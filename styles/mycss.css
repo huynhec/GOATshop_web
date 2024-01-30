@@ -1,0 +1,104 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h3.section-title {
+    color: #007bff;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #dee2e6;
+}
+
+th {
+    background-color: #007bff;
+    color: white;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+.btn {
+    padding: 8px 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    color: white;
+}
+
+.main-form {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.btn-update, .btn-delete {
+    margin-right: 8px;
+}
+
+.btn:hover {
+    filter: brightness(85%);
+}
+
+/* Hiệu ứng cho nút Xóa */
+.btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+/* Hiệu ứng cho nút Sửa */
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+/* Bảng hiển thị dữ liệu */
+.table {
+    font-size: 14px;
+}
+
+/* Định dạng tiêu đề bảng */
+.table th {
+    background-color: #007bff;
+    color: white;
+}
+
+/* Hiệu ứng khi di chuột vào dòng trong bảng */
+.table tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+/* Nút cập nhật và xoá */
+.btn-update,
+.btn-delete {
+    margin-right: 5px;
+}
