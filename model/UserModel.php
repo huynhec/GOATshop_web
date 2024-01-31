@@ -66,7 +66,7 @@ class   UserModel extends Database
 
     public function User__Update($tenhienthi, $username, $password, $phanquyen, $trangthai, $mauser)
     {
-        $obj = $this->connect->prepare("UPDATE users SET tenhienthi = ?, username = ?, password = ?, phanquyen = ?, trangthai = ? WHERE mauser = ? ");
+        $obj = $this->connect->prepare("UPDATE users SET tenhienthi = ?, username = ?, `password` = ?, phanquyen = ?, trangthai = ? WHERE mauser = ? ");
         $obj->execute(array( $tenhienthi, $username, $password, $phanquyen, $trangthai, $mauser));
         return $obj->rowCount();
     }
