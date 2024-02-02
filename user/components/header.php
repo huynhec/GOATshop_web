@@ -1,11 +1,12 @@
 <?php
-// // Import TheLoaiModel class
-// require_once "../model/TheLoaiModel.php";
+// Import TheLoaiModel class
+require_once "../model/DoanhMucModel.php";
 // require_once "../model/NhomTruyenModel.php";
-// $theLoai = new TheLoaiModel();
+$doanhmuc = new DoanhMucModel();
+
 // $nhomTruyen = new NhomTruyenModel();
-// // Lấy danh sách thể loại
-// $theLoai__Get_All = $theLoai->theLoai__Get_All();
+// Lấy danh sách thể loại
+$doanhmuc__Get_All = $doanhmuc->DoanhMuc__Get_All();
 // $nhomTruyen__Get_All = $nhomTruyen->nhomTruyen__Get_All();
 ?>
 
@@ -17,7 +18,7 @@
         <div class="navbar-logo-menu">
             <!-- Logo -->
             <a class="navbar-logo" href="./index.php">
-                <img alt="logo" src="../assets/images/logo.png">
+                <img alt="logo" src="../assets/images/12092021_Sessions_Diana_chibi_update.png">
             </a>
             <!-- Nút điều hướng trên điện thoại -->
             <div class="navbar-toggle"><i class="bx bx-menu"></i></div>
@@ -32,18 +33,13 @@
                 </div>
                 <!-- Danh sách -->
                 <div class="navbar-item has-sub">
-                    <a href="index.php?pages=nhom-truyen"><i class='bx bx-category-alt'></i>Giày</a>
+                    <a href="index.php?pages=doanh-muc"><i class='bx bx-category-alt'></i>Doanh mục</a>
                     <ul class="navbar-item-sub">
-                        <div class="menu-country">
-                            <?php foreach ($nhomTruyen__Get_All as $item) : ?>
-                                <li><a href="index.php?pages=nhom-truyen&nhom_truyen_id=<?= $item->nhom_truyen_id?>"><?= $item->nhom_truyen_ten ?></a></li>
-                            <?php endforeach ?>
-                        </div>
                         <div class="menu-genre">
-                            <?php foreach ($theLoai__Get_All as $item) : ?>
+                            <?php foreach ($doanhmuc__Get_All as $item) : ?>
                                 <li>
-                                    <a href="index.php?pages=truyen-the-loai&the_loai_id=<?= $item->the_loai_id ?>">
-                                        <?= $item->the_loai_ten ?>
+                                    <a href="index.php?pages=truyen-the-loai&maloai=<?= $item->maloai ?>">
+                                        <?= $item->tenloai ?>
                                     </a>
                                 </li>
                             <?php endforeach ?>
@@ -51,7 +47,7 @@
                     </ul>
                 </div>
                 <!-- Truyện hot -->
-                <div class="navbar-item"><a href="index.php?pages=truyen-top"><i class='bx bxs-hot bx-burst' style='color:#ff0004'></i>Quần áo</a></div>
+                <div class="navbar-item"><a href="index.php?pages=quan-ao"><i class='bx bxs-hot bx-burst' style='color:#ff0004'></i>Quần áo</a></div>
 
                 <!-- Nút đóng menu -->
                 <div class="navbar-close">
@@ -71,16 +67,7 @@
                     <a href="#">
                         <li><b><i class='bx bx-user-check'></i><?= $_SESSION['user']->ten_hien_thi ?></b></li>
                     </a>
-                    <a href="index.php?pages=truyen-da-xem">
-                        <li> <i class='bx bx-book-reader'></i> Truyện đã xem</li>
-                    </a>
-                    <a href="index.php?pages=truyen-da-thich">
-                        <li> <i class='bx bx-book-heart'></i> Truyện đã thích</li>
-                    </a>
-                    <a href="index.php?pages=truyen-theo-doi">
-                        <li><i class='bx bx-book-bookmark'></i> Đang theo dõi</li>
-                    </a>
-                    <hr>
+                   
                     <a href="../auth/pages/chinh-sua.php">
                         <li> <i class='bx bx-cog'></i> Chỉnh sửa</li>
                     </a>
@@ -116,3 +103,5 @@
     <!-- Nút lên đầu trang -->
     <div class="action-item action-top"><i class="bx bx-chevron-up"></i></div>
 </div>
+<br><br><br><br><br><br>
+<h1>con cac</h1>
