@@ -162,8 +162,8 @@ img:hover {
   right: 0;
   height: 50px;
   z-index: 10;
-  /* background: #fff; */
-  background: #414d61;
+  background: #e9f8f6;
+  /* background: #414d61; */
   position: fixed;
   box-shadow: 0 0 3px #999;
   padding: 0;
@@ -189,7 +189,7 @@ img:hover {
   margin: 0;
   height: 50px;
   vertical-align: top;
-  filter: drop-shadow(0 0 0.75rem crimson);
+  filter: drop-shadow(0 0 0.75rem rgb(141, 217, 209));
 }
 
 .navbar-logo:hover {

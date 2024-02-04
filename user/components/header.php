@@ -18,7 +18,7 @@ $doanhmuc__Get_All = $doanhmuc->DoanhMuc__Get_All();
         <div class="navbar-logo-menu">
             <!-- Logo -->
             <a class="navbar-logo" href="./index.php">
-                <img alt="logo" src="../assets/images/12092021_Sessions_Diana_chibi_update.png">
+                <img alt="logo" src="../assets/images/logo-no-background.png">
             </a>
             <!-- Nút điều hướng trên điện thoại -->
             <div class="navbar-toggle"><i class="bx bx-menu"></i></div>
@@ -65,7 +65,7 @@ $doanhmuc__Get_All = $doanhmuc->DoanhMuc__Get_All();
                 <!-- Menu hành động của người dùng -->
                 <div class="navbar-display-action hidden">
                     <a href="#">
-                        <li><b><i class='bx bx-user-check'></i><?= $_SESSION['user']->ten_hien_thi ?></b></li>
+                        <li><b><i class='bx bx-user-check'></i><?= $_SESSION['user']->tenhienthi ?></b></li>
                     </a>
                    
                     <a href="../auth/pages/chinh-sua.php">
@@ -104,4 +104,4 @@ $doanhmuc__Get_All = $doanhmuc->DoanhMuc__Get_All();
     <div class="action-item action-top"><i class="bx bx-chevron-up"></i></div>
 </div>
 <br><br><br><br><br><br>
-<h1>con cac</h1>
+<h1>Ricon cay</h1>
