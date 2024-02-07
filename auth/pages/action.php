@@ -1,9 +1,9 @@
 <?php
 session_start();
 require_once '../../model/KhachHangModel.php';
-// require_once '../../model/NhanVienModel.php';
+require_once '../../model/NhanVienModel.php';
 $kh = new KhachHangModel();
-// $nhanVien = new NhanVienModel();
+$nhanVien = new NhanVienModel();
 
 if (isset($_GET['req'])) {
     switch ($_GET['req']) {
@@ -24,11 +24,6 @@ if (isset($_GET['req'])) {
 
 
         case "dang-ky":
-            // Bật tất cả các báo cáo lỗi
-            error_reporting(E_ALL);
-
-            // Hiển thị lỗi ngay trên trang web
-            ini_set('display_errors', 1);
             $res = 0;
             $tenhienthi = $_POST['tenkh'];
             $gioitinh = $_POST['gioitinh'];
@@ -48,6 +43,36 @@ if (isset($_GET['req'])) {
                 header('location: ../index.php?pages=dang-nhap');
             } else {
                 header('location: ../index.php?pages=dang-ky&msg=error');
+            }
+            break;
+        case "dang-nhap-admin":
+                        // Bật tất cả các báo cáo lỗi
+                        error_reporting(E_ALL);
+
+                        // Hiển thị lỗi ngay trên trang web
+                        ini_set('display_errors', 1);
+            $emailOrUsername = $_POST['email_or_username'];
+
+            // $password = $cm->MaHoaMatKhau(trim($_POST['password']));
+            // $password = (trim($_POST['password']));
+            echo"cai du maaaa";
+
+            $password = $_POST['password'];
+
+            $res = $nhanVien->NhanVien__Dang_Nhap($emailOrUsername, $password);
+            if ($res == false) {
+                header('location: ../index.php?pages=dang-nhap-admin&msg=warning');
+            } else {
+                if ($res->phanquyen == 0) {
+                    $_SESSION['admin'] = $res;
+                    header('location: ../../admin/');
+                } elseif ($res->phanquyen == 1) {
+                    $_SESSION['manager'] = $res;
+                    header('location: ../../admin/');
+                } elseif ($res->phanquyen == 2) {
+                    $_SESSION['nhanvien'] = $res;
+                    header('location: ../../admin/');
+                }
             }
             break;
 

@@ -82,7 +82,6 @@ class KhachHangModel extends Database
         $obj = $this->connect->prepare($sql);
         $obj->setFetchMode(PDO::FETCH_OBJ);
         $obj->execute(array($emailOrUsername, $password));
-        echo "helloooooo";
 
         if ($obj->rowCount() > 0) {
             return $obj->fetch();

@@ -1,8 +1,8 @@
-<!-- <?php if (isset($_GET['pages'])) : ?> -->
+<?php if (isset($_GET['pages'])) : ?>
     <div id="sidebar">
         <div class="sidebar-logo">
             <div class="col-logo">
-                <img src="../assets/images/logo.png" alt="logo">
+                <img src="../assets/images/logo-no-background.png" alt="logo">
             </div>
             <div class="col-menu" id="menu-bar">
                 <i class='bx bx-menu'></i>
@@ -40,7 +40,7 @@
                 </a>
             </li>
 
-            <!-- <?php if (isset($_SESSION['admin']) || isset($_SESSION['manager'])) : ?> -->
+            <?php if (isset($_SESSION['admin']) || isset($_SESSION['manager'])) : ?>
                 <li class="<?= $_GET['pages'] == 'trang-thai' ? "active" : "" ?>">
                     <a href="index.php?pages=trang-thai">
                         <i class='bx bx-category-alt'></i>
@@ -59,7 +59,7 @@
                         <span class="text">Quản lý khách hàng</span>
                     </a>
                 </li>
-            <!-- <?php endif ?> -->
+            <?php endif ?>
             <li>
                 <a href="../user/">
                     <i class='bx bx-desktop'></i>
@@ -74,4 +74,4 @@
             </li>
         </ul>
     </div>
-<!-- <?php endif ?> -->
+<?php endif ?>
