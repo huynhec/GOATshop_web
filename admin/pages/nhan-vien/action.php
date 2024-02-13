@@ -5,11 +5,6 @@ $nv = new NhanVienModel();
 if (isset($_GET['req'])) {
     switch ($_GET['req']) {
         case "add":
-            // Bật tất cả các báo cáo lỗi
-            error_reporting(E_ALL);
-
-            // Hiển thị lỗi ngay trên trang web
-            ini_set('display_errors', 1);
             $res = 0;
             $tenhienthi = $_POST['tennv'];
             $username = $_POST['username'];

@@ -43,6 +43,15 @@ class KhachHangModel extends Database
         $obj->execute();
         return $obj->fetchAll();
     }
+
+    public function KhachHang__Get_By_Id($makh)
+    {
+        $obj = $this->connect->prepare("SELECT * FROM khachhang WHERE makh = ?");
+        $obj->setFetchMode(PDO::FETCH_OBJ);
+        $obj->execute(array($makh));
+        return $obj->fetch();
+    }
+
     public function KhachHang__Add($tenhienthi, $gioitinh, $ngaysinh, $sodienthoai, $diachi, $email, $username, $password, $trangthai)
     {
         // Thêm người dùng vào bảng users
@@ -88,5 +97,13 @@ class KhachHangModel extends Database
         } else {
             return false;
         }
+    }
+
+    public function KhachHang__Update($makh, $tenkh, $username, $gioitinh, $ngaysinh, $sodienthoai, $diachi, $email, $password, $trangthai)
+    {
+        $obj = $this->connect->prepare("UPDATE khachhang kh JOIN users u ON kh.mauser = u.mauser 
+        SET kh.tenkh=?, u.username=?, kh.gioitinh=?, kh.ngaysinh=?, kh.sodienthoai=?, kh.diachi=?, kh.email=?, u.password=?, kh.trangthai=?, u.trangthai=? WHERE kh.makh=?");
+        $obj->execute(array($tenkh, $username, $gioitinh, $ngaysinh, $sodienthoai, $diachi, $email, $password, $trangthai, $trangthai, $makh));
+        return $obj->rowCount();
     }
 }
