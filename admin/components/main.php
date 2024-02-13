@@ -8,6 +8,9 @@ if (isset($_GET['pages']) && !isset($_GET['req'])) {
         case "nhan-vien":
             require_once "pages/nhan-vien/index.php";
             break;
+        case "khach-hang":
+            require_once "pages/khach-hang/index.php";
+            break;
         case "trang-loi":
             require_once "pages/trang-loi/index.php";
             break;
