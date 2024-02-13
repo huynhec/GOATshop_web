@@ -1,10 +1,10 @@
 <?php
 session_start();
 
-// if (!isset($_SESSION['admin']) && !isset($_SESSION['manager']) && !isset($_SESSION['nhanvien'])) {
-//     header("location: ../auth/index.php?pages=dang-nhap-admin");
-//     exit();
-// }
+if (!isset($_SESSION['admin']) && !isset($_SESSION['manager']) && !isset($_SESSION['nhanvien'])) {
+    header("location: ../auth/index.php?pages=dang-nhap-admin");
+    exit();
+}
 
 ?>
 <!DOCTYPE html>
@@ -17,10 +17,11 @@ session_start();
 
     <link rel="stylesheet" href="../assets/vendor/bootstrap-5.3.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="../assets/vendor/boxicons-2.1.4/css/boxicons.min.css">
-    <link rel="stylesheet" href="../assets/vendor/DataTables/DataTables-1.13.8/css/dataTables.bootstrap5.min.css">
+    <!-- <link rel="stylesheet" href="../assets/vendor/DataTables/DataTables-1.13.8/css/dataTables.bootstrap5.min.css"> -->
 
     <link rel="stylesheet" href="../assets/vendor/daterangepicker-master/daterangepicker.css">
     <link rel="stylesheet" href="../assets/css/admin.css">
+    <link rel="stylesheet" href="../assets/vendor/sweetalert2.min.css">
 </head>
 
 <body>

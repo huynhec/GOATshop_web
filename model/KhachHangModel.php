@@ -47,7 +47,7 @@ class KhachHangModel extends Database
     {
         // Thêm người dùng vào bảng users
         $obj = $this->connect->prepare("INSERT INTO users (tenhienthi, username, password, phanquyen, trangthai)
-                                        VALUES (?, ?, ?, 2 , ?)");
+                                        VALUES (?, ?, ?, 3 , ?)");
         $obj->execute(array($tenhienthi, $username, $password, $trangthai));
 
         // Lấy mauser vừa được thêm

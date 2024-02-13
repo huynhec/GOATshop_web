@@ -2,8 +2,10 @@
 session_start();
 require_once '../../model/KhachHangModel.php';
 require_once '../../model/NhanVienModel.php';
+require_once '../../model/AdminModel.php';
 $kh = new KhachHangModel();
 $nhanVien = new NhanVienModel();
+$admin = new AdminModel();
 
 if (isset($_GET['req'])) {
     switch ($_GET['req']) {
@@ -45,25 +47,19 @@ if (isset($_GET['req'])) {
                 header('location: ../index.php?pages=dang-ky&msg=error');
             }
             break;
+
         case "dang-nhap-admin":
-                        // Bật tất cả các báo cáo lỗi
-                        error_reporting(E_ALL);
-
-                        // Hiển thị lỗi ngay trên trang web
-                        ini_set('display_errors', 1);
             $emailOrUsername = $_POST['email_or_username'];
-
             // $password = $cm->MaHoaMatKhau(trim($_POST['password']));
             // $password = (trim($_POST['password']));
-            echo"cai du maaaa";
-
             $password = $_POST['password'];
 
             $res = $nhanVien->NhanVien__Dang_Nhap($emailOrUsername, $password);
-            if ($res == false) {
+            $resad = $admin->Admin__Dang_Nhap($emailOrUsername, $password);
+            if ($res == false && $resad == false) {
                 header('location: ../index.php?pages=dang-nhap-admin&msg=warning');
             } else {
-                if ($res->phanquyen == 0) {
+                if ($res->phanquyen == 0 ) {
                     $_SESSION['admin'] = $res;
                     header('location: ../../admin/');
                 } elseif ($res->phanquyen == 1) {
@@ -72,6 +68,9 @@ if (isset($_GET['req'])) {
                 } elseif ($res->phanquyen == 2) {
                     $_SESSION['nhanvien'] = $res;
                     header('location: ../../admin/');
+                } elseif ($resad->phanquyen == 0){
+                    $_SESSION['admin'] = $resad;
+                    header('location: ../../admin');
                 }
             }
             break;
@@ -85,6 +84,9 @@ if (isset($_GET['req'])) {
             }
             if (isset($_SESSION['user'])) {
                 unset($_SESSION['user']);
+            }
+            if (isset($_SESSION['nhanvien'])){
+                unset($_SESSION['nhanvien']);
             }
             header('location:' . $_SERVER["HTTP_REFERER"]);
             break;

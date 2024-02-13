@@ -20,12 +20,12 @@ if (isset($_SESSION['admin'])) {
             <div class="form-group">
                 <label for="email_or_username">Email hoặc Username</label>
                 <input type="text" name="email_or_username" id="email_or_username" class="form-control" required
-                    placeholder="Nhập email">
+                    placeholder="Nhập email hoặc username">
             </div>
             <div class="form-group">
                 <label for="password">Mặt khẩu</label>
                 <input type="password" name="password" id="password" class="form-control" required
-                    placeholder="Nhập password">
+                    placeholder="Nhập mặt khẩu">
             </div>
             <br>
             <div class="form-group text-center">
