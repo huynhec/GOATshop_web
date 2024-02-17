@@ -5,11 +5,17 @@ if (isset($_GET['pages']) && !isset($_GET['req'])) {
         case "trang-chu":
             require_once "pages/trang-chu/index.php";
             break;
+        case "san-pham":
+            require_once "pages/san-pham/index.php";
+            break;
         case "nhan-vien":
             require_once "pages/nhan-vien/index.php";
             break;
         case "khach-hang":
             require_once "pages/khach-hang/index.php";
+            break;
+        case "anh-san-pham":
+            require_once "pages/san-pham/c_index.php";
             break;
         case "trang-loi":
             require_once "pages/trang-loi/index.php";
