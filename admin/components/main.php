@@ -14,6 +14,9 @@ if (isset($_GET['pages']) && !isset($_GET['req'])) {
         case "thuong-hieu":
             require_once "pages/thuong-hieu/index.php";
             break;
+        case "trang-thai":
+            require_once "pages/trang-thai/index.php";
+            break;
         case "nhan-vien":
             require_once "pages/nhan-vien/index.php";
             break;
