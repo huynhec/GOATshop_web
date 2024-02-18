@@ -46,7 +46,7 @@ class ThuongHieuModel extends Database
     public function ThuongHieu__Add($tenth, $mota, $trangthai)
     {
         $obj = $this->connect->prepare("INSERT INTO thuonghieu(tenth, mota, trangthai) VALUES (?,?,?)");
-        $obj->execute(array($tenth, $mota));
+        $obj->execute(array($tenth, $mota, $trangthai));
         return $obj->rowCount();
     }
 

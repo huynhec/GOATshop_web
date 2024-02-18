@@ -59,11 +59,6 @@ if (isset($_GET['req'])) {
 
             break;
         case "update":
-            // Bật tất cả các báo cáo lỗi
-            error_reporting(E_ALL);
-
-            // Hiển thị lỗi ngay trên trang web
-            ini_set('display_errors', 1);
             $res = 0;
             $masp = $_POST['masp'];
             $tensp = $_POST["tensp"];
