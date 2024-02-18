@@ -82,4 +82,37 @@ class SanPhamModel extends Database
         return $obj->rowCount();
     }
 
+    public function SanPham__Get_All_Paged($page_number)
+    {
+        // Số lượng truyện trên mỗi trang
+        $items_per_page = 12;
+
+        // Tính toán giá trị bắt đầu và kết thúc cho phân trang
+        $page_start = ($page_number - 1) * $items_per_page;
+        $page_end = $items_per_page;
+
+        // Chuẩn bị và thực hiện truy vấn
+        $obj = $this->connect->prepare(
+            "SELECT *
+            FROM sanpham
+            WHERE trangthai = 1
+            GROUP BY masp
+            LIMIT :page_start, :page_end"
+        );
+
+        $obj->bindParam(':page_start', $page_start, PDO::PARAM_INT);
+        $obj->bindParam(':page_end', $page_end, PDO::PARAM_INT);
+
+        $obj->setFetchMode(PDO::FETCH_OBJ);
+        $obj->execute();
+        return $obj->fetchAll();
+    }
+
+    public function SanPham__Update_Luot_Mua($masp, $luotmua)
+    {
+        $obj = $this->connect->prepare("UPDATE sanpham SET luotmua=? WHERE masp=?");
+        $obj->execute(array($luotmua, $masp));
+        return $obj->rowCount();
+    }
+
 }

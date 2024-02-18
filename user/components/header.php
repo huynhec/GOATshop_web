@@ -1,13 +1,15 @@
 <?php
-// Import TheLoaiModel class
-require_once "../model/DoanhMucModel.php";
-// require_once "../model/NhomTruyenModel.php";
-$doanhmuc = new DoanhMucModel();
-
-// $nhomTruyen = new NhomTruyenModel();
+require_once "../model/LoaiSpModel.php";
+require_once "../model/ThuongHieuModel.php";
+// require_once "../model/ChiTietGioHangModel.php";
+// require_once "../model/GioHangModel.php";
+$loaisp = new LoaiSpModel();
+$th = new ThuongHieuModel();
+// $ctgh = new ChiTietGioHangModel();
+// $gh = new GioHangModel();
 // Lấy danh sách thể loại
-$doanhmuc__Get_All = $doanhmuc->DoanhMuc__Get_All();
-// $nhomTruyen__Get_All = $nhomTruyen->nhomTruyen__Get_All();
+$loaiSp__Get_All = $loaisp->LoaiSp__Get_All();
+$thuongHieu__Get_All = $th->ThuongHieu__Get_All();
 ?>
 
 <!-- Thẻ chứa thanh điều hướng -->
@@ -33,12 +35,17 @@ $doanhmuc__Get_All = $doanhmuc->DoanhMuc__Get_All();
                 </div>
                 <!-- Danh sách -->
                 <div class="navbar-item has-sub">
-                    <a href="index.php?pages=doanh-muc"><i class='bx bx-category-alt'></i>Doanh mục</a>
+                    <a href="index.php?pages=danh-muc"><i class='bx bx-category-alt'></i>Danh mục</a>
                     <ul class="navbar-item-sub">
+                        <div class="menu-country">
+                            <?php foreach ($thuongHieu__Get_All as $item) : ?>
+                                <li><a href="index.php?pages=thuong-hieu&math=<?= $item->math ?>"><?= $item->tenth ?></a></li>
+                            <?php endforeach ?>
+                        </div>
                         <div class="menu-genre">
-                            <?php foreach ($doanhmuc__Get_All as $item) : ?>
+                            <?php foreach ($loaiSp__Get_All as $item) : ?>
                                 <li>
-                                    <a href="index.php?pages=truyen-the-loai&maloai=<?= $item->maloai ?>">
+                                    <a href="index.php?pages=loai-sp&maloai=<?= $item->maloai ?>">
                                         <?= $item->tenloai ?>
                                     </a>
                                 </li>
@@ -46,9 +53,12 @@ $doanhmuc__Get_All = $doanhmuc->DoanhMuc__Get_All();
                         </div>
                     </ul>
                 </div>
-                <!-- Truyện hot -->
-                <div class="navbar-item"><a href="index.php?pages=quan-ao"><i class='bx bxs-hot bx-burst' style='color:#ff0004'></i>Quần áo</a></div>
+                <!--  -->
+                <?php if (isset($_SESSION['user'])) : ?>
 
+                    <div class="navbar-item"><a href="index.php?pages=don-hang"><i class='bx bxs-hot bx-burst' style='color:#ff0004'></i>Đơn của bạn</a></div>
+
+                <?php endif ?>
                 <!-- Nút đóng menu -->
                 <div class="navbar-close">
                     <i class="bx bx-x"></i>
@@ -56,7 +66,24 @@ $doanhmuc__Get_All = $doanhmuc->DoanhMuc__Get_All();
             </div>
         </div>
         <!-- Phần bên phải thanh điều hướng -->
+
         <div class="navbar-display-user-action">
+            <?php if (isset($_SESSION['user'])) : ?>
+                <div class="navbar-display-cart" onclick="return(location.href='./index.php?pages=gio-hang')">
+                    <i class='bx bxs-cart'>
+
+                        <span id="cart-item"><?= ($res) ?></span>
+                    </i>
+                </div>
+
+                <?php else : ?>
+                <div class="navbar-display-cart" onclick="return checkLogin()">
+                    <i class='bx bxs-cart'>
+                        <span id="cart-item">0</span>
+                    </i>
+                </div>
+            <?php endif ?>
+
             <?php if (isset($_SESSION['user'])) : ?>
                 <!-- display-user người dùng đã đăng nhập -->
                 <div class="navbar-display-user">
@@ -65,12 +92,21 @@ $doanhmuc__Get_All = $doanhmuc->DoanhMuc__Get_All();
                 <!-- Menu hành động của người dùng -->
                 <div class="navbar-display-action hidden">
                     <a href="#">
-                        <li><b><i class='bx bx-user-check'></i><?= $_SESSION['user']->tenhienthi ?></b></li>
+                        <li><b><i class='bx bx-user-check'></i><?= $_SESSION['user']->tenkh ?></b></li>
                     </a>
-                   
+                    <!-- <a href="index.php?pages=san-phan-da-xem">
+                        <li> <i class='bx bx-book-reader'></i> Sản phẩm đã xem</li>
+                    </a>
+                    <a href="index.php?pages=san-phan-da-thich">
+                        <li> <i class='bx bx-book-heart'></i> Sản phẩm đã thích</li>
+                    </a>
+                    <a href="index.php?pages=san-phan-theo-doi">
+                        <li><i class='bx bx-book-bookmark'></i> Đang theo dõi</li>
+                    </a>
+                    <hr>
                     <a href="../auth/pages/chinh-sua.php">
                         <li> <i class='bx bx-cog'></i> Chỉnh sửa</li>
-                    </a>
+                    </a> -->
                     <hr>
                     <a href="../auth/pages/action.php?req=dang-xuat">
                         <li><i class='bx bx-log-out'></i> Đăng xuất</li>
@@ -103,5 +139,3 @@ $doanhmuc__Get_All = $doanhmuc->DoanhMuc__Get_All();
     <!-- Nút lên đầu trang -->
     <div class="action-item action-top"><i class="bx bx-chevron-up"></i></div>
 </div>
-<br><br><br><br><br><br>
-<h1>Ricon cay</h1>

@@ -6,6 +6,16 @@ if (isset($_SESSION['url'])) {
     unset($_SESSION['url']);
 }
 
+if (isset($_SERVER["HTTP_REFERER"])) {
+    if (strlen(strstr($_SERVER["HTTP_REFERER"], "dang-nhap")) < 1) {
+      if (strlen(strstr($_SERVER["HTTP_REFERER"], "chinh-sua")) < 1) {
+        if (strlen(strstr($_SERVER["HTTP_REFERER"], "dang-ky")) < 1) {
+          $_SESSION['url'] = $_SERVER["HTTP_REFERER"];
+        }
+      }
+    }
+  }
+  
 $url = $_SESSION['url'] ?? '../../user/'
 
 ?>

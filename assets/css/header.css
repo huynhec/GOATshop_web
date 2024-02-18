@@ -17,8 +17,7 @@
 }
 
 *::-webkit-scrollbar-thumb {
-  /* background: rgb(218, 216, 216); */
-  background: rgb(135, 206, 235);
+  background: rgb(218, 216, 216);
   border-radius: 10px;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
@@ -40,12 +39,12 @@ body {
   position: relative;
   overflow-x: none;
   font-family: sans-serif;
-  background: #fff;
+  background: #e4efef;
   margin: 0 auto;
 }
 
 a {
-  color: #080808;
+  color: #000;
   text-decoration: none;
   background-color: transparent;
   vertical-align: middle;
@@ -161,9 +160,8 @@ img:hover {
   left: 0;
   right: 0;
   height: 50px;
-  z-index: 10;
-  background: #e9f8f6;
-  /* background: #414d61; */
+  z-index: 100;
+  background: #38fffc;
   position: fixed;
   box-shadow: 0 0 3px #999;
   padding: 0;
@@ -189,7 +187,7 @@ img:hover {
   margin: 0;
   height: 50px;
   vertical-align: top;
-  filter: drop-shadow(0 0 0.75rem rgb(141, 217, 209));
+  filter: drop-shadow(0 0 0.75rem rgb(160, 236, 255));
 }
 
 .navbar-logo:hover {
@@ -267,10 +265,9 @@ img:hover {
 
 .navbar-item.has-sub .menu-country {
   display: flex;
-    padding: 15px;
-    flex-direction: column;
-    flex-wrap: wrap;
-    justify-content: center;
+  padding: 15px;
+  flex-wrap: wrap;
+  width: 50%;
 }
 
 .navbar-item.has-sub .menu-country li {
@@ -333,9 +330,11 @@ img:hover {
 .navbar-display-user-action {
   position: relative;
   float: right;
+  display: flex;
 }
 
-.navbar-display-user {
+.navbar-display-user
+ {
   width: 35px;
   height: 35px;
   border-radius: 20px;
@@ -351,9 +350,34 @@ img:hover {
   display: none;
 }
 
-.navbar-display-user i {
+.navbar-display-user i,
+  .navbar-display-cart i {
   font-size: 20px;
   color: #999;
+}
+
+.navbar-display-cart
+ {
+  width: 35px;
+  height: 35px;
+  border-radius: 20px;
+  line-height: 35px;
+  overflow: hidden;
+  cursor: pointer;
+  text-align: center;
+  vertical-align: middle;
+  margin: 7px;
+}
+span#cart-item {
+  position: absolute;
+  top: 2px;
+  left: 30px;
+  color: white;
+  background: #f27474;
+  border-radius: 10px;
+  width: 20px;
+  height: 20px;
+  font-size: 16px;
 }
 
 .navbar-display-action {
@@ -523,3 +547,4 @@ img:hover {
     padding: 0 5px;
   }
 }
+

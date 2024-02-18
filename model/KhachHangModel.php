@@ -106,4 +106,11 @@ class KhachHangModel extends Database
         $obj->execute(array($tenkh, $username, $gioitinh, $ngaysinh, $sodienthoai, $diachi, $email, $password, $trangthai, $trangthai, $makh));
         return $obj->rowCount();
     }
+
+    public function KhachHang__Update_Info($makh, $tenkh, $sodienthoai, $diachi, $email)
+    {
+        $obj = $this->connect->prepare("UPDATE khachhang SET tenkh=?, sodienthoai=?, diachi=?, email=? WHERE makh=?");
+        $obj->execute(array($tenkh, $sodienthoai, $diachi, $email, $makh));
+        return $obj->rowCount();
+    }
 }
