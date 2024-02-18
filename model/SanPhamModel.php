@@ -82,6 +82,14 @@ class SanPhamModel extends Database
         return $obj->rowCount();
     }
 
+    public function SanPham__Delete($masp)
+    {
+        $obj = $this->connect->prepare("DELETE FROM sanpham WHERE masp = ?");
+        $obj->execute(array($masp));
+
+        return $obj->rowCount();
+    }
+    
     public function SanPham__Get_All_Paged($page_number)
     {
         // Số lượng truyện trên mỗi trang
@@ -114,5 +122,4 @@ class SanPhamModel extends Database
         $obj->execute(array($luotmua, $masp));
         return $obj->rowCount();
     }
-
 }

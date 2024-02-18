@@ -77,6 +77,23 @@ if (isset($_GET['req'])) {
                 header('location: ../../index.php?pages=san-pham&msg=error');
             }
             break;
+            
+        case "delete":
+            $res = 0;
+            $masp = $_GET['masp'];
+            foreach ($anhSp->AnhSp__Get_By_Id_Sp($masp) as $item) {
+                unlink("../../../assets/" . $item->hinhanh);
+                rmdir("../../../assets/uploads/$masp");
+            }
+            $res += $anhSp->AnhSp__Delete_By_Id_Sp($masp);
+            $res += $sp->SanPham__Delete($masp);
+
+            if ($res != 0) {
+                header('location: ../../index.php?pages=san-pham&msg=success');
+            } else {
+                header('location: ../../index.php?pages=san-pham&msg=error');
+            }
+            break;
 
         case "c_add":
             $masp = $_POST["masp"];
@@ -150,7 +167,7 @@ if (isset($_GET['req'])) {
                 header("location: ../../index.php?pages=anh-san-pham&masp=$masp&msg=error");
             }
             break;
-            
+
         case "c_delete":
             $res = 0;
             $maanh = $_GET["maanh"];

@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="../assets/vendor/bootstrap-5.3.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="../assets/vendor/boxicons-2.1.4/css/boxicons.min.css">
     <link rel="stylesheet" href="../assets/css/header.css">
+    <link rel="stylesheet" href="../assets/css/main.css">
 </head>
 <body>
     <?php require_once 'components/header.php' ?>
