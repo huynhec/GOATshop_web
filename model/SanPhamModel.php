@@ -135,4 +135,16 @@ class SanPhamModel extends Database
         $obj->execute(array(1));
         return $obj->fetchAll();
     }
+
+    public function SanPham__Get_Top_Same($math,  $masp)
+    {
+        $sql = "SELECT * FROM sanpham INNER JOIN thuonghieu ON sanpham.math = thuonghieu.math WHERE thuonghieu.math =? AND sanpham.masp !=? AND sanpham.trangthai=1
+        ORDER BY RAND()
+        LIMIT 6";
+
+        $obj = $this->connect->prepare($sql);
+        $obj->setFetchMode(PDO::FETCH_OBJ);
+        $obj->execute(array($math, $masp));
+        return $obj->fetchAll();
+    }
 }
