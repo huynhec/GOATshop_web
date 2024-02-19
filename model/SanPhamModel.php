@@ -89,7 +89,7 @@ class SanPhamModel extends Database
 
         return $obj->rowCount();
     }
-    
+
     public function SanPham__Get_All_Paged($page_number)
     {
         // Số lượng truyện trên mỗi trang
@@ -121,5 +121,18 @@ class SanPhamModel extends Database
         $obj = $this->connect->prepare("UPDATE sanpham SET luotmua=? WHERE masp=?");
         $obj->execute(array($luotmua, $masp));
         return $obj->rowCount();
+    }
+
+    public function SanPham__Get_Top_Random($limit = 6)
+    {
+        $sql = "SELECT * FROM sanpham
+        WHERE trangthai=?
+        ORDER BY RAND()
+        LIMIT $limit";
+
+        $obj = $this->connect->prepare($sql);
+        $obj->setFetchMode(PDO::FETCH_OBJ);
+        $obj->execute(array(1));
+        return $obj->fetchAll();
     }
 }

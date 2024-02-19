@@ -51,4 +51,35 @@ class CommonModel
             return false;
         }
     }
+
+    function getTimeAgo($time)
+    {
+        if (!is_numeric($time)) {
+            $time = strtotime($time);
+        }
+
+        $timeDifference = time() - $time;
+
+        if ($timeDifference < 1) {
+            return 'Less than 1 second ago';
+        }
+
+        $timeUnits = array(
+            12 * 30 * 24 * 60 * 60 => 'year',
+            30 * 24 * 60 * 60      => 'month',
+            24 * 60 * 60           => 'day',
+            60 * 60                => 'hour',
+            60                     => 'minute',
+            1                      => 'second'
+        );
+
+        foreach ($timeUnits as $seconds => $unit) {
+            $division = $timeDifference / $seconds;
+
+            if ($division >= 1) {
+                $roundedValue = round($division);
+                return $roundedValue . ' ' . $unit . (($roundedValue > 1) ? 's' : '') . ' ago';
+            }
+        }
+    }
 }

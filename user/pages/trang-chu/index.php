@@ -8,7 +8,7 @@ $cm = new CommonModel();
 $sp__Get_Top_Updated_5 = $sp->SanPham__Get_Top_Updated(5);
 $sp__Get_Top_Updated_8 = $sp->SanPham__Get_Top_Updated(8);
 // $sp__Get_Top_Sale = $sp->SanPham__Get_Top_Sale();
-// $sp__Get_Top_Random = $sp->SanPham__Get_Top_Random(5);
+$sp__Get_Top_Random = $sp->SanPham__Get_Top_Random(5);
 
 $top = 0;
 ?>
@@ -29,8 +29,8 @@ $top = 0;
                 <div class="manga-container">
                     <div class="manga-thumbnail">
                         <img src="../assets/<?= $anhSp__Get_By_Id_Sp_First->hinhanh ?>">
-<?PHP // thêm vào đây ?>
-                    </div>
+                        <span class="manga-note background-1"><i
+                                class="bx bxs-badge-dollar"></i><?=$cm->getTimeAgo($item->ngaythem)?></span>                    </div>
                     <div class="manga-title color-1"><?= $item->tensp ?></div>
                 </div>
             </a>
@@ -105,8 +105,8 @@ $top = 0;
                     <div class="manga-container__right" id="top_<?= $top++ ?>">
                         <div class="manga-thumbnail">
                             <img src="../assets/<?= $anhSp__Get_By_Id_Sp_First->hinhanh ?>">
-<?PHP //thêm vào đây ?>
-                        </div>
+                            <span class="manga-note background-1"><i
+                                    class="bx bxs-badge-dollar"></i><?=number_format($item->dongia)?>đ</span>                        </div>
                         <div class="blur"></div>
                         <div class="manga-title color-3"><?= $item->tensp ?></div>
                     </div>
