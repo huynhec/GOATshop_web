@@ -156,4 +156,82 @@ class SanPhamModel extends Database
         $obj->execute(array(1));
         return $obj->fetchAll();
     }
+
+    public function SanPham__Get_By_Th_Paged($page_number, $math)
+    {
+        // Số lượng sp trên mỗi trang
+        $items_per_page = 12;
+
+        // Tính toán giá trị bắt đầu và kết thúc cho phân trang
+        $page_start = ($page_number - 1) * $items_per_page;
+        $page_end = $items_per_page;
+
+        // Chuẩn bị và thực hiện truy vấn
+        $obj = $this->connect->prepare(
+            "SELECT *
+            FROM sanpham
+            WHERE trangthai = 1 AND math = $math
+            GROUP BY masp
+            LIMIT :page_start, :page_end"
+        );
+
+        $obj->bindParam(':page_start', $page_start, PDO::PARAM_INT);
+        $obj->bindParam(':page_end', $page_end, PDO::PARAM_INT);
+
+        $obj->setFetchMode(PDO::FETCH_OBJ);
+        $obj->execute();
+        return $obj->fetchAll();
+    }
+
+    public function SanPham__Get_Ten_Sp_Paged($page_number, $tensp)
+    {
+        // Số lượng sp trên mỗi trang
+        $items_per_page = 12;
+
+        // Tính toán giá trị bắt đầu và kết thúc cho phân trang
+        $page_start = ($page_number - 1) * $items_per_page;
+        $page_end = $items_per_page;
+
+        // Chuẩn bị và thực hiện truy vấn
+        $obj = $this->connect->prepare(
+            "SELECT *
+            FROM sanpham
+            WHERE trangthai = 1 AND tensp LIKE '%$tensp%'
+            GROUP BY masp
+            LIMIT :page_start, :page_end"
+        );
+
+        $obj->bindParam(':page_start', $page_start, PDO::PARAM_INT);
+        $obj->bindParam(':page_end', $page_end, PDO::PARAM_INT);
+
+        $obj->setFetchMode(PDO::FETCH_OBJ);
+        $obj->execute();
+        return $obj->fetchAll();
+    }
+
+    public function SanPham__Get_By_Loai_Paged($page_number, $maloai)
+    {
+        // Số lượng sp trên mỗi trang
+        $items_per_page = 12;
+
+        // Tính toán giá trị bắt đầu và kết thúc cho phân trang
+        $page_start = ($page_number - 1) * $items_per_page;
+        $page_end = $items_per_page;
+
+        // Chuẩn bị và thực hiện truy vấn
+        $obj = $this->connect->prepare(
+            "SELECT *
+            FROM sanpham
+            WHERE trangthai = 1 AND maloai = $maloai
+            GROUP BY masp
+            LIMIT :page_start, :page_end"
+        );
+
+        $obj->bindParam(':page_start', $page_start, PDO::PARAM_INT);
+        $obj->bindParam(':page_end', $page_end, PDO::PARAM_INT);
+
+        $obj->setFetchMode(PDO::FETCH_OBJ);
+        $obj->execute();
+        return $obj->fetchAll();
+    }
 }

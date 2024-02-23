@@ -31,7 +31,8 @@ $top = 0;
                     <div class="manga-thumbnail">
                         <img src="../assets/<?= $anhSp__Get_By_Id_Sp_First->hinhanh ?>">
                         <span class="manga-note background-1"><i
-                                class="bx bxs-badge-dollar"></i><?=$cm->getTimeAgo($item->ngaythem)?></span>                    </div>
+                                class="bx bxs-badge-dollar"></i><?=$cm->getTimeAgo($item->ngaythem)?></span>
+                    </div>
                     <div class="manga-title color-1"><?= $item->tensp ?></div>
                 </div>
             </a>
@@ -106,8 +107,9 @@ $top = 0;
                     <div class="manga-container__right" id="top_<?= $top++ ?>">
                         <div class="manga-thumbnail">
                             <img src="../assets/<?= $anhSp__Get_By_Id_Sp_First->hinhanh ?>">
-                            <span class="manga-note background-1"><i
-                                    class="bx bxs-badge-dollar"></i><?=number_format($item->dongia)?>đ</span>                        </div>
+                            <span class="manga-note background-7"> <b>Top <?= $top ?></b> |
+                                <?= $cm->formatThousand($item->luotmua) ?> lượt mua</span>
+                        </div>
                         <div class="blur"></div>
                         <div class="manga-title color-3"><?= $item->tensp ?></div>
                     </div>
