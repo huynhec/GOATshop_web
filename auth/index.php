@@ -12,7 +12,7 @@ session_start();
     <title>GOATshop</title>
 
     <link rel="shortcut icon" href="../assets/images/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="../assets/vendor/bootstrap-5.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/vendor/bootstrap-5.2.3-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../assets/css/auth.css">
 </head>
 
@@ -22,8 +22,9 @@ session_start();
     </div>
 
 
-    <script src="../assets/vendor/jquery-3.7.1.min.js"></script>
-    <script src="../assets/vendor/bootstrap-5.3.2/js/bootstrap.min.js"></script>
+    <script src="../assets/vendor/jquery-3.7.1.js"></script>
+    <script src="../assets/vendor/bootstrap-5.2.3-dist/js/bootstrap.min.js"></script>
+    <script src="../assets/vendor/sweetalert2@11.js"></script>
 
     <?php if (isset($_GET['msg'])) {
     switch ($_GET['msg']) {

@@ -1,12 +1,12 @@
 <?php
 require_once "../model/LoaiSpModel.php";
 require_once "../model/ThuongHieuModel.php";
-// require_once "../model/ChiTietGioHangModel.php";
-// require_once "../model/GioHangModel.php";
+require_once "../model/ChiTietGioHangModel.php";
+require_once "../model/GioHangModel.php";
 $loaisp = new LoaiSpModel();
 $th = new ThuongHieuModel();
-// $ctgh = new ChiTietGioHangModel();
-// $gh = new GioHangModel();
+$ctgh = new ChiTietGioHangModel();
+$gh = new GioHangModel();
 // Lấy danh sách thể loại
 $loaiSp__Get_All = $loaisp->LoaiSp__Get_All();
 $thuongHieu__Get_All = $th->ThuongHieu__Get_All();
@@ -71,12 +71,18 @@ $thuongHieu__Get_All = $th->ThuongHieu__Get_All();
             <?php if (isset($_SESSION['user'])) : ?>
                 <div class="navbar-display-cart" onclick="return(location.href='./index.php?pages=gio-hang')">
                     <i class='bx bxs-cart'>
-
+                        <?php
+                        $res = 0;
+                        if (isset($_SESSION['user'])) {
+                            $magh = isset($gh->GioHang__Get_By_Id_Kh($_SESSION['user']->makh)->magh) ? $gh->GioHang__Get_By_Id_Kh($_SESSION['user']->makh)->magh : 0;
+                            $res = count($ctgh->ChiTietGioHang__Get_By_Id_GH($magh));
+                        }
+                        ?>
                         <span id="cart-item"><?= ($res) ?></span>
                     </i>
                 </div>
 
-                <?php else : ?>
+            <?php else : ?>
                 <div class="navbar-display-cart" onclick="return checkLogin()">
                     <i class='bx bxs-cart'>
                         <span id="cart-item">0</span>

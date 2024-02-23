@@ -147,4 +147,13 @@ class SanPhamModel extends Database
         $obj->execute(array($math, $masp));
         return $obj->fetchAll();
     }
+
+    public function SanPham__Get_Top_Sale()
+    {
+        $sql = "SELECT * FROM sanpham WHERE trangthai=? ORDER BY luotmua DESC  LIMIT 3";
+        $obj = $this->connect->prepare($sql);
+        $obj->setFetchMode(PDO::FETCH_OBJ);
+        $obj->execute(array(1));
+        return $obj->fetchAll();
+    }
 }

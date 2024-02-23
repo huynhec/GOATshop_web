@@ -1148,3 +1148,25 @@
     line-height: 1.5;
     border: 1px solid #ff7043;
   }
+
+  .size-option {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    border: 1px solid #000;
+    text-align: center;
+    line-height: 50px;
+    margin: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    /* Hiệu ứng màu nền khi hover */
+  }
+  
+  .selected {
+    background-color: #ccc;
+    /* Màu nền khi được chọn */
+  }
+  
+  input[type="radio"] {
+    display: none;
+  }

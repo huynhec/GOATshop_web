@@ -82,4 +82,23 @@ class CommonModel
             }
         }
     }
+
+    function formatThousand($number)
+    {
+        $number = (int) preg_replace('/[^0-9]/', '', $number);
+
+        if ($number >= 1000) {
+            $roundedNumber = round($number);
+            $formattedNumber = number_format($roundedNumber);
+            $numberParts = explode(',', $formattedNumber);
+            $magnitudeSuffix = array('K', 'M', 'B', 'T', 'Q');
+            $countParts = count($numberParts) - 1;
+            $formattedResult = $numberParts[0] . ((int) $numberParts[1][0] !== 0 ? '.' . $numberParts[1][0] : '');
+            $formattedResult .= $magnitudeSuffix[$countParts - 1];
+
+            return $formattedResult;
+        }
+
+        return $number;
+    }
 }

@@ -15,13 +15,13 @@ if (!isset($_SESSION['admin']) && !isset($_SESSION['manager']) && !isset($_SESSI
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="dynamicTitle">GOATshop</title>
 
-    <link rel="stylesheet" href="../assets/vendor/bootstrap-5.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/vendor/bootstrap-5.2.3-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../assets/vendor/boxicons-2.1.4/css/boxicons.min.css">
-    <!-- <link rel="stylesheet" href="../assets/vendor/DataTables/DataTables-1.13.8/css/dataTables.bootstrap5.min.css"> -->
+    <link rel="stylesheet" href="../assets/vendor/datatables/css/1_dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="../assets/vendor/datatables/css/2_buttons.bootstrap5.min.css">
 
-    <link rel="stylesheet" href="../assets/vendor/daterangepicker-master/daterangepicker.css">
+    <link rel="stylesheet" href="../assets/vendor/daterangejs/daterangepicker.css">
     <link rel="stylesheet" href="../assets/css/admin.css">
-    <link rel="stylesheet" href="../assets/vendor/sweetalert2.min.css">
 </head>
 
 <body>
@@ -29,17 +29,15 @@ if (!isset($_SESSION['admin']) && !isset($_SESSION['manager']) && !isset($_SESSI
     <?php require_once 'components/main.php' ?>
 
 
-    <script src="../assets/vendor/jquery-3.7.1.min.js"></script>
-    <script src="../assets/vendor/bootstrap-5.3.2/js/bootstrap.min.js"></script>
-    <script src="../assets/vendor/sweetalert2.all.min.js"></script>
+    <script src="../assets/vendor/jquery-3.7.1.js"></script>
+    <script src="../assets/vendor/bootstrap-5.2.3-dist/js/bootstrap.min.js"></script>
+    <script src="../assets/vendor/sweetalert2@11.js"></script>
+    <script src="../assets/vendor/datatables/js/1_jquery.dataTables.min.js"></script>
+    <script src="../assets/vendor/datatables/js/2_dataTables.bootstrap5.min.js"></script>
 
-    <script src="../assets/vendor/DataTables/DataTables-1.13.8/js/jquery.dataTables.min.js"></script>
-    <script src="../assets/vendor/DataTables/DataTables-1.13.8/js/dataTables.bootstrap5.min.js"></script>
-
-    <script src="../assets/vendor/daterangepicker-master/moment.min.js"></script>
-    <script src="../assets/vendor/daterangepicker-master/daterangepicker.js"></script>
+    <script src="../assets/vendor/daterangejs/moment.min.js"></script>
+    <script src="../assets/vendor/daterangejs/daterangepicker.min.js"></script>
     <script src="../assets/vendor/ckeditor/ckeditor.js"></script>
-
     <script src="../assets/js/admin.js"></script>
 
     <?php if (isset($_GET['msg'])) {

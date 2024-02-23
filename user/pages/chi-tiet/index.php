@@ -12,7 +12,7 @@ if (!isset($_GET['masp'])) {
 $masp = $_GET['masp'];
 
 $sp__Get_By_Id = $sp->SanPham__Get_By_Id($masp);
-// $sp__Get_Top_Sale = $sp->SanPham__Get_Top_Sale();
+$sp__Get_Top_Sale = $sp->SanPham__Get_Top_Sale();
 $sp__Get_Top_Same = $sp->SanPham__Get_Top_Same($sp__Get_By_Id->math,  $masp);
 $anhSp__Get_By_Id_Sp_Not_First = $anhSp->AnhSp__Get_By_Id_Sp_Not_First($sp__Get_By_Id->masp);
 ?>
@@ -44,21 +44,93 @@ $anhSp__Get_By_Id_Sp_Not_First = $anhSp->AnhSp__Get_By_Id_Sp_Not_First($sp__Get_
                         <div class="tab-group-1">
                             <h5 class="text-danger"><b><?= number_format($sp__Get_By_Id->dongia) ?>đ</b></h5>
                         </div>
-                        <div class="sp-item-container__chitiet__left">
-                            <div class="tab-group-1">
-                                <div class="sp-thich">
-                                    <?php if(isset($_SESSION['user'])):?>
-                                    <div class="btn btn-sm color-0 background-7" onclick="addCart('<?= $masp ?>')">
-                                        <i class="bx bx-cart"></i> Mua ngay
+                        <?php if ($sp__Get_By_Id->maloai == '1') : ?>
+                            <h5 class="text-normal">Chọn kích thước:</h6>
+                                <div>
+                                    <!-- code chọn size (39 đến 44) -->
+                                    <div>
+                                        <label for="size39" class="size-option" onclick="selectSize('39')">
+                                            <input type="radio" id="size39" name="size" value="39">
+                                            39
+                                        </label>
+
+                                        <label for="size40" class="size-option" onclick="selectSize('40')">
+                                            <input type="radio" id="size40" name="size" value="40">
+                                            40
+                                        </label>
+
+                                        <label for="size41" class="size-option" onclick="selectSize('41')">
+                                            <input type="radio" id="size41" name="size" value="41">
+                                            41
+                                        </label>
+
+                                        <label for="size42" class="size-option" onclick="selectSize('42')">
+                                            <input type="radio" id="size42" name="size" value="42">
+                                            42
+                                        </label>
+
+                                        <label for="size43" class="size-option" onclick="selectSize('43')">
+                                            <input type="radio" id="size43" name="size" value="43">
+                                            43
+                                        </label>
+
+                                        <label for="size44" class="size-option" onclick="selectSize('44')">
+                                            <input type="radio" id="size44" name="size" value="44">
+                                            44
+                                        </label>
                                     </div>
-                                    <?php else:?>
-                                        <div class="btn btn-sm btn-secondary" onclick="return checkLogin()">
-                                        <i class="bx bx-cart"></i> Mua ngay
-                                    </div>
-                                    <?php endif?>
                                 </div>
-                            </div>
-                        </div>
+                            <?php elseif ($sp__Get_By_Id->maloai == '3') : ?>
+                                <h5 class="text-normal">Chọn kích thước:</h6>
+                                    <div>
+                                        <!-- code chọn size (S M L X XX XXX) -->
+                                        <div>
+                                            <label for="sizeS" class="size-option" onclick="selectSize('S')">
+                                                <input type="radio" id="sizeS" name="size" value="S">
+                                                S
+                                            </label>
+
+                                            <label for="sizeM" class="size-option" onclick="selectSize('M')">
+                                                <input type="radio" id="sizeM" name="size" value="M">
+                                                M
+                                            </label>
+
+                                            <label for="sizeL" class="size-option" onclick="selectSize('L')">
+                                                <input type="radio" id="sizeL" name="size" value="L">
+                                                L
+                                            </label>
+
+                                            <label for="sizeX" class="size-option" onclick="selectSize('X')">
+                                                <input type="radio" id="sizeX" name="size" value="X">
+                                                X
+                                            </label>
+
+                                            <label for="sizeXL" class="size-option" onclick="selectSize('XL')">
+                                                <input type="radio" id="size" name="size" value="XX">
+                                                XL
+                                            </label>
+
+                                        </div>
+                                    </div>
+
+                                <?php endif ?>
+
+                                <div class="sp-item-container__chitiet__left">
+                                    <div class="tab-group-1">
+                                        <div class="sp-thich">
+                                            <?php if (isset($_SESSION['user'])) : ?>
+                                                <div class="btn btn-sm color-0 background-7" onclick="addCart('<?= $masp ?>')">
+                                                    <i class="bx bx-cart"></i> Mua ngay
+                                                </div>
+
+                                            <?php else : ?>
+                                                <div class="btn btn-sm btn-secondary" onclick="return checkLogin()">
+                                                    <i class="bx bx-cart"></i> Mua ngay
+                                                </div>
+                                            <?php endif ?>
+                                        </div>
+                                    </div>
+                                </div>
                     </div>
                 </div>
             </div>
@@ -94,7 +166,8 @@ $anhSp__Get_By_Id_Sp_Not_First = $anhSp->AnhSp__Get_By_Id_Sp_Not_First($sp__Get_
                                     <div class="manga-thumbnail">
                                         <img src="../assets/<?= $anhSp__Get_By_Id_Sp_First->hinhanh ?>">
                                         <span class="manga-note background-7"> <b>Top <?= $top ?></b> |
-<?PHP //thêm vào đây ?>                                    </div>
+                                            <?= $cm->formatThousand($item->luotmua) ?> lượt mua</span>
+                                    </div>
                                     <div class="blur"></div>
                                     <div class="manga-title color-3"><?= $item->tensp ?></div>
                                 </div>
@@ -132,25 +205,73 @@ $anhSp__Get_By_Id_Sp_Not_First = $anhSp->AnhSp__Get_By_Id_Sp_Not_First($sp__Get_
     </div>
 </main>
 <script>
+    let masize = null;
+
+    function selectSize(size) {
+        // Loại bỏ lớp "selected" từ tất cả các kích thước trước đó
+        $('.size-option').removeClass('selected');
+        // Thêm lớp "selected" cho kích thước được chọn
+        $(`[for="size${size}"]`).addClass('selected');
+        // Set giá trị cho biến masize dựa trên giá trị của size
+        switch (size) {
+            case '39':
+                masize = '1';
+                break;
+            case '40':
+                masize = '2';
+                break;
+            case '41':
+                masize = '3';
+                break;
+            case '42':
+                masize = '4';
+                break;
+            case '43':
+                masize = '5';
+                break;
+            case '44':
+                masize = '6';
+                break;
+            case 'S':
+                masize = '7';
+                break;
+            case 'M':
+                masize = '8';
+                break;
+            case 'L':
+                masize = '9';
+                break;
+            case 'X':
+                masize = '10';
+                break;
+            case 'XL':
+                masize = '11';
+                break;
+        }
+        return masize;
+    }
+
     function addCart(masp) {
         $.ajax({
             type: "POST",
             url: "./components/action.php",
             data: {
                 action: "add",
-                masp: masp
+                masp: masp,
+                masize: masize
             },
             success: function(response) {
                 console.log(response);
-                    $("#cart-item").text(response);
-                    Swal.fire({
-                        icon: "success",
-                        title: "Đã thêm vào giỏ",
-                        confirmButtonText: "OK",
-                    });
+                $("#cart-item").text(response);
+                Swal.fire({
+                    icon: "success",
+                    title: "Đã thêm vào giỏ",
+                    confirmButtonText: "OK",
+                });
             },
         });
     }
+
     // Định nghĩa hàm showSlide trước khi sử dụng
     function showSlide(index) {
         let slides = document.querySelectorAll('.item');

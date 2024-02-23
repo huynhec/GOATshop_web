@@ -1,17 +1,22 @@
 <?php
 session_start();
-// require_once "../../model/GioHangModel.php";
-// require_once "../../model/ChiTietGioHangModel.php";
-// require_once "../../model/DonHangModel.php";
-// require_once "../../model/ChiTietDonHangModel.php";
+require_once "../../model/GioHangModel.php";
+require_once "../../model/ChiTietGioHangModel.php";
+require_once "../../model/DonHangModel.php";
+require_once "../../model/ChiTietDonHangModel.php";
 require_once "../../model/KhachHangModel.php";
 require_once "../../model/SanPhamModel.php";
+require_once "../../model/SizeModel.php";
+require_once "../../model/SizeSpModel.php";
+
 $kh = new KhachHangModel();
-// $gh = new GioHangModel();
-// $ctgh = new ChiTietGioHangModel();
-// $dh = new DonHangModel();
-// $ctdh = new ChiTietDonHangModel();
+$gh = new GioHangModel();
+$ctgh = new ChiTietGioHangModel();
+$dh = new DonHangModel();
+$ctdh = new ChiTietDonHangModel();
 $sp = new SanPhamModel();
+$sz = new SizeModel();
+$szsp = new SizeSpModel();
 if (isset($_POST['action'])) {
     // Xử lý dựa trên action
     switch ($_POST['action']) {
@@ -22,7 +27,7 @@ if (isset($_POST['action'])) {
 
             echo $res;
             break;
-            
+
         case 'checkout':
             $makh = $_POST['makh'];
             $tenkh = $_POST['tenkh'];
@@ -46,9 +51,10 @@ if (isset($_POST['action'])) {
                 $masp = $item->masp;
                 $soluong = $item->soluong;
                 $dongia = $item->dongia;
+                $masize = $item->masize;
                 $luotmua = $sp->SanPham__Get_By_Id($masp)->luotmua + 1;
                 // Thêm chi tiết đơn hàng
-                $resDh = $ctdh->ChiTietDonHang__Add($madh, $masp, $soluong, $dongia);
+                $resDh = $ctdh->ChiTietDonHang__Add($madh, $masp, $soluong, $dongia, $masize);
                 $resSp = $sp->SanPham__Update_Luot_Mua($masp, $luotmua);
             }
             $res = $gh->GioHang__Update_Trang_Thai($magh, 0);
@@ -59,6 +65,10 @@ if (isset($_POST['action'])) {
             }
             break;
         case 'add':
+            error_reporting(E_ALL);
+            ini_set('display_errors', 1);
+
+
 
             $masp = $_POST['masp'];
             $soluong =  1;
@@ -66,17 +76,25 @@ if (isset($_POST['action'])) {
             $ngaythem = date('Y-m-d H:i:s');
             $makh = $_SESSION['user']->makh;
             $trangthai = 1; //giỏ hàng đang được tạo, chưa thêm vào đơn hàng
+
+            $masize = $_POST['masize'];
+            
             $resGH = $gh->GioHang__Get_By_Id_Kh($makh);
             if (isset($resGH->magh)) {
-                $check = $ctgh->ChiTietGioHang__Check($resGH->magh, $masp, $makh);
+                $check = $ctgh->ChiTietGioHang__Check($resGH->magh, $masp, $makh, $masize);
                 if ($check != false) {
                     $resCtgh = $ctgh->ChiTietGioHang__Update($check->mactgh, $check->magh, $masp, $check->soluong + 1, $dongia);
+                    $res = $szsp->SizeSp__Add($masp, $masize);
+
                 } else {
-                    $resCtgh = $ctgh->ChiTietGioHang__Add($resGH->magh, $masp, $soluong, $dongia);
+                    $resCtgh = $ctgh->ChiTietGioHang__Add($resGH->magh, $masp, $soluong, $dongia, $masize);
+                    $res = $szsp->SizeSp__Add($masp, $masize);
+
                 }
             } else {
                 $magh = $gh->GioHang__Add($ngaythem, $makh, $trangthai);
-                $resCtgh = $ctgh->ChiTietGioHang__Add($magh, $masp, $soluong, $dongia);
+                $resCtgh = $ctgh->ChiTietGioHang__Add($magh, $masp, $soluong, $dongia, $masize);
+                $res = $szsp->SizeSp__Add($masp, $masize);
             }
 
             $maghNew = $gh->GioHang__Get_By_Id_Kh($makh);
@@ -122,5 +140,6 @@ if (isset($_POST['action'])) {
                 ]);
             }
             break;
+            
     }
 }

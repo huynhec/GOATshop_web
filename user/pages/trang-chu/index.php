@@ -7,7 +7,7 @@ $anhSp = new AnhSpModel();
 $cm = new CommonModel();
 $sp__Get_Top_Updated_5 = $sp->SanPham__Get_Top_Updated(5);
 $sp__Get_Top_Updated_8 = $sp->SanPham__Get_Top_Updated(8);
-// $sp__Get_Top_Sale = $sp->SanPham__Get_Top_Sale();
+$sp__Get_Top_Sale = $sp->SanPham__Get_Top_Sale();
 $sp__Get_Top_Random = $sp->SanPham__Get_Top_Random(5);
 
 $top = 0;
