@@ -41,6 +41,8 @@ class ChiTietTrangThaiModel extends Database
     }
     public function ChiTietTrangThai__Add($madon, $matt, $manv, $ngaytao)
     {
+        var_dump($madon, $matt, $manv, $ngaytao);  // In giá trị của các biến
+
         $obj = $this->connect->prepare("INSERT INTO chitiettrangthai(madon, matt, manv, ngaytao) VALUES (?,?,?,?)");
         $obj->execute(array($madon, $matt, $manv, $ngaytao));
         return $obj->rowCount();
