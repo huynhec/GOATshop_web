@@ -50,7 +50,7 @@ $anhSp__Get_By_Id_Sp_Not_First = $anhSp->AnhSp__Get_By_Id_Sp_Not_First($sp__Get_
                                     <!-- code chọn size (39 đến 44) -->
                                     <div>
                                         <label for="size39" class="size-option" onclick="selectSize('39')">
-                                            <input type="radio" id="size39" name="size" value="39">
+                                            <input class="btn-check" type="radio" id="size39" name="size" value="39">
                                             39
                                         </label>
 

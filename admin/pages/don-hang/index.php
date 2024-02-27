@@ -53,25 +53,47 @@ $donHang__Get_All = $dh->DonHang__Get_All();
                                     <td><?= number_format($item->tongdh) ?></td>
                                     <td><?= isset($cttt->ChiTietTrangThai__Get_Last_By_DH($item->madon)->tentt) ?  $cttt->ChiTietTrangThai__Get_Last_By_DH($item->madon)->tentt : 'Chưa xác nhận!' ?></td>
                                     <td><?= isset($cttt->ChiTietTrangThai__Get_Last_By_DH($item->madon)->ngaytao) ?  $cttt->ChiTietTrangThai__Get_Last_By_DH($item->madon)->ngaytao : 'Chưa xác nhận' ?></td>
-                                    <td class="text-center font-weight-bold">
+                                    <?php if (isset($_SESSION['admin'])) : ?>
+                                        <td class="text-center font-weight-bold">
                                         <?php if (
-                                            $cttt->ChiTietTrangThai__Check($item->madon, 1) != false // đơn bị hủy bởi người bán
-                                        ) : ?>
-                                            <button type="button" class="btn btn-success btn-secondary" onclick="return update_obj('<?= $item->madon ?>')">
-                                                <i class="bx bx-edit" aria-hidden="true"></i> Đơn đã hủy
-                                            </button>
+                                                $cttt->ChiTietTrangThai__Check($item->madon, 1) != false // đơn bị hủy bởi người bán
+                                            ) : ?>
+                                                <button type="button" class="btn btn-success btn-secondary" onclick="handleUpdate()">
+                                                    <i class="bx bx-edit" aria-hidden="true"></i> Đơn đã hủy
+                                                </button>
 
-                                        <?php elseif ($cttt->ChiTietTrangThai__Check($item->madon, 6) != false) :   // đơn được giao thành công)
-                                        ?>
-                                            <button type="button" class="btn btn-success btn-update" onclick="return update_obj('<?= $item->madon ?>')">
-                                                <i class="bx bx-edit" aria-hidden="true"></i> Đơn đã giao
-                                            </button>
-                                        <?php else : ?>
-                                            <button type="button" class="btn btn-danger btn-update" onclick="return update_obj('<?= $item->madon ?>')">
-                                                <i class="bx bx-edit" aria-hidden="true"></i> Đơn cần xử lý
-                                            </button>
-                                        <?php endif ?>
-                                    </td>
+                                            <?php elseif ($cttt->ChiTietTrangThai__Check($item->madon, 6) != false) :   // đơn được giao thành công)
+                                            ?>
+                                                <button type="button" class="btn btn-success btn-update" onclick="handleUpdate()">
+                                                    <i class="bx bx-edit" aria-hidden="true"></i> Đơn đã giao
+                                                </button>
+                                            <?php else : ?>
+                                                <button type="button" class="btn btn-danger btn-update" onclick="handleUpdate()">
+                                                    <i class="bx bx-edit" aria-hidden="true"></i> Đơn cần xử lý
+                                                </button>
+                                            <?php endif ?>
+                                        </td>
+                                    <?php else : ?>
+                                        <td class="text-center font-weight-bold">
+                                            <?php if (
+                                                $cttt->ChiTietTrangThai__Check($item->madon, 1) != false // đơn bị hủy bởi người bán
+                                            ) : ?>
+                                                <button type="button" class="btn btn-success btn-secondary" onclick="return update_obj('<?= $item->madon ?>')">
+                                                    <i class="bx bx-edit" aria-hidden="true"></i> Đơn đã hủy
+                                                </button>
+
+                                            <?php elseif ($cttt->ChiTietTrangThai__Check($item->madon, 6) != false) :   // đơn được giao thành công)
+                                            ?>
+                                                <button type="button" class="btn btn-success btn-update" onclick="return update_obj('<?= $item->madon ?>')">
+                                                    <i class="bx bx-edit" aria-hidden="true"></i> Đơn đã giao
+                                                </button>
+                                            <?php else : ?>
+                                                <button type="button" class="btn btn-danger btn-update" onclick="return update_obj('<?= $item->madon ?>')">
+                                                    <i class="bx bx-edit" aria-hidden="true"></i> Đơn cần xử lý
+                                                </button>
+                                            <?php endif ?>
+                                        </td>
+                                    <?php endif ?>
                                 </tr>
                             <?php endforeach ?>
                         </tbody>
@@ -89,6 +111,14 @@ $donHang__Get_All = $dh->DonHang__Get_All();
 </div>
 
 <script>
+     function handleUpdate() {
+        Swal.fire({
+            title: 'Thông báo',
+            text: 'Chỉ quản lý và nhân viên mới thao tác được',
+            icon: 'info',
+        });
+    }
+    
     function update_obj(madon) {
         $.post("pages/don-hang/update.php", {
             madon: madon,

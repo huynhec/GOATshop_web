@@ -46,9 +46,9 @@ $khachHang__Get_All = $kh->KhachHang__Get_All(-1);
                                             <i class="bx bx-edit" aria-hidden="true"></i> Sửa
                                         </button>
                                         <?php if (isset($_SESSION['admin'])) : ?>
-                                            <!-- <button type="button" class="btn btn-danger btn-delete" onclick="return delete_obj('<?= $item->makh ?>')">
+                                            <button type="button" class="btn btn-danger btn-delete" onclick="return delete_obj('<?= $item->makh ?>')">
                                                 <i class="fa fa-trash" aria-hidden="true"></i> Xóa
-                                            </button> -->
+                                            </button>
                                         <?php endif ?>
                                     </td>
                                 </tr>

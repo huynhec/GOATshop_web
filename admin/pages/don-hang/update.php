@@ -20,6 +20,7 @@ $madon = $_POST['madon'];
 $chiTietDonHang__Get_By_Id_DH = $ctdh->ChiTietDonHang__Get_By_Id_DH($madon);
 $chiTietTrangThai__Get_By_Id_DH = $cttt->ChiTietTrangThai__Get_By_Id_DH($madon);
 $trangThai__Get_BY_Id_DH = $tt->TrangThai__Get_By_Id_DH($madon);
+
 ?>
 
 <div class="main-update">
@@ -58,7 +59,6 @@ $trangThai__Get_BY_Id_DH = $tt->TrangThai__Get_By_Id_DH($madon);
             </tfoot>
         </table>
     </div>
-
     <hr>
     <h4 class="section-title">Trạng thái đơn hàng</h4>
 
@@ -88,15 +88,13 @@ $trangThai__Get_BY_Id_DH = $tt->TrangThai__Get_By_Id_DH($madon);
         <div class="col">
             <label>Cập nhật tình trạng đơn:</label>
 
-            <?php 
+            <?php
             $lastMATT = isset($cttt->ChiTietTrangThai__Get_Last_By_DH($madon)->matt) ? $cttt->ChiTietTrangThai__Get_Last_By_DH($madon)->matt : null;
 
             if (($lastMATT == 1) || ($lastMATT == 6)) :
             ?>
                 <label class="form-check-label" for="matt<?= $item->matt ?>">...</label>
             <?php else : ?>
-
-
 
                 <?php foreach ($trangThai__Get_BY_Id_DH as $item) : ?>
                     <div class="form-check form-check-inline">
@@ -108,9 +106,9 @@ $trangThai__Get_BY_Id_DH = $tt->TrangThai__Get_By_Id_DH($madon);
 
         </div>
         <br />
-        <div class="col text-center">
-            <button type="submit" class="btn btn-primary">Lưu thông tin</button>
-        </div>
+            <div class="col text-center">
+                <button type="submit" class="btn btn-primary">Lưu thông tin</button>
+            </div>
     </form>
 
 </div>

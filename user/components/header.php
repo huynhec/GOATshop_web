@@ -102,17 +102,17 @@ $thuongHieu__Get_All = $th->ThuongHieu__Get_All();
                     </a>
                     <!-- <a href="index.php?pages=san-phan-da-xem">
                         <li> <i class='bx bx-book-reader'></i> Sản phẩm đã xem</li>
-                    </a>
-                    <a href="index.php?pages=san-phan-da-thich">
+                    </a> -->
+                    <!-- <a href="index.php?pages=san-phan-da-thich">
                         <li> <i class='bx bx-book-heart'></i> Sản phẩm đã thích</li>
-                    </a>
-                    <a href="index.php?pages=san-phan-theo-doi">
+                    </a> -->
+                    <!-- <a href="index.php?pages=san-phan-theo-doi">
                         <li><i class='bx bx-book-bookmark'></i> Đang theo dõi</li>
-                    </a>
+                    </a> -->
                     <hr>
                     <a href="../auth/pages/chinh-sua.php">
                         <li> <i class='bx bx-cog'></i> Chỉnh sửa</li>
-                    </a> -->
+                    </a>
                     <hr>
                     <a href="../auth/pages/action.php?req=dang-xuat">
                         <li><i class='bx bx-log-out'></i> Đăng xuất</li>

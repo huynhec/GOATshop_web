@@ -37,7 +37,7 @@ class SanPhamModel extends Database
         if ($trangthai != -1) {
             $obj = $this->connect->prepare("SELECT * FROM sanpham");
         } else {
-            $obj = $this->connect->prepare("SELECT * FROM sanpham WHERE trangthai = 1");
+            $obj = $this->connect->prepare("SELECT * FROM sanpham ");
         }
         $obj->setFetchMode(PDO::FETCH_OBJ);
         $obj->execute();
@@ -93,7 +93,7 @@ class SanPhamModel extends Database
     public function SanPham__Get_All_Paged($page_number)
     {
         // Số lượng truyện trên mỗi trang
-        $items_per_page = 12;
+        $items_per_page = 14;
 
         // Tính toán giá trị bắt đầu và kết thúc cho phân trang
         $page_start = ($page_number - 1) * $items_per_page;

@@ -46,6 +46,7 @@ if (isset($_GET['req'])) {
             $email_new = $_POST['email_new'];
             $email = $email_old;
 
+
             if ($email_new != $email_old && strlen($email_new) > 0) {
                 if ($nv->NhanVien__Check_Email($email_new)) {
                     $email = $email_new;

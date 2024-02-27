@@ -4,11 +4,11 @@ require_once '../../../model/UserModel.php';
 $kh = new KhachHangModel();
 $user = new UserModel();
 $makh = $_POST['makh'];
-// Lấy thông tin nhân viên từ bảng nhanvien
+// Lấy thông tin nhân viên từ bảng khachhang
 $khachHang__Get_By_Id = $kh->KhachHang__Get_By_Id($makh);
-// Kiểm tra nếu có thông tin nhân viên
+// Kiểm tra nếu có thông tin khách hàng
 if ($khachHang__Get_By_Id) {
-    // Lấy mauser từ kết quả của NhanVien__Get_By_Id
+    // Lấy mauser từ kết quả của KhachHang__Get_By_Id
     $mauser = $khachHang__Get_By_Id->mauser;
     // Lấy thông tin user từ bảng users bằng mauser
     $user__Get_By_Id = $user->User__Get_By_Id($mauser);
@@ -19,7 +19,7 @@ if ($khachHang__Get_By_Id) {
     <h3 class="section-title">Cập nhật khách hàng</h3>
     <form class="form-group" action="pages/khach-hang/action.php?req=update" method="post">
         <input type="hidden" class="form-control" id="makh" name="makh" required value="<?= $khachHang__Get_By_Id->makh ?>">
-        <input type="hidden" class="form-control" id="password_old" name="password_old" value="<?= $khachHang__Get_By_Id->password ?>">
+        <input type="hidden" class="form-control" id="password_old" name="password_old" value="<?= $user__Get_By_Id->password ?>">
         <input type="hidden" class="form-control" id="email_old" name="email_old" required value="<?= $khachHang__Get_By_Id->email ?>">
 
 

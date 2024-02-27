@@ -11,7 +11,7 @@
   scroll-behavior: smooth;
 }
 
-*::-webkit-scrollbar{
+*::-webkit-scrollbar {
   width: 10px;
   height: 10px;
 }
@@ -39,9 +39,24 @@ body {
   position: relative;
   overflow-x: none;
   font-family: sans-serif;
-  background: #E3E6E6;
+  background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)),
+    url('../../assets/images/baner.jpg');
+  background-size: cover;
   margin: 0 auto;
+
+
 }
+
+/* body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: inherit;
+  filter: blur(10px);
+} */
 
 a {
   color: #000;
@@ -54,7 +69,8 @@ a {
 img {
   vertical-align: middle;
 }
-img{
+
+img {
   width: 100%;
 }
 
@@ -215,6 +231,7 @@ img:hover {
   display: flex;
   align-items: center;
 }
+
 .navbar-item a i {
   padding-right: 0.2rem;
 }
@@ -276,6 +293,7 @@ img:hover {
   margin: 0.1rem;
   padding: 0.1rem;
 }
+
 .navbar-item.has-sub .menu-genre {
   display: flex;
   padding-left: 15px;
@@ -333,8 +351,7 @@ img:hover {
   display: flex;
 }
 
-.navbar-display-user
- {
+.navbar-display-user {
   width: 35px;
   height: 35px;
   border-radius: 20px;
@@ -346,18 +363,18 @@ img:hover {
   vertical-align: middle;
   margin: 7px;
 }
+
 .hidden {
   display: none;
 }
 
 .navbar-display-user i,
-  .navbar-display-cart i {
+.navbar-display-cart i {
   font-size: 20px;
   color: #999;
 }
 
-.navbar-display-cart
- {
+.navbar-display-cart {
   width: 35px;
   height: 35px;
   border-radius: 20px;
@@ -368,6 +385,7 @@ img:hover {
   vertical-align: middle;
   margin: 7px;
 }
+
 span#cart-item {
   position: absolute;
   top: 2px;
@@ -418,6 +436,7 @@ span#cart-item {
     vertical-align: middle;
     padding: 0 2rem;
   }
+
   .navbar .navbar-logo {
     transition: position 0.3s, left 0.3s;
     -webkit-transition: position 0.3s, left 0.3s;
@@ -434,6 +453,7 @@ span#cart-item {
   .navbar-item.has-sub .navbar-item-sub {
     visibility: hidden !important;
   }
+
   .navbar.active-menu .navbar-menu {
     left: 0;
     box-shadow: 0 0 5px #ccc;
@@ -547,4 +567,3 @@ span#cart-item {
     padding: 0 5px;
   }
 }
-

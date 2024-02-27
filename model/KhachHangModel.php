@@ -37,7 +37,7 @@ class KhachHangModel extends Database
         if ($trangthai != -1) {
             $obj = $this->connect->prepare("SELECT * FROM khachhang");
         } else {
-            $obj = $this->connect->prepare("SELECT * FROM khachhang WHERE trangthai =1");
+            $obj = $this->connect->prepare("SELECT * FROM khachhang");
         }
         $obj->setFetchMode(PDO::FETCH_OBJ);
         $obj->execute();
@@ -83,9 +83,9 @@ class KhachHangModel extends Database
     {
     // Kiểm tra xem đầu vào có phải là email hay username
     if (filter_var($emailOrUsername, FILTER_VALIDATE_EMAIL)) {
-        $sql = "SELECT * FROM khachhang INNER JOIN users ON khachhang.mauser = users.mauser WHERE khachhang.email = ? AND users.password = ?";
+        $sql = "SELECT * FROM khachhang INNER JOIN users ON khachhang.mauser = users.mauser WHERE khachhang.email = ? AND users.password = ? AND khachhang.trangthai = 1";
     } else {
-        $sql = "SELECT * FROM users INNER JOIN khachhang ON users.mauser = khachhang.mauser WHERE users.username = ? AND users.password = ?";
+        $sql = "SELECT * FROM users INNER JOIN khachhang ON users.mauser = khachhang.mauser WHERE users.username = ? AND users.password = ? AND users.trangthai = 1";
     }
 
         $obj = $this->connect->prepare($sql);

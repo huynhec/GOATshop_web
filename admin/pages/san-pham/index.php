@@ -34,6 +34,7 @@ $sanPham__Get_All = $sp->SanPham__Get_All(-1);
                                 <th>Tên sản phẩm</th>
                                 <th>Đơn giá</th>
                                 <th>Thương hiệu</th>
+                                <th>Trạng thái</th>
                                 <th>Thao tác</th>
                             </tr>
                         </thead>
@@ -46,6 +47,7 @@ $sanPham__Get_All = $sp->SanPham__Get_All(-1);
                                 <td><?= $item->tensp ?></td>
                                 <td><?= number_format($item->dongia) ?></td>
                                 <td><?= $th->ThuongHieu__Get_By_Id($item->math)->tenth ?></td>
+                                <td><?= $item->trangthai == 1 ? '<span class="text-success">Hiển thị</span>' : '<span class="text-danger">Tạm ẩn</span>' ?></td>
                                 <td class="text-center font-weight-bold">
                                     <button type="button" class="btn btn-primary btn-update"
                                         onclick="return update_anhsp_obj('<?= $item->masp ?>')">
@@ -58,7 +60,7 @@ $sanPham__Get_All = $sp->SanPham__Get_All(-1);
                                     <?php if (isset($_SESSION['admin'])) : ?>
                                     <button type="button" class="btn btn-danger btn-delete"
                                         onclick="return delete_obj('<?= $item->masp ?>')">
-                                        <i class="bx bx-trash" aria-hidden="true"></i> Xóa
+                                        <i class="bx bx-trash" aria-hidden="true"></i> 
                                     </button>
                                     <?php endif ?>
                                 </td>

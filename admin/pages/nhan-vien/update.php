@@ -73,8 +73,8 @@ if ($nhanVien__Get_By_Id) {
         <div class="col">
             <label for="phanquyen" class="form-label">Phân quyền</label>
             <select class="form-select " aria-label=".phanquyen" id="phanquyen" name="phanquyen">
-                <option value="1" <?= $nhanVien__Get_By_Id->phanquyen == 1 ? 'selected' : '' ?>>Manager</option>
-                <option value="2" <?= $nhanVien__Get_By_Id->phanquyen == 2 ? 'selected' : '' ?>>Nhân viên</option>
+                <option value="1" <?= $user__Get_By_Id->phanquyen == 1 ? 'selected' : '' ?>>Manager</option>
+                <option value="2" <?= $user__Get_By_Id->phanquyen == 2 ? 'selected' : '' ?>>Nhân viên</option>
             </select>
         </div>
         <br />

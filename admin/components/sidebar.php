@@ -1,8 +1,3 @@
-<!-- Thêm CSS -->
-<link rel="stylesheet" href="../assets/vendor/sweetalert2.min.css">
-
-<!-- Thêm JS -->
-<script src="../assets/vendor/sweetalert2.all.min.js"></script>
 
 <?php if (isset($_GET['pages'])) : ?>
     <div id="sidebar">
@@ -73,44 +68,17 @@
                 </a>
             </li>
             <li>
+                <!-- Trang của bạn -->
                 <a href="#" class="logout" onclick="confirmLogout()">
                     <i class='bx bxs-log-out-circle'></i>
                     <span class="text">Logout</span>
                 </a>
+                <script src="../assets/js/confirmLogout.js"></script>
+
+
             </li>
         </ul>
     </div>
+
+
 <?php endif ?>
-
-<?php
-// Kiểm tra xem người dùng nào đang đăng nhập
-if (isset($_SESSION['admin'])) {
-    $confirmMessage = 'Muốn đăng xuất khỏi trang admin không?';
-} elseif (isset($_SESSION['manager'])) {
-    $confirmMessage = 'Muốn đăng xuất khỏi trang manager không?';
-} elseif (isset($_SESSION['nhanvien'])) {
-    $confirmMessage = 'Muốn đăng xuất khỏi trang nhân viên không?';
-} else {
-    $confirmMessage = 'Muốn đăng xuất không?';
-}
-?>
-
-<script>
-function confirmLogout() {
-    // Sử dụng SweetAlert2 thay thế cho hộp thoại confirm
-    Swal.fire({
-        title: 'Xác nhận đăng xuất',
-        text: '<?php echo $confirmMessage; ?>',
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Đồng ý',
-        cancelButtonText: 'Hủy',
-    }).then((result) => {
-        // Nếu người dùng đồng ý, thực hiện đăng xuất
-        if (result.isConfirmed) {
-            window.location.href = "../auth/pages/action.php?req=dang-xuat";
-        }
-    });
-}
-</script>
-
