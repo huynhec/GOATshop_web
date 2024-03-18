@@ -58,10 +58,10 @@ $sanPham__Get_All = $sp->SanPham__Get_All(-1);
                                         <i class="bx bx-edit" aria-hidden="true"></i>
                                     </button>
                                     <?php if (isset($_SESSION['admin'])) : ?>
-                                    <button type="button" class="btn btn-danger btn-delete"
+                                    <!-- <button type="button" class="btn btn-danger btn-delete"
                                         onclick="return delete_obj('<?= $item->masp ?>')">
                                         <i class="bx bx-trash" aria-hidden="true"></i> 
-                                    </button>
+                                    </button> -->
                                     <?php endif ?>
                                 </td>
                             </tr>

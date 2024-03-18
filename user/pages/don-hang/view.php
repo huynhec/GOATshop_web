@@ -23,7 +23,7 @@ $madon = $_POST['madon'];
             <tr>
                 <td width=2% style="padding: 5px; "><?=++$count?></td>
                 <td width="60%" style="padding: 5px; "><?= $sp->SanPham__Get_By_Id($item->masp)->tensp ?></td>
-                <td width="20%" style="padding: 5px; "><?= $szsp->SizeSp__Get_By_Id($item->masp)->tensize ?></td>
+                <td width="20%" style="padding: 5px; "><?= $szsp->SizeSp__Get_By_Id($item->masize)->tensize ?></td>
                 <td width="20%" style="padding: 5px; text-align: center"><?= $item->soluong ?></td>
             </tr>
         <?php endforeach ?>

@@ -132,8 +132,37 @@ private function deleteKhachHang($mauser)
         $obj->execute(array($mauser));
         return $obj->fetch();
     }
+    public function User__Check_Username($username)
+    {
+        $obj = $this->connect->prepare("SELECT * FROM users WHERE username = ?");
+        $obj->setFetchMode(PDO::FETCH_OBJ);
+        $obj->execute(array($username));
+        if ($obj->rowCount() > 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 
+    public function Ma_Hoa_Mat_Khau($password)
+    {
+        $ciphering = "AES-128-CTR";
+        $options = 0;
+        $encryption_iv = '1234567891011121';
+        $encryption_key = "W3docs";
+        $encryption = openssl_encrypt($password, $ciphering, $encryption_key, $options, $encryption_iv);
+        return $encryption;
+    }
 
+    public function Giai_Ma_Mat_Khau($mat_khau_ma_hoa)
+    {
+        $ciphering = "AES-128-CTR";
+        $options = 0;
+        $decryption_iv = '1234567891011121';
+        $decryption_key = "W3docs";
+        $decryption = openssl_decrypt($mat_khau_ma_hoa, $ciphering, $decryption_key, $options, $decryption_iv);
+        return $decryption;
+    }
 }
 
 

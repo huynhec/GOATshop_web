@@ -44,17 +44,17 @@ class LoaiSpModel extends Database
         return $obj->fetchAll();
     }
     
-    public function LoaiSp__Add($tenloai, $mota, $trangthai)
+    public function LoaiSp__Add($tenloai, $tenthuoctinh, $trangthai, $ghichu)
     {
-        $obj = $this->connect->prepare("INSERT INTO loaisp(tenloai, mota,trangthai) VALUES (?,?,?)");
-        $obj->execute(array($tenloai, $mota, $trangthai));
+        $obj = $this->connect->prepare("INSERT INTO loaisp(tenloai, tenthuoctinh,trangthai, ghichu) VALUES (?,?,?,?)");
+        $obj->execute(array($tenloai, $tenthuoctinh, $trangthai, $ghichu));
         return $obj->rowCount();
     }
 
-    public function LoaiSp__Update($maloai, $tenloai, $mota, $trangthai)
+    public function LoaiSp__Update($maloai, $tenloai, $tenthuoctinh, $trangthai, $ghichu)
     {
-        $obj = $this->connect->prepare("UPDATE loaisp SET tenloai=?, mota=?, trangthai=? WHERE maloai=?");
-        $obj->execute(array($tenloai, $mota, $trangthai, $maloai));
+        $obj = $this->connect->prepare("UPDATE loaisp SET tenloai=?, tenthuoctinh=?, trangthai=?, ghichu=? WHERE maloai=?");
+        $obj->execute(array($tenloai, $tenthuoctinh, $trangthai, $ghichu, $maloai));
         return $obj->rowCount();
     }
     public function LoaiSp__Delete($maloai)
@@ -70,5 +70,12 @@ class LoaiSpModel extends Database
         $obj->setFetchMode(PDO::FETCH_OBJ);
         $obj->execute(array($maloai));
         return $obj->fetch();
+    }
+    public function LoaiSp__Get_All_Exist()
+    {
+        $obj = $this->connect->prepare("SELECT * FROM loaisp INNER JOIN thuoctinh ON loaisp.maloai = thuoctinh.maloai WHERE loaisp.trangthai=1 GROUP BY thuoctinh.maloai");
+        $obj->setFetchMode(PDO::FETCH_OBJ);
+        $obj->execute();
+        return $obj->fetchAll();
     }
 }

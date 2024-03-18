@@ -1,4 +1,5 @@
 <?php
+
 require_once '../model/GioHangModel.php';
 require_once '../model/ChiTietGioHangModel.php';
 require_once '../model/SanPhamModel.php';
@@ -6,7 +7,6 @@ require_once '../model/AnhSpModel.php';
 require_once '../model/CommonModel.php';
 require_once '../model/SizeModel.php';
 require_once '../model/SizeSpModel.php';
-
 
 $gh = new GioHangModel();
 $ctgh = new ChiTietGioHangModel();
@@ -92,6 +92,7 @@ $chiTietGioHang__Get_By_Id_Gh = $ctgh->ChiTietGioHang__Get_By_Id_GH(isset($gioHa
                                                             <div class="form-outline form-white mb-1">
                                                                 <label class="form-label" for="tenkh">Tên người nhận</label>
                                                                 <input type="text" name="tenkh" id="tenkh" class="form-control" siez="17" placeholder="Tên người nhận" value="<?= $_SESSION['user']->tenkh ?>" required />
+
                                                             </div>
 
                                                             <div class="form-outline form-white mb-1">
@@ -128,6 +129,8 @@ $chiTietGioHang__Get_By_Id_Gh = $ctgh->ChiTietGioHang__Get_By_Id_GH(isset($gioHa
                                                         <button type="button" onclick="return checkout()" class="btn btn-lg btn-danger w-100">
                                                             <input type="hidden" id="magh" name="magh" value="<?= $gioHang__Get_By_Id_Kh->magh ?>" readonly>
                                                             <input type="hidden" id="makh" name="makh" value="<?= $_SESSION['user']->makh ?>" readonly>
+                                                            <input type="hidden" id="username" name="username" value="<?= $_SESSION['user']->username ?>" readonly>
+                                                            <input type="hidden" id="password" name="password" value="<?= $_SESSION['user']->password ?>" readonly>
                                                             <input type="hidden" id="action" name="action" value="checkout">
                                                             <span>Đặt hàng <i class="bx bxs-right-arrow-alt"></i></span>
                                                         </button>
@@ -193,7 +196,9 @@ $chiTietGioHang__Get_By_Id_Gh = $ctgh->ChiTietGioHang__Get_By_Id_GH(isset($gioHa
                 diachi: document.getElementById('diachi').value,
                 sodienthoai: document.getElementById('sodienthoai').value,
                 email: document.getElementById('email').value,
-                magh: document.getElementById('magh').value
+                magh: document.getElementById('magh').value,
+                username: document.getElementById('username').value,
+                password: document.getElementById('username').value
             },
             success: function(response) {
                 console.log(response);

@@ -1,6 +1,11 @@
 <?php
 session_start();
-
+if (isset($_SESSION['admin'])) {
+    unset($_SESSION['admin']);
+}
+if (isset($_SESSION['manager'])) {
+    unset($_SESSION['manager']);
+}
 ?>
 
 <!DOCTYPE html>
@@ -25,11 +30,11 @@ session_start();
     <script src="../assets/vendor/jquery-3.7.1.js"></script>
     <script src="../assets/vendor/bootstrap-5.2.3-dist/js/bootstrap.min.js"></script>
     <script src="../assets/vendor/sweetalert2@11.js"></script>
-
+    <script src="../assets/js/diachi.js"></script>
     <?php if (isset($_GET['msg'])) {
-    switch ($_GET['msg']) {
-      case 'success':
-        echo "<script>
+        switch ($_GET['msg']) {
+            case 'success':
+                echo "<script>
                     const Toast = Swal.mixin({
                         toast: true,
                         position: 'top-end',
@@ -46,10 +51,10 @@ session_start();
                         title: 'Đăng ký thành công!'
                     });
                 </script>";
-        break;
+                break;
 
-      case 'error':
-        echo "<script>
+            case 'error':
+                echo "<script>
                         const Toast = Swal.mixin({
                             toast: true,
                             position: 'top-end',
@@ -66,10 +71,49 @@ session_start();
                             title: 'Đăng ký không thành công! Tài khoản đã tồn tại'
                         });
                     </script>";
-        break;
+                break;
+            case 'update-success':
+                echo "<script>
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 2000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                            toast.onmouseenter = Swal.stopTimer;
+                            toast.onmouseleave = Swal.resumeTimer;
+                            }
+                        });
+                        Toast.fire({
+                            icon: 'success',
+                            title: 'Cập nhật thành công!'
+                        });
+                    </script>";
+                break;
 
-      case 'warning':
-        echo "<script>
+            case 'update-error':
+                echo "<script>
+                            const Toast = Swal.mixin({
+                                toast: true,
+                                position: 'top-end',
+                                showConfirmButton: false,
+                                timer: 2000,
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                toast.onmouseenter = Swal.stopTimer;
+                                toast.onmouseleave = Swal.resumeTimer;
+                                }
+                            });
+                            Toast.fire({
+                                icon: 'error',
+                                title: 'Cập nhật không thành công!'
+                            });
+                        </script>";
+                break;
+
+            case 'warning':
+                echo "<script>
                         const Toast = Swal.mixin({
                             toast: true,
                             position: 'top-end',
@@ -86,9 +130,47 @@ session_start();
                             title: 'Thông tin đăng nhập không chính xác hoặc tài khoản bị khóa!'
                         });
                     </script>";
-        break;
-    }
-  } ?>
+                break;
+            case 'samepwu':
+                echo "<script>
+                            const Toast = Swal.mixin({
+                                toast: true,
+                                position: 'top-end',
+                                showConfirmButton: false,
+                                timer: 2000,
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                toast.onmouseenter = Swal.stopTimer;
+                                toast.onmouseleave = Swal.resumeTimer;
+                                }
+                            });
+                            Toast.fire({
+                                icon: 'warning',
+                                title: 'Tài khoản không trùng với mặt khẩu!'
+                            });
+                        </script>";
+                break;
+            case '!recaptcha':
+                echo "<script>
+                            const Toast = Swal.mixin({
+                                toast: true,
+                                position: 'top-end',
+                                showConfirmButton: false,
+                                timer: 2000,
+                                timerProgressBar: true,
+                                didOpen: (toast) => {
+                                toast.onmouseenter = Swal.stopTimer;
+                                toast.onmouseleave = Swal.resumeTimer;
+                                }
+                            });
+                            Toast.fire({
+                                icon: 'error',
+                                title: 'Vui lòng xác nhận ReCAPTCHA trước khi tiếp tục!'
+                            });
+                        </script>";
+                break;
+        }
+    } ?>
 </body>
 
 </html>

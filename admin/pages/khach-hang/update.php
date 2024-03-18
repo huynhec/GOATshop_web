@@ -21,13 +21,14 @@ if ($khachHang__Get_By_Id) {
         <input type="hidden" class="form-control" id="makh" name="makh" required value="<?= $khachHang__Get_By_Id->makh ?>">
         <input type="hidden" class="form-control" id="password_old" name="password_old" value="<?= $user__Get_By_Id->password ?>">
         <input type="hidden" class="form-control" id="email_old" name="email_old" required value="<?= $khachHang__Get_By_Id->email ?>">
+        <input type="hidden" class="form-control" id="username_old" name="username_old" required value="<?= $user__Get_By_Id->username ?>">
 
 
         <div class="col">
             <label for="tenkh" class="form-label">Tên khách hàng</label>
             <input type="text" class="form-control" id="tenkh" name="tenkh" required value="<?= $khachHang__Get_By_Id->tenkh ?>">
             <label for="tennv" class="form-label">Username</label>
-            <input type="text" class="form-control" id="username" name="username" required value="<?= $user__Get_By_Id->username ?>">
+            <input type="text" class="form-control" id="username_new" name="username_new" required value="<?= $user__Get_By_Id->username ?>">
         </div>
         <div class="row">
             <div class="col">

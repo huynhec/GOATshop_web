@@ -39,6 +39,38 @@ $('#daterange').daterangepicker({
   });
 });
 
+    function addInput() {
+        var inputContainer = document.getElementById('inputContainer');
+        var inputGroup = document.createElement('div');
+        inputGroup.className = 'input-group mb-2';
+
+        var input = document.createElement('input');
+        input.type = 'text';
+        input.name = 'thuoctinh[]'; // Tên thuộc tính là một mảng để có thể lưu nhiều thuộc tính
+        input.placeholder = 'Thuộc tính ' + (inputContainer.children.length + 1);
+        input.className = 'form-control';
+        input.required = true;
+
+        var button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'btn btn-danger';
+        button.textContent = 'Xoá';
+        button.onclick = function() {
+            inputContainer.removeChild(inputGroup);
+        };
+
+        inputGroup.appendChild(input);
+        inputGroup.appendChild(button);
+        inputContainer.appendChild(inputGroup);
+    }
+
+    function removeInput(button) {
+        var inputGroup = button.parentElement;
+        var inputContainer = inputGroup.parentElement;
+        inputContainer.removeChild(inputGroup);
+    }
+
+
 CKEDITOR.replace('mota');
 
 

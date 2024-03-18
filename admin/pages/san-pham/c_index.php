@@ -79,7 +79,7 @@ $anhSp__Get_By_Id_Sp_Not_First = $anhSp->AnhSp__Get_By_Id_Sp_Not_First($masp);
             </div>
 
         </div>
-        <div class="col-4">
+        <div class="col-7">
             <div class="main-form">
                 <?php require_once 'c_add.php' ?>
             </div>

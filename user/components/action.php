@@ -35,7 +35,7 @@ if (isset($_POST['action'])) {
             $sodienthoai = $_POST['sodienthoai'];
             $email = $_POST['email'];
             $magh = $_POST['magh'];
-
+            $username = $_POST['username'];
             // cập nhật thông tin khách hàng (vì giữ cái liên kết khóa ngoại ở đơn hàng)
             $khRes = $kh->KhachHang__Update_Info($makh, $tenkh, $sodienthoai, $diachi, $email);
             $resKh = $kh->KhachHang__Get_By_Id($makh);
@@ -68,8 +68,6 @@ if (isset($_POST['action'])) {
             error_reporting(E_ALL);
             ini_set('display_errors', 1);
 
-
-
             $masp = $_POST['masp'];
             $soluong =  1;
             $dongia = $sp->SanPham__Get_By_Id($masp)->dongia;
@@ -77,19 +75,17 @@ if (isset($_POST['action'])) {
             $makh = $_SESSION['user']->makh;
             $trangthai = 1; //giỏ hàng đang được tạo, chưa thêm vào đơn hàng
 
-            $masize = $_POST['masize'];
-            
+            $masize = $_POST['masize'] ?? 0;
+
             $resGH = $gh->GioHang__Get_By_Id_Kh($makh);
             if (isset($resGH->magh)) {
                 $check = $ctgh->ChiTietGioHang__Check($resGH->magh, $masp, $makh, $masize);
                 if ($check != false) {
                     $resCtgh = $ctgh->ChiTietGioHang__Update($check->mactgh, $check->magh, $masp, $check->soluong + 1, $dongia);
                     $res = $szsp->SizeSp__Add($masp, $masize);
-
                 } else {
                     $resCtgh = $ctgh->ChiTietGioHang__Add($resGH->magh, $masp, $soluong, $dongia, $masize);
                     $res = $szsp->SizeSp__Add($masp, $masize);
-
                 }
             } else {
                 $magh = $gh->GioHang__Add($ngaythem, $makh, $trangthai);
@@ -140,6 +136,5 @@ if (isset($_POST['action'])) {
                 ]);
             }
             break;
-
     }
 }

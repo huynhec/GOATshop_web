@@ -46,7 +46,7 @@ class KhachHangModel extends Database
 
     public function KhachHang__Get_By_Id($makh)
     {
-        $obj = $this->connect->prepare("SELECT * FROM khachhang WHERE makh = ?");
+        $obj = $this->connect->prepare("SELECT khachhang.*, users.username, users.password FROM khachhang INNER JOIN users ON khachhang.mauser = users.mauser WHERE makh = ?");
         $obj->setFetchMode(PDO::FETCH_OBJ);
         $obj->execute(array($makh));
         return $obj->fetch();
@@ -113,4 +113,6 @@ class KhachHangModel extends Database
         $obj->execute(array($tenkh, $sodienthoai, $diachi, $email, $makh));
         return $obj->rowCount();
     }
+
+
 }

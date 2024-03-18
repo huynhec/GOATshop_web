@@ -40,11 +40,13 @@ $loaiSp__Get_All = $loaiSp->LoaiSp__Get_All();
             <label>Chọn loại sản phẩm:</label>
             <?php foreach ($loaiSp__Get_All as $item) : ?>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input checkbox" type="radio" id="maloai<?= $item->maloai ?>" value="<?= $item->maloai ?>" name="maloai" required>
+                    <input class="form-check-input checkbox" type="radio" id="maloai<?= $item->maloai ?>" value="<?= $item->maloai ?>" name="maloai" <?= $item->maloai == 1 ? 'checked' : '' ?> onclick="add_obj('<?= $item->maloai ?>')">
                     <label class="form-check-label" for="maloai<?= $item->maloai ?>"><?= $item->tenloai ?></label>
                 </div>
             <?php endforeach; ?>
         </div>
+        <div class="update-form"></div>
+
         <div class="col">
             <label for="mota" class="form-label">Mô tả</label>
             <textarea class="form-control" id="mota" name="mota"></textarea>
@@ -65,7 +67,6 @@ $loaiSp__Get_All = $loaiSp->LoaiSp__Get_All();
 
 
 <script>
-
     function kiemTraCheckbox(msg) {
         var checkboxes = document.querySelectorAll(".checkbox");
         var isChecked = false;
@@ -97,6 +98,13 @@ $loaiSp__Get_All = $loaiSp->LoaiSp__Get_All();
         return true;
     }
 
+    function add_obj(maloai) {
+        $.post("pages/san-pham/d_add.php", {
+            maloai: maloai,
+        }, function(data, status) {
+            $(".update-form").html(data);
+        });
+    };
 
     // Lấy ra đối tượng input có id là 'anhsp'
     var anhsp = document.getElementById('anhsp');
@@ -187,8 +195,6 @@ $loaiSp__Get_All = $loaiSp->LoaiSp__Get_All();
 
                 // Hiển thị card trong #anhsp_preview
                 anhsp_preview.appendChild(cardContainer);
-
-
 
                 // Tăng số lượng file đã tải lên
                 filesUploaded++;

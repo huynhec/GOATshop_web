@@ -2,9 +2,14 @@
 require_once '../../../model/SanPhamModel.php';
 require_once '../../../model/AnhSpModel.php';
 require_once '../../../model/CommonModel.php';
+require_once '../../../model/ThuocTinhModel.php';
+require_once '../../../model/ChiTietThuocTinhModel.php';
+
 $sp = new SanPhamModel();
 $anhSp = new AnhSpModel();
 $cm = new CommonModel();
+$thuoctinh = new ThuocTinhModel();
+$chitietthuoctinh = new ChiTietThuocTinhModel();
 $defaultImagePath = "uploads/cover.png";
 
 if (isset($_GET['req'])) {
@@ -18,9 +23,14 @@ if (isset($_GET['req'])) {
             $luotmua = 0;
             $math = $_POST["math"];
             $maloai = $_POST["maloai"];
-
             $masp = $sp->SanPham__Add($tensp, $dongia, $mota, $ngaythem, $trangthai, $luotmua, $math, $maloai);
+            $idtt = $_POST["idtt"];
+            $noidung = $_POST["noidung"];
 
+            for ($i = 0; $i < count($idtt); $i++) {
+                $chitietthuoctinh__Add = $chitietthuoctinh->ChiTietThuocTinh__Add($idtt[$i], $masp, $noidung[$i]);
+            }
+            
             $totalRes = 0;
 
             // Kiểm tra xem có tệp ảnh đã tải lên không

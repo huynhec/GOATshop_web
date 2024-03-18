@@ -7,8 +7,8 @@ if (isset($_GET['pages']) && !isset($_GET['req'])) {
         case "dang-ky":
             require_once "pages/dang-ky.php";
             break;
-        case "dang-nhap-admin":
-            require_once "pages/dang-nhap-admin.php";
+        case "chinh-sua":
+            require_once "pages/chinh-sua.php";
             break;
         case "trang-loi":
             require_once "pages/trang-loi.php";

@@ -39,9 +39,7 @@ body {
   position: relative;
   overflow-x: none;
   font-family: sans-serif;
-  background: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)),
-    url('../../assets/images/baner.jpg');
-  background-size: cover;
+  background-color: #f0f0f0;
   margin: 0 auto;
 
 
@@ -177,7 +175,7 @@ img:hover {
   right: 0;
   height: 50px;
   z-index: 100;
-  background: #38fffc;
+  background: #94fffd;
   position: fixed;
   box-shadow: 0 0 3px #999;
   padding: 0;
@@ -248,7 +246,7 @@ img:hover {
   left: 0;
   padding: 1rem 0;
   margin: 0;
-  background: #fff;
+  background: #fffcfc;
   color: #000;
   box-shadow: 0 0 0 #999;
   border-bottom-left-radius: 10px;
@@ -256,7 +254,10 @@ img:hover {
   visibility: hidden;
   opacity: 0;
   overflow: visible;
-  transition: min-height 0.3s, visibility 0.3s, opacity 0.3s, box-shadow 0.3s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sử dụng box-shadow để tạo hiệu ứng đổ bóng */
+  transition: visibility 0.3s, opacity 0.3s, box-shadow 0.3s; /* Áp dụng hiệu ứng chuyển động */
+
+  /* transition: min-height 0.3s, visibility 0.3s, opacity 0.3s, box-shadow 0.3s; */
   -webkit-transition: min-height 0.3s, visibility 0.3s, opacity 0.3s,
     box-shadow 0.3s;
   -moz-transition: min-height 0.3s, visibility 0.3s, opacity 0.3s,
@@ -292,8 +293,29 @@ img:hover {
   width: 24%;
   margin: 0.1rem;
   padding: 0.1rem;
+  position: relative; /* Tính năng tương tác */
+  cursor: pointer;
+  transition: all 0.3s ease; /* Hiệu ứng chuyển động */
 }
 
+/* Khi trỏ vào mục menu, thêm hiệu ứng box-shadow và thay đổi màu sắc */
+.navbar-item.has-sub .menu-country li:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Hiệu ứng bóng */
+  background-color: #f0f0f0; /* Màu nền thay đổi khi trỏ vào */
+}
+
+/* Định dạng văn bản trong mục menu */
+.navbar-item.has-sub .menu-country li a {
+  text-decoration: none;
+  color: #333;
+}
+
+/* Khi trỏ vào văn bản, thay đổi màu sắc */
+.navbar-item.has-sub .menu-country li:hover a {
+  color: #ff6600; /* Màu sắc thay đổi khi trỏ vào */
+}
+
+/* Định dạng menu-genre */
 .navbar-item.has-sub .menu-genre {
   display: flex;
   padding-left: 15px;
@@ -301,19 +323,41 @@ img:hover {
   flex-wrap: wrap;
 }
 
+/* Định dạng từng mục trong menu-genre */
 .navbar-item.has-sub .menu-genre li {
   float: left;
-  width: 24%;
+  width: 41%;
   margin: 0.1rem;
   padding: 0.1rem;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
+/* Khi trỏ vào mục menu-genre, thêm hiệu ứng box-shadow và thay đổi màu sắc */
+.navbar-item.has-sub .menu-genre li:hover {
+  background-color: #f0f0f0;
+}
+
+/* Định dạng văn bản trong mục menu-genre */
+.navbar-item.has-sub .menu-genre li a {
+  text-decoration: none;
+  color: #333;
+}
+
+/* Khi trỏ vào văn bản, thay đổi màu sắc */
+.navbar-item.has-sub .menu-genre li:hover a {
+  color: #ff6600;
+}
+
+/* Hiệu ứng khi menu-genre được kích hoạt hoặc khi trỏ vào */
 .navbar-item.has-sub.activated .navbar-item-sub,
 .navbar-item.has-sub:hover .navbar-item-sub {
   visibility: visible;
   opacity: 1;
-  box-shadow: 0 2px 2px #999;
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
 }
+
 
 /* search */
 .navbar-search {
@@ -567,3 +611,6 @@ span#cart-item {
     padding: 0 5px;
   }
 }
+
+
+  

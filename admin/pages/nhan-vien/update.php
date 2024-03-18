@@ -21,6 +21,7 @@ if ($nhanVien__Get_By_Id) {
         <input type="hidden" class="form-control" id="manv" name="manv" required value="<?= $nhanVien__Get_By_Id->manv ?>">
         <input type="hidden" class="form-control" id="password_old" name="password_old" value="<?= $user__Get_By_Id->password ?>">
         <input type="hidden" class="form-control" id="email_old" name="email_old" required value="<?= $nhanVien__Get_By_Id->email ?>">
+        <input type="hidden" class="form-control" id="username_old" name="username_old" value="<?= $user__Get_By_Id->username ?>">
 
 
 
@@ -28,7 +29,7 @@ if ($nhanVien__Get_By_Id) {
             <label for="tennv" class="form-label">Tên nhân viên</label>
             <input type="text" class="form-control" id="tennv" name="tennv" required value="<?= $nhanVien__Get_By_Id->tennv ?>">
             <label for="tennv" class="form-label">Username</label>
-            <input type="text" class="form-control" id="username" name="username" required value="<?= $user__Get_By_Id->username ?>">
+            <input type="text" class="form-control" id="username_new" name="username_new" required value="<?= $user__Get_By_Id->username ?>">
         </div>
         <div class="row">
             <div class="col">

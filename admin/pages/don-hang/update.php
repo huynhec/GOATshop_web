@@ -102,13 +102,14 @@ $trangThai__Get_BY_Id_DH = $tt->TrangThai__Get_By_Id_DH($madon);
                         <label class="form-check-label" for="matt<?= $item->matt ?>"><?= $item->tentt ?></label>
                     </div>
                 <?php endforeach; ?>
+                <div class="col text-center">
+                    <button type="submit" class="btn btn-primary">Lưu thông tin</button>
+                </div>
             <?php endif; ?>
 
         </div>
         <br />
-            <div class="col text-center">
-                <button type="submit" class="btn btn-primary">Lưu thông tin</button>
-            </div>
+
     </form>
 
 </div>

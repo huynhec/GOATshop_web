@@ -25,28 +25,32 @@ $loaisp__Get_All = $loaisp->LoaiSp__Get_All(-1);
                     <table id="table_js" class="table table-striped" style="width:100%">
                         <thead>
                             <tr>
-                                <th>ID</th>
                                 <th>Tên loại sản phẩm</th>
-                                <th>Mô tả</th>
+                                <th>Tên thuộc tính</th>
                                 <th>Trạng thái</th>
+                                <th>Ghi chú</th>
                                 <th>Thao tác</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php foreach ($loaisp__Get_All as $item) : ?>
                                 <tr>
-                                    <td><?= $item->maloai ?></td>
                                     <td><?= $item->tenloai ?></td>
-                                    <td><?= $item->mota ?></td>
+                                    <td>
+                                        <div class="bg-custom">
+                                            <?= $item->tenthuoctinh ?>
+                                        </div>
+                                    </td>
                                     <td><?= $item->trangthai == 1 ? '<span class="text-success">Hoạt động</span>' : '<span class="text-danger">Tạm khóa</span>' ?></td>
+                                    <td><?= $item->ghichu ?></td>
                                     <td class="text-center font-weight-bold">
                                         <button type="button" class="btn btn-warning btn-update" onclick="return update_obj('<?= $item->maloai ?>')">
                                             <i class="bx bx-edit" aria-hidden="true"></i> Sửa
                                         </button>
                                         <?php if (isset($_SESSION['admin'])) : ?>
-                                            <button type="button" class="btn btn-danger btn-delete" onclick="return delete_obj('<?= $item->maloai ?>')">
+                                            <!-- <button type="button" class="btn btn-danger btn-delete" onclick="return delete_obj('<?= $item->maloai ?>')">
                                                 <i class="bx bx-trash" aria-hidden="true"></i> Xóa
-                                            </button>
+                                            </button> -->
                                         <?php endif ?>
                                     </td>
                                 </tr>
