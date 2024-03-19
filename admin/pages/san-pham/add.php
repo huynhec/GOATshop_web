@@ -1,10 +1,16 @@
 <?php
 require_once '../model/ThuongHieuModel.php';
 require_once '../model/LoaiSpModel.php';
+require_once '../model/ThuocTinhModel.php';
+
+$tt = new ThuocTinhModel();
 $th = new ThuongHieuModel();
 $loaiSp = new LoaiSpModel();
 $thuongHieu__Get_All = $th->ThuongHieu__Get_All();
 $loaiSp__Get_All = $loaiSp->LoaiSp__Get_All();
+$thuoctinh__Get_All = $tt->ThuocTinh__Get_All(-1);
+$loaisp__Get_All_Exist = $loaiSp->LoaiSp__Get_All_Exist();
+
 ?>
 <div class="main-add">
     <h3 class="section-title">Thêm sản phẩm</h3>
@@ -31,17 +37,17 @@ $loaiSp__Get_All = $loaiSp->LoaiSp__Get_All();
             <label>Chọn thương hiệu:</label>
             <?php foreach ($thuongHieu__Get_All as $item) : ?>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input checkbox" type="radio" id="math<?= $item->math ?>" value="<?= $item->math ?>" name="math" required>
-                    <label class="form-check-label" for="math<?= $item->math ?>"><?= $item->tenth ?></label>
+                    <input class="btn-check" type="radio" id="math<?= $item->math ?>" value="<?= $item->math ?>" name="math" required>
+                    <label class="btn btn-outline-primary" for="math<?= $item->math ?>"><?= $item->tenth ?></label>
                 </div>
             <?php endforeach; ?>
         </div>
         <div class="col">
             <label>Chọn loại sản phẩm:</label>
-            <?php foreach ($loaiSp__Get_All as $item) : ?>
+            <?php foreach ($loaisp__Get_All_Exist as $item) : ?>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input checkbox" type="radio" id="maloai<?= $item->maloai ?>" value="<?= $item->maloai ?>" name="maloai" <?= $item->maloai == 1 ? 'checked' : '' ?> onclick="add_obj('<?= $item->maloai ?>')">
-                    <label class="form-check-label" for="maloai<?= $item->maloai ?>"><?= $item->tenloai ?></label>
+                <input class="btn-check" type="radio" id="maloai<?= $item->maloai ?>" value="<?= $item->maloai ?>" name="maloai" <?= $item->maloai == 1 ? 'checked' : '' ?> onclick="add_obj('<?= $item->maloai ?>')">
+                    <label class="btn btn-outline-primary" for="maloai<?= $item->maloai ?>"><?= $item->tenloai ?></label>
                 </div>
             <?php endforeach; ?>
         </div>

@@ -80,6 +80,14 @@ if (isset($_GET['req'])) {
             $math = $_POST["math"];
             $maloai = $_POST["maloai"];
 
+            $id_cttt = $_POST["id_cttt"];
+            $idtt = $_POST["idtt"];
+            $noidung = $_POST["noidung"];
+
+            for ($i = 0; $i < count($idtt); $i++) {
+                $chitietthuoctinh__Update = $chitietthuoctinh->ChiTietThuocTinh__Update($id_cttt[$i], $idtt[$i], $masp, $noidung[$i]);
+            }
+            
             $res += $sp->SanPham__Update($masp, $tensp, $dongia, $mota, $ngaythem, $trangthai, $luotmua, $math, $maloai);
             if ($res != 0) {
                 header('location: ../../index.php?pages=san-pham&msg=success');

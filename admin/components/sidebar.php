@@ -27,12 +27,12 @@
                 <span class="text">Quản lý sản phẩm</span>
             </a>
         </li>
-        <!-- <li class="<?= $_GET['pages'] == 'thuoc-tinh' ? "active" : "" ?>">
+        <li class="<?= $_GET['pages'] == 'thuoc-tinh' ? "active" : "" ?>">
             <a href="index.php?pages=thuoc-tinh">
                 <i class='bx bx-category-alt'></i>
                 <span class="text">Quản lý thuộc tính</span>
             </a>
-        </li> -->
+        </li>
         <li class="<?= $_GET['pages'] == 'loai-sp' ? "active" : "" ?>">
             <a href="index.php?pages=loai-sp">
                 <i class='bx bx-category-alt'></i>

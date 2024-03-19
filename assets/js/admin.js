@@ -70,7 +70,14 @@ $('#daterange').daterangepicker({
         inputContainer.removeChild(inputGroup);
     }
 
-
+    function showAttributes(maloai) {
+      $.post("get_attributes.php", {
+          maloai: maloai,
+      }, function(data, status) {
+          $("#attributes-container").html(data);
+      });
+  }
+  
 CKEDITOR.replace('mota');
 
 
