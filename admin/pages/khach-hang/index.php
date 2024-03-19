@@ -23,7 +23,7 @@ $khachHang__Get_All = $kh->KhachHang__Get_All(-1);
                 <h3 class="section-title">Danh sách khách hàng</h3>
                 <div class="table-responsive">
                     <table id="table_js" class="table table-striped" style="width:100%">
-                        <thead>
+                        <thead class="table-dark">
                             <tr>
                                 <th>ID</th>
                                 <th>Tên khách hàng</th>

@@ -23,7 +23,7 @@ $thuongHieu__Get_All = $th->ThuongHieu__Get_All(-1);
                 <h3 class="section-title">Danh sách thương hiệu</h3>
                 <div class="table-responsive">
                     <table id="table_js" class="table table-striped" style="width:100%">
-                        <thead>
+                        <thead class="table-dark">
                             <tr>
                                 <th>ID</th>
                                 <th>Tên thương hiệu</th>

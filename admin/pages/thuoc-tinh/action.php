@@ -13,12 +13,19 @@ if (isset($_GET['req'])) {
             // Hiển thị lỗi ngay trên trang web
             ini_set('display_errors', 1);
             $res = 0;
-            $tentt = $_POST['tentt'];
             $trangthai = $_POST['trangthai'];
             $is_num = $_POST['is_num'];
             $maloai = $_POST['maloai'];
 
-            $res += $tt->ThuocTinh__Add($tentt, $trangthai, $is_num, $maloai);
+            if(isset($_POST['thuoctinh']) && is_array($_POST['thuoctinh'])) {
+                foreach($_POST['thuoctinh'] as $thuoctinh) {
+                    // Xử lý và lưu vào cơ sở dữ liệu ở đây
+                    $tentt = $thuoctinh;
+                    $res += $tt->ThuocTinh__Add($tentt, $trangthai, $is_num, $maloai);
+                }
+            }
+
+
             if ($res != 0) {
                 header('location: ../../index.php?pages=thuoc-tinh&msg=success');
             } else {

@@ -23,7 +23,7 @@ $nhanVien__Get_All = $nv->NhanVien__Get_All(-1);
                 <h3 class="section-title">Danh sách nhân viên</h3>
                 <div class="table-responsive">
                     <table id="table_js" class="table table-striped" style="width:100%">
-                        <thead>
+                        <thead class="table-dark">
                             <tr>
                                 <th>ID</th>
                                 <th>Tên nhân viên</th>
@@ -42,7 +42,7 @@ $nhanVien__Get_All = $nv->NhanVien__Get_All(-1);
                                     <td><?= $item->gioitinh == 1  ? 'Nữ'  : 'Nam' ?></td>
                                     <td><?= $item->email ?></td>
                                     <td><?= $item->trangthai == 1 ? '<span class="text-success">Hoạt động</span>' : '<span class="text-danger">Tạm khóa</span>' ?></td>
-                                    <td><?= $item->phanquyen == 1 ? '<span class="text-danger">Manager</span>' : ($item->phanquyen == 2 ? '<span class="text-primay">Nhân viên</span>' : '<span class="text-success">Khách hàng</span>')?></td>
+                                    <td><?= $item->phanquyen == 1 ? '<span class="text-danger">Manager</span>' : ($item->phanquyen == 2 ? '<span class="text-primay">Nhân viên</span>' : '<span class="text-success">Khách hàng</span>') ?></td>
                                     <td class="text-center font-weight-bold">
                                         <button type="button" class="btn btn-warning btn-update" onclick="return update_obj('<?= $item->manv ?>')">
                                             <i class="bx bx-edit" aria-hidden="true"></i> Sửa

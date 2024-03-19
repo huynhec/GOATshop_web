@@ -27,29 +27,39 @@ $loaisp__Get_All = $loaisp->LoaiSp__Get_All();
             <?php endforeach; ?>
         </div>
         <div class="col">
-            <label for="tentt" class="form-label">Tên thuộc tính</label>
-            <input type="text" class="form-control" id="tentt" name="tentt" required>
-        </div>
-            <div class="col">
-                <label for="trangthai" class="form-label">Trạng thái</label>
-                <select class="form-select " aria-label=".trangthai" id="trangthai" name="trangthai">
-                    <option value="1" selected>Hiển thị</option>
-                    <option value="0">Tạm ẩn</option>
-                </select>
-            </div>
-            <div class="col mt-2">
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input checkbox" type="radio" id="is_num_0" value="0" name="is_num" required checked>
-                    <label class="form-check-label" for="is_num_0">Kiểu chữ</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input checkbox" type="radio" id="is_num_1" value="1" name="is_num" required>
-                    <label class="form-check-label" for="is_num_1">Kiểu số</label>
+            <label for="mota" class="form-label">Thêm thuộc tính: </label>
+            <div id="inputContainer">
+                <div class="input-group mb-2">
+                    <input type="text" name="thuoctinh[]" placeholder="Thuộc tính 1" class="form-control" required>
+                    <!-- <button type="button" class="btn btn-danger" onclick="removeInput(this)">Xoá</button> -->
                 </div>
             </div>
-            <br />
             <div class="col text-center">
-                <button type="submit" class="btn btn-primary">Lưu thông tin</button>
+                <button type="button" class="btn btn-primary mt-2" onclick="addInput()">Thêm thuộc tính</button>
             </div>
+        </div>
+
+
+        <div class="col">
+            <label for="trangthai" class="form-label">Trạng thái</label>
+            <select class="form-select " aria-label=".trangthai" id="trangthai" name="trangthai">
+                <option value="1" selected>Hiển thị</option>
+                <option value="0">Tạm ẩn</option>
+            </select>
+        </div>
+        <div class="col mt-2">
+            <div class="form-check form-check-inline">
+                <input class="form-check-input checkbox" type="radio" id="is_num_0" value="0" name="is_num" required checked>
+                <label class="form-check-label" for="is_num_0">Kiểu chữ</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input checkbox" type="radio" id="is_num_1" value="1" name="is_num" required>
+                <label class="form-check-label" for="is_num_1">Kiểu số</label>
+            </div>
+        </div>
+        <br />
+        <div class="col text-center">
+            <button type="submit" class="btn btn-primary">Lưu thông tin</button>
+        </div>
     </form>
 </div>

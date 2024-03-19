@@ -33,7 +33,7 @@ $donHang__Get_All = $dh->DonHang__Get_All();
                 <h3 class="section-title">Danh sách đơn hàng</h3>
                 <div class="table-responsive">
                     <table id="table_js" class="table table-striped" style="width:100%">
-                        <thead>
+                        <thead class="table-dark">
                             <tr>
                                 <th>ID</th>
                                 <th>Ngày đặt</th>
@@ -53,25 +53,25 @@ $donHang__Get_All = $dh->DonHang__Get_All();
                                     <td><?= number_format($item->tongdh) ?></td>
                                     <td><?= isset($cttt->ChiTietTrangThai__Get_Last_By_DH($item->madon)->tentt) ?  $cttt->ChiTietTrangThai__Get_Last_By_DH($item->madon)->tentt : 'Chưa xác nhận!' ?></td>
                                     <td><?= isset($cttt->ChiTietTrangThai__Get_Last_By_DH($item->madon)->ngaytao) ?  $cttt->ChiTietTrangThai__Get_Last_By_DH($item->madon)->ngaytao : 'Chưa xác nhận' ?></td>
-                                        <td class="text-center font-weight-bold">
-                                            <?php if (
-                                                $cttt->ChiTietTrangThai__Check($item->madon, 1) != false // đơn bị hủy bởi người bán
-                                            ) : ?>
-                                                <button type="button" class="btn btn-danger btn-secondary" onclick="return update_obj('<?= $item->madon ?>')">
-                                                    <i class="bx bx-edit" aria-hidden="true"></i> Đơn đã hủy
-                                                </button>
+                                    <td class="text-center font-weight-bold">
+                                        <?php if (
+                                            $cttt->ChiTietTrangThai__Check($item->madon, 1) != false // đơn bị hủy bởi người bán
+                                        ) : ?>
+                                            <button type="button" class="btn btn-danger btn-secondary" onclick="return update_obj('<?= $item->madon ?>')">
+                                                <i class="bx bx-edit" aria-hidden="true"></i> Đơn đã hủy
+                                            </button>
 
-                                            <?php elseif ($cttt->ChiTietTrangThai__Check($item->madon, 6) != false) :   // đơn được giao thành công)
-                                            ?>
-                                                <button type="button" class="btn btn-success btn-update" onclick="return update_obj('<?= $item->madon ?>')">
-                                                    <i class="bx bx-edit" aria-hidden="true"></i> Đơn đã giao
-                                                </button>
-                                            <?php else : ?>
-                                                <button type="button" class="btn btn-warning btn-update" onclick="return update_obj('<?= $item->madon ?>')">
-                                                    <i class="bx bx-edit" aria-hidden="true"></i> Đơn cần xử lý
-                                                </button>
-                                            <?php endif ?>
-                                        </td>
+                                        <?php elseif ($cttt->ChiTietTrangThai__Check($item->madon, 6) != false) :   // đơn được giao thành công)
+                                        ?>
+                                            <button type="button" class="btn btn-success btn-update" onclick="return update_obj('<?= $item->madon ?>')">
+                                                <i class="bx bx-edit" aria-hidden="true"></i> Đơn đã giao
+                                            </button>
+                                        <?php else : ?>
+                                            <button type="button" class="btn btn-warning btn-update" onclick="return update_obj('<?= $item->madon ?>')">
+                                                <i class="bx bx-edit" aria-hidden="true"></i> Đơn cần xử lý
+                                            </button>
+                                        <?php endif ?>
+                                    </td>
                                 </tr>
                             <?php endforeach ?>
                         </tbody>
@@ -89,14 +89,14 @@ $donHang__Get_All = $dh->DonHang__Get_All();
 </div>
 
 <script>
-     function handleUpdate() {
+    function handleUpdate() {
         Swal.fire({
             title: 'Thông báo',
             text: 'Chỉ quản lý và nhân viên mới thao tác được',
             icon: 'info',
         });
     }
-    
+
     function update_obj(madon) {
         $.post("pages/don-hang/update.php", {
             madon: madon,

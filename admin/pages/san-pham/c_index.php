@@ -33,7 +33,7 @@ $anhSp__Get_By_Id_Sp_Not_First = $anhSp->AnhSp__Get_By_Id_Sp_Not_First($masp);
                 <h3 class="section-title">Danh sách hình ảnh sản phẩm: <b><?= $sanPham__Get_By_Id->tensp ?></b></h3>
                 <div class="table-responsive">
                     <table id="table_js" class="table table-striped" style="width:100%">
-                        <thead>
+                        <thead class="table-dark">
                             <tr>
                                 <th>ID</th>
                                 <th>Hình ảnh</th>

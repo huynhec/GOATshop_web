@@ -30,7 +30,7 @@ $sanPham__Get_All = $sp->SanPham__Get_All(-1);
                 <h3 class="section-title">Danh sách sản phẩm</h3>
                 <div class="table-responsive">
                     <table id="table_js" class="table table-striped" style="width:100%">
-                        <thead>
+                        <thead class="table-dark">
                             <tr>
                                 <th>Ảnh sản phẩm</th>
                                 <th>Tên sản phẩm</th>

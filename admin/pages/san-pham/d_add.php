@@ -12,26 +12,18 @@ $thuoctinh__Get_All = $thuoctinh->ThuocTinh__Get_All(-1);
     <label>THUỘC TÍNH:</label>
     <?php if (count($thuoctinh__Get_By_Id_Loai) > 0) : ?>
         <div class="form-check">
-
             <div class="row">
 
                 <?php foreach ($thuoctinh__Get_By_Id_Loai as $item) : ?>
-
                     <div class="col-2">
                         <input type="hidden" id="idtt<?= $item->idtt ?>" value="<?= $item->idtt ?>" name="idtt[]" required>
                         <label for="idtt<?= $item->idtt ?>"><?= $item->tentt ?></label>
                     </div>
                     <div class="col-4">
                         <input type="<?= $item->is_num == 1 ? 'number' : 'text' ?>" class="form-control" id="noidung" name="noidung[]" required>
-
                     </div>
-
                 <?php endforeach; ?>
             </div>
-
-
-
-
         </div>
     <?php else : ?>
         <p>

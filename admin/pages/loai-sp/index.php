@@ -23,7 +23,7 @@ $loaisp__Get_All = $loaisp->LoaiSp__Get_All(-1);
                 <h3 class="section-title">Danh sách loại sản phẩm</h3>
                 <div class="table-responsive">
                     <table id="table_js" class="table table-striped" style="width:100%">
-                        <thead>
+                        <thead class="table-dark">
                             <tr>
                                 <th>Tên loại sản phẩm</th>
                                 <th>Tên thuộc tính</th>
