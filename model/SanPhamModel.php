@@ -67,18 +67,18 @@ class SanPhamModel extends Database
         return $obj->fetchAll();
     }
 
-    public function SanPham__Add($tensp, $dongia, $mota, $ngaythem, $trangthai, $luotmua, $math, $maloai)
+    public function SanPham__Add($tensp, $mota, $ngaythem, $trangthai, $luotmua, $math, $maloai)
     {
-        $obj = $this->connect->prepare("INSERT INTO sanpham(tensp, dongia, mota, ngaythem, trangthai, luotmua, math, maloai) VALUES (?,?,?,?,?,?,?,?)");
-        $obj->execute(array($tensp, $dongia, $mota, $ngaythem, $trangthai, $luotmua, $math, $maloai));
+        $obj = $this->connect->prepare("INSERT INTO sanpham(tensp, mota, ngaythem, trangthai, luotmua, math, maloai) VALUES (?,?,?,?,?,?,?)");
+        $obj->execute(array($tensp, $mota, $ngaythem, $trangthai, $luotmua, $math, $maloai));
         return $this->connect->lastInsertId();
     }
 
 
-    public function SanPham__Update($masp, $tensp, $dongia, $mota, $ngaythem, $trangthai, $luotmua, $math, $maloai)
+    public function SanPham__Update($masp, $tensp, $mota, $ngaythem, $trangthai, $luotmua, $math, $maloai)
     {
-        $obj = $this->connect->prepare("UPDATE sanpham SET tensp=?, dongia=?, mota=?, ngaythem=?, trangthai=?, luotmua=?, math=?, maloai=? WHERE masp=?");
-        $obj->execute(array($tensp, $dongia, $mota, $ngaythem, $trangthai, $luotmua, $math, $maloai, $masp));
+        $obj = $this->connect->prepare("UPDATE sanpham SET tensp=?, mota=?, ngaythem=?, trangthai=?, luotmua=?, math=?, maloai=? WHERE masp=?");
+        $obj->execute(array($tensp, $mota, $ngaythem, $trangthai, $luotmua, $math, $maloai, $masp));
         return $obj->rowCount();
     }
 

@@ -22,14 +22,14 @@ $loaisp__Get_All_Exist = $loaiSp->LoaiSp__Get_All_Exist();
             <input type="text" class="form-control" id="tensp" name="tensp" required>
         </div>
 
-            
-            <div class="col">
-                <label for="trangthai" class="form-label">Trạng thái</label>
-                <select class="form-select " aria-label=".trangthai" id="trangthai" name="trangthai">
-                    <option value="1" selected>Hiển thị</option>
-                    <option value="0">Tạm ẩn</option>
-                </select>
-            </div>
+
+        <div class="col">
+            <label for="trangthai" class="form-label">Trạng thái</label>
+            <select class="form-select " aria-label=".trangthai" id="trangthai" name="trangthai">
+                <option value="1" selected>Hiển thị</option>
+                <option value="0">Tạm ẩn</option>
+            </select>
+        </div>
         <div class="col">
             <label>Chọn thương hiệu:</label>
             <?php foreach ($thuongHieu__Get_All as $item) : ?>
@@ -43,11 +43,13 @@ $loaisp__Get_All_Exist = $loaiSp->LoaiSp__Get_All_Exist();
             <label>Chọn loại sản phẩm:</label>
             <?php foreach ($loaisp__Get_All_Exist as $item) : ?>
                 <div class="form-check form-check-inline">
-                <input class="btn-check" type="radio" id="maloai<?= $item->maloai ?>" value="<?= $item->maloai ?>" name="maloai"  onclick="add_obj('<?= $item->maloai ?>')" required>
+                    <input class="btn-check" type="radio" id="maloai<?= $item->maloai ?>" value="<?= $item->maloai ?>" name="maloai" onclick="add_obj('<?= $item->maloai ?>')" required>
                     <label class="btn btn-outline-primary" for="maloai<?= $item->maloai ?>"><?= $item->tenloai ?></label>
                 </div>
             <?php endforeach; ?>
         </div>
+
+
         <div class="update-form"></div>
 
         <div class="col">
@@ -62,8 +64,16 @@ $loaisp__Get_All_Exist = $loaiSp->LoaiSp__Get_All_Exist();
             <div id="anhsp_preview" class="image-preview"></div>
         </div>
         <div class="col">
-                <label for="dongia" class="form-label">Đơn giá</label>
-                <input type="number" min="0" max="1000000000" class="form-control" id="dongia" name="dongia" required>
+            <label for="dongia" class="form-label">Đơn giá</label>
+            <!-- <input type="number" min="0" max="1000000000" class="form-control" id="dongia" name="dongia" required> -->
+            <div id="inputDongia">
+                <div class="input-group mb-2">
+                    <input type="number" min="0" max="1000000000" class="form-control" name="dongia[]" placeholder="Đơn giá 1" class="form-control" required>
+                </div>
+            </div>
+            <div class="col text-center">
+                <button type="button" class="btn btn-primary mt-2" onclick="addDongia()">Thêm đơn giá</button>
+            </div>
         </div>
         <br />
         <div class="col text-center">
@@ -74,36 +84,36 @@ $loaisp__Get_All_Exist = $loaiSp->LoaiSp__Get_All_Exist();
 
 
 <script>
-    function kiemTraCheckbox(msg) {
-        var checkboxes = document.querySelectorAll(".checkbox");
-        var isChecked = false;
+   function kiemTraCheckbox(msg) {
+    var checkboxes = document.querySelectorAll(".btn-check");
+    var isChecked = false;
 
-        checkboxes.forEach(function(checkbox) {
-            if (checkbox.checked) {
-                isChecked = true;
+    checkboxes.forEach(function(checkbox) {
+        if (checkbox.checked) {
+            isChecked = true;
+        }
+    });
+
+    if (!isChecked) {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 2000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.onmouseenter = Swal.stopTimer;
+                toast.onmouseleave = Swal.resumeTimer;
             }
         });
-
-        if (!isChecked) {
-            const Toast = Swal.mixin({
-                toast: true,
-                position: 'top-end',
-                showConfirmButton: false,
-                timer: 2000,
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                    toast.onmouseenter = Swal.stopTimer;
-                    toast.onmouseleave = Swal.resumeTimer;
-                }
-            });
-            Toast.fire({
-                icon: 'warning',
-                title: msg
-            });
-            return false;
-        }
-        return true;
+        Toast.fire({
+            icon: 'warning',
+            title: msg
+        });
+        return false;
     }
+    return true;
+}
 
     function add_obj(maloai) {
         $.post("pages/san-pham/d_add.php", {
@@ -112,6 +122,45 @@ $loaisp__Get_All_Exist = $loaiSp->LoaiSp__Get_All_Exist();
             $(".update-form").html(data);
         });
     };
+
+    function addDongia() {
+        var inputContainer = document.getElementById('inputDongia');
+        var inputGroup = document.createElement('div');
+        inputGroup.className = 'input-group mb-2';
+
+        var input = document.createElement('input');
+        input.type = 'number';
+        input.name = 'dongia[]'; // Tên thuộc tính là một mảng để có thể lưu nhiều thuộc tính
+        input.placeholder = 'Đơn giá ' + (inputContainer.children.length + 1);
+        input.className = 'form-control';
+        input.required = true;
+
+        var button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'btn btn-danger';
+        button.textContent = 'Xoá';
+        button.onclick = function() {
+            inputContainer.removeChild(inputGroup);
+        };
+
+        inputGroup.appendChild(input);
+        inputGroup.appendChild(button);
+        inputContainer.appendChild(inputGroup);
+    }
+
+    function removeInput(button) {
+        var inputGroup = button.parentElement;
+        var inputContainer = inputGroup.parentElement;
+        inputContainer.removeChild(inputGroup);
+    }
+
+    function showAttributes(masp) {
+        $.post("get_attributes.php", {
+            masp: masp,
+        }, function(data, status) {
+            $("#attributes-container").html(data);
+        });
+    }
 
     // Lấy ra đối tượng input có id là 'anhsp'
     var anhsp = document.getElementById('anhsp');
@@ -254,5 +303,4 @@ $loaisp__Get_All_Exist = $loaiSp->LoaiSp__Get_All_Exist();
         // Hiển thị ảnh preview cho tất cả các file được chọn
         displayImagePreview(files);
     });
-    
 </script>

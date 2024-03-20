@@ -4,7 +4,9 @@ require_once '../../../model/AnhSpModel.php';
 require_once '../../../model/CommonModel.php';
 require_once '../../../model/ThuocTinhModel.php';
 require_once '../../../model/ChiTietThuocTinhModel.php';
+require_once '../../../model/DonGiaModel.php';
 
+$dg = new DongiaModel();
 $sp = new SanPhamModel();
 $anhSp = new AnhSpModel();
 $cm = new CommonModel();
@@ -23,14 +25,22 @@ if (isset($_GET['req'])) {
             $luotmua = 0;
             $math = $_POST["math"];
             $maloai = $_POST["maloai"];
-            $masp = $sp->SanPham__Add($tensp, $dongia, $mota, $ngaythem, $trangthai, $luotmua, $math, $maloai);
+            $masp = $sp->SanPham__Add($tensp, $mota, $ngaythem, $trangthai, $luotmua, $math, $maloai);
             $idtt = $_POST["idtt"];
             $noidung = $_POST["noidung"];
-
+            $apdung = 1;
+            $ngaynhap = date("Y-m-d H:i:s");
             for ($i = 0; $i < count($idtt); $i++) {
                 $chitietthuoctinh__Add = $chitietthuoctinh->ChiTietThuocTinh__Add($idtt[$i], $masp, $noidung[$i]);
             }
-            
+
+            if(isset($_POST['dongia']) && is_array($_POST['dongia'])) {
+                foreach($_POST['dongia'] as $item) {
+                    // Xử lý và lưu vào cơ sở dữ liệu ở đây
+                    $dongia = $item;
+                    $res += $dg->DonGia__Add($dongia, $apdung, $ngaynhap, $masp);
+                }
+            }
             $totalRes = 0;
 
             // Kiểm tra xem có tệp ảnh đã tải lên không
@@ -87,7 +97,7 @@ if (isset($_GET['req'])) {
             for ($i = 0; $i < count($idtt); $i++) {
                 $chitietthuoctinh__Update = $chitietthuoctinh->ChiTietThuocTinh__Update($id_cttt[$i], $idtt[$i], $masp, $noidung[$i]);
             }
-            
+
             $res += $sp->SanPham__Update($masp, $tensp, $dongia, $mota, $ngaythem, $trangthai, $luotmua, $math, $maloai);
             if ($res != 0) {
                 header('location: ../../index.php?pages=san-pham&msg=success');

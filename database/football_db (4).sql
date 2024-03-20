@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: localhost
--- Thời gian đã tạo: Th3 20, 2024 lúc 04:55 AM
+-- Thời gian đã tạo: Th3 20, 2024 lúc 05:52 AM
 -- Phiên bản máy phục vụ: 10.4.21-MariaDB
 -- Phiên bản PHP: 8.1.6
 
@@ -198,7 +198,15 @@ INSERT INTO `anhsp` (`maanh`, `hinhanh`, `masp`) VALUES
 (171, 'uploads/32/2-bang-dau-goi-speedwick_1709135978.png', 32),
 (172, 'uploads/32/3-bang-dau-goi-speedwick_1709135978.png', 32),
 (173, 'uploads/32/4-bang-dau-goi-speedwick_1709135978.png', 32),
-(174, 'uploads/32/5-bang-dau-goi-speedwick_1709135978.png', 32);
+(174, 'uploads/32/5-bang-dau-goi-speedwick_1709135978.png', 32),
+(175, 'uploads/cover.png', 34),
+(176, 'uploads/35/7cb6b5908c4bbf27c0cd7e456c9afe44_1710910141.png', 35),
+(177, 'uploads/35/428605946_1085375362701657_5057481201664617608_n_1710910109.png', 35),
+(178, 'uploads/35/7cb6b5908c4bbf27c0cd7e456c9afe44_1710910121.png', 35),
+(179, 'uploads/cover.png', 36),
+(180, 'uploads/37/Screen_Shot_2020-04-14_at_3.46.02_PM_large_1710910259.png', 37),
+(181, 'uploads/37/278992597_1072256933325185_4382511592463080745_n_1710910259.png', 37),
+(182, 'uploads/37/278825202_832735701020574_8406443313045287299_n_1710910259.png', 37);
 
 -- --------------------------------------------------------
 
@@ -277,6 +285,20 @@ CREATE TABLE `chitietthuoctinh` (
   `masp` int(11) NOT NULL,
   `noidung` varchar(150) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `chitietthuoctinh`
+--
+
+INSERT INTO `chitietthuoctinh` (`id_cttt`, `idtt`, `masp`, `noidung`) VALUES
+(5, 2, 34, 'vải'),
+(6, 4, 34, 'm'),
+(7, 2, 35, 'vải thều'),
+(8, 4, 35, 'M'),
+(9, 14, 36, '9'),
+(10, 15, 36, 'đỏ'),
+(11, 2, 37, 'vải '),
+(12, 4, 37, 'L');
 
 -- --------------------------------------------------------
 
@@ -1035,7 +1057,13 @@ CREATE TABLE `dongia` (
 --
 
 INSERT INTO `dongia` (`id_dongia`, `masp`, `dongia`, `apdung`, `ngaynhap`, `ghichu`) VALUES
-(1, 8, '500000', 1, '2024-03-06', NULL);
+(1, 8, '500000', 1, '2024-03-06', NULL),
+(3, 35, '499000', 1, '2024-03-20', NULL),
+(4, 35, '299000', 1, '2024-03-20', NULL),
+(5, 36, '790000', 1, '2024-03-20', NULL),
+(6, 36, '69000', 1, '2024-03-20', NULL),
+(7, 37, '999000', 1, '2024-03-20', NULL),
+(8, 37, '899000', 1, '2024-03-20', NULL);
 
 -- --------------------------------------------------------
 
@@ -1293,7 +1321,11 @@ INSERT INTO `sanpham` (`masp`, `tensp`, `mota`, `ngaythem`, `trangthai`, `maloai
 (29, 'Mizuno Morelia Neo IV Pro FG - Aurum Pack', '<p><strong>MIZUNO MORELIA NEO IV PRO FG</strong><br />\r\n<strong>T&ecirc;n sản phẩm</strong>:&nbsp;Mizuno Morelia Neo IV Pro FG (Gi&agrave;y đ&aacute; b&oacute;ng s&acirc;n cỏ tự nhi&ecirc;n)<br />\r\n<strong>M&agrave;u sắc</strong>: Đen/Gold<br />\r\n<strong>M&atilde; sản phẩm:</strong>&nbsp;P1GA2334-50<br />\r\n<strong>Thương hiệu</strong>: Mizuno (Nhật Bản)<br />\r\n<strong>Loại đế gi&agrave;y</strong>: FG d&agrave;nh cho mặt s&acirc;n cỏ tự nhi&ecirc;n<br />\r\n<strong>Ph&acirc;n kh&uacute;c:</strong>&nbsp;Pro (Mid-end)<br />\r\n<strong>Form gi&agrave;y:&nbsp;</strong>Tương đối thoải m&aacute;i, ph&ugrave; hợp ch&acirc;n thon đến&nbsp;b&egrave;<br />\r\n<strong>Lưỡi g&agrave;:&nbsp;</strong>dạng lưỡi g&agrave; rời, chất liệu da tự nhi&ecirc;n<br />\r\n<strong>Chất liệu Upper:&nbsp;</strong>chất liệu da tự nhi&ecirc;n<br />\r\n<strong>Năm sản xuất:&nbsp;</strong>2023<br />\r\n<strong>Phong c&aacute;ch thi đấu:&nbsp;</strong>Mọi vị tr&iacute; tr&ecirc;n s&acirc;n</p>\r\n', '2024-02-28 22:21:44', 1, 1, 5, 0),
 (30, 'Mizuno Alpha Elite FG - Prism Gold', '<p><strong>MIZUNO ALPHA ELITE FG</strong><br />\r\n<strong>T&ecirc;n sản phẩm</strong>:&nbsp;Mizuno Alpha Elite FG (Gi&agrave;y đ&aacute; b&oacute;ng s&acirc;n cỏ tự nhi&ecirc;n)<br />\r\n<strong>M&agrave;u sắc</strong>: Trắng<br />\r\n<strong>M&atilde; sản phẩm:</strong>&nbsp;P1GA244245<br />\r\n<strong>Thương hiệu</strong>: Mizuno (Nhật Bản)<br />\r\n<strong>Loại đế gi&agrave;y</strong>: FG d&agrave;nh cho mặt s&acirc;n cỏ tự nhi&ecirc;n<br />\r\n<strong>Ph&acirc;n kh&uacute;c:</strong>&nbsp;Elite&nbsp;(Cao cấp)<br />\r\n<strong>Form gi&agrave;y:&nbsp;</strong>Tương đối thoải m&aacute;i, ph&ugrave; hợp ch&acirc;n thon đến&nbsp;b&egrave;<br />\r\n<strong>Lưỡi g&agrave;:&nbsp;</strong>dạng lưỡi g&agrave; rời, chất liệu da tự nhi&ecirc;n<br />\r\n<strong>Chất liệu Upper:&nbsp;</strong>chất liệu tổng hợp<br />\r\n<strong>Năm sản xuất:&nbsp;</strong>2023<br />\r\n<strong>Phong c&aacute;ch thi đấu:&nbsp;</strong>Mọi vị tr&iacute; tr&ecirc;n s&acirc;n</p>\r\n', '2024-02-28 22:24:37', 1, 1, 5, 1),
 (31, 'Đai bảo vệ gối thoáng khí có đai cuốn Aolikes AL7720 (1 cặp)', '<h3><strong>ĐAI BẢO VỆ GỐI AL7720&nbsp;D&Agrave;NH CHO NHỮNG AI?</strong></h3>\r\n\r\n<ul>\r\n	<li>Th&iacute;ch hợp sử dụng cho người chơi thể thao: B&oacute;ng đ&aacute;, cầu l&ocirc;ng, đạp xe, chạy bộ, leo n&uacute;i&hellip;</li>\r\n	<li>C&aacute;c trường hợp chấn thương hậu phẫu, cố định đầu gối theo chỉ định của b&aacute;c sĩ.</li>\r\n	<li>Đai bảo vệ gối AL7720 gi&uacute;p những người gặp chấn thương v&ugrave;ng gối nhưng kh&ocirc;ng muốn sử dụng miếng đệm Silicone g&acirc;y kh&oacute; chịu. D&acirc;y đai với điểm gắn cố định từ d&acirc;y chằng ch&eacute;o sau được quấn ra đằng trước(phần tr&ecirc;n v&agrave; dưới mặt gối) gi&uacute;p giảm &aacute;p lực tối đa l&ecirc;n v&ugrave;ng xương b&aacute;nh ch&egrave;, xương dưới sụn, d&acirc;y chằng v&agrave; g&acirc;n</li>\r\n	<li>Ưu ti&ecirc;n sử dụng loại chất liệu vải Spandex tho&aacute;ng kh&iacute;, tho&aacute;t mồ h&ocirc;i tốt. D&acirc;y đai Latex si&ecirc;u co gi&atilde;n ph&ugrave; hợp b&oacute; chắc ch&acirc;n v&agrave; đầu gối người d&ugrave;ng. Sản phẩm băng thun đầu gối cũng c&oacute; miếng d&aacute;n vu&ocirc;ng l&agrave;m điểm b&aacute;m cho phần d&iacute;nh của d&acirc;y đai, kh&ocirc;ng dễ bung tuột</li>\r\n</ul>\r\n', '2024-02-28 22:56:33', 1, 4, 6, 3),
-(32, 'Bộ bó gối đàn hồi bảo vệ khớp Aolikes AL7718 (1 cặp)', '<h3><strong>Bộ b&oacute; gối đ&agrave;n hồi bảo vệ khớp Aolikes AL7718 (1 cặp)</strong></h3>\r\n\r\n<h3>Bạn đ&atilde; thực sự biết c&aacute;ch bảo vệ bản th&acirc;n khi chơi b&oacute;ng đ&aacute;? Việc sử dụng phụ kiện bảo vệ c&aacute;c khớp, nhất l&agrave; đầu gối l&agrave; một phần cực kỳ quan trọng trong b&oacute;ng đ&aacute;, ảnh hưởng trực tiếp đến chất lượng chơi b&oacute;ng của bạn. C&aacute;c loại chấn thương thường gặp trong b&oacute;ng đ&aacute; li&ecirc;n quan đến vị tr&iacute; gối như gi&atilde;n&nbsp;d&acirc;y chằng, đứt d&acirc;y chằng trước/sau, vi&ecirc;m sụn tr&ecirc;n gối...&nbsp;Đừng để m&igrave;nh gặp chấn thương ảnh hưởng đến sức khỏe lập tức v&agrave; đau nhức l&acirc;u d&agrave;i. Trang bị&nbsp;<strong>B&oacute; gối đ&agrave;n hồi bảo vệ khớp Aolikes AL7718&nbsp;</strong>trước khi bắt đầu tập luyện, ngo&agrave;i ra bộ phụ kiện c&ograve;n hỗ trợ rất tốt cho những người đang bị chấn thương m&agrave; cần tập luyện, hỗ trợ chấn thương gi&uacute;p cầu thủ sớm hồi phục v&agrave; quay lại s&acirc;n cỏ.</h3>\r\n', '2024-02-28 22:59:38', 1, 4, 6, 0);
+(32, 'Bộ bó gối đàn hồi bảo vệ khớp Aolikes AL7718 (1 cặp)', '<h3><strong>Bộ b&oacute; gối đ&agrave;n hồi bảo vệ khớp Aolikes AL7718 (1 cặp)</strong></h3>\r\n\r\n<h3>Bạn đ&atilde; thực sự biết c&aacute;ch bảo vệ bản th&acirc;n khi chơi b&oacute;ng đ&aacute;? Việc sử dụng phụ kiện bảo vệ c&aacute;c khớp, nhất l&agrave; đầu gối l&agrave; một phần cực kỳ quan trọng trong b&oacute;ng đ&aacute;, ảnh hưởng trực tiếp đến chất lượng chơi b&oacute;ng của bạn. C&aacute;c loại chấn thương thường gặp trong b&oacute;ng đ&aacute; li&ecirc;n quan đến vị tr&iacute; gối như gi&atilde;n&nbsp;d&acirc;y chằng, đứt d&acirc;y chằng trước/sau, vi&ecirc;m sụn tr&ecirc;n gối...&nbsp;Đừng để m&igrave;nh gặp chấn thương ảnh hưởng đến sức khỏe lập tức v&agrave; đau nhức l&acirc;u d&agrave;i. Trang bị&nbsp;<strong>B&oacute; gối đ&agrave;n hồi bảo vệ khớp Aolikes AL7718&nbsp;</strong>trước khi bắt đầu tập luyện, ngo&agrave;i ra bộ phụ kiện c&ograve;n hỗ trợ rất tốt cho những người đang bị chấn thương m&agrave; cần tập luyện, hỗ trợ chấn thương gi&uacute;p cầu thủ sớm hồi phục v&agrave; quay lại s&acirc;n cỏ.</h3>\r\n', '2024-02-28 22:59:38', 1, 4, 6, 0),
+(34, 'Giày5', '<p>sfdf</p>\r\n', '2024-03-20 11:32:33', 1, 3, 1, 0),
+(35, 'temp', '<p>test</p>\r\n', '2024-03-20 11:33:47', 1, 3, 1, 0),
+(36, 'temp2', '<p>test</p>\r\n', '2024-03-20 11:50:11', 1, 6, 2, 0),
+(37, 'temp3', '<p>test</p>\r\n', '2024-03-20 11:50:59', 1, 3, 2, 0);
 
 -- --------------------------------------------------------
 
@@ -12254,7 +12286,7 @@ ALTER TABLE `wards`
 -- AUTO_INCREMENT cho bảng `anhsp`
 --
 ALTER TABLE `anhsp`
-  MODIFY `maanh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=175;
+  MODIFY `maanh` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=183;
 
 --
 -- AUTO_INCREMENT cho bảng `chitietdonhang`
@@ -12278,7 +12310,7 @@ ALTER TABLE `chitietloaisp`
 -- AUTO_INCREMENT cho bảng `chitietthuoctinh`
 --
 ALTER TABLE `chitietthuoctinh`
-  MODIFY `id_cttt` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_cttt` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT cho bảng `chitiettrangthai`
@@ -12296,7 +12328,7 @@ ALTER TABLE `district`
 -- AUTO_INCREMENT cho bảng `dongia`
 --
 ALTER TABLE `dongia`
-  MODIFY `id_dongia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_dongia` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT cho bảng `donhang`
@@ -12338,7 +12370,7 @@ ALTER TABLE `province`
 -- AUTO_INCREMENT cho bảng `sanpham`
 --
 ALTER TABLE `sanpham`
-  MODIFY `masp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `masp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT cho bảng `size`
