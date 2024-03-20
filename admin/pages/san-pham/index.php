@@ -3,12 +3,15 @@ require_once '../model/SanPhamModel.php';
 require_once '../model/ThuongHieuModel.php';
 require_once '../model/AnhSpModel.php';
 require_once '../model/ThuocTinhModel.php';
+require_once '../model/DonGiaModel.php';
 
+$dg = new DongiaModel();
 $sp = new SanPhamModel();
 $th = new ThuongHieuModel();
 $anhSp = new AnhSpModel();
 $tt = new ThuocTinhModel();
 $sanPham__Get_All = $sp->SanPham__Get_All(-1);
+$donGia__Get_All = $dg->DonGia__Get_All();
 ?>
 
 <div id="main-container">
@@ -45,7 +48,7 @@ $sanPham__Get_All = $sp->SanPham__Get_All(-1);
                                 <tr>
                                     <td><img src="../assets/<?= $anhSp->AnhSp__Get_By_Id_Sp_First($item->masp)->hinhanh ?>" alt="" srcset="" class="img-fluid" width="50"></td>
                                     <td><?= $item->tensp ?></td>
-                                    <td><?= number_format($item->dongia) ?></td>
+                                    <td><?php echo number_format($dg->ShowDonGia__Get_By_Id_Sp($item->masp), 0, ',', '.') ?> đ</td>
                                     <td><?= $th->ThuongHieu__Get_By_Id($item->math)->tenth ?></td>
                                     <td><?= $item->trangthai == 1 ? '<span class="text-success">Hiển thị</span>' : '<span class="text-danger">Tạm ẩn</span>' ?></td>
                                     <td class="text-center font-weight-bold">

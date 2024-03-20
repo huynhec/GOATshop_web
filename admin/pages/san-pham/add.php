@@ -2,6 +2,8 @@
 require_once '../model/ThuongHieuModel.php';
 require_once '../model/LoaiSpModel.php';
 require_once '../model/ThuocTinhModel.php';
+require_once '../model/DonGiaModel.php';
+
 
 $tt = new ThuocTinhModel();
 $th = new ThuongHieuModel();
@@ -20,11 +22,7 @@ $loaisp__Get_All_Exist = $loaiSp->LoaiSp__Get_All_Exist();
             <input type="text" class="form-control" id="tensp" name="tensp" required>
         </div>
 
-        <div class="row">
-            <div class="col">
-                <label for="dongia" class="form-label">Đơn giá</label>
-                <input type="number" min="0" max="1000000000" class="form-control" id="dongia" name="dongia" required>
-            </div>
+            
             <div class="col">
                 <label for="trangthai" class="form-label">Trạng thái</label>
                 <select class="form-select " aria-label=".trangthai" id="trangthai" name="trangthai">
@@ -32,7 +30,6 @@ $loaisp__Get_All_Exist = $loaiSp->LoaiSp__Get_All_Exist();
                     <option value="0">Tạm ẩn</option>
                 </select>
             </div>
-        </div>
         <div class="col">
             <label>Chọn thương hiệu:</label>
             <?php foreach ($thuongHieu__Get_All as $item) : ?>
@@ -46,7 +43,7 @@ $loaisp__Get_All_Exist = $loaiSp->LoaiSp__Get_All_Exist();
             <label>Chọn loại sản phẩm:</label>
             <?php foreach ($loaisp__Get_All_Exist as $item) : ?>
                 <div class="form-check form-check-inline">
-                <input class="btn-check" type="radio" id="maloai<?= $item->maloai ?>" value="<?= $item->maloai ?>" name="maloai" <?= $item->maloai == 1 ? 'checked' : '' ?> onclick="add_obj('<?= $item->maloai ?>')">
+                <input class="btn-check" type="radio" id="maloai<?= $item->maloai ?>" value="<?= $item->maloai ?>" name="maloai"  onclick="add_obj('<?= $item->maloai ?>')" required>
                     <label class="btn btn-outline-primary" for="maloai<?= $item->maloai ?>"><?= $item->tenloai ?></label>
                 </div>
             <?php endforeach; ?>
@@ -63,6 +60,10 @@ $loaisp__Get_All_Exist = $loaiSp->LoaiSp__Get_All_Exist();
                 <input type="file" class="form-control" id="anhsp" name="anhsp[]" multiple>
             </div>
             <div id="anhsp_preview" class="image-preview"></div>
+        </div>
+        <div class="col">
+                <label for="dongia" class="form-label">Đơn giá</label>
+                <input type="number" min="0" max="1000000000" class="form-control" id="dongia" name="dongia" required>
         </div>
         <br />
         <div class="col text-center">
