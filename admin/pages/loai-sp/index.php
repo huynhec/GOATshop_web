@@ -25,24 +25,20 @@ $loaisp__Get_All = $loaisp->LoaiSp__Get_All(-1);
                     <table id="table_js" class="table table-striped" style="width:100%">
                         <thead class="table-dark">
                             <tr>
+                                <th>ID</th>
                                 <th>Tên loại sản phẩm</th>
-                                <th>Tên thuộc tính</th>
+                                <th>Mô tả</th>
                                 <th>Trạng thái</th>
-                                <th>Ghi chú</th>
                                 <th>Thao tác</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php foreach ($loaisp__Get_All as $item) : ?>
                                 <tr>
+                                    <td><?= $item->maloai ?></td>
                                     <td><?= $item->tenloai ?></td>
-                                    <td>
-                                        <div class="bg-custom">
-                                            <?= $item->tenthuoctinh ?>
-                                        </div>
-                                    </td>
+                                    <td><?= $item->mota ?></td>
                                     <td><?= $item->trangthai == 1 ? '<span class="text-success">Hoạt động</span>' : '<span class="text-danger">Tạm khóa</span>' ?></td>
-                                    <td><?= $item->ghichu ?></td>
                                     <td class="text-center font-weight-bold">
                                         <button type="button" class="btn btn-warning btn-update" onclick="return update_obj('<?= $item->maloai ?>')">
                                             <i class="bx bx-edit" aria-hidden="true"></i> Sửa

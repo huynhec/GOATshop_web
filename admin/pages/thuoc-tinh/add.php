@@ -59,7 +59,7 @@ $loaisp__Get_All = $loaisp->LoaiSp__Get_All();
         </div>
         <br />
         <div class="col text-center">
-            <button type="submit" class="btn btn-primary">Lưu thông tin</button>
+            <button type="submit" class="btn btn-primary">LƯU THÔNG TIN</button>
         </div>
     </form>
 </div>

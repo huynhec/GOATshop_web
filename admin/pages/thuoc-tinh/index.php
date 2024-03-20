@@ -46,9 +46,9 @@ $loaisp__Get_All_Exist = $loaiSp->LoaiSp__Get_All_Exist();
                                             <i class="bx bx-edit" aria-hidden="true"></i> Sửa
                                         </button>
                                         <?php if (isset($_SESSION['admin'])) : ?>
-                                            <button type="button" class="btn btn-danger btn-delete" onclick="return delete_obj('<?= $item->idtt ?>')">
+                                            <!-- <button type="button" class="btn btn-danger btn-delete" onclick="return delete_obj('<?= $item->idtt ?>')">
                                                 <i class="bx bx-trash" aria-hidden="true"></i> Xóa
-                                            </button>
+                                            </button> -->
                                         <?php endif ?>
                                     </td>
                                 </tr>
@@ -82,9 +82,9 @@ $loaisp__Get_All_Exist = $loaiSp->LoaiSp__Get_All_Exist();
                                             <i class="bx bx-edit" aria-hidden="true"></i> Sửa
                                         </button>
                                         <?php if (isset($_SESSION['admin'])) : ?>
-                                            <button type="button" class="btn btn-danger btn-delete" onclick="return delete_obj('<?= $item->idtt ?>')">
+                                            <!-- <button type="button" class="btn btn-danger btn-delete" onclick="return delete_obj('<?= $item->idtt ?>')">
                                                 <i class="bx bx-trash" aria-hidden="true"></i> Xóa
-                                            </button>
+                                            </button> -->
                                         <?php endif ?>
                                     </td>
                                 </tr>
@@ -92,7 +92,7 @@ $loaisp__Get_All_Exist = $loaiSp->LoaiSp__Get_All_Exist();
                                     <td colspan="3" class="p-0">
                                         <div class="collapse" id="collapse<?= $item->maloai ?>">
                                             <table class="table table-striped">
-                                            <!-- <thead class="thead-light">
+                                                <!-- <thead class="thead-light">
                                                     <tr>
                                                         <th>Tên thuộc tính</th>
                                                         <th>Trạng thái</th>
@@ -103,17 +103,21 @@ $loaisp__Get_All_Exist = $loaiSp->LoaiSp__Get_All_Exist();
                                                 <tbody>
                                                     <?php foreach ($thuoctinh__Get_All as $thuoctinh) : ?>
                                                         <?php if ($thuoctinh->maloai == $item->maloai) : ?>
+                                                            <i class="bi bi-arrow-return-right"></i>
+
                                                             <tr class="sub">
-                                                                <td><?= $thuoctinh->tentt ?></td>
+                                                                <td> -- 
+                                                                    <?= $thuoctinh->tentt ?>
+                                                                </td>
                                                                 <td><?= $thuoctinh->trangthai == 1 ? '<span class="text-success">Hoạt động</span>' : '<span class="text-danger">Tạm khóa</span>' ?></td>
                                                                 <td class="text-center font-weight-bold">
                                                                     <button type="button" class="btn btn-warning btn-update" onclick="return update_obj('<?= $item->idtt ?>')">
                                                                         <i class="bx bx-edit" aria-hidden="true"></i> Sửa
                                                                     </button>
                                                                     <?php if (isset($_SESSION['admin'])) : ?>
-                                                                        <button type="button" class="btn btn-danger btn-delete" onclick="return delete_obj('<?= $item->idtt ?>')">
+                                                                        <!-- <button type="button" class="btn btn-danger btn-delete" onclick="return delete_obj('<?= $item->idtt ?>')">
                                                                             <i class="bx bx-trash" aria-hidden="true"></i> Xóa
-                                                                        </button>
+                                                                        </button> -->
                                                                     <?php endif ?>
                                                                 </td>
                                                             </tr>
@@ -179,9 +183,9 @@ $loaisp__Get_All_Exist = $loaiSp->LoaiSp__Get_All_Exist();
 </script>
 
 <style>
-/* CSS */
-tr.sub td {
-    text-indent: 50px; /* Điều chỉnh khoảng cách thục đầu dòng */
-}
-
+    /* CSS */
+    tr.sub td {
+        text-indent: 50px;
+        /* Điều chỉnh khoảng cách thục đầu dòng */
+    }
 </style>
