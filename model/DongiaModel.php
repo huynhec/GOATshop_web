@@ -29,7 +29,7 @@ if (file_exists($f)) {
 }
 include_once($des);
 
-class DongiaModel extends Database
+class DonGiaModel extends Database
 {
 
     public function DonGia__Get_All($apdung = null)
@@ -51,40 +51,81 @@ class DongiaModel extends Database
         return $obj->rowCount();
     }
 
-    public function DonGia__Update($dongia, $apdung, $ngaynhap, $masp, $iddg)
+    public function DonGia__Update($dongia, $apdung, $ngaynhap, $masp, $id_dongia)
     {
         $obj = $this->connect->prepare("UPDATE dongia SET dongia=?, apdung=?, ngaynhap=?, masp=? WHERE id_dongia=?");
-        $obj->execute(array($dongia, $apdung, $ngaynhap, $masp, $iddg));
+        $obj->execute(array($dongia, $apdung, $ngaynhap, $masp, $id_dongia));
         return $obj->rowCount();
     }
-    public function DonGia__Delete($iddg)
+    public function DonGia__Update_ApDung($masp, $id_dongia)
+    {
+        // Cập nhật tất cả các bản ghi 'apdung' trong bảng 'dongia' thành 0
+        $stmt = $this->connect->prepare("UPDATE dongia SET apdung = 0 WHERE masp = ? ");
+        $stmt->execute(array($masp));
+
+        // Cập nhật bản ghi 'apdung' của 'id_dongia' thành 1
+        $stmt = $this->connect->prepare("UPDATE dongia SET apdung = 1 WHERE id_dongia = ?");
+        $stmt->execute([$id_dongia]);
+        return true;
+
+    }
+
+    public function DonGia__Delete($id_dongia)
     {
         $obj = $this->connect->prepare("DELETE FROM dongia WHERE id_dongia = ?");
-        $obj->execute(array($iddg));
+        $obj->execute(array($id_dongia));
         return $obj->rowCount();
     }
 
-    public function DonGia__Get_By_Id($iddg)
+    public function DonGia__Get_By_Id($id_dongia)
     {
         $obj = $this->connect->prepare("SELECT * FROM dongia WHERE id_dongia= ?");
         $obj->setFetchMode(PDO::FETCH_OBJ);
-        $obj->execute(array($iddg));
+        $obj->execute(array($id_dongia));
         return $obj->fetch();
     }
 
     public function DonGia__Get_By_Id_Sp($masp)
     {
-        $obj = $this->connect->prepare("SELECT * FROM dongia INNER JOIN sanpham ON dongia.masp = sanpham.masp WHERE apdung=1 AND masp=?");
+        $obj = $this->connect->prepare("SELECT * FROM dongia INNER JOIN sanpham ON dongia.masp = sanpham.masp WHERE dongia.masp=?");
         $obj->setFetchMode(PDO::FETCH_OBJ);
         $obj->execute(array($masp));
         return $obj->fetchAll();
     }
     public function ShowDonGia__Get_By_Id_Sp($masp)
     {
-        $obj = $this->connect->prepare("SELECT * FROM dongia INNER JOIN sanpham ON dongia.masp = sanpham.masp WHERE dongia.apdung=1 AND dongia.masp=?");
+        $obj = $this->connect->prepare("SELECT * FROM dongia INNER JOIN sanpham ON dongia.masp = sanpham.masp WHERE dongia.apdung=1 AND masp=?");
+        $obj->setFetchMode(PDO::FETCH_OBJ);
+        $obj->execute(array($masp));
+        return $obj->fetchAll(); // Trả về giá trị đơn giá
+    }
+    // public function ShowDonGia__Get_By_Id_Spdg($masp)
+    // {
+    //     $obj = $this->connect->prepare("SELECT * FROM dongia WHERE masp = ? AND apdung = 1 ORDER BY id_dongia DESC LIMIT 1");
+    //     $obj->execute(array($masp));
+    //     return $obj->fetch(PDO::FETCH_OBJ); // Trả về đối tượng chứa thông tin đơn giá
+    // }
+
+    public function ShowDonGia__Get_By_Id_Spdg($masp)
+    {
+        $obj = $this->connect->prepare("SELECT * FROM dongia WHERE masp= ? AND apdung =1 ORDER BY id_dongia DESC LIMIT 1");
         $obj->setFetchMode(PDO::FETCH_OBJ);
         $obj->execute(array($masp));
         $dongia = $obj->fetch(PDO::FETCH_OBJ); // Lấy dòng đơn giá duy nhất từ kết quả truy vấn
         return $dongia->dongia; // Trả về giá trị đơn giá
     }
+
+    // public function ShowDonGia__Get_By_Id_Not_Spdg($masp)
+    // {
+    //     $id_dongia = $this->ShowDonGia__Get_By_Id_Spdg($masp)->id_dongia;
+    //     $obj = $this->connect->prepare("SELECT * FROM dongia WHERE masp = ? AND id_dongia !=? ORDER BY id_dongia ASC");
+    //     $obj->setFetchMode(PDO::FETCH_OBJ);
+    //     $obj->execute(array($masp, $id_dongia));
+    //     return $obj->fetchAll();
+    // }
 }
+
+// gc: 100
+// gm: 90
+// gm<gc ?
+// |(gc-gm)|*100% = -10% : ''

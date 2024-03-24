@@ -33,9 +33,6 @@ $loai__Get_All = $loaisp->LoaiSp__Get_All($maloai);
             <?php endforeach; ?>
         </div>
 
-
-
-
         <div class="col">
             <label for="tentt" class="form-label">Tên thuộc tính</label>
             <input type="text" class="form-control" id="tentt" name="tentt" required value="<?= $thuoctinh__Get_By_Id->tentt ?>">

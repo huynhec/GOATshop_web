@@ -9,14 +9,9 @@ if (isset($_GET['req'])) {
             $tenloai = $_POST['tenloai'];
             $trangthai = $_POST['trangthai'];
             $ghichu = null;
-            // $mota = $_POST['mota'] != "" ? $_POST['mota'] : 'Đang cập nhật';
-            if(isset($_POST['thuoctinh']) && is_array($_POST['thuoctinh'])) {
-                foreach($_POST['thuoctinh'] as $thuoctinh) {
-                    // Xử lý và lưu vào cơ sở dữ liệu ở đây
-                    $tenthuoctinh = $thuoctinh;
-                    $res += $loaisp->LoaiSp__Add($tenloai, $tenthuoctinh, $trangthai, $ghichu);
-                }
-            }
+            $mota = $_POST['mota'] != "" ? $_POST['mota'] : 'Đang cập nhật';
+
+            $res += $loaisp->LoaiSp__Add($tenloai, $tenloai, $trangthai);
             if ($res != 0) {
                 header('location: ../../index.php?pages=loai-sp&msg=success');
             } else {

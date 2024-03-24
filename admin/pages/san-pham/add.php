@@ -63,17 +63,17 @@ $loaisp__Get_All_Exist = $loaiSp->LoaiSp__Get_All_Exist();
             </div>
             <div id="anhsp_preview" class="image-preview"></div>
         </div>
+
         <div class="col">
             <label for="dongia" class="form-label">Đơn giá</label>
-            <!-- <input type="number" min="0" max="1000000000" class="form-control" id="dongia" name="dongia" required> -->
             <div id="inputDongia">
                 <div class="input-group mb-2">
-                    <input type="number" min="0" max="1000000000" class="form-control" name="dongia[]" placeholder="Đơn giá 1" class="form-control" required>
+                    <input type="number" min="0" max="1000000000" class="form-control" name="dongia[]" placeholder="Đơn giá " class="form-control" required>
                 </div>
             </div>
-            <div class="col text-center">
+            <!-- <div class="col text-center">
                 <button type="button" class="btn btn-primary mt-2" onclick="addDongia()">Thêm đơn giá</button>
-            </div>
+            </div> -->
         </div>
         <br />
         <div class="col text-center">
@@ -84,36 +84,36 @@ $loaisp__Get_All_Exist = $loaiSp->LoaiSp__Get_All_Exist();
 
 
 <script>
-   function kiemTraCheckbox(msg) {
-    var checkboxes = document.querySelectorAll(".btn-check");
-    var isChecked = false;
+    function kiemTraCheckbox(msg) {
+        var checkboxes = document.querySelectorAll(".btn-check");
+        var isChecked = false;
 
-    checkboxes.forEach(function(checkbox) {
-        if (checkbox.checked) {
-            isChecked = true;
-        }
-    });
-
-    if (!isChecked) {
-        const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 2000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-                toast.onmouseenter = Swal.stopTimer;
-                toast.onmouseleave = Swal.resumeTimer;
+        checkboxes.forEach(function(checkbox) {
+            if (checkbox.checked) {
+                isChecked = true;
             }
         });
-        Toast.fire({
-            icon: 'warning',
-            title: msg
-        });
-        return false;
+
+        if (!isChecked) {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 2000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                }
+            });
+            Toast.fire({
+                icon: 'warning',
+                title: msg
+            });
+            return false;
+        }
+        return true;
     }
-    return true;
-}
 
     function add_obj(maloai) {
         $.post("pages/san-pham/d_add.php", {
@@ -123,44 +123,44 @@ $loaisp__Get_All_Exist = $loaiSp->LoaiSp__Get_All_Exist();
         });
     };
 
-    function addDongia() {
-        var inputContainer = document.getElementById('inputDongia');
-        var inputGroup = document.createElement('div');
-        inputGroup.className = 'input-group mb-2';
+    // function addDongia() {
+    //     var inputContainer = document.getElementById('inputDongia');
+    //     var inputGroup = document.createElement('div');
+    //     inputGroup.className = 'input-group mb-2';
 
-        var input = document.createElement('input');
-        input.type = 'number';
-        input.name = 'dongia[]'; // Tên thuộc tính là một mảng để có thể lưu nhiều thuộc tính
-        input.placeholder = 'Đơn giá ' + (inputContainer.children.length + 1);
-        input.className = 'form-control';
-        input.required = true;
+    //     var input = document.createElement('input');
+    //     input.type = 'number';
+    //     input.name = 'dongia[]'; // Tên thuộc tính là một mảng để có thể lưu nhiều thuộc tính
+    //     input.placeholder = 'Đơn giá ' + (inputContainer.children.length + 1);
+    //     input.className = 'form-control';
+    //     input.required = true;
 
-        var button = document.createElement('button');
-        button.type = 'button';
-        button.className = 'btn btn-danger';
-        button.textContent = 'Xoá';
-        button.onclick = function() {
-            inputContainer.removeChild(inputGroup);
-        };
+    //     var button = document.createElement('button');
+    //     button.type = 'button';
+    //     button.className = 'btn btn-danger';
+    //     button.textContent = 'Xoá';
+    //     button.onclick = function() {
+    //         inputContainer.removeChild(inputGroup);
+    //     };
 
-        inputGroup.appendChild(input);
-        inputGroup.appendChild(button);
-        inputContainer.appendChild(inputGroup);
-    }
+    //     inputGroup.appendChild(input);
+    //     inputGroup.appendChild(button);
+    //     inputContainer.appendChild(inputGroup);
+    // }
 
-    function removeInput(button) {
-        var inputGroup = button.parentElement;
-        var inputContainer = inputGroup.parentElement;
-        inputContainer.removeChild(inputGroup);
-    }
+    // function removeInput(button) {
+    //     var inputGroup = button.parentElement;
+    //     var inputContainer = inputGroup.parentElement;
+    //     inputContainer.removeChild(inputGroup);
+    // }
 
-    function showAttributes(masp) {
-        $.post("get_attributes.php", {
-            masp: masp,
-        }, function(data, status) {
-            $("#attributes-container").html(data);
-        });
-    }
+    // function showAttributes(masp) {
+    //     $.post("get_attributes.php", {
+    //         masp: masp,
+    //     }, function(data, status) {
+    //         $("#attributes-container").html(data);
+    //     });
+    // }
 
     // Lấy ra đối tượng input có id là 'anhsp'
     var anhsp = document.getElementById('anhsp');

@@ -32,6 +32,9 @@ if (isset($_GET['pages']) && !isset($_GET['req'])) {
         case "anh-san-pham":
             require_once "pages/san-pham/c_index.php";
             break;
+        case "dongia-san-pham":
+            require_once "pages/san-pham/gia_index.php";
+            break;
         case "trang-loi":
             require_once "pages/trang-loi/index.php";
             break;

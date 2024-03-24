@@ -35,10 +35,11 @@ $donGia__Get_All = $dg->DonGia__Get_All();
                     <table id="table_js" class="table table-striped" style="width:100%">
                         <thead class="table-dark">
                             <tr>
+                                <th>#</th>
                                 <th>Ảnh sản phẩm</th>
                                 <th>Tên sản phẩm</th>
-                                <th>Đơn giá</th>
                                 <th>Thương hiệu</th>
+                                <th>Đơn giá</th>
                                 <th>Trạng thái</th>
                                 <th>Thao tác</th>
                             </tr>
@@ -46,11 +47,18 @@ $donGia__Get_All = $dg->DonGia__Get_All();
                         <tbody>
                             <?php foreach ($sanPham__Get_All as $item) : ?>
                                 <tr>
+                                    <td><?= $item->masp ?></td>
                                     <td><img src="../assets/<?= $anhSp->AnhSp__Get_By_Id_Sp_First($item->masp)->hinhanh ?>" alt="" srcset="" class="img-fluid" width="50"></td>
                                     <td><?= $item->tensp ?></td>
-                                    <td><?php echo number_format($dg->ShowDonGia__Get_By_Id_Sp($item->masp), 0, ',', '.') ?> đ</td>
+
                                     <td><?= $th->ThuongHieu__Get_By_Id($item->math)->tenth ?></td>
-                                    <td><?= $item->trangthai == 1 ? '<span class="text-success">Hiển thị</span>' : '<span class="text-danger">Tạm ẩn</span>' ?></td>
+                                    <td><?= $dg->ShowDonGia__Get_By_Id_Spdg($item->masp) ?>
+                                        <button type="button" class="btn btn-warning btn-update" onclick="return dg_update_obj('<?= $item->masp ?>')">
+                                            <i class="bx bx-edit" aria-hidden="true"></i>
+                                        </button>
+                                    </td>
+                                    <td><?= $item->trangthai == 1 ? '<span class="text-success">Hiển thị</span>' : '<span class="text-danger">Tạm ẩn</span>' ?>
+                                    </td>
                                     <td class="text-center font-weight-bold">
                                         <button type="button" class="btn btn-primary btn-update" onclick="return update_anhsp_obj('<?= $item->masp ?>')">
                                             <i class="bx bx-photo-album" aria-hidden="true"></i>
@@ -84,6 +92,10 @@ $donGia__Get_All = $dg->DonGia__Get_All();
 <script>
     function update_anhsp_obj(masp) {
         location.href = "index.php?pages=anh-san-pham&masp=" + masp;
+    };
+
+    function dg_update_obj(masp) {
+        location.href = "index.php?pages=dongia-san-pham&masp=" + masp;
     };
 
     function update_obj(masp) {

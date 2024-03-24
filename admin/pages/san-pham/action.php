@@ -6,7 +6,7 @@ require_once '../../../model/ThuocTinhModel.php';
 require_once '../../../model/ChiTietThuocTinhModel.php';
 require_once '../../../model/DonGiaModel.php';
 
-$dg = new DongiaModel();
+$dg = new DonGiaModel();
 $sp = new SanPhamModel();
 $anhSp = new AnhSpModel();
 $cm = new CommonModel();
@@ -28,14 +28,14 @@ if (isset($_GET['req'])) {
             $masp = $sp->SanPham__Add($tensp, $mota, $ngaythem, $trangthai, $luotmua, $math, $maloai);
             $idtt = $_POST["idtt"];
             $noidung = $_POST["noidung"];
-            $apdung = 1;
+            $apdung = $_POST['apdung'];
             $ngaynhap = date("Y-m-d H:i:s");
             for ($i = 0; $i < count($idtt); $i++) {
                 $chitietthuoctinh__Add = $chitietthuoctinh->ChiTietThuocTinh__Add($idtt[$i], $masp, $noidung[$i]);
             }
 
-            if(isset($_POST['dongia']) && is_array($_POST['dongia'])) {
-                foreach($_POST['dongia'] as $item) {
+            if (isset($_POST['dongia']) && is_array($_POST['dongia'])) {
+                foreach ($_POST['dongia'] as $item) {
                     // Xử lý và lưu vào cơ sở dữ liệu ở đây
                     $dongia = $item;
                     $res += $dg->DonGia__Add($dongia, $apdung, $ngaynhap, $masp);
@@ -98,14 +98,14 @@ if (isset($_GET['req'])) {
                 $chitietthuoctinh__Update = $chitietthuoctinh->ChiTietThuocTinh__Update($id_cttt[$i], $idtt[$i], $masp, $noidung[$i]);
             }
 
-            $res += $sp->SanPham__Update($masp, $tensp, $dongia, $mota, $ngaythem, $trangthai, $luotmua, $math, $maloai);
+            $res += $sp->SanPham__Update($masp, $tensp, $mota, $ngaythem, $trangthai, $luotmua, $math, $maloai);
             if ($res != 0) {
                 header('location: ../../index.php?pages=san-pham&msg=success');
             } else {
                 header('location: ../../index.php?pages=san-pham&msg=error');
             }
             break;
-            
+
         case "delete":
             $res = 0;
             $masp = $_GET['masp'];
@@ -212,7 +212,38 @@ if (isset($_GET['req'])) {
                 header("location: ../../index.php?pages=anh-san-pham&masp=$masp&msg=error");
             }
             break;
+        case "gia_add":
+            $res = 0;
+            $masp = $_POST["masp"];
+            $dongia = $_POST["dongia"];
+            $apdung = 1;
+            $ngaynhap = date("Y-m-d H:i:s");
+            if (isset($_POST['dongia']) && is_array($_POST['dongia'])) {
+                foreach ($_POST['dongia'] as $item) {
+                    // Xử lý và lưu vào cơ sở dữ liệu ở đây
+                    $dongia = $item;
+                    $res += $dg->DonGia__Add($dongia, $apdung, $ngaynhap, $masp);
+                }
+            }
+            if ($res != 0) {
+                header("location: ../../index.php?pages=dongia-san-pham&masp=$masp&msg=success");
+            } else {
+                header("location: ../../index.php?pages=dongia-san-pham&masp=$masp&msg=error");
+            }
+            break;
+        case "gia_update":
+            $res = 0;
+            $id_dongia = $_POST["id_dongia"];
+            $masp = $_POST['masp'];
 
+            $res += $dg->DonGia__Update_ApDung($masp, $id_dongia);
+
+            if ($res != 0) {
+                header("location: ../../index.php?pages=dongia-san-pham&masp=$masp&msg=success");
+            } else {
+                header("location: ../../index.php?pages=dongia-san-pham&masp=$masp&msg=error");
+            }
+            break;
         default:
             break;
     }

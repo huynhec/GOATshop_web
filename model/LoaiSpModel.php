@@ -44,10 +44,10 @@ class LoaiSpModel extends Database
         return $obj->fetchAll();
     }
     
-    public function LoaiSp__Add($tenloai, $tenthuoctinh, $trangthai, $ghichu)
+    public function LoaiSp__Add( $tenloai, $mota, $trangthai)
     {
-        $obj = $this->connect->prepare("INSERT INTO loaisp(tenloai, tenthuoctinh,trangthai, ghichu) VALUES (?,?,?,?)");
-        $obj->execute(array($tenloai, $tenthuoctinh, $trangthai, $ghichu));
+        $obj = $this->connect->prepare("INSERT INTO loaisp(tenloai, mota, trangthai) VALUES (?,?,?)");
+        $obj->execute(array($tenloai, $mota, $trangthai));
         return $obj->rowCount();
     }
 
