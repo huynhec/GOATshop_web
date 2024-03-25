@@ -51,9 +51,17 @@ $donGia__Get_All = $dg->DonGia__Get_All();
                                     <td><img src="../assets/<?= $anhSp->AnhSp__Get_By_Id_Sp_First($item->masp)->hinhanh ?>" alt="" srcset="" class="img-fluid" width="50"></td>
                                     <td><?= $item->tensp ?></td>
 
-                                    <td><?= $th->ThuongHieu__Get_By_Id($item->math)->tenth ?></td>
-                                    <td><?= $dg->ShowDonGia__Get_By_Id_Spdg($item->masp) ?>
-                                        <button type="button" class="btn btn-warning btn-update" onclick="return dg_update_obj('<?= $item->masp ?>')">
+                                    <td>
+                                        <a href="index.php?pages=thuong-hieu">
+                                            <button class="btn btn-outline-primary">
+                                                <?= $th->ThuongHieu__Get_By_Id($item->math)->tenth ?>
+                                            </button>
+                                        </a>
+
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-success btn-update" onclick="return dg_update_obj('<?= $item->masp ?>')">
+                                            <?= number_format($dg->ShowDonGia__Get_By_Id_Spdg($item->masp))  ?> đ
                                             <i class="bx bx-edit" aria-hidden="true"></i>
                                         </button>
                                     </td>

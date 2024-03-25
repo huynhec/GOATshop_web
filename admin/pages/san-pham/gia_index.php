@@ -54,18 +54,12 @@ $dongia__Get_By_Id_Sp_First = $dongia->ShowDonGia__Get_By_Id_Spdg($masp);
                                     <td>
                                         <?php if ($item->apdung == 1) : ?>
                                             <!-- Nút sẽ hiển thị khi apdung == 1 -->
-                                            <!-- <button type="button" class="btn btn-warning btn-update" onclick="return update_apdung('<?= $item->id_dongia ?>', '<?= $item->apdung ?>')">
-                                                <i class="bx bx-edit" aria-hidden="true"></i>
-                                            </button> -->
                                             <label class="switch" onclick="return update_apdung('<?= $item->id_dongia ?>', '<?= $item->apdung ?>')">
                                                 <input type="checkbox" checked>
                                                 <span class="slider"></span>
                                             </label>
                                         <?php else : ?>
-                                            <!-- Nút sẽ ẩn khi apdung != 1 -->
-                                            <!-- <button type="button" class="btn btn-warning btn-update" style="display: none;" onclick="return update_apdung('<?= $item->id_dongia ?>', '<?= $item->apdung ?>')">
-                                                <i class="bx bx-edit" aria-hidden="true"></i>
-                                            </button> -->
+                                            <!-- Nút sẽ ẩn khi apdung != 1 -->                                          
                                             <label class="switch" onclick="return update_apdung('<?= $item->id_dongia ?>', '<?= $item->masp ?>')">
                                                 <input type="checkbox">
                                                 <span class="slider"></span>

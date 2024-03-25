@@ -46,6 +46,9 @@ class DonGiaModel extends Database
 
     public function DonGia__Add($dongia, $apdung, $ngaynhap, $masp)
     {
+        $obj = $this->connect->prepare("UPDATE dongia SET apdung = 0 WHERE masp = ? ");
+        $obj->execute(array($masp));
+
         $obj = $this->connect->prepare("INSERT INTO dongia(dongia, apdung, ngaynhap, masp) VALUES (?,?,?,?)");
         $obj->execute(array($dongia, $apdung, $ngaynhap, $masp));
         return $obj->rowCount();
@@ -99,12 +102,6 @@ class DonGiaModel extends Database
         $obj->execute(array($masp));
         return $obj->fetchAll(); // Trả về giá trị đơn giá
     }
-    // public function ShowDonGia__Get_By_Id_Spdg($masp)
-    // {
-    //     $obj = $this->connect->prepare("SELECT * FROM dongia WHERE masp = ? AND apdung = 1 ORDER BY id_dongia DESC LIMIT 1");
-    //     $obj->execute(array($masp));
-    //     return $obj->fetch(PDO::FETCH_OBJ); // Trả về đối tượng chứa thông tin đơn giá
-    // }
 
     public function ShowDonGia__Get_By_Id_Spdg($masp)
     {

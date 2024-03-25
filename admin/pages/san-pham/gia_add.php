@@ -23,7 +23,13 @@ $sanPham__Get_By_Id = $sp->SanPham__Get_By_Id($masp);
     </form>
 </div>
 <script>
-// function update_apdung(id_dongia) {
-//     DonGia__Update_ApDung($apdung, $id_dongia);
-// };
+function update_apdung(id_dongia, masp) {
+    $.post("pages/san-pham/action.php?req=gia_update", {
+        id_dongia: id_dongia,
+        masp: masp,
+    }, function(data, status) {
+        $(".main-form").html(data);
+        location.reload();
+    });
+};
 </script>

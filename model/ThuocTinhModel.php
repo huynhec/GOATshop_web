@@ -80,7 +80,7 @@ class ThuocTinhModel extends Database
 
     public function ThuocTinh__Get_By_Id_Sp($masp)
     {
-        $obj = $this->connect->prepare("SELECT * FROM thuoctinh INNER JOIN chitietthuoctinh ON thuoctinh.idtt = chitietthuoctinh.idtt WHERE trangthai=1 AND masp=?");
+        $obj = $this->connect->prepare("SELECT * FROM thuoctinh INNER JOIN chitietthuoctinh ON thuoctinh.idtt = chitietthuoctinh.idtt WHERE masp=?");
         $obj->setFetchMode(PDO::FETCH_OBJ);
         $obj->execute(array($masp));
         return $obj->fetchAll();

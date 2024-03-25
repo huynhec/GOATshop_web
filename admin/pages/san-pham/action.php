@@ -28,7 +28,7 @@ if (isset($_GET['req'])) {
             $masp = $sp->SanPham__Add($tensp, $mota, $ngaythem, $trangthai, $luotmua, $math, $maloai);
             $idtt = $_POST["idtt"];
             $noidung = $_POST["noidung"];
-            $apdung = $_POST['apdung'];
+            $apdung = 1;
             $ngaynhap = date("Y-m-d H:i:s");
             for ($i = 0; $i < count($idtt); $i++) {
                 $chitietthuoctinh__Add = $chitietthuoctinh->ChiTietThuocTinh__Add($idtt[$i], $masp, $noidung[$i]);

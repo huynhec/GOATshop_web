@@ -38,11 +38,8 @@ if (isset($_GET['req'])) {
             $idtt = $_POST['idtt'];
             $tentt = $_POST['tentt'];
             $trangthai = $_POST['trangthai'];
-            $maloai = $_POST['maloai'];
             $is_num = $_POST['is_num'];
-
-
-
+            $maloai = $_POST['maloai'];
 
             $res += $tt->ThuocTinh__Update($tentt, $trangthai, $is_num, $maloai, $idtt);
             if ($res != 0) {
@@ -52,37 +49,32 @@ if (isset($_GET['req'])) {
             }
             break;
 
-            case "i_update":
-                $res = 0; // Khởi tạo biến $res trước khi sử dụng
-                $idtt = $_POST['idtt'];
-                $trangthai = $_POST['trangthai'];
-                $maloai = $_POST['maloai'];
-            
-                // Lấy giá trị của is_num dựa trên chỉ số index từ form
-                $indexes = $_POST['index']; // Mảng chứa các chỉ số index từ form
-                $is_num = []; // Mảng chứa các giá trị is_num
-            
-                // Duyệt qua mỗi chỉ số và lấy giá trị tương ứng của is_num
-                foreach ($indexes as $index) {
-                    // Kiểm tra xem phần tử tồn tại trong $_POST['tentt'] không
-                    // Nếu tồn tại, lấy giá trị tentt tương ứng, nếu không, gán một giá trị mặc định
-                    $tentt_value = isset($_POST['tentt'][$index]) ? $_POST['tentt'][$index] : '';
-                    // Lấy giá trị is_num từ $_POST dựa trên chỉ số index
-                    $is_num_value = isset($_POST['is_num'][$index]) ? $_POST['is_num'][$index] : 0;
-                    // Gọi hàm cập nhật thuộc tính và cộng dồn biến $res
-                    $res += $tt->ThuocTinh__Update($tentt_value, $trangthai, $is_num_value, $maloai, $idtt[$index]);
-                }
-            
-                // Kiểm tra kết quả và chuyển hướng tùy thuộc vào kết quả
-                if ($res > 0) {
-                    header('location: ../../index.php?pages=thuoc-tinh&msg=success');
-                } else {
-                    header('location: ../../index.php?pages=thuoc-tinh&msg=error');
-                }
-                break;
-            
+        case "l_update":
+            $res = 0;
+            $idtt = $_POST['idtt'];
+            $tentt = $_POST['tentt'];
+            $trangthai = $_POST['trangthai'];
+            $maloai = $_POST['maloai'];
+
+            for ($i = 0; $i < count($idtt); $i++) {
+
+                echo $tentt[$i];
+                echo $trangthai[$i];
+                echo $_POST["is_num_$idtt[$i]"];
+                echo $maloai;
+                echo $idtt[$i];
+
+                // Xử lý và lưu vào cơ sở dữ liệu ở đây
+                $res += $tt->ThuocTinh__Update($tentt[$i], $trangthai[$i], $_POST["is_num_$idtt[$i]"], $maloai, $idtt[$i]);
+            }
 
 
+            if ($res != 0) {
+                header('location: ../../index.php?pages=thuoc-tinh&msg=success');
+            } else {
+                header('location: ../../index.php?pages=thuoc-tinh&msg=error');
+            }
+            break;
         case "delete":
             $res = 0;
             $idtt = $_GET['idtt'];
