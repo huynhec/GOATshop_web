@@ -44,6 +44,9 @@ if (isset($_POST['action'])) {
             $ngaythem = Date('Y-m-d H:i:s');
             $tongdh = $ctgh->ChiTietGioHang__Sum_Tien_GH($magh)->sum_tien;
             $madh = $dh->DonHang__Add($ngaythem, $makh, $tongdh);
+            
+            // cập nhật trạng thái 
+
 
             // Lấy thông tin giỏ hàng
             $ctghRes = $ctgh->ChiTietGioHang__Get_By_Id_GH($magh);

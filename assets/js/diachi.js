@@ -2,7 +2,7 @@ $(document).ready(function() {
     // Listen for changes in the "province" select box
     $('#province').on('change', function() {
       var province_id = $(this).val();
-      console.log(province_id);
+      // console.log(province_id);
       if (province_id) {
         // If a province is selected, fetch the districts for that province using AJAX
         $.ajax({
