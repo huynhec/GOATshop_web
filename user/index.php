@@ -1,9 +1,10 @@
-<?PHP 
-    session_start();
+<?PHP
+session_start();
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,6 +18,7 @@
     <link rel="stylesheet" href="../assets/css/main.css">
     <link rel="stylesheet" href="../assets/css/footer.css">
 </head>
+
 <body>
     <?php require_once 'components/header.php' ?>
     <?php require_once 'components/main.php' ?>
@@ -31,4 +33,5 @@
     <script src="../assets/js/main.js"></script>
 
 </body>
+
 </html>
