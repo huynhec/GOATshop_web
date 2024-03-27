@@ -226,9 +226,9 @@ if (isset($_GET['req'])) {
                 }
             }
             if ($res != 0) {
-                header("location: ../../index.php?pages=dongia-san-pham&masp=$masp&msg=success");
+                header("location: ../../index.php?pages=san-pham&msg=success");
             } else {
-                header("location: ../../index.php?pages=dongia-san-pham&masp=$masp&msg=error");
+                header("location: ../../index.php?pages=san-pham&msg=error");
             }
             break;
         case "gia_update":
@@ -239,9 +239,9 @@ if (isset($_GET['req'])) {
             $res += $dg->DonGia__Update_ApDung($masp, $id_dongia);
 
             if ($res != 0) {
-                header("location: ../../index.php?pages=dongia-san-pham&masp=$masp&msg=success");
+                header('location: ../../index.php?pages=san-pham&msg=success');
             } else {
-                header("location: ../../index.php?pages=dongia-san-pham&masp=$masp&msg=error");
+                header('location: ../../index.php?pages=san-pham&msg=error');
             }
             break;
         default:

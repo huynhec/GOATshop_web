@@ -70,7 +70,6 @@ class DonGiaModel extends Database
         $stmt = $this->connect->prepare("UPDATE dongia SET apdung = 1 WHERE id_dongia = ?");
         $stmt->execute([$id_dongia]);
         return true;
-
     }
 
     public function DonGia__Delete($id_dongia)
@@ -120,6 +119,8 @@ class DonGiaModel extends Database
     //     $obj->execute(array($masp, $id_dongia));
     //     return $obj->fetchAll();
     // }
+
+
 }
 
 // gc: 100
