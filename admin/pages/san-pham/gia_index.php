@@ -36,6 +36,7 @@ $dongia__Get_By_Id_Sp_First = $dongia->ShowDonGia__Get_By_Id_Spdg($masp);
                     <table id="table_js" class="table table-striped" style="width:100%">
                         <thead class="table-dark">
                             <tr>
+                                <th>ID</th>
                                 <th>Đơn giá</th>
                                 <th>Ngày nhập</th>
                                 <th>Áp dụng</th>
@@ -45,26 +46,29 @@ $dongia__Get_By_Id_Sp_First = $dongia->ShowDonGia__Get_By_Id_Spdg($masp);
 
                         <tbody>
                             <?php foreach ($dongia__Get_By_Id_Sp as $item) : ?>
-                                <tr>
-                                    <td><?= $item->dongia ?></td>
-                                    <td><?= $item->ngaynhap ?></td>
-                                    <td><?= $item->apdung ?></td>
-                                    <td>
-                                        <?php if ($item->apdung == 1) : ?>
-                                            <!-- Nút sẽ hiển thị khi apdung == 1 -->
-                                            <label class="switch" onclick="return update_apdung('<?= $item->id_dongia ?>', '<?= $item->apdung ?>')">
-                                                <input type="checkbox" checked>
-                                                <span class="slider"></span>
-                                            </label>
-                                        <?php else : ?>
-                                            <!-- Nút sẽ ẩn khi apdung != 1 -->
-                                            <label class="switch" onclick="return update_apdung('<?= $item->id_dongia ?>', '<?= $item->masp ?>')">
-                                                <input type="checkbox">
-                                                <span class="slider"></span>
-                                            </label>
-                                        <?php endif; ?>
-                                    </td>
-                                </tr>
+                            <tr>
+                                <td><?= $item->id_dongia ?></td>
+                                <td><?= $item->dongia ?></td>
+                                <td><?= $item->ngaynhap ?></td>
+                                <td><?= $item->apdung ?></td>
+                                <td>
+                                    <?php if ($item->apdung == 1) : ?>
+                                    <!-- Nút sẽ hiển thị khi apdung == 1 -->
+                                    <label class="switch"
+                                        onclick="return update_apdung('<?= $item->id_dongia ?>', '<?= $item->apdung ?>')">
+                                        <input type="checkbox" checked>
+                                        <span class="slider"></span>
+                                    </label>
+                                    <?php else : ?>
+                                    <!-- Nút sẽ ẩn khi apdung != 1 -->
+                                    <label class="switch"
+                                        onclick="return update_apdung('<?= $item->id_dongia ?>', '<?= $item->masp ?>')">
+                                        <input type="checkbox">
+                                        <span class="slider"></span>
+                                    </label>
+                                    <?php endif; ?>
+                                </td>
+                            </tr>
                             <?php endforeach ?>
                         </tbody>
                     </table>
@@ -84,80 +88,80 @@ $dongia__Get_By_Id_Sp_First = $dongia->ShowDonGia__Get_By_Id_Spdg($masp);
 </div>
 
 <script>
-    function update_apdung(id_dongia, masp) {
-        $.post("pages/san-pham/action.php?req=gia_update", {
-            id_dongia: id_dongia,
-            masp: masp,
-        }, function(data, status) {
-            $(".main-form").html(data);
-            location.reload();
-        });
-    };
+function update_apdung(id_dongia, masp) {
+    $.post("pages/san-pham/action.php?req=gia_update", {
+        id_dongia: id_dongia,
+        masp: masp,
+    }, function(data, status) {
+        $(".main-form").html(data);
+        location.reload();
+    });
+};
 
 
-    window.addEventListener('load', function() {
-        document.getElementById('dynamicTitle').innerText = "";
-    })
+window.addEventListener('load', function() {
+    document.getElementById('dynamicTitle').innerText = "";
+})
 </script>
 
 <style>
-    .switch {
-        position: relative;
-        display: inline-block;
-        width: 60px;
-        height: 34px;
-    }
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
 
-    .switch input {
-        opacity: 0;
-        width: 0;
-        height: 0;
-    }
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
 
-    .slider {
-        position: absolute;
-        cursor: pointer;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: #ccc;
-        -webkit-transition: .4s;
-        transition: .4s;
-    }
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
 
-    .slider:before {
-        position: absolute;
-        content: "";
-        height: 26px;
-        width: 26px;
-        left: 4px;
-        bottom: 4px;
-        background-color: white;
-        -webkit-transition: .4s;
-        transition: .4s;
-    }
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
 
-    input:checked+.slider {
-        background-color: #2196F3;
-    }
+input:checked+.slider {
+    background-color: #2196F3;
+}
 
-    input:focus+.slider {
-        box-shadow: 0 0 1px #2196F3;
-    }
+input:focus+.slider {
+    box-shadow: 0 0 1px #2196F3;
+}
 
-    input:checked+.slider:before {
-        -webkit-transform: translateX(26px);
-        -ms-transform: translateX(26px);
-        transform: translateX(26px);
-    }
+input:checked+.slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
 
-    /* Rounded sliders */
-    .slider.round {
-        border-radius: 34px;
-    }
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
 
-    .slider.round:before {
-        border-radius: 50%;
-    }
+.slider.round:before {
+    border-radius: 50%;
+}
 </style>
