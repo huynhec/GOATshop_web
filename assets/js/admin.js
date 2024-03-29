@@ -39,36 +39,78 @@ $('#daterange').daterangepicker({
   });
 });
 
-    function addInput() {
-        var inputContainer = document.getElementById('inputContainer');
-        var inputGroup = document.createElement('div');
-        inputGroup.className = 'input-group mb-2';
+function addInput() {
+  var inputContainer = document.getElementById('inputContainer');
+  var inputGroup = document.createElement('div');
+  inputGroup.className = 'input-group mb-2';
 
-        var input = document.createElement('input');
-        input.type = 'text';
-        input.name = 'thuoctinh[]'; // Tên thuộc tính là một mảng để có thể lưu nhiều thuộc tính
-        input.placeholder = 'Thuộc tính ' + (inputContainer.children.length + 1);
-        input.className = 'form-control';
-        input.required = true;
+  // Tạo trường nhập văn bản mới
+  var inputText = document.createElement('input');
+  inputText.type = 'text';
+  inputText.name = 'thuoctinh[]'; // Tên thuộc tính được coi là một mảng để lưu nhiều thuộc tính
+  inputText.placeholder = 'Thuộc tính ' + (inputContainer.children.length + 1);
+  inputText.className = 'form-control';
+  inputText.required = true;
 
-        var button = document.createElement('button');
-        button.type = 'button';
-        button.className = 'btn btn-danger';
-        button.textContent = 'Xoá';
-        button.onclick = function() {
-            inputContainer.removeChild(inputGroup);
-        };
+  // Tạo trường chọn dropdown mới để chọn trạng thái
+  var selectStatus = document.createElement('select');
+  selectStatus.className = 'form-select';
+  selectStatus.name = 'trangthai';
+  var option1 = document.createElement('option');
+  option1.value = '1';
+  option1.textContent = 'Hiển thị';
+  var option2 = document.createElement('option');
+  option2.value = '0';
+  option2.textContent = 'Tạm ẩn';
+  selectStatus.appendChild(option1);
+  selectStatus.appendChild(option2);
 
-        inputGroup.appendChild(input);
-        inputGroup.appendChild(button);
-        inputContainer.appendChild(inputGroup);
-    }
+  // Tạo hai trường radio mới để chọn kiểu dữ liệu
+  var radioGroup = document.createElement('div');
+  radioGroup.className = 'form-check';
 
-    function removeInput(button) {
-        var inputGroup = button.parentElement;
-        var inputContainer = inputGroup.parentElement;
-        inputContainer.removeChild(inputGroup);
-    }
+  var radioLabel1 = document.createElement('label');
+  radioLabel1.className = 'form-check-label';
+  radioLabel1.textContent = 'Kiểu chữ: ';
+  var radioInput1 = document.createElement('input');
+  radioInput1.type = 'radio';
+  radioInput1.className = 'form-check-input';
+  radioInput1.name = 'is_num' + (inputContainer.children.length + 1);
+  radioInput1.value = '0';
+  radioInput1.required = true;
+  radioLabel1.appendChild(radioInput1);
+
+  var radioLabel2 = document.createElement('label');
+  radioLabel2.className = 'form-check-label';
+  radioLabel2.textContent = 'Kiểu số: ';
+  var radioInput2 = document.createElement('input');
+  radioInput2.type = 'radio';
+  radioInput2.className = 'form-check-input';
+  radioInput2.name = 'is_num' + (inputContainer.children.length + 1);
+  radioInput2.value = '1';
+  radioLabel2.appendChild(radioInput2);
+
+  // Tạo nút xóa
+  var button = document.createElement('button');
+  button.type = 'button';
+  button.className = 'btn btn-danger';
+  button.textContent = 'Xoá';
+  button.onclick = function() {
+      inputContainer.removeChild(inputGroup);
+  };
+
+  // Thêm các phần tử vào nhóm
+  inputGroup.appendChild(inputText);
+  inputGroup.appendChild(selectStatus);
+  radioGroup.appendChild(radioLabel1);
+  radioGroup.appendChild(radioLabel2);
+  inputGroup.appendChild(radioGroup);
+  inputGroup.appendChild(button);
+
+  // Thêm nhóm vào container
+  inputContainer.appendChild(inputGroup);
+}
+
 
     function showAttributes(maloai) {
       $.post("get_attributes.php", {

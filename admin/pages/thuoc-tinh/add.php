@@ -56,7 +56,7 @@ $loaisp__Get_All = $loaisp->LoaiSp__Get_All();
             </div>
 
             <div class="col text-center">
-                <button type="button" class="btn btn-primary mt-2" onclick="add()">Thêm thuộc tính</button>
+                <button type="button" class="btn btn-primary mt-2" onclick="addInput()">Thêm thuộc tính</button>
             </div>
         </div>
 
@@ -66,6 +66,3 @@ $loaisp__Get_All = $loaisp->LoaiSp__Get_All();
         </div>
     </form>
 </div>
-<script>
-    function add() {}
-</script>
