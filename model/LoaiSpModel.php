@@ -34,17 +34,17 @@ class LoaiSpModel extends Database
 
     public function LoaiSp__Get_All($trangthai = null)
     {
-        if($trangthai == -1){
+        if ($trangthai == -1) {
             $obj = $this->connect->prepare("SELECT * FROM loaisp");
-        }else{
+        } else {
             $obj = $this->connect->prepare("SELECT * FROM loaisp WHERE trangthai=1");
         }
         $obj->setFetchMode(PDO::FETCH_OBJ);
         $obj->execute();
         return $obj->fetchAll();
     }
-    
-    public function LoaiSp__Add( $tenloai, $mota, $trangthai)
+
+    public function LoaiSp__Add($tenloai, $mota, $trangthai)
     {
         $obj = $this->connect->prepare("INSERT INTO loaisp(tenloai, mota, trangthai) VALUES (?,?,?)");
         $obj->execute(array($tenloai, $mota, $trangthai));
@@ -71,6 +71,7 @@ class LoaiSpModel extends Database
         $obj->execute(array($maloai));
         return $obj->fetch();
     }
+
     public function LoaiSp__Get_All_Exist()
     {
         $obj = $this->connect->prepare("SELECT * FROM loaisp INNER JOIN thuoctinh ON loaisp.maloai = thuoctinh.maloai WHERE loaisp.trangthai=1 GROUP BY thuoctinh.maloai");

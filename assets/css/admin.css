@@ -64,7 +64,7 @@ ul {
 
 /* Thiết lập cho logo trong thanh bên */
 .sidebar-logo {
-  height: 56px;
+  height: 70px;
   display: flex;
   align-items: center;
   position: sticky;
@@ -78,10 +78,14 @@ ul {
 
 #sidebar.hide > .sidebar-logo {
   justify-content: center;
+  margin-top: 50px;
+  margin-bottom: 30px;
 }
 
 #sidebar .sidebar-logo .col-logo img {
-  width: 100%;
+
+  height: 110px;
+  width: 220px;
 }
 
 #sidebar .sidebar-logo .col-menu .bx {

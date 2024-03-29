@@ -80,6 +80,8 @@ $dongia__Get_By_Id_Sp_First = $dongia->ShowDonGia__Get_By_Id_Spdg($masp);
             <div class="main-form">
                 <?php require_once 'gia_add.php' ?>
             </div>
+            <br>
+            <br>
             <div class="main-chart">
                 <?php require_once 'gia_chart.php' ?>
             </div>
