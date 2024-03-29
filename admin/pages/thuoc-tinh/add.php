@@ -37,7 +37,7 @@ $loaisp__Get_All = $loaisp->LoaiSp__Get_All();
             </div>
             <div class="col-3">
                 <label for="trangthai" class="form-label">Trạng thái:</label>
-                <select class="form-select " aria-label=".trangthai" id="trangthai" name="trangthai">
+                <select class="form-select" aria-label=".trangthai" id="trangthai" name="trangthai[]" required>
                     <option value="1" selected>Hiển thị</option>
                     <option value="0">Tạm ẩn</option>
                 </select>
@@ -46,20 +46,21 @@ $loaisp__Get_All = $loaisp->LoaiSp__Get_All();
                 <label for="trangthai" class="form-label">Kiểu dữ liệu:</label>
                 <br>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input checkbox" type="radio" id="is_num_0" value="0" name="is_num" required checked>
+                    <input class="form-check-input checkbox" type="radio" id="is_num_0" value="0" name="is_num[]" required checked>
                     <label class="form-check-label" for="is_num_0">Kiểu chữ</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input checkbox" type="radio" id="is_num_1" value="1" name="is_num" required>
+                    <input class="form-check-input checkbox" type="radio" id="is_num_1" value="1" name="is_num[]" required>
                     <label class="form-check-label" for="is_num_1">Kiểu số</label>
                 </div>
             </div>
 
+        </div>
+        <div class="row">
             <div class="col text-center">
                 <button type="button" class="btn btn-primary mt-2" onclick="addInput()">Thêm thuộc tính</button>
             </div>
         </div>
-
         <br />
         <div class="col text-center">
             <button type="submit" class="btn btn-primary">LƯU THÔNG TIN</button>

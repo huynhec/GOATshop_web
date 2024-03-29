@@ -40,22 +40,36 @@ $('#daterange').daterangepicker({
 });
 
 function addInput() {
-  var inputContainer = document.getElementById('inputContainer');
+  var row = document.querySelector('.main-add .row');
+
+  // Tạo cột chứa trường nhập thuộc tính
+  var colInput = document.createElement('div');
+  colInput.className = 'col-5';
+  var labelInput = document.createElement('label');
+  labelInput.className = 'form-label';
+  colInput.appendChild(labelInput);
   var inputGroup = document.createElement('div');
   inputGroup.className = 'input-group mb-2';
-
-  // Tạo trường nhập văn bản mới
   var inputText = document.createElement('input');
   inputText.type = 'text';
-  inputText.name = 'thuoctinh[]'; // Tên thuộc tính được coi là một mảng để lưu nhiều thuộc tính
-  inputText.placeholder = 'Thuộc tính ' + (inputContainer.children.length + 1);
+  inputText.name = 'thuoctinh[]';
+  inputText.placeholder = 'Thuộc tính ' + (row.querySelectorAll('.col-5').length + 1);
   inputText.className = 'form-control';
   inputText.required = true;
+  inputGroup.appendChild(inputText);
+  colInput.appendChild(inputGroup);
 
-  // Tạo trường chọn dropdown mới để chọn trạng thái
+  // Tạo cột chứa trường chọn trạng thái
+  var colStatus = document.createElement('div');
+  colStatus.className = 'col-3';
+  var labelStatus = document.createElement('label');
+  labelStatus.className = 'form-label';
+  colStatus.appendChild(labelStatus);
   var selectStatus = document.createElement('select');
-  selectStatus.className = 'form-select';
-  selectStatus.name = 'trangthai';
+  selectStatus.className = 'form-select ';
+  selectStatus.setAttribute('aria-label', '.trangthai');
+  selectStatus.id = 'trangthai';
+  selectStatus.name = 'trangthai[]';
   var option1 = document.createElement('option');
   option1.value = '1';
   option1.textContent = 'Hiển thị';
@@ -64,61 +78,55 @@ function addInput() {
   option2.textContent = 'Tạm ẩn';
   selectStatus.appendChild(option1);
   selectStatus.appendChild(option2);
+  colStatus.appendChild(selectStatus);
 
-  // Tạo hai trường radio mới để chọn kiểu dữ liệu
+  // Tạo cột chứa trường chọn kiểu dữ liệu
+  var colDataType = document.createElement('div');
+  colDataType.className = 'col-4';
+  var labelDataType = document.createElement('label');
+  labelDataType.className = 'form-label';
+  colDataType.appendChild(labelDataType);
+  var br = document.createElement('br');
+  colDataType.appendChild(br);
   var radioGroup = document.createElement('div');
-  radioGroup.className = 'form-check';
-
-  var radioLabel1 = document.createElement('label');
-  radioLabel1.className = 'form-check-label';
-  radioLabel1.textContent = 'Kiểu chữ: ';
+  radioGroup.className = 'form-check form-check-inline';
   var radioInput1 = document.createElement('input');
   radioInput1.type = 'radio';
-  radioInput1.className = 'form-check-input';
-  radioInput1.name = 'is_num' + (inputContainer.children.length + 1);
+  radioInput1.className = 'form-check-input checkbox';
+  radioInput1.id = 'is_num_0_' + (row.querySelectorAll('.col-5').length);
   radioInput1.value = '0';
+  radioInput1.name = 'is_num[' + (row.querySelectorAll('.col-5').length) + ']';
   radioInput1.required = true;
-  radioLabel1.appendChild(radioInput1);
-
-  var radioLabel2 = document.createElement('label');
-  radioLabel2.className = 'form-check-label';
-  radioLabel2.textContent = 'Kiểu số: ';
+  var radioLabel1 = document.createElement('label');
+  radioLabel1.className = 'form-check-label';
+  radioLabel1.textContent = 'Kiểu chữ';
+  radioLabel1.htmlFor = 'is_num_0_' + (row.querySelectorAll('.col-5').length);
+  radioGroup.appendChild(radioInput1);
+  radioGroup.appendChild(radioLabel1);
+  var radioGroup2 = document.createElement('div');
+  radioGroup2.className = 'form-check form-check-inline';
   var radioInput2 = document.createElement('input');
   radioInput2.type = 'radio';
-  radioInput2.className = 'form-check-input';
-  radioInput2.name = 'is_num' + (inputContainer.children.length + 1);
+  radioInput2.className = 'form-check-input checkbox';
+  radioInput2.id = 'is_num_1_' + (row.querySelectorAll('.col-5').length);
   radioInput2.value = '1';
-  radioLabel2.appendChild(radioInput2);
+  radioInput2.name = 'is_num[' + (row.querySelectorAll('.col-5').length) + ']';
+  radioInput2.required = true;
+  var radioLabel2 = document.createElement('label');
+  radioLabel2.className = 'form-check-label';
+  radioLabel2.textContent = 'Kiểu số';
+  radioLabel2.htmlFor = 'is_num_1_' + (row.querySelectorAll('.col-5').length);
+  radioGroup2.appendChild(radioInput2);
+  radioGroup2.appendChild(radioLabel2);
+  colDataType.appendChild(radioGroup);
+  colDataType.appendChild(radioGroup2);
 
-  // Tạo nút xóa
-  var button = document.createElement('button');
-  button.type = 'button';
-  button.className = 'btn btn-danger';
-  button.textContent = 'Xoá';
-  button.onclick = function() {
-      inputContainer.removeChild(inputGroup);
-  };
-
-  // Thêm các phần tử vào nhóm
-  inputGroup.appendChild(inputText);
-  inputGroup.appendChild(selectStatus);
-  radioGroup.appendChild(radioLabel1);
-  radioGroup.appendChild(radioLabel2);
-  inputGroup.appendChild(radioGroup);
-  inputGroup.appendChild(button);
-
-  // Thêm nhóm vào container
-  inputContainer.appendChild(inputGroup);
+  // Thêm các cột vào hàng
+  row.appendChild(colInput);
+  row.appendChild(colStatus);
+  row.appendChild(colDataType);
 }
 
-
-    function showAttributes(maloai) {
-      $.post("get_attributes.php", {
-          maloai: maloai,
-      }, function(data, status) {
-          $("#attributes-container").html(data);
-      });
-  }
   
 CKEDITOR.replace('mota');
 

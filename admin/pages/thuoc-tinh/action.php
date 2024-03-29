@@ -18,11 +18,14 @@ if (isset($_GET['req'])) {
             $maloai = $_POST['maloai'];
 
             if (isset($_POST['thuoctinh']) && is_array($_POST['thuoctinh'])) {
-                foreach ($_POST['thuoctinh'] as $thuoctinh) {
-                    // Xử lý và lưu vào cơ sở dữ liệu ở đây
+                foreach ($_POST['thuoctinh'] as $key => $thuoctinh) {
                     $tentt = $thuoctinh;
+                    $trangthai = $_POST['trangthai'][$key];
+                    $is_num = $_POST['is_num'][$key];
+                    // Xử lý và lưu vào cơ sở dữ liệu ở đây
                     $res += $tt->ThuocTinh__Add($tentt, $trangthai, $is_num, $maloai);
                 }
+                
             }
 
 
