@@ -47,13 +47,14 @@ function addInput() {
   colInput.className = 'col-5';
   var labelInput = document.createElement('label');
   labelInput.className = 'form-label';
+  labelInput.textContent = 'Tên thuộc tính:';
   colInput.appendChild(labelInput);
   var inputGroup = document.createElement('div');
   inputGroup.className = 'input-group mb-2';
   var inputText = document.createElement('input');
   inputText.type = 'text';
   inputText.name = 'thuoctinh[]';
-  inputText.placeholder = 'Thuộc tính ' + (row.querySelectorAll('.col-5').length + 1);
+  inputText.placeholder = 'Thuộc tính ' + (row.querySelectorAll('.col-5').length + 1 );
   inputText.className = 'form-control';
   inputText.required = true;
   inputGroup.appendChild(inputText);
@@ -61,12 +62,13 @@ function addInput() {
 
   // Tạo cột chứa trường chọn trạng thái
   var colStatus = document.createElement('div');
-  colStatus.className = 'col-3';
+  colStatus.className = 'col-2';
   var labelStatus = document.createElement('label');
   labelStatus.className = 'form-label';
+  labelStatus.textContent = 'Trạng thái:';
   colStatus.appendChild(labelStatus);
   var selectStatus = document.createElement('select');
-  selectStatus.className = 'form-select ';
+  selectStatus.className = 'form-select';
   selectStatus.setAttribute('aria-label', '.trangthai');
   selectStatus.id = 'trangthai';
   selectStatus.name = 'trangthai[]';
@@ -82,9 +84,10 @@ function addInput() {
 
   // Tạo cột chứa trường chọn kiểu dữ liệu
   var colDataType = document.createElement('div');
-  colDataType.className = 'col-4';
+  colDataType.className = 'col-3';
   var labelDataType = document.createElement('label');
   labelDataType.className = 'form-label';
+  labelDataType.textContent = 'Kiểu dữ liệu:';
   colDataType.appendChild(labelDataType);
   var br = document.createElement('br');
   colDataType.appendChild(br);
@@ -93,14 +96,14 @@ function addInput() {
   var radioInput1 = document.createElement('input');
   radioInput1.type = 'radio';
   radioInput1.className = 'form-check-input checkbox';
-  radioInput1.id = 'is_num_0_' + (row.querySelectorAll('.col-5').length);
+  radioInput1.id = 'is_num_0_' + (row.querySelectorAll('.col-4').length + 1);
   radioInput1.value = '0';
-  radioInput1.name = 'is_num[' + (row.querySelectorAll('.col-5').length) + ']';
+  radioInput1.name = 'is_num[' + (row.querySelectorAll('.col-4').length + 1) + ']';
   radioInput1.required = true;
   var radioLabel1 = document.createElement('label');
   radioLabel1.className = 'form-check-label';
   radioLabel1.textContent = 'Kiểu chữ';
-  radioLabel1.htmlFor = 'is_num_0_' + (row.querySelectorAll('.col-5').length);
+  radioLabel1.htmlFor = 'is_num_0_' + (row.querySelectorAll('.col-4').length + 1);
   radioGroup.appendChild(radioInput1);
   radioGroup.appendChild(radioLabel1);
   var radioGroup2 = document.createElement('div');
@@ -108,23 +111,39 @@ function addInput() {
   var radioInput2 = document.createElement('input');
   radioInput2.type = 'radio';
   radioInput2.className = 'form-check-input checkbox';
-  radioInput2.id = 'is_num_1_' + (row.querySelectorAll('.col-5').length);
+  radioInput2.id = 'is_num_1_' + (row.querySelectorAll('.col-4').length + 1);
   radioInput2.value = '1';
-  radioInput2.name = 'is_num[' + (row.querySelectorAll('.col-5').length) + ']';
+  radioInput2.name = 'is_num[' + (row.querySelectorAll('.col-4').length + 1) + ']';
   radioInput2.required = true;
   var radioLabel2 = document.createElement('label');
   radioLabel2.className = 'form-check-label';
   radioLabel2.textContent = 'Kiểu số';
-  radioLabel2.htmlFor = 'is_num_1_' + (row.querySelectorAll('.col-5').length);
+  radioLabel2.htmlFor = 'is_num_1_' + (row.querySelectorAll('.col-4').length + 1);
   radioGroup2.appendChild(radioInput2);
   radioGroup2.appendChild(radioLabel2);
   colDataType.appendChild(radioGroup);
   colDataType.appendChild(radioGroup2);
+  // nut xoa
+  var colDeleteButton = document.createElement('div');
+    colDeleteButton.className = 'col-1';
+    var button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'btn btn-danger';
+    button.textContent = 'Xoá';
+    button.onclick = function() {
+        row.removeChild(colInput);
+        row.removeChild(colStatus);
+        row.removeChild(colDataType);
+        row.removeChild(colDeleteButton);
+    };
+    colDeleteButton.appendChild(button);
+
 
   // Thêm các cột vào hàng
   row.appendChild(colInput);
   row.appendChild(colStatus);
   row.appendChild(colDataType);
+  row.appendChild(colDeleteButton);
 }
 
   
