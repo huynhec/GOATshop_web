@@ -48,7 +48,7 @@ $dongia__Get_By_Id_Sp_First = $dongia->ShowDonGia__Get_By_Id_Spdg($masp);
                             <?php foreach ($dongia__Get_By_Id_Sp as $item) : ?>
                             <tr>
                                 <td><?= $item->id_dongia ?></td>
-                                <td><?= $item->dongia ?></td>
+                                <td><?= number_format($item->dongia)?> đ</td>
                                 <td><?= $item->ngaynhap ?></td>
                                 <td><?= $item->apdung ?></td>
                                 <td>
