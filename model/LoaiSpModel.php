@@ -51,10 +51,10 @@ class LoaiSpModel extends Database
         return $obj->rowCount();
     }
 
-    public function LoaiSp__Update($maloai, $tenloai, $tenthuoctinh, $trangthai, $ghichu)
+    public function LoaiSp__Update($maloai, $tenloai, $mota, $trangthai, $ghichu)
     {
-        $obj = $this->connect->prepare("UPDATE loaisp SET tenloai=?, tenthuoctinh=?, trangthai=?, ghichu=? WHERE maloai=?");
-        $obj->execute(array($tenloai, $tenthuoctinh, $trangthai, $ghichu, $maloai));
+        $obj = $this->connect->prepare("UPDATE loaisp SET tenloai=?, mota=?, trangthai=?, ghichu=? WHERE maloai=?");
+        $obj->execute(array($tenloai, $mota, $trangthai, $ghichu, $maloai));
         return $obj->rowCount();
     }
     public function LoaiSp__Delete($maloai)

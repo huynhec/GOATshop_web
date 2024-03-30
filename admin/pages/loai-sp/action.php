@@ -19,19 +19,20 @@ if (isset($_GET['req'])) {
             }
             break;
 
-        // case "update":
-        //     $res = 0;
-        //     $maloai = $_POST['maloai'];
-        //     $tenloai = $_POST['tenloai'];
-        //     $mota = $_POST['mota'];
-        //     $trangthai = $_POST['trangthai'];
-        //     $res += $loaisp->LoaiSp__Update($maloai, $tenloai, $mota, $trangthai);
-        //     if ($res != 0) {
-        //         header('location: ../../index.php?pages=loai-sp&msg=success');
-        //     } else {
-        //         header('location: ../../index.php?pages=loai-sp&msg=error');
-        //     }
-        //     break;
+        case "update":
+            $res = 0;
+            $maloai = $_POST['maloai'];
+            $tenloai = $_POST['tenloai'];
+            $mota = $_POST['mota'];
+            $trangthai = $_POST['trangthai'];
+            $ghichu = null;
+            $res += $loaisp->LoaiSp__Update($maloai, $tenloai, $mota, $trangthai, $ghichu);
+            if ($res != 0) {
+                header('location: ../../index.php?pages=loai-sp&msg=success');
+            } else {
+                header('location: ../../index.php?pages=loai-sp&msg=error');
+            }
+            break;
 
         case "delete":
             $res = 0;
