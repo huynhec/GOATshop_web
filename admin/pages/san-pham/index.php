@@ -71,7 +71,7 @@ $donGia__Get_All = $dg->DonGia__Get_All();
                                         <button type="button" class="btn btn-primary btn-update" onclick="return update_anhsp_obj('<?= $item->masp ?>')">
                                             <i class="bx bx-photo-album" aria-hidden="true"></i>
                                         </button>
-                                        <button type="button" class="btn btn-warning btn-update" onclick="return update_obj('<?= $item->masp ?>')">
+                                        <button type="button" class="btn btn-warning btn-update" onclick="return update_obj('<?= $item->masp ?>','<?= $item->maloai ?>')">
                                             <i class="bx bx-edit" aria-hidden="true"></i>
                                         </button>
                                         <?php if (isset($_SESSION['admin'])) : ?>
@@ -106,9 +106,10 @@ $donGia__Get_All = $dg->DonGia__Get_All();
         location.href = "index.php?pages=dongia-san-pham&masp=" + masp;
     };
 
-    function update_obj(masp) {
+    function update_obj(masp, maloai) {
         $.post("pages/san-pham/update.php", {
             masp: masp,
+            maloai: maloai,
         }, function(data, status) {
             $(".main-form").html(data);
         });

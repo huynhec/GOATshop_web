@@ -6,9 +6,11 @@ $loaiSp = new LoaiSpModel();
 $sp = new SanPhamModel();
 $th = new ThuongHieuModel();
 $masp = $_POST['masp'];
+$maloai = $_POST['maloai'];
 $sanPham__Get_By_Id = $sp->SanPham__Get_By_Id($masp);
 $thuongHieu__Get_All = $th->ThuongHieu__Get_All();
 $loaiSp__Get_All = $loaiSp->loaiSp__Get_All();
+$loaiSp_Get_By_Id = $loaiSp->LoaiSp__Get_By_Id($maloai);
 ?>
 
 <div class="main-update">
@@ -33,15 +35,13 @@ $loaiSp__Get_All = $loaiSp->loaiSp__Get_All();
             <?php endforeach; ?>
         </div>
         <div class="col">
-            <label>Chọn loại sản phẩm:</label>
-            <?php foreach ($loaiSp__Get_All as $item) : ?>
+            <label>Loại sản phẩm:</label>
             <div class="form-check form-check-inline">
-                <input class="btn-check" type="radio" id="maloai<?= $item->maloai ?>" value="<?= $item->maloai ?>"
-                    name="maloai" <?= $item->maloai == $sanPham__Get_By_Id->maloai ? 'checked' : '' ?>
-                    <?= $item->maloai == $sanPham__Get_By_Id->maloai ? "onclick='d_update_obj()'" : "onclick='d_add_obj(`$item->maloai`)'" ?>>
-                <label class="btn btn-outline-primary" for="maloai<?= $item->maloai ?>"><?= $item->tenloai ?></label>
+                <input class="btn-check" type="radio" id="maloai<?= $maloai ?>" value="<?= $maloai ?>"
+                    name="maloai" <?= $maloai == $sanPham__Get_By_Id->maloai ? 'checked' : '' ?>
+                    <?= $maloai == $sanPham__Get_By_Id->maloai ? "onclick='d_update_obj()'" : "onclick='d_add_obj(`$item->maloai`)'" ?>>
+                <label class="btn btn-outline-primary" for="maloai<?= $maloai ?>"><?=$loaiSp_Get_By_Id->tenloai  ?></label>
             </div>
-            <?php endforeach; ?>
         </div>
         <div class="update-form"></div>
 
