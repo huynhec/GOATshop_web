@@ -5,7 +5,7 @@ require_once '../model/AnhSpModel.php';
 require_once '../model/ThuocTinhModel.php';
 require_once '../model/DonGiaModel.php';
 
-$dg = new DongiaModel();
+$dg = new DonGiaModel();
 $sp = new SanPhamModel();
 $th = new ThuongHieuModel();
 $anhSp = new AnhSpModel();
