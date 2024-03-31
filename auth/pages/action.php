@@ -15,9 +15,7 @@ if (isset($_GET['req'])) {
 
             $url = $_POST['url'];
             $emailOrUsername = $_POST['email_or_username'];
-            $password = $user->Ma_Hoa_Mat_Khau(trim($_POST['password']));
-            // $password = (trim($_POST['password']));
-            // $password = $_POST['password'];
+            $password = $_POST['password'];
             $secret = '6LeCaZkpAAAAAB9T3X4XQN55xopilzrXny4-kS3u'; //Thay thế bằng mã Secret Key của bạn
             $verify_response = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret=' . $secret . '&response=' . $captcha);
             $response_data = json_decode($verify_response);
@@ -28,6 +26,9 @@ if (isset($_GET['req'])) {
             } else {
                 header('location: ../index.php?pages=dang-nhap&msg=!recaptcha');
             }
+            //mã hoá mặt khẩu
+            $password = $user->Ma_Hoa_Mat_Khau(trim($_POST['password']));
+
             $res = $kh->KhachHang__Dang_Nhap($emailOrUsername, $password);
             if (!$captcha) {
                 header('location: ../index.php?pages=dang-nhap&msg=!recaptcha');
@@ -70,7 +71,7 @@ if (isset($_GET['req'])) {
             $email = $_POST['email'];
             $username = $_POST['username'];
             $trangthai = 1;
-            $password = $user->Ma_Hoa_Mat_Khau(trim($_POST['password']));
+            $password = $_POST['password'];
 
             if ($email == $password || $username == $password) {
                 header('location: ../index.php?pages=dang-ky&msg=samepwu');
@@ -87,6 +88,9 @@ if (isset($_GET['req'])) {
             } else {
                 header('location: ../index.php?pages=dang-ky&msg=!recaptcha');
             }
+            // mã hoá mật khẩu
+            $password = $user->Ma_Hoa_Mat_Khau(trim($_POST['password']));
+
             if ($captcha) {
                 if ($kh->KhachHang__Check_Email($email) && $user->User__Check_Username($username)) {
                     $res += $kh->KhachHang__Add($tenhienthi, $gioitinh, $ngaysinh, $sodienthoai, $province_id, $district_id, $wards_id, $road, $email, $username, $password, $trangthai);
