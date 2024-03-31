@@ -45,7 +45,7 @@ class ThuocTinhModel extends Database
     }
     public function ThuocTinh__Get_By_Id_Loai($maloai)
     {
-        $obj = $this->connect->prepare("SELECT * FROM thuoctinh WHERE maloai = ?");
+        $obj = $this->connect->prepare("SELECT * FROM thuoctinh WHERE trangthai=1 AND maloai = ?");
         $obj->setFetchMode(PDO::FETCH_OBJ);
         $obj->execute(array($maloai));
         return $obj->fetchAll();
