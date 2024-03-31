@@ -51,12 +51,20 @@ class LoaiSpModel extends Database
         return $obj->rowCount();
     }
 
+    // Cập nhật trạng thái của loại sản phẩm và các sản phẩm tương ứng
     public function LoaiSp__Update($maloai, $tenloai, $mota, $trangthai, $ghichu)
     {
-        $obj = $this->connect->prepare("UPDATE loaisp SET tenloai=?, mota=?, trangthai=?, ghichu=? WHERE maloai=?");
-        $obj->execute(array($tenloai, $mota, $trangthai, $ghichu, $maloai));
-        return $obj->rowCount();
+        // Cập nhật trạng thái của loại sản phẩm
+        $updateLoaiSp = $this->connect->prepare("UPDATE loaisp SET tenloai=?, mota=?, trangthai=?, ghichu=? WHERE maloai=?");
+        $updateLoaiSp->execute(array($tenloai, $mota, $trangthai, $ghichu, $maloai));
+
+        // Cập nhật trạng thái của các sản phẩm tương ứng
+        $updateSanPham = $this->connect->prepare("UPDATE sanpham SET trangthai=? WHERE maloai=?");
+        $updateSanPham->execute(array($trangthai, $maloai));
+
+        return $updateLoaiSp->rowCount();
     }
+
     public function LoaiSp__Delete($maloai)
     {
         $obj = $this->connect->prepare("DELETE FROM loaisp WHERE maloai = ?");

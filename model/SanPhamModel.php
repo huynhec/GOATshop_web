@@ -85,9 +85,20 @@ class SanPhamModel extends Database
 
     public function SanPham__Update($masp, $tensp, $mota, $ngaythem, $trangthai, $luotmua, $math, $maloai)
     {
-        $obj = $this->connect->prepare("UPDATE sanpham SET tensp=?, mota=?, ngaythem=?, trangthai=?, luotmua=?, math=?, maloai=? WHERE masp=?");
-        $obj->execute(array($tensp, $mota, $ngaythem, $trangthai, $luotmua, $math, $maloai, $masp));
-        return $obj->rowCount();
+        // Kiểm tra trạng thái của loại sản phẩm
+        $query = $this->connect->prepare("SELECT trangthai FROM loaisp WHERE maloai = ?");
+        $query->execute([$maloai]);
+        $result = $query->fetch(PDO::FETCH_ASSOC);
+        $trangThaiLoai = $result['trangthai'];
+
+        // Nếu trạng thái của loại sản phẩm là hiển thị, thì mới cập nhật sản phẩm
+        if ($trangThaiLoai == 1) {
+            $obj = $this->connect->prepare("UPDATE sanpham SET tensp=?, mota=?, ngaythem=?, trangthai=?, luotmua=?, math=?, maloai=? WHERE masp=?");
+            $obj->execute(array($tensp, $mota, $ngaythem, $trangthai, $luotmua, $math, $maloai, $masp));
+            return $obj->rowCount();
+        } else {
+            return 0;
+        }
     }
 
     public function SanPham__Delete($masp)
