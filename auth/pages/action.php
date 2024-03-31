@@ -62,7 +62,11 @@ if (isset($_GET['req'])) {
             $gioitinh = $_POST['gioitinh'];
             $ngaysinh = $_POST['ngaysinh'];
             $sodienthoai = $_POST['sodienthoai'];
-            $diachi = $_POST['diachi'];
+            // Lấy thông tin địa chỉ
+            $province_id = $_POST['province_name'];
+            $district_id = $_POST['district_name'];
+            $wards_id= $_POST['wards'];
+            $road = $_POST['road'];
             $email = $_POST['email'];
             $username = $_POST['username'];
             $trangthai = 1;
@@ -83,18 +87,18 @@ if (isset($_GET['req'])) {
             } else {
                 header('location: ../index.php?pages=dang-ky&msg=!recaptcha');
             }
-            // $password = $_POST['password'];
             if ($captcha) {
                 if ($kh->KhachHang__Check_Email($email) && $user->User__Check_Username($username)) {
-                $res += $kh->KhachHang__Add($tenhienthi, $gioitinh, $ngaysinh, $sodienthoai, $diachi, $email, $username, $password, $trangthai);
-            }}
+                    $res += $kh->KhachHang__Add($tenhienthi, $gioitinh, $ngaysinh, $sodienthoai, $province_id, $district_id, $wards_id, $road, $email, $username, $password, $trangthai);
+                }
+            }
             // if ($nhanVien->NhanVien__Check_Email($email)) {
             //     $res += $nhanVien->NhanVien__Add($tenhienthi, $gioitinh, $ngaysinh, $sodienthoai, $diachi, $email,$password, $username, $trangthai, 0);
             // }
 
             if (!$captcha) {
                 header('location: ../index.php?pages=dang-ky&msg=!recaptcha');
-            } elseif ($res != false) { 
+            } elseif ($res != false) {
 
                 header('location: ../index.php?pages=dang-nhap&msg=success');
             } else {
@@ -102,49 +106,49 @@ if (isset($_GET['req'])) {
             }
             break;
 
-            case "chinh-sua":
-                $res = 0;
-                $makh = $_POST['makh'];
-                $tenkh = $_POST['tenkh'];
-                $username = $_POST['username'];
-                $gioitinh = $_POST['gioitinh'];
-                $ngaysinh = $_POST['ngaysinh'];
-                $sodienthoai = $_POST['sodienthoai'];
-                $diachi = $_POST['diachi'];
-                $trangthai = 1;
-    
-    
-                // $email_old = trim($_POST['email_old']);
-                // $email_new = trim($_POST['email_new']);
-                $email_old = $_POST['email_old'];
-                $email_new = $_POST['email_new'];
-    
-                $email = $email_old;
-    
-                if ($email_new != $email_old && strlen($email_new) > 0) {
-                    if ($kh->KhachHang__Check_Email($email_new)) {
-                        $email = $email_new;
-                    } else {
-                        header('location: ../../index.php?pages=khach-hang&msg=error');
-                    }
-                }
-                // $password_old = trim($_POST['password_old']);
-                // $password_new = trim($_POST['password_new']);
-                $password_old = $_POST['password_old'];
-                $password_new = $_POST['password_new'];
-    
-                $password = $password_old;
-    
-                if ($password_new != $password_old && strlen($password_new) > 0) {
-                    $password = $password_new;
-                }
-                echo $res += $kh->KhachHang__Update($makh, $tenkh, $username, $gioitinh, $ngaysinh, $sodienthoai, $diachi, $email, $password, $trangthai);
-                if ($res != 0) {
-                    header('location: ../index.php?pages=chinh-sua');
+        case "chinh-sua":
+            $res = 0;
+            $makh = $_POST['makh'];
+            $tenkh = $_POST['tenkh'];
+            $username = $_POST['username'];
+            $gioitinh = $_POST['gioitinh'];
+            $ngaysinh = $_POST['ngaysinh'];
+            $sodienthoai = $_POST['sodienthoai'];
+            $diachi = $_POST['diachi'];
+            $trangthai = 1;
+
+
+            // $email_old = trim($_POST['email_old']);
+            // $email_new = trim($_POST['email_new']);
+            $email_old = $_POST['email_old'];
+            $email_new = $_POST['email_new'];
+
+            $email = $email_old;
+
+            if ($email_new != $email_old && strlen($email_new) > 0) {
+                if ($kh->KhachHang__Check_Email($email_new)) {
+                    $email = $email_new;
                 } else {
-                    header('location: ../index.php?pages=chinh-sua');
+                    header('location: ../../index.php?pages=khach-hang&msg=error');
                 }
-                break;
+            }
+            // $password_old = trim($_POST['password_old']);
+            // $password_new = trim($_POST['password_new']);
+            $password_old = $_POST['password_old'];
+            $password_new = $_POST['password_new'];
+
+            $password = $password_old;
+
+            if ($password_new != $password_old && strlen($password_new) > 0) {
+                $password = $password_new;
+            }
+            echo $res += $kh->KhachHang__Update($makh, $tenkh, $username, $gioitinh, $ngaysinh, $sodienthoai, $diachi, $email, $password, $trangthai);
+            if ($res != 0) {
+                header('location: ../index.php?pages=chinh-sua');
+            } else {
+                header('location: ../index.php?pages=chinh-sua');
+            }
+            break;
 
         case "dang-xuat":
             if (isset($_SESSION['manager'])) {

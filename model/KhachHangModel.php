@@ -52,20 +52,33 @@ class KhachHangModel extends Database
         return $obj->fetch();
     }
 
-    public function KhachHang__Add($tenhienthi, $gioitinh, $ngaysinh, $sodienthoai, $diachi, $email, $username, $password, $trangthai)
+    public function KhachHang__Add($tenhienthi, $gioitinh, $ngaysinh, $sodienthoai, $province, $district, $wards, $road, $email, $username, $password, $trangthai)
     {
         // Thêm người dùng vào bảng users
         $obj = $this->connect->prepare("INSERT INTO users (tenhienthi, username, password, phanquyen, trangthai)
-                                        VALUES (?, ?, ?, 3 , ?)");
+                                    VALUES (?, ?, ?, 3 , ?)");
         $obj->execute(array($tenhienthi, $username, $password, $trangthai));
 
         // Lấy mauser vừa được thêm
         $mauser = $this->connect->lastInsertId();
 
-        $obj = $this->connect->prepare("INSERT INTO khachhang(tenkh, gioitinh, ngaysinh, sodienthoai, diachi, email, trangthai, mauser) VALUES (?,?,?,?,?,?,?,?)");
-        $obj->execute(array($tenhienthi, $gioitinh, $ngaysinh, $sodienthoai, $diachi, $email, $trangthai, $mauser));
+        // Thêm thông tin khách hàng vào bảng khachhang
+        $obj = $this->connect->prepare("INSERT INTO khachhang (tenkh, gioitinh, ngaysinh, sodienthoai, email, trangthai, mauser)
+                                    VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $obj->execute(array($tenhienthi, $gioitinh, $ngaysinh, $sodienthoai, $email, $trangthai, $mauser));
+
+        // Lấy makh vừa được thêm
+        $makh = $this->connect->lastInsertId();
+
+        // Thêm địa chỉ của khách hàng vào bảng diachi
+        $obj = $this->connect->prepare("INSERT INTO diachi (makh, province, district, wards, road)
+                                    VALUES (?, ?, ?, ?, ?)");
+        $obj->execute(array($makh, $province, $district, $wards, $road));
+
+        // Trả về số hàng đã được thêm vào bảng khachhang
         return $obj->rowCount();
     }
+
 
     public function KhachHang__Check_Email($email)
     {
@@ -81,12 +94,12 @@ class KhachHangModel extends Database
 
     public function KhachHang__Dang_Nhap($emailOrUsername, $password)
     {
-    // Kiểm tra xem đầu vào có phải là email hay username
-    if (filter_var($emailOrUsername, FILTER_VALIDATE_EMAIL)) {
-        $sql = "SELECT * FROM khachhang INNER JOIN users ON khachhang.mauser = users.mauser WHERE khachhang.email = ? AND users.password = ? AND khachhang.trangthai = 1";
-    } else {
-        $sql = "SELECT * FROM users INNER JOIN khachhang ON users.mauser = khachhang.mauser WHERE users.username = ? AND users.password = ? AND users.trangthai = 1";
-    }
+        // Kiểm tra xem đầu vào có phải là email hay username
+        if (filter_var($emailOrUsername, FILTER_VALIDATE_EMAIL)) {
+            $sql = "SELECT * FROM khachhang INNER JOIN users ON khachhang.mauser = users.mauser WHERE khachhang.email = ? AND users.password = ? AND khachhang.trangthai = 1";
+        } else {
+            $sql = "SELECT * FROM users INNER JOIN khachhang ON users.mauser = khachhang.mauser WHERE users.username = ? AND users.password = ? AND users.trangthai = 1";
+        }
 
         $obj = $this->connect->prepare($sql);
         $obj->setFetchMode(PDO::FETCH_OBJ);
@@ -113,6 +126,4 @@ class KhachHangModel extends Database
         $obj->execute(array($tenkh, $sodienthoai, $diachi, $email, $makh));
         return $obj->rowCount();
     }
-
-
 }
