@@ -4,7 +4,7 @@ require_once '../../../model/SanPhamModel.php';
 $sp = new SanPhamModel();
 $thuoctinh = new ThuocTinhModel();
 $maloai = isset($_POST['maloai']) ? $_POST['maloai'] : 1;
-$thuoctinh__Get_By_Id_Loai = $thuoctinh->ThuocTinh__Get_By_Id_Loai($maloai);
+$thuoctinh__Get_By_Id_Loai = $thuoctinh->ThuocTinh__Get_By_Id_Loai_AddSp($maloai);
 $thuoctinh__Get_All = $thuoctinh->ThuocTinh__Get_All(-1);
 ?>
 

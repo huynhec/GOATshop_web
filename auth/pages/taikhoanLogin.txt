@@ -55,3 +55,4 @@ admin|98ZwvMHS
 haison|98ZwvMHSBA==
 admin|98ZwvMHS
 chilinh|1234567
+admin@gmail.com|123456
