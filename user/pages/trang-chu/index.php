@@ -2,6 +2,9 @@
 require_once '../model/SanPhamModel.php';
 require_once '../model/AnhSpModel.php';
 require_once '../model/CommonModel.php';
+require_once '../model/DonGiaModel.php';
+
+$dg = new DonGiaModel();
 $sp = new SanPhamModel();
 $anhSp = new AnhSpModel();
 $cm = new CommonModel();
@@ -75,7 +78,6 @@ $top = 0;
                 <div class="item-title color-1"><i class='bx bx-star bx-tada'></i>MỚI CẬP NHẬT</div>
             </a>
         </div>
-        
         <div class="main-item-container">
             <?php foreach ($sp__Get_Top_Updated_5 as $item) : ?>
                 <?php if (count($sp__Get_Top_Updated_5) > 0) : ?>
@@ -124,7 +126,7 @@ $top = 0;
                                 <div class="manga-container">
                                     <div class="manga-thumbnail">
                                         <img src="../assets/<?= $anhSp__Get_By_Id_Sp_First->hinhanh ?>">
-                                        <span class="manga-note background-1"><i class="bx bxs-badge-dollar"></i><?= number_format($item->dongia) ?>đ</span>
+                                        <span class="manga-note background-1"><i class="bx bxs-badge-dollar"></i><?= number_format($dg->ShowDonGia__Get_By_Id_Spdg($item->masp)) ?>₫</span>
                                     </div>
                                     <div class="manga-title color-1"><?= $item->tensp ?></div>
                                 </div>
@@ -189,7 +191,7 @@ $top = 0;
                             <div class="manga-container">
                                 <div class="manga-thumbnail">
                                     <img src="../assets/<?= $anhSp__Get_By_Id_Sp_First->hinhanh ?>">
-                                    <span class="manga-note background-8"><?= number_format($item->dongia) ?>đ</i></span>
+                                    <span class="manga-note background-8"><?= number_format($dg->ShowDonGia__Get_By_Id_Spdg($item->masp)) ?>₫</i></span>
                                 </div>
                                 <div class="manga-title color-8"><?= $item->tensp ?></div>
                             </div>
