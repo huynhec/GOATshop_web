@@ -17,31 +17,31 @@
         </li>
         <li class="<?= $_GET['pages'] == 'don-hang' ? "active" : "" ?>">
             <a href="index.php?pages=don-hang">
-                <i class='bx bx-category-alt'></i>
+                <i class='bx bx-file'></i>
                 <span class="text">Quản lý đơn hàng</span>
             </a>
         </li>
         <li class="<?= $_GET['pages'] == 'san-pham' ? "active" : "" ?>">
             <a href="index.php?pages=san-pham">
-                <i class='bx bx-category-alt'></i>
+                <i class='bx bx-package'></i>
                 <span class="text">Quản lý sản phẩm</span>
-            </a>
-        </li>
-        <li class="<?= $_GET['pages'] == 'thuoc-tinh' ? "active" : "" ?>">
-            <a href="index.php?pages=thuoc-tinh">
-                <i class='bx bx-category-alt'></i>
-                <span class="text">Quản lý thuộc tính</span>
             </a>
         </li>
         <li class="<?= $_GET['pages'] == 'loai-sp' ? "active" : "" ?>">
             <a href="index.php?pages=loai-sp">
-                <i class='bx bx-category-alt'></i>
+                <i class='bx bx-box'></i>
                 <span class="text">Quản lý loại sản phẩm</span>
+            </a>
+        </li>
+        <li class="<?= $_GET['pages'] == 'thuoc-tinh' ? "active" : "" ?>">
+            <a href="index.php?pages=thuoc-tinh">
+                <i class='bx bx-list-plus'></i>
+                <span class="text">Quản lý thuộc tính</span>
             </a>
         </li>
         <li class="<?= $_GET['pages'] == 'thuong-hieu' ? "active" : "" ?>">
             <a href="index.php?pages=thuong-hieu">
-                <i class='bx bx-category-alt'></i>
+                <i class='bx bx-purchase-tag-alt'></i>
                 <span class="text">Quản lý thương hiệu</span>
             </a>
         </li>
@@ -49,7 +49,7 @@
         <?php if (isset($_SESSION['admin']) || isset($_SESSION['manager'])) : ?>
         <li class="<?= $_GET['pages'] == 'trang-thai' ? "active" : "" ?>">
             <a href="index.php?pages=trang-thai">
-                <i class='bx bx-category-alt'></i>
+                <i class='bx bx-stats'></i>
                 <span class="text">Quản lý trạng thái</span>
             </a>
         </li>

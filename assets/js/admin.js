@@ -11,7 +11,7 @@ window.addEventListener("load", function () {
     // order: [[0, "desc"]], // Sắp xếp theo cột đầu tiên (index 0) giảm dần ("desc")
   });
 
-  reSize();
+  // reSize();
 
   window.addEventListener("resize", function () {
     reSize();

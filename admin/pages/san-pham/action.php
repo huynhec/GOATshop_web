@@ -226,7 +226,7 @@ if (isset($_GET['req'])) {
                 }
             }
             if ($res != 0) {
-                header("location: ../../index.php?pages=san-pham&msg=success");
+                header("location: ../../index.php?pages=san-pham#product_". $masp);
             } else {
                 header("location: ../../index.php?pages=san-pham&msg=error");
             }
@@ -238,11 +238,11 @@ if (isset($_GET['req'])) {
 
             $res += $dg->DonGia__Update_ApDung($masp, $id_dongia);
 
-            if ($res != 0) {
-                header('location: ../../index.php?pages=san-pham&msg=success');
-            } else {
-                header('location: ../../index.php?pages=san-pham&msg=error');
-            }
+            // if ($res != 0) {
+            //     header("location: ../../index.php?pages=dongia-san-pham&msg=success");
+            // } else {
+            //     header("location: ../../index.php?pages=dongia-san-pham&msg=error");
+            // }
             break;
         default:
             break;

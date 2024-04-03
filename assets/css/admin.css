@@ -223,6 +223,10 @@ div#anhsp_preview {
   flex-direction: column; /* Hiển thị các loại sản phẩm dọc */
   gap: 10px; /* Khoảng cách giữa các loại sản phẩm */
 }
+.highlight {
+  background-color: #ffff99; /* Màu nền sáng */
+  transition: background-color 0.5s ease; /* Thêm hiệu ứng chuyển đổi */
+}
 
 
 @media (max-width: 991px) {

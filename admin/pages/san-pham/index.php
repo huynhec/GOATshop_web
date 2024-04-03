@@ -46,7 +46,7 @@ $donGia__Get_All = $dg->DonGia__Get_All();
                         </thead>
                         <tbody>
                             <?php foreach ($sanPham__Get_All as $item) : ?>
-                                <tr>
+                                <tr id="product_<?php echo $item->masp; ?>">
                                     <td><?= $item->masp ?></td>
                                     <td><img src="../assets/<?= $anhSp->AnhSp__Get_By_Id_Sp_First($item->masp)->hinhanh ?>" alt="" srcset="" class="img-fluid" width="50"></td>
                                     <td><?= $item->tensp ?></td>
@@ -59,7 +59,7 @@ $donGia__Get_All = $dg->DonGia__Get_All();
                                     </td>
                                     <td>
                                         <button type="button" class="btn btn-success btn-update" onclick="return dg_update_obj('<?= $item->masp ?>')">
-                                            <?= number_format($dg->ShowDonGia__Get_By_Id_Spdg($item->masp))  ?> đ
+                                            <?= number_format($dg->ShowDonGia__Get_By_Id_Spdg($item->masp))  ?>₫
                                             <i class="bx bx-edit" aria-hidden="true"></i>
                                         </button>
                                     </td>
@@ -95,7 +95,7 @@ $donGia__Get_All = $dg->DonGia__Get_All();
     </div>
 </div>
 
-<script>
+<script>  
     function update_anhsp_obj(masp) {
         location.href = "index.php?pages=anh-san-pham&masp=" + masp;
     };
