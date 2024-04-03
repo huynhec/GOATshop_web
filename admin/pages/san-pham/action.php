@@ -23,9 +23,10 @@ if (isset($_GET['req'])) {
             $ngaythem = date("Y-m-d H:i:s");
             $trangthai = $_POST["trangthai"];
             $luotmua = 0;
+            $luotxem = 0;
             $math = $_POST["math"];
             $maloai = $_POST["maloai"];
-            $masp = $sp->SanPham__Add($tensp, $mota, $ngaythem, $trangthai, $luotmua, $math, $maloai);
+            $masp = $sp->SanPham__Add($tensp, $mota, $ngaythem, $trangthai, $luotmua, $luotxem, $math, $maloai);
             $idtt = $_POST["idtt"];
             $noidung = $_POST["noidung"];
             $apdung = 1;
@@ -87,6 +88,7 @@ if (isset($_GET['req'])) {
             $ngaythem = date("Y-m-d H:i:s");
             $trangthai = $_POST["trangthai"];
             $luotmua = $_POST["luotmua"];
+            $luotxem = $_POST["luotxem"];
             $math = $_POST["math"];
             $maloai = $_POST["maloai"];
 
@@ -98,7 +100,7 @@ if (isset($_GET['req'])) {
                 $chitietthuoctinh__Update = $chitietthuoctinh->ChiTietThuocTinh__Update($id_cttt[$i], $idtt[$i], $masp, $noidung[$i]);
             }
 
-            $res += $sp->SanPham__Update($masp, $tensp, $mota, $ngaythem, $trangthai, $luotmua, $math, $maloai);
+            $res += $sp->SanPham__Update($masp, $tensp, $mota, $ngaythem, $trangthai, $luotmua, $luotxem, $math, $maloai);
             if ($res != 0) {
                 header('location: ../../index.php?pages=san-pham&msg=success');
             } else {
@@ -226,7 +228,7 @@ if (isset($_GET['req'])) {
                 }
             }
             if ($res != 0) {
-                header("location: ../../index.php?pages=san-pham#product_". $masp);
+                header("location: ../../index.php?pages=san-pham#product_" . $masp);
             } else {
                 header("location: ../../index.php?pages=san-pham&msg=error");
             }

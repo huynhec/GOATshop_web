@@ -20,6 +20,7 @@ $szsp = new SizeSpModel();
 if (isset($_POST['action'])) {
     // Xử lý dựa trên action
     switch ($_POST['action']) {
+
         case 'delete':
 
             $madon = $_POST['madon'];
@@ -44,7 +45,7 @@ if (isset($_POST['action'])) {
             $ngaythem = Date('Y-m-d H:i:s');
             $tongdh = $ctgh->ChiTietGioHang__Sum_Tien_GH($magh)->sum_tien;
             $madh = $dh->DonHang__Add($ngaythem, $makh, $tongdh);
-            
+
             // cập nhật trạng thái 
 
 
@@ -138,6 +139,12 @@ if (isset($_POST['action'])) {
                     "sum" => number_format($sum),
                 ]);
             }
+            break;
+        case 'view':
+            $masp = isset($_POST['masp']) ? intval($_POST['masp']) : 0;
+            $newViewCount = $sp->SanPham__Increase_View_Count($masp);
+
+            echo number_format($newViewCount);
             break;
     }
 }

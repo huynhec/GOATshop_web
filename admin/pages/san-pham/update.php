@@ -37,10 +37,11 @@ $loaiSp_Get_By_Id = $loaiSp->LoaiSp__Get_By_Id($maloai);
         <div class="col">
             <label>Loại sản phẩm:</label>
             <div class="form-check form-check-inline">
-                <input class="btn-check" type="radio" id="maloai<?= $maloai ?>" value="<?= $maloai ?>"
-                    name="maloai" <?= $maloai == $sanPham__Get_By_Id->maloai ? 'checked' : '' ?>
+                <input class="btn-check" type="radio" id="maloai<?= $maloai ?>" value="<?= $maloai ?>" name="maloai"
+                    <?= $maloai == $sanPham__Get_By_Id->maloai ? 'checked' : '' ?>
                     <?= $maloai == $sanPham__Get_By_Id->maloai ? "onclick='d_update_obj()'" : "onclick='d_add_obj(`$item->maloai`)'" ?>>
-                <label class="btn btn-outline-primary" for="maloai<?= $maloai ?>"><?=$loaiSp_Get_By_Id->tenloai  ?></label>
+                <label class="btn btn-outline-primary"
+                    for="maloai<?= $maloai ?>"><?=$loaiSp_Get_By_Id->tenloai  ?></label>
             </div>
         </div>
         <div class="update-form"></div>
@@ -56,6 +57,12 @@ $loaiSp_Get_By_Id = $loaiSp->LoaiSp__Get_By_Id($maloai);
         <div class="col">
             <label for="mota" class="form-label">Mô tả</label>
             <textarea class="form-control" id="mota_u" name="mota"><?= $sanPham__Get_By_Id->mota ?></textarea>
+        </div>
+
+        <div class="col">
+            <label for="luotxem" class="form-label">Lượt xem</label>
+            <input type="number" min="0" max="1000000000" class="form-control" id="luotxem" name="luotxem" required
+                value="<?= $sanPham__Get_By_Id->luotxem ?>" readonly>
         </div>
 
         <div class="col">

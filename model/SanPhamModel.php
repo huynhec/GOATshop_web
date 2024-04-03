@@ -75,15 +75,15 @@ class SanPhamModel extends Database
         return $obj->fetchAll();
     }
 
-    public function SanPham__Add($tensp, $mota, $ngaythem, $trangthai, $luotmua, $math, $maloai)
+    public function SanPham__Add($tensp, $mota, $ngaythem, $trangthai, $luotmua, $luotxem, $math, $maloai)
     {
-        $obj = $this->connect->prepare("INSERT INTO sanpham(tensp, mota, ngaythem, trangthai, luotmua, math, maloai) VALUES (?,?,?,?,?,?,?)");
-        $obj->execute(array($tensp, $mota, $ngaythem, $trangthai, $luotmua, $math, $maloai));
+        $obj = $this->connect->prepare("INSERT INTO sanpham(tensp, mota, ngaythem, trangthai, luotmua, luotxem, math, maloai) VALUES (?,?,?,?,?,?,?,?)");
+        $obj->execute(array($tensp, $mota, $ngaythem, $trangthai, $luotmua, $luotxem, $math, $maloai));
         return $this->connect->lastInsertId();
     }
 
 
-    public function SanPham__Update($masp, $tensp, $mota, $ngaythem, $trangthai, $luotmua, $math, $maloai)
+    public function SanPham__Update($masp, $tensp, $mota, $ngaythem, $trangthai, $luotmua, $luotxem, $math, $maloai)
     {
         // Kiểm tra trạng thái của loại sản phẩm
         $query = $this->connect->prepare("SELECT trangthai FROM loaisp WHERE maloai = ?");
@@ -93,8 +93,8 @@ class SanPhamModel extends Database
 
         // Nếu trạng thái của loại sản phẩm là hiển thị, thì mới cập nhật sản phẩm
         if ($trangThaiLoai == 1) {
-            $obj = $this->connect->prepare("UPDATE sanpham SET tensp=?, mota=?, ngaythem=?, trangthai=?, luotmua=?, math=?, maloai=? WHERE masp=?");
-            $obj->execute(array($tensp, $mota, $ngaythem, $trangthai, $luotmua, $math, $maloai, $masp));
+            $obj = $this->connect->prepare("UPDATE sanpham SET tensp=?, mota=?, ngaythem=?, trangthai=?, luotmua=?, luotxem=?, math=?, maloai=? WHERE masp=?");
+            $obj->execute(array($tensp, $mota, $ngaythem, $trangthai, $luotmua, $luotxem, $math, $maloai, $masp));
             return $obj->rowCount();
         } else {
             return 0;
@@ -140,6 +140,25 @@ class SanPhamModel extends Database
         $obj = $this->connect->prepare("UPDATE sanpham SET luotmua=? WHERE masp=?");
         $obj->execute(array($luotmua, $masp));
         return $obj->rowCount();
+    }
+
+    public function SanPham__Increase_View_Count($masp)
+    {
+        $sql = "UPDATE sanpham SET luotxem = luotxem + 1 WHERE sanpham.trangthai = 1 AND masp = ?";
+        $obj = $this->connect->prepare($sql);
+        $obj->execute(array($masp));
+
+        $newViewCount = $this->SanPham__Get_View_Count($masp);
+        return ($obj->rowCount() > 0) ? $newViewCount : false;
+    }
+    public function SanPham__Get_View_Count($masp)
+    {
+        $sql = "SELECT luotxem FROM sanpham WHERE sanpham.trangthai = 1 AND masp = ?";
+        $obj = $this->connect->prepare($sql);
+        $obj->execute(array($masp));
+        $result = $obj->fetch(PDO::FETCH_OBJ);
+
+        return ($result) ? $result->luotxem : 0;
     }
 
     public function SanPham__Get_Top_Random($limit = 6)

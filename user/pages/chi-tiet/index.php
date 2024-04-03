@@ -386,4 +386,7 @@ window.addEventListener('load', function(event) {
     slideContainer.addEventListener('mouseenter', stopSlideShow);
     slideContainer.addEventListener('mouseleave', startSlideShow);
 });
+window.addEventListener('load', function() {
+    viewSanpham('<?= $masp ?>');
+});
 </script>

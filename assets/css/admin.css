@@ -227,7 +227,12 @@ div#anhsp_preview {
   background-color: #ffff99; /* Màu nền sáng */
   transition: background-color 0.5s ease; /* Thêm hiệu ứng chuyển đổi */
 }
+.treo {
+  position: fixed;
+  height: 800px; 
+  overflow-y: auto; /* Tạo thanh cuộn dọc khi cần */
 
+}
 
 @media (max-width: 991px) {
 }

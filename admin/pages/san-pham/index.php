@@ -88,14 +88,17 @@ $donGia__Get_All = $dg->DonGia__Get_All();
 
         </div>
         <div class="col-5">
-            <div class="main-form">
-                <?php require_once 'add.php' ?>
+            <div class="treo">
+                <div class="main-form-addsp">
+                    <?php require_once 'add.php' ?>
+                </div>
             </div>
         </div>
+
     </div>
 </div>
 
-<script>  
+<script>
     function update_anhsp_obj(masp) {
         location.href = "index.php?pages=anh-san-pham&masp=" + masp;
     };

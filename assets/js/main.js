@@ -66,3 +66,15 @@ setInterval(function () {
     showSlide(currentIndex);
 }, 4000);
 });
+
+//luot xem
+function viewSanpham(masp) {
+  $.ajax({
+    type: "POST",
+    url: "components/action.php",
+    data: { action: "view", masp: masp },
+    success: function (response) {
+      $("#view-count").text(response);
+    },
+  });
+}
