@@ -89,7 +89,7 @@ $donGia__Get_All = $dg->DonGia__Get_All();
         </div>
         <div class="col-5">
             <div class="treo">
-                <div class="main-form-addsp">
+                <div class="main-form">
                     <?php require_once 'add.php' ?>
                 </div>
             </div>
