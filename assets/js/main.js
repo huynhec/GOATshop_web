@@ -78,3 +78,39 @@ function viewSanpham(masp) {
     },
   });
 }
+let timer;
+let timeCounter = 0;
+let masp; // Khai báo biến masp ở cấp độ toàn cục
+let typetrack;
+
+function startTimer(element) {
+    // Lấy masp từ thuộc tính data-masp
+    masp = element.getAttribute('data-masp');
+    typetrack = 2;
+    // Khởi động đồng hồ
+    timer = setInterval(() => updateTime(), 1000);
+}
+
+function endTimer() {
+    clearInterval(timer);
+    if (timeCounter > 3) {
+        saveTime(); // Không cần truyền masp ở đây vì nó là biến toàn cục
+    }
+    timeCounter = 0;
+}
+
+function updateTime() {
+    timeCounter++;
+}
+
+function saveTime() {
+  $.ajax({
+      type: "POST",
+      url: "components/action.php",
+      data: { action: "timetracking", masp: masp, timeCounter: timeCounter, typetrack: typetrack,  },
+      success: function(response) {
+          console.log("Request successful!");
+      },
+  });
+}
+

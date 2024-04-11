@@ -178,7 +178,7 @@ class SanPhamModel extends Database
     {
         $sql = "SELECT * FROM sanpham INNER JOIN thuonghieu ON sanpham.math = thuonghieu.math WHERE thuonghieu.math =? AND sanpham.masp !=? AND sanpham.trangthai=1
         ORDER BY RAND()
-        LIMIT 6";
+        LIMIT 5";
 
         $obj = $this->connect->prepare($sql);
         $obj->setFetchMode(PDO::FETCH_OBJ);

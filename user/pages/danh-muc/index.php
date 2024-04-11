@@ -2,6 +2,9 @@
 require_once '../model/CommonModel.php';
 require_once '../model/SanPhamModel.php';
 require_once '../model/AnhSpModel.php';
+require_once '../model/DonGiaModel.php';
+
+$dg = new DonGiaModel();
 $cm = new CommonModel();
 $anhSp = new AnhSpModel();
 $sp = new SanPhamModel();
@@ -26,10 +29,10 @@ $sanPham__Get_Ten_Sp_Paged = $sp->SanPham__Get_All_Paged($page_number);
                 <?php $anhSp__Get_By_Id_Sp_First = $anhSp->AnhSp__Get_By_Id_Sp_First($item->masp); ?>
 
                     <a href="index.php?pages=chi-tiet&masp=<?= $item->masp ?>">
-                        <div class="manga-container">
+                        <div class="manga-container" data-masp="<?= $anhSp__Get_By_Id_Sp_First->masp ?>" onmouseenter="startTimer(this)" onmouseleave="endTimer()">
                             <div class="manga-thumbnail">
                                 <img src="../assets/<?= $anhSp__Get_By_Id_Sp_First->hinhanh?>">
-                                <span class="manga-note background-2"><?= number_format($item->dongia) ?>đ <i class="bx bxs-star"></i></span>
+                                <span class="manga-note background-2"><?= number_format($dg->ShowDonGia__Get_By_Id_Spdg($item->masp)) ?>₫ <i class="bx bxs-star"></i></span>
                             </div>
                             <div class="manga-title color-2"><?= $item->tensp ?></div>
                         </div>

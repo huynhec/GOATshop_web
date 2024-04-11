@@ -8,6 +8,7 @@ require_once "../../model/KhachHangModel.php";
 require_once "../../model/SanPhamModel.php";
 require_once "../../model/SizeModel.php";
 require_once "../../model/SizeSpModel.php";
+require_once "../../model/TimeTrackingModel.php";
 
 $kh = new KhachHangModel();
 $gh = new GioHangModel();
@@ -17,6 +18,7 @@ $ctdh = new ChiTietDonHangModel();
 $sp = new SanPhamModel();
 $sz = new SizeModel();
 $szsp = new SizeSpModel();
+$ttr = new TimeTrackingModel();
 if (isset($_POST['action'])) {
     // Xử lý dựa trên action
     switch ($_POST['action']) {
@@ -145,6 +147,23 @@ if (isset($_POST['action'])) {
             $newViewCount = $sp->SanPham__Increase_View_Count($masp);
 
             echo number_format($newViewCount);
+            break;
+        case "timetracking":
+            $res = 0;
+            $typetrack = $_POST['typetrack'];
+            $masp = $_POST['masp'];
+            $timeCounter = $_POST['timeCounter'];
+            $ngay = date('Y-m-d H:i:s');
+            // Kiểm tra và xử lý tính toán của $typetrack
+            if ($typetrack == 1) {
+                $timeCounter = $timeCounter * 2;
+            }
+            $res += $ttr->User_item_tracking__Add($timeCounter, $masp, $typetrack, $ngay);
+            if ($res != 0) {
+                header('location: ../../index.php?pages=thoi-gian-theo-doi&msg=success');
+            } else {
+                header('location: ../../index.php?pages=thoi-gian-theo-doi&msg=error');
+            }
             break;
     }
 }

@@ -84,9 +84,9 @@ $top = 0;
                     <?php $anhSp__Get_By_Id_Sp_First = $anhSp->AnhSp__Get_By_Id_Sp_First($item->masp); ?>
                     <?php if (isset($anhSp__Get_By_Id_Sp_First->masp)) : ?>
                         <a href="index.php?pages=chi-tiet&masp=<?= $anhSp__Get_By_Id_Sp_First->masp ?>">
-                            <div class="manga-container">
+                            <div class="manga-container" data-masp="<?= $anhSp__Get_By_Id_Sp_First->masp ?>" onmouseenter="startTimer(this)" onmouseleave="endTimer()" onclick="endTimer()">
                                 <div class="manga-thumbnail">
-                                    <img src="../assets/<?= $anhSp__Get_By_Id_Sp_First->hinhanh ?>">
+                                    <img src="../assets/<?= $anhSp__Get_By_Id_Sp_First->hinhanh ?>" loading="lazy">
                                     <span class="manga-note background-1"><i class="bx bxs-badge-dollar"></i><?= $cm->getTimeAgo($item->ngaythem) ?></span>
                                 </div>
                                 <div class="manga-title color-1"><?= $item->tensp ?></div>
@@ -118,24 +118,24 @@ $top = 0;
                 </a>
             </div>
             <div class="main-item-container__left">
-                <?php foreach ($sp__Get_Top_Updated_8 as $item) : ?>
-                    <?php if (count($sp__Get_Top_Updated_8) > 0) : ?>
+                <?php foreach ($sp__Get_Top_Updated_5 as $item) : ?>
+                    <?php if (count($sp__Get_Top_Updated_5) > 0) : ?>
                         <?php $anhSp__Get_By_Id_Sp_First = $anhSp->AnhSp__Get_By_Id_Sp_First($item->masp); ?>
                         <?php if (isset($anhSp__Get_By_Id_Sp_First->masp)) : ?>
                             <a href="index.php?pages=chi-tiet&masp=<?= $anhSp__Get_By_Id_Sp_First->masp ?>">
-                                <div class="manga-container">
+                                <div class="manga-container" data-masp="<?= $anhSp__Get_By_Id_Sp_First->masp ?>" onmouseenter="startTimer(this)" onmouseleave="endTimer()"  onclick="endTimer()">
                                     <div class="manga-thumbnail">
-                                        <img src="../assets/<?= $anhSp__Get_By_Id_Sp_First->hinhanh ?>">
-                                        <span class="manga-note background-1"><i class="bx bxs-badge-dollar"></i><?= number_format($dg->ShowDonGia__Get_By_Id_Spdg($item->masp)) ?>₫</span>
+                                        <img src="../assets/<?= $anhSp__Get_By_Id_Sp_First->hinhanh ?>" loading="lazy">
+                                        <span class="manga-note background-1"><i class="bx bxs-badge-dollar"></i><?= $cm->getTimeAgo($item->ngaythem) ?></span>
                                     </div>
                                     <div class="manga-title color-1"><?= $item->tensp ?></div>
                                 </div>
                             </a>
                         <?php else : ?>
                             <a href="index.php?pages=chi-tiet&masp=<?= $item->masp ?>">
-                                <div class="manga-container">
+                                <div class="manga-container" data-masp="<?= $item->masp ?>" onmouseenter="startTimer(this)" onmouseleave="endTimer()"  onclick="endTimer()">
                                     <div class="manga-thumbnail">
-                                        <img src="../assets/<?= $item->hinhanh ?>">
+                                        <img src="../assets/<?= $item->hinhanh ?>" loading="lazy">
                                         <span class="manga-note background-1">Đang cập nhật... <i class="bx bxs-star"></i></span>
                                     </div>
                                     <div class="manga-title color-1"><?= $item->tensp ?></div>
@@ -160,7 +160,7 @@ $top = 0;
                         <?php if (isset($anhSp__Get_By_Id_Sp_First->masp)) : ?>
                             <a href="index.php?pages=chi-tiet&masp=<?= $item->masp ?>">
                                 <div class="manga-container__right" id="top_<?= $top++ ?>">
-                                    <div class="manga-thumbnail">
+                                    <div class="manga-thumbnail" data-masp="<?= $anhSp__Get_By_Id_Sp_First->masp ?>" onmouseenter="startTimer(this)" onmouseleave="endTimer()" onclick="endTimer()">
                                         <img src="../assets/<?= $anhSp__Get_By_Id_Sp_First->hinhanh ?>">
                                         <span class="manga-note background-7"> <b>Top <?= $top ?></b> |
                                             <?= $cm->formatThousand($item->luotmua) ?> lượt mua</span>
@@ -188,7 +188,7 @@ $top = 0;
                     <?php $anhSp__Get_By_Id_Sp_First = $anhSp->AnhSp__Get_By_Id_Sp_First($item->masp); ?>
                     <?php if (isset($anhSp__Get_By_Id_Sp_First->masp)) : ?>
                         <a href="index.php?pages=chi-tiet&masp=<?= $item->masp ?>">
-                            <div class="manga-container">
+                            <div class="manga-container" data-masp="<?= $anhSp__Get_By_Id_Sp_First->masp ?>" onmouseenter="startTimer(this)" onmouseleave="endTimer()" onclick="endTimer()">
                                 <div class="manga-thumbnail">
                                     <img src="../assets/<?= $anhSp__Get_By_Id_Sp_First->hinhanh ?>">
                                     <span class="manga-note background-8"><?= number_format($dg->ShowDonGia__Get_By_Id_Spdg($item->masp)) ?>₫</i></span>
@@ -201,5 +201,5 @@ $top = 0;
             <?php endforeach ?>
         </div>
     </div>
-    
+
 </main>

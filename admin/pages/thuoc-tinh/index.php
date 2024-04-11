@@ -27,7 +27,7 @@ $loaisp__Get_All_Exist = $loaiSp->LoaiSp__Get_All_Exist();
 
                 <h3 class="section-title">Danh sách thuộc tính theo loại</h3>
                 <div class="table-responsive">
-                    <table id="table_js1" class="table table-striped table-light" style="width:100%">
+                    <table id="table_js" class="table table-striped table-light" style="width:100%">
                         <thead class="thead-dark">
                             <tr>
                                 <th>Tên loại</th>
