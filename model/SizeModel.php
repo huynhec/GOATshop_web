@@ -32,27 +32,52 @@ include_once($des);
 class SizeModel extends Database
 {
 
-    public function Size__Get_All()
+    public function Size__Get_All($trangthai = null)
     {
-        $obj = $this->connect->prepare("SELECT * FROM size");
+        if ($trangthai == -1) {
+            $obj = $this->connect->prepare("SELECT * FROM kichco");
+        } else {
+            $obj = $this->connect->prepare("SELECT * FROM kichco WHERE trangthai=1");
+        }
         $obj->setFetchMode(PDO::FETCH_OBJ);
         $obj->execute();
         return $obj->fetchAll();
     }
-
-    public function Size__Add($size)
+    public function Size__Get_By_Id_Loai($maloai)
     {
-        $obj = $this->connect->prepare("INSERT INTO size(tensize) VALUES (?)");
-        $obj->execute(array($size));
-
-        return $this->connect->lastInsertId();
+        $obj = $this->connect->prepare("SELECT kichco.idsize, kichco.tensize, kichco.trangthai, loaisp.maloai, loaisp.tenloai, loaisp.mota, loaisp.ghichu
+        FROM kichco
+        INNER JOIN loaisp ON kichco.maloai = loaisp.maloai WHERE kichco.maloai=? ");
+        $obj->setFetchMode(PDO::FETCH_OBJ);
+        $obj->execute(array($maloai));
+        return $obj->fetchAll();
     }
 
-    public function Size__Get_By_Id($masize)
+    public function Size__Add($tensize, $trangthai, $maloai)
     {
-        $obj = $this->connect->prepare("SELECT * FROM size WHERE masize = ?");
+        $obj = $this->connect->prepare("INSERT INTO kichco(tensize, trangthai, maloai) VALUES (?,?,?)");
+        $obj->execute(array($tensize, $trangthai, $maloai));
+        return $obj->rowCount();
+    }
+
+    public function Size__Update($tensize,  $trangthai, $maloai, $idsize)
+    {
+        $obj = $this->connect->prepare("UPDATE kichco SET tensize=?,  trangthai=?, maloai=? WHERE idsize=?");
+        $obj->execute(array($tensize,  $trangthai, $maloai, $idsize));
+        return $obj->rowCount();
+    }
+    public function Size__Delete($idtt)
+    {
+        $obj = $this->connect->prepare("DELETE FROM kichco WHERE idsize = ?");
+        $obj->execute(array($idtt));
+        return $obj->rowCount();
+    }
+
+    public function Size__Get_By_Id($idsize)
+    {
+        $obj = $this->connect->prepare("SELECT * FROM kichco WHERE idsize= ?");
         $obj->setFetchMode(PDO::FETCH_OBJ);
-        $obj->execute(array($masize));
+        $obj->execute(array($idsize));
         return $obj->fetch();
     }
 }

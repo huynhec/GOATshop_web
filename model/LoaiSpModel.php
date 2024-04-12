@@ -87,4 +87,11 @@ class LoaiSpModel extends Database
         $obj->execute();
         return $obj->fetchAll();
     }
+    public function LoaiSp__Get_All_Exist2()
+    {
+        $obj = $this->connect->prepare("SELECT * FROM loaisp INNER JOIN kichco ON loaisp.maloai = kichco.maloai WHERE loaisp.trangthai=1 GROUP BY kichco.maloai");
+        $obj->setFetchMode(PDO::FETCH_OBJ);
+        $obj->execute();
+        return $obj->fetchAll();
+    }
 }

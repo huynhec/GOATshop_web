@@ -3,7 +3,9 @@ require_once '../model/SanPhamModel.php';
 require_once '../model/AnhSpModel.php';
 require_once '../model/CommonModel.php';
 require_once '../model/DonGiaModel.php';
+require_once '../model/SizeModel.php';
 
+$size = new SizeModel();
 $dg = new DonGiaModel();
 $sp = new SanPhamModel();
 $anhSp = new AnhSpModel();
@@ -12,9 +14,16 @@ $cm = new CommonModel();
 if (!isset($_GET['masp'])) {
     return;
 }
+if (!isset($_GET['maloai'])) {
+    return;
+}
 $masp = $_GET['masp'];
+$maloai = $_GET['maloai'];
 
 $sp__Get_By_Id = $sp->SanPham__Get_By_Id($masp);
+$sp__Get_By_IdLoai = $sp->SanPham__Get_By_IdLoai($maloai);
+$size__Get_By_IdLoai = $size->Size__Get_By_Id_Loai($maloai);
+
 $sp__Get_Top_Sale = $sp->SanPham__Get_Top_Sale();
 $sp__Get_Top_Same = $sp->SanPham__Get_Top_Same($sp__Get_By_Id->math,  $masp);
 $anhSp__Get_By_Id_Sp_Not_First = $anhSp->AnhSp__Get_By_Id_Sp_Not_First($sp__Get_By_Id->masp);
@@ -43,105 +52,23 @@ $anhSp__Get_By_Id_Sp_Not_First = $anhSp->AnhSp__Get_By_Id_Sp_Not_First($sp__Get_
                 <hr>
                 <div class="manga-sp-container__chitiet__left">
                     <div class="manga-title color-2"><?= $sp__Get_By_Id->tensp ?></div>
+
                     <div class="sp-container__top">
-                        <!-- <div class="tab-group-1">
-                            <h5 class="text-danger"><b><?= number_format($sp__Get_By_Id->dongia) ?>đ</b></h5>
-                        </div> -->
-                        <?php if ($sp__Get_By_Id->maloai == '1') : ?>
-                            <h5 class="text-normal">Chọn kích thước:</h5>
-                            <div>
-                                <!-- code chọn size (39 đến 44) -->
+
+                        <div class="form-check">
+                            <div class="row">
                                 <div>
-                                    <label for="size39" class="size-option btn-outline-primary" onclick="selectSize('39')">
-                                        <input type="radio" id="size39" name="size" value="39">
-                                        39
-                                    </label>
-
-                                    <label for="size40" class="size-option" onclick="selectSize('40')">
-                                        <input type="radio" id="size40" name="size" value="40">
-                                        40
-                                    </label>
-
-                                    <label for="size41" class="size-option" onclick="selectSize('41')">
-                                        <input type="radio" id="size41" name="size" value="41">
-                                        41
-                                    </label>
-
-                                    <label for="size42" class="size-option" onclick="selectSize('42')">
-                                        <input type="radio" id="size42" name="size" value="42">
-                                        42
-                                    </label>
-
-                                    <label for="size43" class="size-option" onclick="selectSize('43')">
-                                        <input type="radio" id="size43" name="size" value="43">
-                                        43
-                                    </label>
-
-                                    <label for="size44" class="size-option" onclick="selectSize('44')">
-                                        <input type="radio" id="size44" name="size" value="44">
-                                        44
-                                    </label>
+                                    <?php foreach ($size__Get_By_IdLoai as $item) : ?>
+                                        <?php if ($item->trangthai == 1) : ?>
+                                            <label class="size-option" id="size-label-<?= $item->idsize ?>" onclick="selectSize('<?= $item->idsize ?>')">
+                                                <input type="radio" name="size" id="idsize<?= $item->idsize ?>" value="<?= $item->tensize ?>">
+                                                <?= $item->tensize ?>
+                                            </label>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
                                 </div>
                             </div>
-                        <?php elseif ($sp__Get_By_Id->maloai == '3') : ?>
-                            <h5 class="text-normal">Chọn kích thước:</h5>
-                            <div>
-                                <!-- code chọn size (S M L X XX XXX) -->
-                                <div>
-                                    <label for="sizeS" class="size-option" onclick="selectSize('S')">
-                                        <input type="radio" id="sizeS" name="size" value="S">
-                                        S
-                                    </label>
-
-                                    <label for="sizeM" class="size-option" onclick="selectSize('M')">
-                                        <input type="radio" id="sizeM" name="size" value="M">
-                                        M
-                                    </label>
-
-                                    <label for="sizeL" class="size-option" onclick="selectSize('L')">
-                                        <input type="radio" id="sizeL" name="size" value="L">
-                                        L
-                                    </label>
-
-                                    <label for="sizeXL" class="size-option" onclick="selectSize('XL')">
-                                        <input type="radio" id="size" name="size" value="XX">
-                                        XL
-                                    </label>
-
-                                </div>
-                            </div>
-                        <?php elseif ($sp__Get_By_Id->maloai == '6') : ?>
-                            <h5 class="text-normal">Chọn kích thước:</h5>
-                            <div>
-                                <div>
-                                    <label for="size6" class="size-option" onclick="selectSize('6')">
-                                        <input type="radio" id="size6" name="size" value="6">
-                                        6
-                                    </label>
-
-                                    <label for="size7" class="size-option" onclick="selectSize('7')">
-                                        <input type="radio" id="size7" name="size" value="7">
-                                        7
-                                    </label>
-
-                                    <label for="size8" class="size-option" onclick="selectSize('8')">
-                                        <input type="radio" id="size8" name="size" value="8">
-                                        8
-                                    </label>
-
-                                    <label for="size9" class="size-option" onclick="selectSize('9')">
-                                        <input type="radio" id="size9" name="size" value="9">
-                                        9
-                                    </label>
-
-                                    <label for="size10" class="size-option" onclick="selectSize('10')">
-                                        <input type="radio" id="size10" name="size" value="10">
-                                        10
-                                    </label>
-
-                                </div>
-                            </div>
-                        <?php endif ?>
+                        </div>
 
                         <div class="sp-item-container__chitiet__left">
                             <div class="tab-group-1">
@@ -157,7 +84,6 @@ $anhSp__Get_By_Id_Sp_Not_First = $anhSp->AnhSp__Get_By_Id_Sp_Not_First($sp__Get_
                                             </div>
                                         <?php endif; ?>
 
-
                                     <?php else : ?>
                                         <div class="btn btn-sm btn-secondary" onclick="return checkLogin()">
                                             <i class="bx bx-cart"></i> Mua ngay
@@ -166,6 +92,7 @@ $anhSp__Get_By_Id_Sp_Not_First = $anhSp->AnhSp__Get_By_Id_Sp_Not_First($sp__Get_
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -176,7 +103,7 @@ $anhSp__Get_By_Id_Sp_Not_First = $anhSp->AnhSp__Get_By_Id_Sp_Not_First($sp__Get_
                         <?php if ($sp__Get_By_Id->mota != "") : ?>
                             <?= $sp__Get_By_Id->mota ?>
                         <?php else : ?>
-                            <a href="index.php?pages=sp-chi-tiet&masp=<?= $item->masp ?>">
+                            <a href="index.php?pages=sp-chi-tiet&masp=<?= $item->masp ?>&maloai=<?= $item->maloai ?>">
                                 <span class="chapter-name"></span>Đang cập nhật...</span>
                             </a>
                         <?php endif ?>
@@ -196,7 +123,7 @@ $anhSp__Get_By_Id_Sp_Not_First = $anhSp->AnhSp__Get_By_Id_Sp_Not_First($sp__Get_
                     <?php if (count($sp__Get_Top_Sale) > 0) : ?>
                         <?php $anhSp__Get_By_Id_Sp_First = $anhSp->AnhSp__Get_By_Id_Sp_First($item->masp); ?>
                         <?php if (isset($anhSp__Get_By_Id_Sp_First->masp)) : ?>
-                            <a href="index.php?pages=chi-tiet&masp=<?= $item->masp ?>">
+                            <a href="index.php?pages=chi-tiet&masp=<?= $item->masp ?>&maloai=<?= $item->maloai ?>">
                                 <div class="manga-container__right" id="top_<?= $top++ ?>">
                                     <div class="manga-thumbnail">
                                         <img src="../assets/<?= $anhSp__Get_By_Id_Sp_First->hinhanh ?>">
@@ -224,7 +151,7 @@ $anhSp__Get_By_Id_Sp_Not_First = $anhSp->AnhSp__Get_By_Id_Sp_Not_First($sp__Get_
                 <?php if (count($sp__Get_Top_Same) > 0) : ?>
                     <?php $anhSp__Get_By_Id_Sp_First = $anhSp->AnhSp__Get_By_Id_Sp_First($item->masp); ?>
                     <?php if (isset($anhSp__Get_By_Id_Sp_First->masp)) : ?>
-                        <a href="index.php?pages=chi-tiet&masp=<?= $item->masp ?>">
+                        <a href="index.php?pages=chi-tiet&masp=<?= $item->masp ?>&maloai=<?= $item->maloai ?>">
                             <div class="manga-container">
                                 <div class="manga-thumbnail">
                                     <img src="../assets/<?= $anhSp__Get_By_Id_Sp_First->hinhanh ?>">
@@ -240,63 +167,11 @@ $anhSp__Get_By_Id_Sp_Not_First = $anhSp->AnhSp__Get_By_Id_Sp_Not_First($sp__Get_
     </div>
 </main>
 <script>
-    let masize = null;
-
     function selectSize(size) {
         // Loại bỏ lớp "selected" từ tất cả các kích thước trước đó
         $('.size-option').removeClass('selected');
         // Thêm lớp "selected" cho kích thước được chọn
-        $(`[for="size${size}"]`).addClass('selected');
-        // Set giá trị cho biến masize dựa trên giá trị của size
-        switch (size) {
-            case '39':
-                masize = '1';
-                break;
-            case '40':
-                masize = '2';
-                break;
-            case '41':
-                masize = '3';
-                break;
-            case '42':
-                masize = '4';
-                break;
-            case '43':
-                masize = '5';
-                break;
-            case '44':
-                masize = '6';
-                break;
-            case 'S':
-                masize = '7';
-                break;
-            case 'M':
-                masize = '8';
-                break;
-            case 'L':
-                masize = '9';
-                break;
-            case 'XL':
-                masize = '11';
-                break;
-            case '6':
-                masize = '12';
-                break;
-            case '7':
-                masize = '13';
-                break;
-            case '8':
-                masize = '14';
-                break;
-            case '9':
-                masize = '15';
-                break;
-            case '10':
-                masize = '16';
-                break;
-
-        }
-        return masize;
+        $(`#size-label-${size}`).addClass('selected');
     }
 
     function addCartSize(masp) {

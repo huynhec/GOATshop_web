@@ -23,7 +23,7 @@ $dongia__Get_By_Id_Sp_First = $dongia->ShowDonGia__Get_By_Id_Spdg($masp);
             </li>
             <li><i class='bx bx-chevron-right'></i></li>
             <li>
-                <a class="active" href="index.php?pages=anh-san-pham&masp=<?= $masp ?>">Danh sách
+                <a class="active" href="index.php?pages=dongia-san-pham&masp=<?= $masp ?>">Danh sách
                     đơn giá</a>
             </li>
         </ul>

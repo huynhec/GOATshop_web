@@ -146,6 +146,76 @@ function addInput() {
   row.appendChild(colDeleteButton);
 }
 
+function addInput2() {
+  var row = document.querySelector('.main-add .row');
+
+    var colSize = document.createElement('div');
+    colSize.className = 'col-5 sizeten';
+    var labelSize = document.createElement('label');
+    labelSize.textContent = 'Tên size:';
+    labelSize.className = 'form-label';
+    colSize.appendChild(labelSize);
+    var inputContainer1 = document.createElement('div');
+    inputContainer1.className = 'inputContainer1';
+    var inputGroup1 = document.createElement('div');
+    inputGroup1.className = 'input-group mb-2';
+    var inputSize = document.createElement('input');
+    inputSize.type = 'text';
+    inputSize.name = 'tensize[]';
+    inputSize.placeholder = 'Tên size ' + (document.querySelectorAll('.sizeten').length + 1);
+    inputSize.className = 'form-control';
+    inputSize.required = true;
+    inputGroup1.appendChild(inputSize);
+    inputContainer1.appendChild(inputGroup1);
+    colSize.appendChild(inputContainer1);
+
+    var colStatus = document.createElement('div');
+    colStatus.className = 'col-3 sizetrangthai';
+    var labelStatus = document.createElement('label');
+    labelStatus.textContent = 'Trạng thái:';
+    labelStatus.className = 'form-label';
+    colStatus.appendChild(labelStatus);
+    var selectStatus = document.createElement('select');
+    selectStatus.className = 'form-select';
+    selectStatus.setAttribute('aria-label', '.trangthai');
+    selectStatus.name = 'trangthai[]';
+    selectStatus.required = true;
+    var option1 = document.createElement('option');
+    option1.value = '1';
+    option1.textContent = 'Hiển thị';
+    var option2 = document.createElement('option');
+    option2.value = '0';
+    option2.textContent = 'Tạm ẩn';
+    selectStatus.appendChild(option1);
+    selectStatus.appendChild(option2);
+    colStatus.appendChild(selectStatus);
+    // nut xoa
+  var colDeleteButton = document.createElement('div');
+  colDeleteButton.className = 'col-2';
+  var button = document.createElement('button');
+  button.type = 'button';
+  button.className = 'btn btn-danger';
+  button.textContent = 'Xoá';
+  button.onclick = function() {
+      row.removeChild(colSize);
+     
+      row.removeChild(colStatus);
+      row.removeChild(colDeleteButton);
+  };
+  colDeleteButton.appendChild(button);
+
+
+    row.appendChild(colSize);
+   
+    row.appendChild(colStatus);
+    row.appendChild(colDeleteButton);
+
+
+    
+}
+
+
+
   
 CKEDITOR.replace('mota');
 

@@ -7,8 +7,9 @@ require_once "../../model/ChiTietDonHangModel.php";
 require_once "../../model/KhachHangModel.php";
 require_once "../../model/SanPhamModel.php";
 require_once "../../model/SizeModel.php";
-require_once "../../model/SizeSpModel.php";
+// require_once "../../model/SizeSpModel.php";
 require_once "../../model/TimeTrackingModel.php";
+require_once "../../model/LuotXemModel.php";
 
 $kh = new KhachHangModel();
 $gh = new GioHangModel();
@@ -17,8 +18,9 @@ $dh = new DonHangModel();
 $ctdh = new ChiTietDonHangModel();
 $sp = new SanPhamModel();
 $sz = new SizeModel();
-$szsp = new SizeSpModel();
+// $szsp = new SizeSpModel();
 $ttr = new TimeTrackingModel();
+$lx = new LuotXemModel();
 if (isset($_POST['action'])) {
     // Xử lý dựa trên action
     switch ($_POST['action']) {
@@ -81,22 +83,22 @@ if (isset($_POST['action'])) {
             $makh = $_SESSION['user']->makh;
             $trangthai = 1; //giỏ hàng đang được tạo, chưa thêm vào đơn hàng
 
-            $masize = $_POST['masize'] ?? 0;
+            $idsize = $_POST['idsize'] ?? 0;
 
             $resGH = $gh->GioHang__Get_By_Id_Kh($makh);
             if (isset($resGH->magh)) {
-                $check = $ctgh->ChiTietGioHang__Check($resGH->magh, $masp, $makh, $masize);
+                $check = $ctgh->ChiTietGioHang__Check($resGH->magh, $masp, $makh, $idsize);
                 if ($check != false) {
-                    $resCtgh = $ctgh->ChiTietGioHang__Update($check->mactgh, $check->magh, $masp, $check->soluong + 1, $dongia);
-                    $res = $szsp->SizeSp__Add($masp, $masize);
+                    $res = $ctgh->ChiTietGioHang__Update($check->mactgh, $check->magh, $masp, $check->soluong + 1, $dongia);
+                    // $res = $szsp->SizeSp__Add($masp, $masize);
                 } else {
-                    $resCtgh = $ctgh->ChiTietGioHang__Add($resGH->magh, $masp, $soluong, $dongia, $masize);
-                    $res = $szsp->SizeSp__Add($masp, $masize);
+                    $res = $ctgh->ChiTietGioHang__Add($resGH->magh, $masp, $soluong, $dongia, $idsize);
+                    // $res = $szsp->SizeSp__Add($masp, $masize);
                 }
             } else {
                 $magh = $gh->GioHang__Add($ngaythem, $makh, $trangthai);
-                $resCtgh = $ctgh->ChiTietGioHang__Add($magh, $masp, $soluong, $dongia, $masize);
-                $res = $szsp->SizeSp__Add($masp, $masize);
+                $res = $ctgh->ChiTietGioHang__Add($magh, $masp, $soluong, $dongia, $idsize);
+                // $res = $szsp->SizeSp__Add($masp, $idsize);
             }
 
             $maghNew = $gh->GioHang__Get_By_Id_Kh($makh);

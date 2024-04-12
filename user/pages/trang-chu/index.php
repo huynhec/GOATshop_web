@@ -83,7 +83,7 @@ $top = 0;
                 <?php if (count($sp__Get_Top_Updated_5) > 0) : ?>
                     <?php $anhSp__Get_By_Id_Sp_First = $anhSp->AnhSp__Get_By_Id_Sp_First($item->masp); ?>
                     <?php if (isset($anhSp__Get_By_Id_Sp_First->masp)) : ?>
-                        <a href="index.php?pages=chi-tiet&masp=<?= $anhSp__Get_By_Id_Sp_First->masp ?>">
+                        <a href="index.php?pages=chi-tiet&masp=<?= $anhSp__Get_By_Id_Sp_First->masp ?>&maloai=<?= $item->maloai ?>">
                             <div class="manga-container" data-masp="<?= $anhSp__Get_By_Id_Sp_First->masp ?>" onmouseenter="startTimer(this)" onmouseleave="endTimer()" onclick="endTimer()">
                                 <div class="manga-thumbnail">
                                     <img src="../assets/<?= $anhSp__Get_By_Id_Sp_First->hinhanh ?>" loading="lazy">
@@ -93,7 +93,7 @@ $top = 0;
                             </div>
                         </a>
                     <?php else : ?>
-                        <a href="index.php?pages=chi-tiet&masp=<?= $item->masp ?>">
+                        <a href="index.php?pages=chi-tiet&masp=<?= $item->masp ?>&maloai=<?= $item->maloai ?>">
                             <div class="manga-container">
                                 <div class="manga-thumbnail">
                                     <img src="../assets/<?= $item->hinhanh ?>">
@@ -122,7 +122,7 @@ $top = 0;
                     <?php if (count($sp__Get_Top_Updated_5) > 0) : ?>
                         <?php $anhSp__Get_By_Id_Sp_First = $anhSp->AnhSp__Get_By_Id_Sp_First($item->masp); ?>
                         <?php if (isset($anhSp__Get_By_Id_Sp_First->masp)) : ?>
-                            <a href="index.php?pages=chi-tiet&masp=<?= $anhSp__Get_By_Id_Sp_First->masp ?>">
+                            <a href="index.php?pages=chi-tiet&masp=<?= $anhSp__Get_By_Id_Sp_First->masp ?>&maloai=<?= $item->maloai ?>">
                                 <div class="manga-container" data-masp="<?= $anhSp__Get_By_Id_Sp_First->masp ?>" onmouseenter="startTimer(this)" onmouseleave="endTimer()"  onclick="endTimer()">
                                     <div class="manga-thumbnail">
                                         <img src="../assets/<?= $anhSp__Get_By_Id_Sp_First->hinhanh ?>" loading="lazy">
@@ -132,7 +132,7 @@ $top = 0;
                                 </div>
                             </a>
                         <?php else : ?>
-                            <a href="index.php?pages=chi-tiet&masp=<?= $item->masp ?>">
+                            <a href="index.php?pages=chi-tiet&masp=<?= $item->masp ?>&maloai=<?= $item->maloai ?>">
                                 <div class="manga-container" data-masp="<?= $item->masp ?>" onmouseenter="startTimer(this)" onmouseleave="endTimer()"  onclick="endTimer()">
                                     <div class="manga-thumbnail">
                                         <img src="../assets/<?= $item->hinhanh ?>" loading="lazy">
@@ -158,7 +158,7 @@ $top = 0;
                     <?php if (count($sp__Get_Top_Sale) > 0) : ?>
                         <?php $anhSp__Get_By_Id_Sp_First = $anhSp->AnhSp__Get_By_Id_Sp_First($item->masp); ?>
                         <?php if (isset($anhSp__Get_By_Id_Sp_First->masp)) : ?>
-                            <a href="index.php?pages=chi-tiet&masp=<?= $item->masp ?>">
+                            <a href="index.php?pages=chi-tiet&masp=<?= $item->masp ?>&maloai=<?= $item->maloai ?>">
                                 <div class="manga-container__right" id="top_<?= $top++ ?>">
                                     <div class="manga-thumbnail" data-masp="<?= $anhSp__Get_By_Id_Sp_First->masp ?>" onmouseenter="startTimer(this)" onmouseleave="endTimer()" onclick="endTimer()">
                                         <img src="../assets/<?= $anhSp__Get_By_Id_Sp_First->hinhanh ?>">
@@ -187,7 +187,7 @@ $top = 0;
                 <?php if (count($sp__Get_Top_Random) > 0) : ?>
                     <?php $anhSp__Get_By_Id_Sp_First = $anhSp->AnhSp__Get_By_Id_Sp_First($item->masp); ?>
                     <?php if (isset($anhSp__Get_By_Id_Sp_First->masp)) : ?>
-                        <a href="index.php?pages=chi-tiet&masp=<?= $item->masp ?>">
+                        <a href="index.php?pages=chi-tiet&masp=<?= $item->masp ?>&maloai=<?= $item->maloai ?>">
                             <div class="manga-container" data-masp="<?= $anhSp__Get_By_Id_Sp_First->masp ?>" onmouseenter="startTimer(this)" onmouseleave="endTimer()" onclick="endTimer()">
                                 <div class="manga-thumbnail">
                                     <img src="../assets/<?= $anhSp__Get_By_Id_Sp_First->hinhanh ?>">

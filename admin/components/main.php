@@ -17,6 +17,9 @@ if (isset($_GET['pages']) && !isset($_GET['req'])) {
         case "thuoc-tinh":
             require_once "pages/thuoc-tinh/index.php";
             break;
+        case "kich-co":
+            require_once "pages/size/index.php";
+            break;
         case "thoi-gian-theo-doi":
             require_once "pages/thoi-gian-theo-doi/index.php";
             break;

@@ -39,6 +39,12 @@
                     <span class="text">Quản lý thuộc tính</span>
                 </a>
             </li>
+            <li class="<?= $_GET['pages'] == 'kick-co' ? "active" : "" ?>">
+                <a href="index.php?pages=kich-co">
+                    <i class='bx bx-list-plus'></i>
+                    <span class="text">Quản lý size</span>
+                </a>
+            </li>
             <li class="<?= $_GET['pages'] == 'thuong-hieu' ? "active" : "" ?>">
                 <a href="index.php?pages=thuong-hieu">
                     <i class='bx bx-purchase-tag-alt'></i>
