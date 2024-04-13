@@ -41,7 +41,7 @@
             </li>
             <li class="<?= $_GET['pages'] == 'kick-co' ? "active" : "" ?>">
                 <a href="index.php?pages=kich-co">
-                    <i class='bx bx-list-plus'></i>
+                    <i class='bx bx-ruler'></i>
                     <span class="text">Quản lý size</span>
                 </a>
             </li>

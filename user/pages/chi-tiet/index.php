@@ -56,7 +56,9 @@ $anhSp__Get_By_Id_Sp_Not_First = $anhSp->AnhSp__Get_By_Id_Sp_Not_First($sp__Get_
                     <div class="sp-container__top">
 
                         <div class="form-check">
+                            <br>
                             <div class="row">
+                                <h5 class="text-normal">Chọn kích thước: </h5>
                                 <div>
                                     <?php foreach ($size__Get_By_IdLoai as $item) : ?>
                                         <?php if ($item->trangthai == 1) : ?>
@@ -69,21 +71,14 @@ $anhSp__Get_By_Id_Sp_Not_First = $anhSp->AnhSp__Get_By_Id_Sp_Not_First($sp__Get_
                                 </div>
                             </div>
                         </div>
-
+                        <br>
                         <div class="sp-item-container__chitiet__left">
                             <div class="tab-group-1">
                                 <div class="sp-thich">
                                     <?php if (isset($_SESSION['user'])) : ?>
-                                        <?php if ($sp__Get_By_Id->maloai == '1' || $sp__Get_By_Id->maloai == '3' || $sp__Get_By_Id->maloai == '6') : ?>
-                                            <div class="btn btn-sm color-0 background-7" onclick="addCartSize('<?= $masp ?>')">
-                                                <i class="bx bx-cart"></i> Mua ngay
-                                            </div>
-                                        <?php else : ?>
-                                            <div class="btn btn-sm color-0 background-7" onclick="addCart('<?= $masp ?>')">
-                                                <i class="bx bx-cart"></i> Mua ngay
-                                            </div>
-                                        <?php endif; ?>
-
+                                        <div class="btn btn-sm color-0 background-7" onclick="addCartSize('<?= $masp ?>')">
+                                            <i class="bx bx-cart"></i> Mua ngay
+                                        </div>
                                     <?php else : ?>
                                         <div class="btn btn-sm btn-secondary" onclick="return checkLogin()">
                                             <i class="bx bx-cart"></i> Mua ngay
@@ -167,11 +162,14 @@ $anhSp__Get_By_Id_Sp_Not_First = $anhSp->AnhSp__Get_By_Id_Sp_Not_First($sp__Get_
     </div>
 </main>
 <script>
+    let idsize = null;
+
     function selectSize(size) {
         // Loại bỏ lớp "selected" từ tất cả các kích thước trước đó
         $('.size-option').removeClass('selected');
         // Thêm lớp "selected" cho kích thước được chọn
         $(`#size-label-${size}`).addClass('selected');
+        idsize = size;
     }
 
     function addCartSize(masp) {
@@ -193,7 +191,7 @@ $anhSp__Get_By_Id_Sp_Not_First = $anhSp->AnhSp__Get_By_Id_Sp_Not_First($sp__Get_
             data: {
                 action: "add",
                 masp: masp,
-                masize: masize
+                idsize: idsize
             },
             success: function(response) {
                 console.log(response);
@@ -216,7 +214,7 @@ $anhSp__Get_By_Id_Sp_Not_First = $anhSp->AnhSp__Get_By_Id_Sp_Not_First($sp__Get_
             data: {
                 action: "add",
                 masp: masp,
-                masize: 0
+                idsize: idsize
             },
             success: function(response) {
                 console.log(response);

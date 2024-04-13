@@ -7,9 +7,9 @@ require_once "../../model/ChiTietDonHangModel.php";
 require_once "../../model/KhachHangModel.php";
 require_once "../../model/SanPhamModel.php";
 require_once "../../model/SizeModel.php";
-// require_once "../../model/SizeSpModel.php";
 require_once "../../model/TimeTrackingModel.php";
 require_once "../../model/LuotXemModel.php";
+require_once "../../model/DonGiaModel.php";
 
 $kh = new KhachHangModel();
 $gh = new GioHangModel();
@@ -18,9 +18,9 @@ $dh = new DonHangModel();
 $ctdh = new ChiTietDonHangModel();
 $sp = new SanPhamModel();
 $sz = new SizeModel();
-// $szsp = new SizeSpModel();
 $ttr = new TimeTrackingModel();
 $lx = new LuotXemModel();
+$dg = new DonGiaModel();
 if (isset($_POST['action'])) {
     // Xử lý dựa trên action
     switch ($_POST['action']) {
@@ -42,7 +42,7 @@ if (isset($_POST['action'])) {
             $magh = $_POST['magh'];
             $username = $_POST['username'];
             // cập nhật thông tin khách hàng (vì giữ cái liên kết khóa ngoại ở đơn hàng)
-            $khRes = $kh->KhachHang__Update_Info($makh, $tenkh, $sodienthoai, $diachi, $email);
+            $khRes = $kh->KhachHang__Update_Info($makh, $tenkh, $sodienthoai, $email);
             $resKh = $kh->KhachHang__Get_By_Id($makh);
             $_SESSION['user'] = $resKh;
             // Thêm đơn hàng
@@ -59,10 +59,10 @@ if (isset($_POST['action'])) {
                 $masp = $item->masp;
                 $soluong = $item->soluong;
                 $dongia = $item->dongia;
-                $masize = $item->masize;
+                $idsize = $item->idsize;
                 $luotmua = $sp->SanPham__Get_By_Id($masp)->luotmua + 1;
                 // Thêm chi tiết đơn hàng
-                $resDh = $ctdh->ChiTietDonHang__Add($madh, $masp, $soluong, $dongia, $masize);
+                $resDh = $ctdh->ChiTietDonHang__Add($madh, $masp, $soluong, $dongia, $idsize);
                 $resSp = $sp->SanPham__Update_Luot_Mua($masp, $luotmua);
             }
             $res = $gh->GioHang__Update_Trang_Thai($magh, 0);
@@ -78,11 +78,10 @@ if (isset($_POST['action'])) {
 
             $masp = $_POST['masp'];
             $soluong =  1;
-            $dongia = $sp->SanPham__Get_By_Id($masp)->dongia;
+            $dongia = $dg->ShowDonGia__Get_By_Id_Spdg($masp);
             $ngaythem = date('Y-m-d H:i:s');
             $makh = $_SESSION['user']->makh;
             $trangthai = 1; //giỏ hàng đang được tạo, chưa thêm vào đơn hàng
-
             $idsize = $_POST['idsize'] ?? 0;
 
             $resGH = $gh->GioHang__Get_By_Id_Kh($makh);
@@ -90,15 +89,12 @@ if (isset($_POST['action'])) {
                 $check = $ctgh->ChiTietGioHang__Check($resGH->magh, $masp, $makh, $idsize);
                 if ($check != false) {
                     $res = $ctgh->ChiTietGioHang__Update($check->mactgh, $check->magh, $masp, $check->soluong + 1, $dongia);
-                    // $res = $szsp->SizeSp__Add($masp, $masize);
                 } else {
                     $res = $ctgh->ChiTietGioHang__Add($resGH->magh, $masp, $soluong, $dongia, $idsize);
-                    // $res = $szsp->SizeSp__Add($masp, $masize);
                 }
             } else {
                 $magh = $gh->GioHang__Add($ngaythem, $makh, $trangthai);
                 $res = $ctgh->ChiTietGioHang__Add($magh, $masp, $soluong, $dongia, $idsize);
-                // $res = $szsp->SizeSp__Add($masp, $idsize);
             }
 
             $maghNew = $gh->GioHang__Get_By_Id_Kh($makh);

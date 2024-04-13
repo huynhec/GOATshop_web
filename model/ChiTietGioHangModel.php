@@ -40,11 +40,11 @@ class ChiTietGioHangModel extends Database
         return $obj->fetchAll();
     }
 
-    public function ChiTietGioHang__Add($magh, $masp, $soluong, $dongia, $masize)
+    public function ChiTietGioHang__Add($magh, $masp, $soluong, $dongia, $idsize)
     {
 
-        $obj = $this->connect->prepare("INSERT INTO chitietgiohang(magh, masp, soluong, dongia, masize) VALUES (?,?,?,?,?)");
-        $obj->execute(array($magh, $masp, $soluong, $dongia, $masize));
+        $obj = $this->connect->prepare("INSERT INTO chitietgiohang(magh, masp, soluong, dongia, idsize) VALUES (?,?,?,?,?)");
+        $obj->execute(array($magh, $masp, $soluong, $dongia, $idsize));
 
         return $this->connect->lastInsertId();
     }
@@ -65,11 +65,11 @@ class ChiTietGioHangModel extends Database
         return $deleteStatement->rowCount();
     }
 
-    public function ChiTietGioHang__Check($magh, $masp, $makh, $masize)
+    public function ChiTietGioHang__Check($magh, $masp, $makh, $idsize)
     {
-        $obj = $this->connect->prepare("SELECT * FROM chitietgiohang INNER JOIN giohang ON chitietgiohang.magh = giohang.magh WHERE giohang.magh=? AND masp=? AND makh = ? AND masize =? AND trangthai=?");
+        $obj = $this->connect->prepare("SELECT * FROM chitietgiohang INNER JOIN giohang ON chitietgiohang.magh = giohang.magh WHERE giohang.magh=? AND masp=? AND makh = ? AND idsize =? AND trangthai=?");
         $obj->setFetchMode(PDO::FETCH_OBJ);
-        $obj->execute(array($magh, $masp, $makh, $masize, 1));
+        $obj->execute(array($magh, $masp, $makh, $idsize, 1));
         if ($obj->rowCount() > 0) {
             return $obj->fetch();
         } else {

@@ -6,7 +6,7 @@ require_once '../../../model/KhachHangModel.php';
 require_once '../../../model/TrangThaiModel.php';
 require_once '../../../model/ChiTietTrangThaiModel.php';
 require_once '../../../model/ChiTietDonHangModel.php';
-require_once '../../../model/SizeSpModel.php';
+require_once '../../../model/SizeModel.php';
 $dh = new DonHangModel();
 $kh = new KhachHangModel();
 $sp = new SanPhamModel();
@@ -14,7 +14,7 @@ $nv = new NhanVienModel();
 $tt = new TrangThaiModel();
 $cttt = new ChiTietTrangThaiModel();
 $ctdh = new ChiTietDonHangModel();
-$szsp = new SizeSpModel();
+$sz = new SizeModel();
 
 $madon = $_POST['madon'];
 $chiTietDonHang__Get_By_Id_DH = $ctdh->ChiTietDonHang__Get_By_Id_DH($madon);
@@ -45,7 +45,7 @@ $trangThai__Get_BY_Id_DH = $tt->TrangThai__Get_By_Id_DH($madon);
                         <td><?= ++$count ?></td>
                         <td><?= $sp->SanPham__Get_By_Id($item->masp)->tensp ?></td>
                         <td><?= $item->soluong ?></td>
-                        <td><?= $szsp->SizeSp__Get_By_Id($item->masize)->tensize ?></td>
+                        <td><?= $sz->Size__Get_By_Id($item->masize)->tensize ?></td>
                         <td><?= number_format($item->dongia) ?></td>
                         <td><?= number_format($item->tongcong) ?></td>
                     </tr>

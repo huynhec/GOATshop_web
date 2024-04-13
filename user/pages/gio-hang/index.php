@@ -1,4 +1,17 @@
 <?php
+$database = new Database();
+$pdo = $database->connect;
+
+// Chuẩn bị và thực thi truy vấn SQL để lấy dữ liệu từ bảng 'province'
+try {
+    $sql = "SELECT * FROM province";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+    $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    echo "Lỗi truy vấn: " . $e->getMessage();
+    die();
+}
 
 require_once '../model/GioHangModel.php';
 require_once '../model/ChiTietGioHangModel.php';
@@ -6,7 +19,7 @@ require_once '../model/SanPhamModel.php';
 require_once '../model/AnhSpModel.php';
 require_once '../model/CommonModel.php';
 require_once '../model/SizeModel.php';
-require_once '../model/SizeSpModel.php';
+require_once '../model/DiaChiModel.php';
 
 $gh = new GioHangModel();
 $ctgh = new ChiTietGioHangModel();
@@ -14,12 +27,14 @@ $sp = new SanPhamModel();
 $anhSp = new AnhSpModel();
 $cm = new CommonModel();
 $sz = new SizeModel();
-$szsp = new SizeSpModel();
+$dc = new DiaChiModel();
 $makh = isset($_SESSION['user']->makh) ? $_SESSION['user']->makh : 0;
 $gioHang__Get_By_Id_Kh = $gh->GioHang__Get_By_Id_Kh($makh);
 $chiTietGioHang__Get_By_Id_Gh = $ctgh->ChiTietGioHang__Get_By_Id_GH(isset($gioHang__Get_By_Id_Kh->magh) ? $gioHang__Get_By_Id_Kh->magh : 0);
+$dc__Get_By_Id_makh = $dc->DiaChi__Get_By_Id($makh);
 ?>
 
+<script src="../assets/js/diachi.js"></script>
 <main class="main">
     <div class="main-container">
         <section class="h-100 h-custom" style="background-color: #eee;">
@@ -54,7 +69,7 @@ $chiTietGioHang__Get_By_Id_Gh = $ctgh->ChiTietGioHang__Get_By_Id_GH(isset($gioHa
                                                             <div class="ms-2 me-2">
                                                                 <div class="text-line"><?= $sp->SanPham__Get_By_Id($item->masp)->tensp ?></div>
                                                                 <div class="text-line">
-                                                                    Size : <?= $szsp->SizeSp__Get_By_Id($item->masize)->tensize ?>
+                                                                    Size : <?= $sz->Size__Get_By_Id($item->idsize)->tensize ?>
                                                                 </div>
                                                                 <p class="small mb-0 text-small" id="gh-dg_<?= $item->mactgh ?>"><?= number_format($item->dongia) ?>đ</p>
                                                             </div>
@@ -62,7 +77,7 @@ $chiTietGioHang__Get_By_Id_Gh = $ctgh->ChiTietGioHang__Get_By_Id_GH(isset($gioHa
                                                         <div class="d-flex flex-row align-items-center m-1">
                                                             <div class="input-group input-group-sm">
                                                                 <button class="btn btn-sm btn-outline-secondary" onclick="decrease(this)" type="button">-</button>
-                                                                <input type="text" class="form-control quantity" id="gh-sl" value="<?= $item->soluong ?>" readonly, data-mactgh="<?= $item->mactgh ?>" , data-magh="<?= $item->magh ?>" , data-dongia="<?= $item->dongia ?>" , data-masp="<?= $item->masp ?>">
+                                                                <input type="text" class="form-control quantity" id="gh-sl" value="<?= $item->soluong ?>" readonly data-mactgh="<?= $item->mactgh ?>" , data-magh="<?= $item->magh ?>" , data-dongia="<?= $item->dongia ?>" , data-masp="<?= $item->masp ?>">
                                                                 <button class="btn btn-sm btn-outline-secondary" onclick="increase(this)" type="button">+</button>
                                                                 <!-- <h5 class="fw-normal mb-0">2</h5> -->
                                                             </div>
@@ -77,7 +92,7 @@ $chiTietGioHang__Get_By_Id_Gh = $ctgh->ChiTietGioHang__Get_By_Id_GH(isset($gioHa
                                         <?php endforeach ?>
 
                                     </div>
-                                    <?php if (isset($gioHang__Get_By_Id_Kh->magh) && count($chiTietGioHang__Get_By_Id_Gh)>0) : ?>
+                                    <?php if (isset($gioHang__Get_By_Id_Kh->magh) && count($chiTietGioHang__Get_By_Id_Gh) > 0) : ?>
                                         <div class="col-lg-5">
 
                                             <div class="card bg-outline rounded-3">
@@ -95,9 +110,36 @@ $chiTietGioHang__Get_By_Id_Gh = $ctgh->ChiTietGioHang__Get_By_Id_GH(isset($gioHa
 
                                                             </div>
 
-                                                            <div class="form-outline form-white mb-1">
-                                                                <label class="form-label" for="diachi">Địa chỉ nhận hàng</label>
-                                                                <input type="text" name="diachi" id="diachi" class="form-control" siez="17" placeholder="Địa chỉ nhận hàng" value="<?= $_SESSION['user']->diachi ?>" required />
+                                                            <div class="form-group">
+                                                                <label for="tinh">Tỉnh/Thành phố</label>
+                                                                <select id="tinh" name="tinh" class="form-control">
+                                                                    <option value="">Chọn một tỉnh</option>
+                                                                    <?php foreach ($results as $row) : ?>
+                                                                        <option value="<?php echo $row['province_id'] ?>"><?php echo $row['name'] ?></option>
+                                                                    <?php endforeach; ?>
+                                                                </select>
+                                                                <!-- Thêm hidden input để lưu tên tỉnh -->
+                                                                <input type="hidden" id="tinh_name" name="tinh_name" value="">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="huyen">Quận/Huyện</label>
+                                                                <select id="huyen" name="huyen" class="form-control">
+                                                                    <option value="">Chọn một quận/huyện</option>
+                                                                </select>
+                                                                <!-- Thêm hidden input để lưu tên huyện -->
+                                                                <input type="hidden" id="huyen_name" name="huyen_name" value="">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="xa">Phường/Xã</label>
+                                                                <select id="xa" name="xa" class="form-control">
+                                                                    <option value="">Chọn một xã</option>
+                                                                </select>
+                                                                <!-- Thêm hidden input để lưu tên xã -->
+                                                                <input type="hidden" id="xa_name" name="xa_name" value="">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="road">Số nhà</label>
+                                                                <input id="road" name="road" class="form-control">
                                                             </div>
 
                                                             <div class="row mb-4">
@@ -186,6 +228,11 @@ $chiTietGioHang__Get_By_Id_Gh = $ctgh->ChiTietGioHang__Get_By_Id_GH(isset($gioHa
     }
 
     function checkout() {
+        var tinh = document.getElementById('tinh').value;
+        var huyen = document.getElementById('huyen').value;
+        var xa = document.getElementById('xa').value;
+        var road = document.getElementById('road').value;
+
         $.ajax({
             type: "POST",
             url: "./components/action.php",
@@ -193,7 +240,7 @@ $chiTietGioHang__Get_By_Id_Gh = $ctgh->ChiTietGioHang__Get_By_Id_GH(isset($gioHa
                 action: "checkout",
                 makh: document.getElementById('makh').value,
                 tenkh: document.getElementById('tenkh').value,
-                diachi: document.getElementById('diachi').value,
+                diachi: `${tinh}, ${huyen}, ${xa}, ${road}`, // Kết hợp các phần thành địa chỉ hoàn chỉnh
                 sodienthoai: document.getElementById('sodienthoai').value,
                 email: document.getElementById('email').value,
                 magh: document.getElementById('magh').value,
@@ -251,8 +298,9 @@ $chiTietGioHang__Get_By_Id_Gh = $ctgh->ChiTietGioHang__Get_By_Id_GH(isset($gioHa
     function increase(button) {
         var input = button.previousElementSibling;
         var value = parseInt(input.value);
-        input.value = value + 1;
-
+        if (value < 50) {
+            input.value = value + 1;
+        }
         $.ajax({
             type: "POST",
             url: "./components/action.php",
