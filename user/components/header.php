@@ -20,7 +20,7 @@ $thuongHieu__Get_All = $th->ThuongHieu__Get_All();
         <div class="navbar-logo-menu">
             <!-- Logo -->
             <a class="navbar-logo" href="./index.php">
-                <img alt="logo" src="../assets/images/logo-no-background.png">
+                <img alt="logo" src="../assets/images/White logo - no background.png">
             </a>
             <!-- Nút điều hướng trên điện thoại -->
             <div class="navbar-toggle"><i class="bx bx-menu"></i></div>
