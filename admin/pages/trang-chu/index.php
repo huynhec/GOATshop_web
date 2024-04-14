@@ -22,14 +22,14 @@ $chiTietDonHang__Top_Ban_Chart = $ctdh->ChiThietDonHang__Top_Ban_Chart();
     <hr>
     <div class="row section-container">
 
-        <div class="col-6">
+        <div class="col-7">
             <input type="text" name="daterange" id="daterange" value="<?= date('m/d/Y', strtotime('-1 month')) ?> - <?= date('m/d/Y') ?>" class="form-control" />
             <div class="main-form">
                 <?php require 'add.php'; ?>
             </div>
         </div>
 
-        <div class="col-6">
+        <div class="col-5">
             <div class="main-chart">
                 <canvas id="barChart"></canvas>
             </div>

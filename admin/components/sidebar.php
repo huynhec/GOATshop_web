@@ -2,12 +2,14 @@
     <div id="sidebar">
         <div class="sidebar-logo">
             <div class="col-logo">
-                <img src="../assets/images/logo-no-background.png" alt="logo">
+                <a href="index.php?pages=trang-chu">
+                    <img src="../assets/images/Black logo - no background.png" alt="logo">
+                </a>
             </div>
             <div class="col-menu" id="menu-bar">
                 <i class='bx bx-menu'></i>
             </div>
-        </div>
+        </div><br><br><br>
         <ul class="side-menu top">
             <li class="<?= $_GET['pages'] == 'trang-chu' ? "active" : "" ?>">
                 <a href="index.php?pages=trang-chu">
@@ -39,8 +41,8 @@
                     <span class="text">Quản lý thuộc tính</span>
                 </a>
             </li>
-            <li class="<?= $_GET['pages'] == 'kick-co' ? "active" : "" ?>">
-                <a href="index.php?pages=kich-co">
+            <li class="<?= $_GET['pages'] == 'size' ? "active" : "" ?>">
+                <a href="index.php?pages=size">
                     <i class='bx bx-ruler'></i>
                     <span class="text">Quản lý size</span>
                 </a>

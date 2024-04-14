@@ -117,3 +117,4 @@ minhhieu|1234567
 minhhieu|1234567
 anhtuyet|1234567
 admin|123456
+admin|123456

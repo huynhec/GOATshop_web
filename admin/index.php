@@ -14,7 +14,7 @@ if (!isset($_SESSION['admin']) && !isset($_SESSION['manager']) && !isset($_SESSI
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title id="dynamicTitle">GOATshop</title>
-    <link rel="shortcut icon" href="../assets/images/logo-no-background.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../assets/images/Browser.png" type="image/x-icon">
     <link rel="stylesheet" href="../assets/vendor/bootstrap-5.2.3-dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="../assets/vendor/boxicons-2.1.4/css/boxicons.min.css">
     <link rel="stylesheet" href="../assets/vendor/datatables/css/1_dataTables.bootstrap5.min.css">
