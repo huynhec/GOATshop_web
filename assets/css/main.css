@@ -83,7 +83,9 @@
 .background-10 {
   background: #388e3c !important;
 }
-
+body{
+  font-family: "Montserrat", sans-serif !important;
+}
 .main {
   position: relative;
   overflow-x: hidden;
@@ -96,9 +98,9 @@
   margin: auto;
   vertical-align: middle;
   overflow: hidden;
-  max-width: 1180px;
+  max-width: 1380px;
   height: 100%;
-  border-radius: 10px; 
+  /* border-radius: 10px;  */
   background-color: #f0f0f0;
   padding: 10px;
   box-shadow: 0 0 90px rgba(0, 0, 0, 0.3); /* Thêm hiệu ứng bóng */
@@ -117,14 +119,13 @@
   max-width: 1120px;
   height: 100%;
   border-radius: 10px; 
-  background-color: #f0f0f0;
+  background-color: #EFEFEF;
   padding: 20px;
-
 
 }
 
 .main-title-container {
-  display: flex;
+  /* display: flex; */
   justify-items: center;
   align-items: center;
   text-align: center;
@@ -143,6 +144,9 @@
   font-weight: bold;
   text-transform: uppercase;
   text-overflow: ellipsis;
+  color: #000000;
+  margin: 0 0 15px;
+  position: relative;
 }
 
 .main-item-container {
@@ -244,6 +248,7 @@
   display: flex;
   justify-items: center;
   align-items: center;
+  text-align: center;
 }
 .main-title-container__left .bx {
   font-size: 2rem;
@@ -902,6 +907,7 @@ select#chapterSelect {
 /* -------------------------------------------------------------------------- */
 .main-container {
   padding: 2px;
+  margin-top: 45px;
 }
 .manga-container__comming_soon {
   position: relative;
@@ -1127,6 +1133,7 @@ img.item {
   object-fit: cover;
   margin: 10px;
   transition: all 0.5s ease-in-out;
+  border-radius: 1rem;
 }
 .thumbnail-container{
   display: flex;
@@ -1135,9 +1142,11 @@ img.item {
 }
 
 img.thumbnail {
-  height: 30px;
-  width: 30px;
+  height: 40px;
+  width: 40px;
   object-fit: contain;
+  border-radius: 0.2rem;
+  cursor: pointer;
 }
 
 .text-line {

@@ -75,7 +75,7 @@ $top = 0;
         <div class="main-container">
             <div class="main-title-container">
                 <a href="index.php?pages=sp-moi&page=1">
-                    <div class="item-title color-1"><i class='bx bx-star bx-tada'></i>MỚI CẬP NHẬT</div>
+                    <div class="item-title color-2">MỚI CẬP NHẬT</div>
                 </a>
             </div>
             <div class="main-item-container">
@@ -204,3 +204,36 @@ $top = 0;
     </div>
 
 </main>
+
+<script>
+        // Excerpt from https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API
+    // function geoFindMe() {
+    //     if (!navigator.geolocation) {
+    //         console.log("Geolocation is not supported by your browser");
+    //         return;
+    //     }
+
+    //     function success(position) {
+    //         var latitude = position.coords.latitude;
+    //         var longitude = position.coords.longitude;
+    //         reverseGeocodingWithGoogle(latitude, longitude)
+    //     }
+
+    //     function error() {
+    //         console.log("Unable to retrieve your location");
+    //     }
+    //     navigator.geolocation.getCurrentPosition(success, error);
+    // }
+
+    // function reverseGeocodingWithGoogle(latitude, longitude) {
+    //     fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key={AIzaSyAA8VI4LmVPAmZJBtQG2XqwTgtkBMyvPZA}`)
+    //         .then(res => res.json())
+    //         .then(response => {
+    //             console.log("User's Location Info: ", response)
+    //         })
+    //         .catch(status => {
+    //             console.log('Request failed.  Returned status of', status)
+    //         })
+    // }
+    // geoFindMe();
+</script>

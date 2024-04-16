@@ -8,6 +8,8 @@ $sp = new SanPhamModel();
 $anhSp = new AnhSpModel();
 
 $timeTracking__Get_All = $ttr->User_item_tracking__Get_All();
+$timeTracking__Get_OneD = $ttr->User_item_tracking__Get_OneD();
+$timeTracking__Get_TwoD = $ttr->User_item_tracking__Get_TwoD();
 ?>
 
 <div id="main-container">
@@ -24,7 +26,7 @@ $timeTracking__Get_All = $ttr->User_item_tracking__Get_All();
         </ul>
     </div>
     <div class="row section-container">
-        <div class="col-8">
+        <div class="col-7">
             <div class="main-data">
                 <h3 class="section-title">Danh sách theo dõi</h3>
                 <div class="table-responsive">
@@ -40,16 +42,48 @@ $timeTracking__Get_All = $ttr->User_item_tracking__Get_All();
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($timeTracking__Get_All as $item) : ?>
-                                <tr>
+                            <!-- nếu nhấn button 1 thì sẽ ngày foreach này -->
+                        <!-- <?php foreach ($timeTracking__Get_OneD as $item) : ?>
+                            <tr data-type="1day">
                                     <td><?= $item->uitrack_id ?></td>
-                                    <td><img src="../assets/<?= $anhSp->AnhSp__Get_By_Id_Sp_First($item->masp)->hinhanh ?>" alt="" srcset="" class="img-fluid" width="50"></td>
+                                    <td><img style="cursor:pointer; " src="../assets/<?= $anhSp->AnhSp__Get_By_Id_Sp_First($item->masp)->hinhanh ?>" alt="" srcset="" class="img-fluid" width="50" onclick="return trackingitem_chart('<?= $item->masp ?>')"></td>
                                     <td>
                                         <span data-toggle="tooltip" title="<?= $sp->SanPham__Get_By_Id($item->masp)->tensp ?>">
                                             <?= strlen($sp->SanPham__Get_By_Id($item->masp)->tensp) > 60 ? substr($sp->SanPham__Get_By_Id($item->masp)->tensp, 0, 60) . '...' : $sp->SanPham__Get_By_Id($item->masp)->tensp ?>
                                         </span>
                                     </td>
-                                    <td><?= $item->typetrack == 1 ? '<span class="text-success">Quan tâm</span>' : '<span class="text-warning">Vãng lai</span>' ?></td>
+                                    <td><?= $item->typetrack == 1 ? '<span class="text-success">Quan tâm</span>' : '<span class="text-warning">Vãng lai</span>' ?>
+                                    </td>
+                                    <td><?= $item->thoigian ?> giây</td>
+                                    <td><?= $item->ngay ?></td>
+                                </tr>
+                            <?php endforeach ?>
+                            <?php foreach ($timeTracking__Get_TwoD as $item) : ?>
+                                <tr data-type="2days">
+                                    <td><?= $item->uitrack_id ?></td>
+                                    <td><img style="cursor:pointer; " src="../assets/<?= $anhSp->AnhSp__Get_By_Id_Sp_First($item->masp)->hinhanh ?>" alt="" srcset="" class="img-fluid" width="50" onclick="return trackingitem_chart('<?= $item->masp ?>')"></td>
+                                    <td>
+                                        <span data-toggle="tooltip" title="<?= $sp->SanPham__Get_By_Id($item->masp)->tensp ?>">
+                                            <?= strlen($sp->SanPham__Get_By_Id($item->masp)->tensp) > 60 ? substr($sp->SanPham__Get_By_Id($item->masp)->tensp, 0, 60) . '...' : $sp->SanPham__Get_By_Id($item->masp)->tensp ?>
+                                        </span>
+                                    </td>
+                                    <td><?= $item->typetrack == 1 ? '<span class="text-success">Quan tâm</span>' : '<span class="text-warning">Vãng lai</span>' ?>
+                                    </td>
+                                    <td><?= $item->thoigian ?> giây</td>
+                                    <td><?= $item->ngay ?></td>
+                                </tr>
+                            <?php endforeach ?> -->
+                             <?php foreach ($timeTracking__Get_All as $item) : ?>
+                                <tr>
+                                    <td><?= $item->uitrack_id ?></td>
+                                    <td><img style="cursor:pointer; " src="../assets/<?= $anhSp->AnhSp__Get_By_Id_Sp_First($item->masp)->hinhanh ?>" alt="" srcset="" class="img-fluid" width="50" onclick="return trackingitem_chart('<?= $item->masp ?>')"></td>
+                                    <td>
+                                        <span data-toggle="tooltip" title="<?= $sp->SanPham__Get_By_Id($item->masp)->tensp ?>">
+                                            <?= strlen($sp->SanPham__Get_By_Id($item->masp)->tensp) > 60 ? substr($sp->SanPham__Get_By_Id($item->masp)->tensp, 0, 60) . '...' : $sp->SanPham__Get_By_Id($item->masp)->tensp ?>
+                                        </span>
+                                    </td>
+                                    <td><?= $item->typetrack == 1 ? '<span class="text-success">Quan tâm</span>' : '<span class="text-warning">Vãng lai</span>' ?>
+                                    </td>
                                     <td><?= $item->thoigian ?> giây</td>
                                     <td><?= $item->ngay ?></td>
                                 </tr>
@@ -59,13 +93,13 @@ $timeTracking__Get_All = $ttr->User_item_tracking__Get_All();
 
                 </div>
             </div>
-
         </div>
         <div class="col-4">
             <div class="main-form">
+                <!-- <button>1 ngày</button> <button>2 ngày</button> -->
             </div>
         </div>
-    </div>
+
 </div>
 
 <script>
@@ -73,4 +107,12 @@ $timeTracking__Get_All = $ttr->User_item_tracking__Get_All();
         document.getElementById('dynamicTitle').innerText = "ADMIN | Quản lý thời gian theo dõi";
     })
 
+
+    function trackingitem_chart(masp) {
+        $.post("pages/thoi-gian-theo-doi/trackingitem_chart.php", {
+            masp: masp,
+        }, function(data, status) {
+            $(".main-form").html(data);
+        });
+    };
 </script>

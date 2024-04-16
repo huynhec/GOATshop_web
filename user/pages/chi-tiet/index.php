@@ -54,7 +54,9 @@ $anhSp__Get_By_Id_Sp_Not_First = $anhSp->AnhSp__Get_By_Id_Sp_Not_First($sp__Get_
                     <div class="manga-title color-2"><?= $sp__Get_By_Id->tensp ?></div>
 
                     <div class="sp-container__top">
-
+                        <div class="tab-group-1">
+                            <h5 class="text-danger"><b><?= number_format($dg->ShowDonGia__Get_By_Id_Spdg($masp)) ?>đ</b></h5>
+                        </div>
                         <div class="form-check">
                             <br>
                             <div class="row">

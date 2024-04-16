@@ -27,7 +27,7 @@ $loaisp__Get_All_Exist2 = $loaiSp->LoaiSp__Get_All_Exist2();
 
                 <h3 class="section-title">Danh sách dạng size theo loại</h3>
                 <div class="table-responsive">
-                    <table id="table_js1" class="table table-striped table-light" style="width:100%">
+                    <table id="table_js" class="table table-striped table-light" style="width:100%">
                         <thead class="thead-dark">
                             <tr>
                                 <th>Tên loại</th>
@@ -81,19 +81,12 @@ $loaisp__Get_All_Exist2 = $loaiSp->LoaiSp__Get_All_Exist2();
                                                         <?= $size->tensize ?>
                                                     </td>
                                                     <td><?= $size->trangthai == 1 ? '<span class="text-success">Hoạt động</span>' : '<span class="text-danger">Tạm khóa</span>' ?>
-                                                    </td>
-                                                    <!-- <td class="text-center font-weight-bold">
-                                                        <button type="button" class="btn btn-warning btn-update"
-                                                            onclick="return update_obj('<?= $size->idsize ?>')">
-                                                            <i class="bx bx-edit" aria-hidden="true"></i> Sửa
-                                                        </button>
-                                                        <?php if (isset($_SESSION['admin'])) : ?>
+                                                    </td>                                                    
+                                                        <!-- <?php if (isset($_SESSION['admin'])) : ?>
                                                         <button type="button" class="btn btn-danger btn-delete" onclick="return delete_obj('<?= $item->idsize ?>')">
                                                                             <i class="bx bx-trash" aria-hidden="true"></i> Xóa
                                                                         </button>
-                                                        <?php endif ?>
-
-                                                    </td> -->
+                                                        <?php endif ?> -->    
                                                 </tr>
                                                 <?php endif; ?>
                                                 <?php endforeach; ?>

@@ -142,7 +142,7 @@ if (isset($_POST['action'])) {
             break;
         case 'view':
             $masp = isset($_POST['masp']) ? intval($_POST['masp']) : 0;
-            $newViewCount = $sp->SanPham__Increase_View_Count($masp);
+            $newViewCount = $lx->LuotXem__Add($masp);
 
             echo number_format($newViewCount);
             break;
@@ -151,7 +151,7 @@ if (isset($_POST['action'])) {
             $typetrack = $_POST['typetrack'];
             $masp = $_POST['masp'];
             $timeCounter = $_POST['timeCounter'];
-            $ngay = date('Y-m-d H:i:s');
+            $ngay = date('Y-m-d');
             // Kiểm tra và xử lý tính toán của $typetrack
             if ($typetrack == 1) {
                 $timeCounter = $timeCounter * 2;

@@ -59,6 +59,12 @@
                     <span class="text">Quản lý thời gian theo dõi</span>
                 </a>
             </li>
+            <li class="<?= $_GET['pages'] == 'luot-xem' ? "active" : "" ?>">
+                <a href="index.php?pages=luot-xem">
+                    <i class='bx bx-show'></i>
+                    <span class="text">Quản lý lượt xem</span>
+                </a>
+            </li>
 
             <?php if (isset($_SESSION['admin']) || isset($_SESSION['manager'])) : ?>
                 <li class="<?= $_GET['pages'] == 'trang-thai' ? "active" : "" ?>">

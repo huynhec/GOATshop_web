@@ -39,14 +39,65 @@ class TimeTrackingModel extends Database
         $obj->execute();
         return $obj->fetchAll();
     }
+    public function User_item_tracking__Get_OneD()
+    {
+        // Lấy ngày hiện tại
+        $ngayhientai = date("Y-m-d");
+
+        // Chuẩn bị câu truy vấn với điều kiện ngày xem là ngày hiện tại
+        $obj = $this->connect->prepare("SELECT * FROM user_item_tracking WHERE DATE(ngay) = ?");
+        $obj->setFetchMode(PDO::FETCH_OBJ);
+        $obj->execute(array($ngayhientai));
+
+        // Trả về kết quả
+        return $obj->fetchAll();
+    }
+    public function User_item_tracking__Get_TwoD()
+    {
+        // Lấy ngày hiện tại
+        $ngayhientai = date("Y-m-d");
+
+        // Tính toán ngày 2 ngày trước đó
+        $ngaytruocdo = date("Y-m-d", strtotime("-3 days"));
+
+        // Chuẩn bị câu truy vấn với điều kiện ngày xem trong khoảng từ ngày 2 ngày trước đến ngày hiện tại
+        $obj = $this->connect->prepare("SELECT * FROM user_item_tracking WHERE DATE(ngay) BETWEEN ? AND ?");
+        $obj->setFetchMode(PDO::FETCH_OBJ);
+        $obj->execute(array($ngaytruocdo, $ngayhientai));
+
+        // Trả về kết quả
+        return $obj->fetchAll();
+    }
+
     public function User_item_tracking__Add($timeCounter, $masp, $typetrack, $ngay)
     {
-        $obj = $this->connect->prepare("INSERT INTO user_item_tracking(thoigian, masp, typetrack, ngay) VALUES (?,?,?,?)");
-        $obj->execute(array($timeCounter, $masp, $typetrack, $ngay));
-        
-        return $obj->rowCount();
-    }
+        // Kiểm tra xem có bản ghi nào đã tồn tại với cùng typetrack, masp và ngay hay không
+        $existingRecord = $this->connect->prepare("
+            SELECT * FROM user_item_tracking 
+            WHERE masp = ? AND typetrack = ? AND ngay = ?
+        ");
+        $existingRecord->execute(array($masp, $typetrack, $ngay));
+        $rowCount = $existingRecord->rowCount();
     
+        if ($rowCount > 0) {
+            // Nếu đã tồn tại bản ghi, cập nhật trường thoigian
+            $updateRecord = $this->connect->prepare("
+                UPDATE user_item_tracking 
+                SET thoigian = thoigian + ?
+                WHERE masp = ? AND typetrack = ? AND ngay = ?
+            ");
+            $updateRecord->execute(array($timeCounter, $masp, $typetrack, $ngay));
+            return $updateRecord->rowCount();
+        } else {
+            // Nếu không có bản ghi tồn tại, thêm mới bản ghi
+            $newRecord = $this->connect->prepare("
+                INSERT INTO user_item_tracking(thoigian, masp, typetrack, ngay) 
+                VALUES (?, ?, ?, ?)
+            ");
+            $newRecord->execute(array($timeCounter, $masp, $typetrack, $ngay));
+            return $newRecord->rowCount();
+        }
+    }
 
     public function User_item_tracking__Update($maanh, $hinhanh, $masp)
     {
@@ -79,10 +130,9 @@ class TimeTrackingModel extends Database
 
     public function User_item_tracking__Get_By_Id_Sp($masp)
     {
-        $obj = $this->connect->prepare("SELECT * FROM user_item_tracking WHERE masp = ?");
+        $obj = $this->connect->prepare("SELECT DATE(ngay) AS ngay, SUM(thoigian) AS thoigian FROM user_item_tracking WHERE masp = ? GROUP BY DATE(ngay)");
         $obj->setFetchMode(PDO::FETCH_OBJ);
         $obj->execute(array($masp));
         return $obj->fetchAll();
     }
-
 }

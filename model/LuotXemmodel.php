@@ -46,27 +46,40 @@ class LuotXemModel extends Database
 
     public function LuotXem__Get_By_Id($masp)
     {
-        $obj = $this->connect->prepare("SELECT * FROM luotxem WHERE masp = ?");
+        $obj = $this->connect->prepare("SELECT DATE(ngayxem) AS ngayxem, SUM(luotxem) AS luotxem FROM luotxem WHERE masp = ? GROUP BY DATE(ngayxem)");
         $obj->setFetchMode(PDO::FETCH_OBJ);
         $obj->execute(array($masp));
-        return $obj->fetch();
+        return $obj->fetchAll();
     }
 
 
 
     public function LuotXem__Add($masp)
     {
-        // Tạo giá trị cho luotxem và ngayxem
-        $luotxem = 1; // Giá trị mặc định cho số lượt xem mới
-        $ngayxem = date("Y-m-d H:i:s"); // Thời gian hiện tại
-
-        // Thực hiện thêm vào bảng luotxem
-        $obj = $this->connect->prepare("INSERT INTO luotxem(luotxem, ngayxem, masp) VALUES (?,?,?)");
-        $obj->execute(array($luotxem, $ngayxem, $masp));
-
+        // Lấy ngày hiện tại
+        $ngayxem = date("Y-m-d");
+    
+        // Kiểm tra xem có bản ghi nào trong cùng ngày và masp giống với sản phẩm được xem không
+        $obj = $this->connect->prepare("SELECT * FROM luotxem WHERE ngayxem = ? AND masp = ?");
+        $obj->execute(array($ngayxem, $masp));
+        $result = $obj->fetch(PDO::FETCH_ASSOC);
+    
+        if ($result) {
+            // Nếu có, cập nhật số lượt xem của bản ghi đó bằng cách tăng lên 1
+            $luotxem = $result['luotxem'] + 1;
+            $obj = $this->connect->prepare("UPDATE luotxem SET luotxem = ? WHERE ngayxem = ? AND masp = ?");
+            $obj->execute(array($luotxem, $ngayxem, $masp));
+        } else {
+            // Nếu không có, thêm một bản ghi mới vào bảng luotxem
+            $luotxem = 1;
+            $obj = $this->connect->prepare("INSERT INTO luotxem(luotxem, ngayxem, masp) VALUES (?,?,?)");
+            $obj->execute(array($luotxem, $ngayxem, $masp));
+        }
+    
         // Trả về ID của bản ghi vừa được thêm vào
         return $this->connect->lastInsertId();
     }
+    
 
 
     // public function LuotXem__Increase_View_Count($masp)

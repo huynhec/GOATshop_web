@@ -29,7 +29,7 @@ $dongia__Get_By_Id_Sp_First = $dongia->ShowDonGia__Get_By_Id_Spdg($masp);
         </ul>
     </div>
     <div class="row section-container">
-        <div class="col-7">
+        <div class="col-6">
             <div class="main-data">
                 <h3 class="section-title">Danh sách đơn giá sản phẩm: <b><?= $sanPham__Get_By_Id->tensp ?></b></h3>
                 <div class="table-responsive">
@@ -76,7 +76,7 @@ $dongia__Get_By_Id_Sp_First = $dongia->ShowDonGia__Get_By_Id_Spdg($masp);
             </div>
 
         </div>
-        <div class="col-5">
+        <div class="col-6">
             <div class="main-form">
                 <?php require_once 'gia_add.php' ?>
             </div>
