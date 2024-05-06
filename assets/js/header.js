@@ -1,4 +1,5 @@
 // Khai báo biến
+let lastScrollTop = 0;
 let navbar = document.querySelector(".navbar");
 let navbarMenu = document.querySelector(".navbar-menu");
 let navbarDisplayUser = document.querySelector(".navbar-display-user");
@@ -16,6 +17,20 @@ let userAction = document.querySelector(".navbar-display-action");
 
 let searchInput = document.querySelector("#search-box");
 let searchIcon = document.querySelector(".navbar-search .icon");
+
+// Hàm cuộn xuống sẽ mất header cuộn lên sẽ hiện ra
+
+window.addEventListener("scroll", function () {
+  let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+  if (currentScroll > lastScrollTop) {
+    navbar.style.top = "-100px";
+  } else {
+    navbar.style.top = "0";
+  }
+
+  lastScrollTop = currentScroll;
+});
 
 // Hàm kiểm tra và kích hoạt nút floating action
 function activeFloatingAction() {

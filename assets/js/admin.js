@@ -217,6 +217,10 @@ function addInput2() {
 
 
   
-CKEDITOR.replace('mota');
-
+// CKEDITOR.replace('mota');
+ClassicEditor
+.create( document.querySelector( '#mota' ) )
+.catch( error => {
+    console.error( error );
+} );
 

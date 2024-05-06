@@ -177,6 +177,8 @@ img:hover {
   height: 50px;
   z-index: 100;
   background-color: #000000;
+  transition: top 0.5s ease-in-out;
+  transform: translateX(-1.7px);
 }
 
 .navbar-container {
@@ -226,6 +228,7 @@ img:hover {
   padding: 0.5rem;
   display: flex;
   align-items: center;
+  color: white;
 }
 
 .navbar-item a i {

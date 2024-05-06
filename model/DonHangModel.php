@@ -39,10 +39,10 @@ class DonHangModel extends Database
         $obj->execute();
         return $obj->fetchAll();
     }
-    public function DonHang__Add($ngaythem, $makh, $tongdh)
+    public function DonHang__Add($ngaythem, $makh, $diachi_id, $tongdh)
     {
-        $obj = $this->connect->prepare("INSERT INTO donhang(ngaythem, makh, tongdh) VALUES (?,?,?)");
-        $obj->execute(array($ngaythem, $makh, $tongdh));
+        $obj = $this->connect->prepare("INSERT INTO donhang(ngaythem, makh, diachi_id, tongdh) VALUES (?,?,?,?)");
+        $obj->execute(array($ngaythem, $makh, $diachi_id, $tongdh));
         return $this->connect->lastInsertId();
     }
 

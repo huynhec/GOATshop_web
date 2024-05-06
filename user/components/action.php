@@ -10,6 +10,7 @@ require_once "../../model/SizeModel.php";
 require_once "../../model/TimeTrackingModel.php";
 require_once "../../model/LuotXemModel.php";
 require_once "../../model/DonGiaModel.php";
+require_once "../../model/DiaChiModel.php";
 
 $kh = new KhachHangModel();
 $gh = new GioHangModel();
@@ -21,6 +22,8 @@ $sz = new SizeModel();
 $ttr = new TimeTrackingModel();
 $lx = new LuotXemModel();
 $dg = new DonGiaModel();
+$dc = new DiaChiModel();
+
 if (isset($_POST['action'])) {
     // Xử lý dựa trên action
     switch ($_POST['action']) {
@@ -36,7 +39,11 @@ if (isset($_POST['action'])) {
         case 'checkout':
             $makh = $_POST['makh'];
             $tenkh = $_POST['tenkh'];
+            //địa chỉ
             $diachi = $_POST['diachi'];
+            $diachi__Get_By_Id_Kh =$dc->DiaChi__Get_By_Id_Kh($makh);
+            $diachi_id = $diachi__Get_By_Id_Kh->diachi_id;
+
             $sodienthoai = $_POST['sodienthoai'];
             $email = $_POST['email'];
             $magh = $_POST['magh'];
@@ -48,7 +55,7 @@ if (isset($_POST['action'])) {
             // Thêm đơn hàng
             $ngaythem = Date('Y-m-d H:i:s');
             $tongdh = $ctgh->ChiTietGioHang__Sum_Tien_GH($magh)->sum_tien;
-            $madh = $dh->DonHang__Add($ngaythem, $makh, $tongdh);
+            $madh = $dh->DonHang__Add($ngaythem, $makh, $diachi_id, $tongdh);
 
             // cập nhật trạng thái 
 

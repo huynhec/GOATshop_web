@@ -68,6 +68,7 @@ if (isset($_GET['req'])) {
             $district_id = $_POST['district_name'];
             $wards_id= $_POST['wards'];
             $road = $_POST['road'];
+
             $email = $_POST['email'];
             $username = $_POST['username'];
             $trangthai = 1;

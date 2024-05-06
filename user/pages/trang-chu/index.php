@@ -206,34 +206,45 @@ $top = 0;
 </main>
 
 <script>
-        // Excerpt from https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API
-    // function geoFindMe() {
-    //     if (!navigator.geolocation) {
-    //         console.log("Geolocation is not supported by your browser");
-    //         return;
-    //     }
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const latitude = position.coords.latitude;
+                    const longitude = position.coords.longitude;
+                    console.log("Latitude:", latitude);
+                    console.log("Longitude:", longitude);
+                    reverseGeocodingWithGoogle(latitude, longitude);
+                },
+                (error) => {
+                    console.log("Error getting location:", error);
+                }
+            );
+        } else {
+            console.log("Geolocation is not supported by this browser.");
+        }
+    }
 
-    //     function success(position) {
-    //         var latitude = position.coords.latitude;
-    //         var longitude = position.coords.longitude;
-    //         reverseGeocodingWithGoogle(latitude, longitude)
-    //     }
+    function reverseGeocodingWithGoogle(latitude, longitude) {
+        fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=AIzaSyBWzRuWS-rxMCENShE23x4Gh1f7R3vAL1Y`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.results && data.results.length > 0) {
+                    console.log("User's Location Info: ", data.results[0]);
+                } else {
+                    console.log("No location information found.");
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching geolocation data:', error);
+            });
+    }
 
-    //     function error() {
-    //         console.log("Unable to retrieve your location");
-    //     }
-    //     navigator.geolocation.getCurrentPosition(success, error);
-    // }
-
-    // function reverseGeocodingWithGoogle(latitude, longitude) {
-    //     fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key={AIzaSyAA8VI4LmVPAmZJBtQG2XqwTgtkBMyvPZA}`)
-    //         .then(res => res.json())
-    //         .then(response => {
-    //             console.log("User's Location Info: ", response)
-    //         })
-    //         .catch(status => {
-    //             console.log('Request failed.  Returned status of', status)
-    //         })
-    // }
-    // geoFindMe();
+    // Call the getLocation function when the page is loaded
+    getLocation();
 </script>

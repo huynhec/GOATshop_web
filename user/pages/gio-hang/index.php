@@ -33,7 +33,51 @@ $gioHang__Get_By_Id_Kh = $gh->GioHang__Get_By_Id_Kh($makh);
 $chiTietGioHang__Get_By_Id_Gh = $ctgh->ChiTietGioHang__Get_By_Id_GH(isset($gioHang__Get_By_Id_Kh->magh) ? $gioHang__Get_By_Id_Kh->magh : 0);
 $dc__Get_By_Id_makh = $dc->DiaChi__Get_By_Id($makh);
 ?>
+<style>
+    /* CSS for payment method section */
+    .section {
+        margin-bottom: 20px;
+    }
 
+    .section-header {
+        margin-bottom: 10px;
+    }
+
+    .section-title {
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .section-content {
+        border: 1px solid #ccc;
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    .content-box {
+        margin-bottom: 20px;
+    }
+
+    .content-box-row {
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+    }
+
+    .input-radio {
+        margin-right: 0px;
+    }
+
+    .main-img {
+        width: 40px;
+        height: 40px;
+        margin-right: 10px;
+    }
+
+    .radio-label-primary {
+        font-weight: bold;
+    }
+</style>
 <script src="../assets/js/diachi.js"></script>
 <main class="main">
     <div class="main-container">
@@ -45,8 +89,7 @@ $dc__Get_By_Id_makh = $dc->DiaChi__Get_By_Id($makh);
                             <div class="card-body p-4">
 
                                 <div class="row">
-
-                                    <div class="col-lg-7">
+                                    <div class="col-lg-6">
                                         <h5 class="mb-3"><a href="?pages=trang-chu" class="text-body"><i class="bx bx-left-arrow-alt me-2"></i>Tiếp tục mua sắm</a></h5>
                                         <hr>
 
@@ -93,7 +136,7 @@ $dc__Get_By_Id_makh = $dc->DiaChi__Get_By_Id($makh);
 
                                     </div>
                                     <?php if (isset($gioHang__Get_By_Id_Kh->magh) && count($chiTietGioHang__Get_By_Id_Gh) > 0) : ?>
-                                        <div class="col-lg-5">
+                                        <div class="col-lg-6">
 
                                             <div class="card bg-outline rounded-3">
                                                 <div class="card-body">
@@ -109,13 +152,24 @@ $dc__Get_By_Id_makh = $dc->DiaChi__Get_By_Id($makh);
                                                                 <input type="text" name="tenkh" id="tenkh" class="form-control" siez="17" placeholder="Tên người nhận" value="<?= $_SESSION['user']->tenkh ?>" required />
 
                                                             </div>
-
+                                                        <!-- địa chỉ -->
                                                             <div class="form-group">
                                                                 <label for="tinh">Tỉnh/Thành phố</label>
-                                                                <select id="tinh" name="tinh" class="form-control">
-                                                                    <option value="">Chọn một tỉnh</option>
+                                                                <select id="tinh" name="tinh" class="form-control" onchange="clear_road();">
+                                                                    <?php
+                                                                    $province_cur = $dc->DiaChi__Get_By_Id_Kh($makh, 'province');
+                                                                    ?>
+                                                                    <?php if (isset($province_cur->province_id)) : ?>
+                                                                        <option value="<?php echo $province_cur->province_id ?>" selected><?php echo $province_cur->name ?></option>
+                                                                    <?php else : ?>
+                                                                        <option value="">Chọn một tỉnh/thành phố</option>
+
+                                                                    <?php endif ?>
+
                                                                     <?php foreach ($results as $row) : ?>
-                                                                        <option value="<?php echo $row['province_id'] ?>"><?php echo $row['name'] ?></option>
+                                                                        <?php if ($row['province_id'] != $province_cur->province_id) : ?>
+                                                                            <option value="<?php echo $row['province_id'] ?>"><?php echo $row['name'] ?></option>
+                                                                        <?php endif ?>
                                                                     <?php endforeach; ?>
                                                                 </select>
                                                                 <!-- Thêm hidden input để lưu tên tỉnh -->
@@ -124,22 +178,44 @@ $dc__Get_By_Id_makh = $dc->DiaChi__Get_By_Id($makh);
                                                             <div class="form-group">
                                                                 <label for="huyen">Quận/Huyện</label>
                                                                 <select id="huyen" name="huyen" class="form-control">
-                                                                    <option value="">Chọn một quận/huyện</option>
+                                                                    <?php
+                                                                    $district_cur = $dc->DiaChi__Get_By_Id_Kh($makh, 'district');
+                                                                    ?>
+
+                                                                    <?php if (isset($district_cur->district_id)) : ?>
+                                                                        <option value="<?php echo $district_cur->district_id ?>" selected><?php echo $district_cur->name ?></option>
+                                                                    <?php else : ?>
+                                                                        <option value="">Chọn một quận/huyện</option>
+                                                                    <?php endif ?>
                                                                 </select>
+
                                                                 <!-- Thêm hidden input để lưu tên huyện -->
                                                                 <input type="hidden" id="huyen_name" name="huyen_name" value="">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="xa">Phường/Xã</label>
                                                                 <select id="xa" name="xa" class="form-control">
-                                                                    <option value="">Chọn một xã</option>
+                                                                    <?php
+                                                                    $wards_cur = $dc->DiaChi__Get_By_Id_Kh($makh, 'wards');
+                                                                    ?>
+                                                                    <?php if (isset($wards_cur->wards_id)) : ?>
+                                                                        <option value="<?php echo $wards_cur->wards_id ?>" selected><?php echo $wards_cur->name ?></option>
+                                                                    <?php else : ?>
+                                                                        <option value="">Chọn một xã</option>
+
+                                                                    <?php endif ?>
                                                                 </select>
                                                                 <!-- Thêm hidden input để lưu tên xã -->
                                                                 <input type="hidden" id="xa_name" name="xa_name" value="">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="road">Số nhà</label>
-                                                                <input id="road" name="road" class="form-control">
+                                                                <?php
+                                                                $road_cur = $dc->DiaChi__Get_By_Id_Kh($makh);
+                                                                ?>
+
+
+                                                                <input id="road" name="road" class="form-control" value="<?= isset($road_cur->road) ? $road_cur->road : '' ?>">
                                                             </div>
 
                                                             <div class="row mb-4">
@@ -163,9 +239,65 @@ $dc__Get_By_Id_makh = $dc->DiaChi__Get_By_Id($makh);
                                                             <p class="mb-2">Tổng hóa đơn</p>
                                                             <b class="mb-2 text-danger" id="gh-sum"><?= number_format($ctgh->ChiTietGioHang__Sum_Tien_GH($item->magh)->sum_tien) ?>đ</b>
                                                         </div>
-                                                        <div class="d-flex justify-content-between">
-                                                            <p class="mb-2">Hình thức thanh toán</p>
-                                                            <p class="mb-2">Khi nhận hàng</p>
+                                                        <div id="section-payment-method" class="section">
+                                                            <div class="order-checkout__loading--box">
+                                                                <div class="order-checkout__loading--circle"></div>
+                                                            </div>
+                                                            <div class="section-header">
+                                                                <h2 class="section-title">Phương thức thanh toán</h2>
+                                                            </div>
+                                                            <div class="section-content">
+                                                                <div class="content-box">
+
+
+                                                                    <div class="radio-wrapper content-box-row">
+                                                                        <label class="two-page" for="payment">
+
+                                                                            <div class="radio-input payment-method-checkbox">
+                                                                                <input class="input-radio" name="payment_method_id" type="radio" value="" checked="">
+                                                                            </div>
+
+                                                                            <div class="radio-content-input">
+                                                                                <img class="main-img" src="https://hstatic.net/0/0/global/design/seller/image/payment/cod.svg?v=6">
+                                                                                <div class="content-wrapper">
+                                                                                    <span class="radio-label-primary">Thanh toán khi giao hàng (COD)</span>
+                                                                                    <span class="quick-tagline hidden"></span>
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </label>
+                                                                    </div>
+
+                                                                    <div class="radio-wrapper content-box-row">
+                                                                        <label class="two-page" for="payment_method_id_1002112115">
+                                                                            <div class="radio-input payment-method-checkbox">
+                                                                                <input type-id="2" id="payment_method_id_1002112115" class="input-radio" name="payment_method_id" type="radio" value="1002112115">
+                                                                            </div>
+
+                                                                            <div class="radio-content-input">
+                                                                                <img class="main-img" src="https://hstatic.net/0/0/global/design/seller/image/payment/other.svg?v=6">
+                                                                                <div class="content-wrapper">
+                                                                                    <span class="radio-label-primary">Chuyển khoản qua ngân hàng</span>
+                                                                                    <span class="quick-tagline hidden"></span>
+
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </label>
+                                                                    </div>
+
+                                                                    <div class="radio-wrapper content-box-row content-box-row-secondary hidden" for="payment_method_id_1002112115">
+                                                                        <div class="blank-slate">
+                                                                            <!-- NH Vietcombank Chi nhánh Tân Định
+                                                                            TK: Le Thanh Chau
+                                                                            STK: 0371000478398 -->
+                                                                            <img src='https://img.vietqr.io/image/vietinbank-113366668888-compact.jpg' />
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                         <hr class="my-2">
                                                         <button type="button" onclick="return checkout()" class="btn btn-lg btn-danger w-100">
@@ -195,6 +327,10 @@ $dc__Get_By_Id_makh = $dc->DiaChi__Get_By_Id($makh);
 </main>
 
 <script>
+    function clear_road() {
+        document.getElementById("road").value = '';
+    }
+
     function remove(mactgh) {
         Swal.fire({
             icon: 'question',

@@ -239,6 +239,10 @@ div#anhsp_preview {
   transition: background-color 0.5s ease; /* Thêm hiệu ứng chuyển đổi */
 }
 
+.ck.ck-content.ck-editor__editable.ck-rounded-corners.ck-editor__editable_inline.ck-blurred {
+  height: 150px !important;
+  overflow: auto;
+}
 
 @media (max-width: 991px) {
 }

@@ -116,7 +116,7 @@ body{
   margin: auto;
   vertical-align: middle;
   overflow: hidden;
-  max-width: 1120px;
+  max-width: 1420px;
   height: 100%;
   border-radius: 10px; 
   background-color: #EFEFEF;
@@ -1014,7 +1014,7 @@ select#chapterSelect {
   width: 100%;
 }
 
-@media (max-width: 980px) {
+@media (max-width: 1180px) {
   .main-container__left {
     width: 100%;
   }

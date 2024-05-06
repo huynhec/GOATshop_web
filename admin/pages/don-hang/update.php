@@ -7,6 +7,7 @@ require_once '../../../model/TrangThaiModel.php';
 require_once '../../../model/ChiTietTrangThaiModel.php';
 require_once '../../../model/ChiTietDonHangModel.php';
 require_once '../../../model/SizeModel.php';
+require_once '../../../model/DiaChiModel.php';
 $dh = new DonHangModel();
 $kh = new KhachHangModel();
 $sp = new SanPhamModel();
@@ -15,8 +16,11 @@ $tt = new TrangThaiModel();
 $cttt = new ChiTietTrangThaiModel();
 $ctdh = new ChiTietDonHangModel();
 $sz = new SizeModel();
+$dc = new DiaChiModel();
 
 $madon = $_POST['madon'];
+$donHang__Get_By_Id = $dh->DonHang__Get_By_Id($madon);
+
 $chiTietDonHang__Get_By_Id_DH = $ctdh->ChiTietDonHang__Get_By_Id_DH($madon);
 $chiTietTrangThai__Get_By_Id_DH = $cttt->ChiTietTrangThai__Get_By_Id_DH($madon);
 $trangThai__Get_BY_Id_DH = $tt->TrangThai__Get_By_Id_DH($madon);
@@ -25,7 +29,9 @@ $trangThai__Get_BY_Id_DH = $tt->TrangThai__Get_By_Id_DH($madon);
 
 <div class="main-update">
     <h3 class="section-title">Chi tiết đơn hàng</h3>
-
+    <p>Họ tên người mua:..<?= $kh->KhachHang__Get_By_Id($donHang__Get_By_Id->makh)->tenkh ?>....</p>
+    <p>Số điện thoại:..<?= $kh->KhachHang__Get_By_Id($donHang__Get_By_Id->makh)->sodienthoai ?>...</p>
+    <p>Địa chỉ nhận:..<?= $dc->DiaChi__Get_By_Full_Ad($donHang__Get_By_Id->diachi_id)->full_dc; ?>....</p>
     <div class="table-responsive">
         <table id="table_js" class="table table-striped" style="width:100%">
             <thead>

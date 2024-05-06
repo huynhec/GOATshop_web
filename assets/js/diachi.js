@@ -36,7 +36,7 @@ $('#province').on('change', function () {
     $('#wards').empty();
   } else {
     // If no province is selected, clear the options in the "district" and "wards" select boxes
-    $('#district').empty();
+    $('#district').empty();    
   }
 });
 
@@ -83,6 +83,8 @@ $('#district').on('change', function () {
 
 // Listen for changes in the "province" select box
 $('#tinh').on('change', function () {
+
+
   var province_id = $(this).val();
   if (province_id) {
     // If a province is selected, fetch the districts for that province using AJAX
@@ -120,6 +122,7 @@ $('#tinh').on('change', function () {
   } else {
     // If no province is selected, clear the options in the "district" and "wards" select boxes
     $('#huyen').empty();
+
   }
 });
 

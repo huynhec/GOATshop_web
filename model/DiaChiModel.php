@@ -98,4 +98,24 @@ class DiaChiModel extends Database
         $obj->execute(array($masp, $maanh));
         return $obj->fetchAll();
     }
+
+    public function DiaChi__Get_By_Id_Kh($makh, $des = null)
+    {
+        if ($des != null) {
+            $obj = $this->connect->prepare("SELECT * FROM `$des` WHERE `name` IN (SELECT `$des` FROM `diachi` WHERE `makh` = ?) LIMIT 1");
+        } else {
+            $obj = $this->connect->prepare("SELECT * FROM `diachi` WHERE `makh` = ? LIMIT 1");
+        }
+        $obj->setFetchMode(PDO::FETCH_OBJ);
+        $obj->execute(array($makh));
+        return $obj->fetch();
+    }
+// nối chuỗi 
+    public function DiaChi__Get_By_Full_Ad($diachi_id)
+    {
+        $obj = $this->connect->prepare("SELECT CONCAT_WS(', ' ,`road`,`wards`,`district`,`province`) AS full_dc FROM `diachi` WHERE `diachi_id`= ?");
+        $obj->setFetchMode(PDO::FETCH_OBJ);
+        $obj->execute(array($diachi_id));
+        return $obj->fetch();
+    }
 }

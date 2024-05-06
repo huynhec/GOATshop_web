@@ -28,7 +28,7 @@ $sanPham__Get_Ten_Sp_Paged = $sp->SanPham__Get_All_Paged($page_number);
             <?php foreach ($sanPham__Get_Ten_Sp_Paged as $item) : ?>
                 <?php $anhSp__Get_By_Id_Sp_First = $anhSp->AnhSp__Get_By_Id_Sp_First($item->masp); ?>
 
-                    <a href="index.php?pages=chi-tiet&masp=<?= $item->masp ?>">
+                    <a href="index.php?pages=chi-tiet&masp=<?= $item->masp ?>&maloai=<?= $item->maloai ?>">
                         <div class="manga-container" data-masp="<?= $anhSp__Get_By_Id_Sp_First->masp ?>" onmouseenter="startTimer(this)" onmouseleave="endTimer()">
                             <div class="manga-thumbnail">
                                 <img src="../assets/<?= $anhSp__Get_By_Id_Sp_First->hinhanh?>">

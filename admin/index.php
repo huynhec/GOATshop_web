@@ -37,7 +37,7 @@ if (!isset($_SESSION['admin']) && !isset($_SESSION['manager']) && !isset($_SESSI
 
     <script src="../assets/vendor/daterangejs/moment.min.js"></script>
     <script src="../assets/vendor/daterangejs/daterangepicker.min.js"></script>
-    <script src="../assets/vendor/ckeditor/ckeditor.js"></script>
+    <script src="../assets/vendor/ckeditor5-build-classic/ckeditor.js"></script>
     <script src="../assets/js/admin.js"></script>
 
     <?php if (isset($_GET['msg'])) {
