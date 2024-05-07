@@ -174,7 +174,7 @@ img:hover {
   top: 0;
   left: 0;
   right: 0;
-  height: 50px;
+  /* height: 50px; */
   z-index: 100;
   background-color: #000000;
   transition: top 0.5s ease-in-out;

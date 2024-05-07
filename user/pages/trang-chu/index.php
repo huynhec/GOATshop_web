@@ -8,7 +8,7 @@ $dg = new DonGiaModel();
 $sp = new SanPhamModel();
 $anhSp = new AnhSpModel();
 $cm = new CommonModel();
-$sp__Get_Top_Updated_5 = $sp->SanPham__Get_Top_Updated(5);
+$sp__Get_Top_Updated_5 = $sp->SanPham__Get_Top_Updated(4);
 $sp__Get_Top_Updated_8 = $sp->SanPham__Get_Top_Updated(8);
 $sp__Get_Top_Sale = $sp->SanPham__Get_Top_Sale();
 $sp__Get_Top_Random = $sp->SanPham__Get_Top_Random(5);
@@ -88,6 +88,9 @@ $top = 0;
                                     <div class="manga-thumbnail">
                                         <img src="../assets/<?= $anhSp__Get_By_Id_Sp_First->hinhanh ?>" loading="lazy">
                                         <span class="manga-note background-1"><i class="bx bxs-badge-dollar"></i><?= $cm->getTimeAgo($item->ngaythem) ?></span>
+                                        <div>
+
+                                        </div>
                                     </div>
                                     <div class="manga-title color-1"><?= $item->tensp ?></div>
                                 </div>

@@ -17,6 +17,7 @@ $page_number = isset($_GET['page']) ? intval($_GET['page']) : 1;
 
 // Lấy danh sách truyện cho trang hiện tại
 $sanPham__Get_By_Loai_Paged = $sp->SanPham__Get_By_Loai_Paged($page_number, $maloai);
+$sanPham__Get_By_Loai = $sp->SanPham__Get_By_IdLoai($maloai);
 ?>
 
 <main class="main">
@@ -51,31 +52,31 @@ $sanPham__Get_By_Loai_Paged = $sp->SanPham__Get_By_Loai_Paged($page_number, $mal
     <div class="pagination-container">
         <div class="pagination">
             <?php
-            $total_pages = ceil(count($sanPham__Get_By_Loai_Paged) / 10);
+            $total_pages = ceil(count($sanPham__Get_By_Loai) / 15);
 
             // Hiển thị nút đầu trang
             if ($page_number > 1) {
-                echo '<a href="index.php?pages=danh-muc&page=1" class="pagination-link">Đầu trang</a>';
+                echo '<a href="index.php?pages=loai-sp&page=1" class="pagination-link">Đầu trang</a>';
             }
 
             // Hiển thị nút trước
             if ($page_number > 1) {
-                echo '<a href="index.php?pages=danh-muc&page=' . ($page_number - 1) . '" class="pagination-link">Trang trước</a>';
+                echo '<a href="index.php?pages=loai-sp&page=' . ($page_number - 1) . '" class="pagination-link">Trang trước</a>';
             }
 
             // Hiển thị các trang gần đó
             for ($i = max(1, $page_number - 2); $i <= min($page_number + 2, $total_pages); $i++) {
-                echo '<a href="index.php?pages=danh-muc&page=' . $i . '" class="pagination-link ' . ($page_number == $i ? 'active' : '') . '">' . $i . '</a>';
+                echo '<a href="index.php?pages=loai-sp&page=' . $i . '" class="pagination-link ' . ($page_number == $i ? 'active' : '') . '">' . $i . '</a>';
             }
 
             // Hiển thị nút sau
             if ($page_number < $total_pages) {
-                echo '<a href="index.php?pages=danh-muc&page=' . ($page_number + 1) . '" class="pagination-link">Trang sau</a>';
+                echo '<a href="index.php?pages=loai-sp&page=' . ($page_number + 1) . '" class="pagination-link">Trang sau</a>';
             }
 
             // Hiển thị nút cuối trang
             if ($page_number < $total_pages) {
-                echo '<a href="index.php?pages=danh-muc&page=' . $total_pages . '" class="pagination-link">Cuối trang</a>';
+                echo '<a href="index.php?pages=loai-sp&page=' . $total_pages . '" class="pagination-link">Cuối trang</a>';
             }
             ?>
         </div>

@@ -56,7 +56,7 @@ class SanPhamModel extends Database
         $obj = $this->connect->prepare("SELECT * FROM sanpham WHERE maloai = ?");
         $obj->setFetchMode(PDO::FETCH_OBJ);
         $obj->execute(array($maloai));
-        return $obj->fetch();
+        return $obj->fetchAll();
     }
 
 
@@ -111,8 +111,8 @@ class SanPhamModel extends Database
 
     public function SanPham__Get_All_Paged($page_number)
     {
-        // Số lượng truyện trên mỗi trang
-        $items_per_page = 14;
+        // Số lượng card trên mỗi trang
+        $items_per_page = 15;
 
         // Tính toán giá trị bắt đầu và kết thúc cho phân trang
         $page_start = ($page_number - 1) * $items_per_page;
@@ -250,7 +250,7 @@ class SanPhamModel extends Database
     public function SanPham__Get_By_Loai_Paged($page_number, $maloai)
     {
         // Số lượng sp trên mỗi trang
-        $items_per_page = 12;
+        $items_per_page = 15;
 
         // Tính toán giá trị bắt đầu và kết thúc cho phân trang
         $page_start = ($page_number - 1) * $items_per_page;

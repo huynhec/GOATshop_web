@@ -14,6 +14,7 @@ $page_number = isset($_GET['page']) ? intval($_GET['page']) : 1;
 
 // Lấy danh sách truyện cho trang hiện tại
 $sanPham__Get_Ten_Sp_Paged = $sp->SanPham__Get_All_Paged($page_number);
+$sanPham__Get_All = $sp->SanPham__Get_All(1);
 ?>
 
 <main class="main">
@@ -24,21 +25,21 @@ $sanPham__Get_Ten_Sp_Paged = $sp->SanPham__Get_All_Paged($page_number);
             </a>
         </div>
         <div class="main-item-container">
-        <?php if (count($sanPham__Get_Ten_Sp_Paged) > 0) : ?>
-            <?php foreach ($sanPham__Get_Ten_Sp_Paged as $item) : ?>
-                <?php $anhSp__Get_By_Id_Sp_First = $anhSp->AnhSp__Get_By_Id_Sp_First($item->masp); ?>
+            <?php if (count($sanPham__Get_Ten_Sp_Paged) > 0) : ?>
+                <?php foreach ($sanPham__Get_Ten_Sp_Paged as $item) : ?>
+                    <?php $anhSp__Get_By_Id_Sp_First = $anhSp->AnhSp__Get_By_Id_Sp_First($item->masp); ?>
 
                     <a href="index.php?pages=chi-tiet&masp=<?= $item->masp ?>&maloai=<?= $item->maloai ?>">
                         <div class="manga-container" data-masp="<?= $anhSp__Get_By_Id_Sp_First->masp ?>" onmouseenter="startTimer(this)" onmouseleave="endTimer()">
                             <div class="manga-thumbnail">
-                                <img src="../assets/<?= $anhSp__Get_By_Id_Sp_First->hinhanh?>">
+                                <img src="../assets/<?= $anhSp__Get_By_Id_Sp_First->hinhanh ?>">
                                 <span class="manga-note background-2"><?= number_format($dg->ShowDonGia__Get_By_Id_Spdg($item->masp)) ?>₫ <i class="bx bxs-star"></i></span>
                             </div>
                             <div class="manga-title color-2"><?= $item->tensp ?></div>
                         </div>
                     </a>
-            <?php endforeach ?>
-            <?php else: ?>
+                <?php endforeach ?>
+            <?php else : ?>
                 Không tìm thấy...
             <?php endif ?>
 
@@ -48,8 +49,7 @@ $sanPham__Get_Ten_Sp_Paged = $sp->SanPham__Get_All_Paged($page_number);
     <div class="pagination-container">
         <div class="pagination">
             <?php
-            $total_pages = ceil(count($sanPham__Get_Ten_Sp_Paged) / 10);
-
+            $total_pages = ceil(count($sanPham__Get_All) / 15);
             // Hiển thị nút đầu trang
             if ($page_number > 1) {
                 echo '<a href="index.php?pages=danh-muc&page=1" class="pagination-link">Đầu trang</a>';
@@ -77,5 +77,6 @@ $sanPham__Get_Ten_Sp_Paged = $sp->SanPham__Get_All_Paged($page_number);
             ?>
         </div>
     </div>
+
 
 </main>

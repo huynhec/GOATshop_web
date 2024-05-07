@@ -152,3 +152,4 @@ minhhieu|1234567
 admin|123456
 hoaibao|1234567
 admin|123456
+admin|123456
