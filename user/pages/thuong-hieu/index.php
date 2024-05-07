@@ -17,6 +17,7 @@ $page_number = isset($_GET['page']) ? intval($_GET['page']) : 1;
 
 // Lấy danh sách truyện cho trang hiện tại
 $sanPham__Get_By_Th_Paged = $sp->SanPham__Get_By_Th_Paged($page_number, $math);
+$sanPham__Get_By_Id_Thuonghieu = $sp->SanPham__Get_By_Id_Thuonghieu($math);
 ?>
 
 <main class="main">
@@ -51,7 +52,7 @@ $sanPham__Get_By_Th_Paged = $sp->SanPham__Get_By_Th_Paged($page_number, $math);
     <div class="pagination-container">
         <div class="pagination">
             <?php
-            $total_pages = ceil(count($sanPham__Get_By_Th_Paged) / 10);
+            $total_pages = ceil(count($sanPham__Get_By_Id_Thuonghieu) / 15);
 
             // Hiển thị nút đầu trang
             if ($page_number > 1) {

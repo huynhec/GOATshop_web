@@ -44,8 +44,8 @@ $url = $_SESSION['url'] ?? '../../user/';
                 <input type="text" name="email_or_username" id="email_or_username" class="form-control" required placeholder="Nhập email hoặc username">
             </div>
             <div class="form-group">
-                <label for="password">Mặt khẩu</label>
-                <input type="password" name="password" id="password" class="form-control" required placeholder="Nhập mặt khẩu">
+                <label for="password">Mật khẩu</label>
+                <input type="password" name="password" id="password" class="form-control" required placeholder="Nhập mật khẩu">
             </div>
             <br>
             <div class="g-recaptcha" data-sitekey="6LeCaZkpAAAAADBw3Hip0xBcv6JdGRcEGMQU8HfS"></div>

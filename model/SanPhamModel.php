@@ -58,7 +58,13 @@ class SanPhamModel extends Database
         $obj->execute(array($maloai));
         return $obj->fetchAll();
     }
-
+    public function SanPham__Get_By_Id_Thuonghieu($math)
+    {
+        $obj = $this->connect->prepare("SELECT * FROM sanpham WHERE math = ?");
+        $obj->setFetchMode(PDO::FETCH_OBJ);
+        $obj->execute(array($math));
+        return $obj->fetchAll();
+    }
 
 
     public function SanPham__Get_Top_Updated($limit = 6)
