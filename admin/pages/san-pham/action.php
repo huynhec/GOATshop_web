@@ -27,12 +27,15 @@ if (isset($_GET['req'])) {
             $math = $_POST["math"];
             $maloai = $_POST["maloai"];
             $masp = $sp->SanPham__Add($tensp, $mota, $ngaythem, $trangthai, $luotmua, $luotxem, $math, $maloai);
-            $idtt = $_POST["idtt"];
+            $idtt = $_POST["idtt"] != "" ? $_POST["idtt"] : 0;
             $noidung = $_POST["noidung"];
             $apdung = 1;
             $ngaynhap = date("Y-m-d H:i:s");
-            for ($i = 0; $i < count($idtt); $i++) {
-                $chitietthuoctinh__Add = $chitietthuoctinh->ChiTietThuocTinh__Add($idtt[$i], $masp, $noidung[$i]);
+
+            if (isset($idtt) && $idtt > 0) {
+                for ($i = 0; $i < count($idtt); $i++) {
+                    $chitietthuoctinh__Add = $chitietthuoctinh->ChiTietThuocTinh__Add($idtt[$i], $masp, $noidung[$i]);
+                }
             }
 
             if (isset($_POST['dongia']) && is_array($_POST['dongia'])) {
@@ -83,7 +86,6 @@ if (isset($_GET['req'])) {
             $res = 0;
             $masp = $_POST['masp'];
             $tensp = $_POST["tensp"];
-            $dongia = $_POST["dongia"];
             $mota = $_POST["mota"];
             $ngaythem = date("Y-m-d H:i:s");
             $trangthai = $_POST["trangthai"];
@@ -93,11 +95,13 @@ if (isset($_GET['req'])) {
             $maloai = $_POST["maloai"];
 
             $id_cttt = $_POST["id_cttt"];
-            $idtt = $_POST["idtt"];
+            $idtt = $_POST["idtt"] != "" ? $_POST["idtt"] : 0;
             $noidung = $_POST["noidung"];
 
-            for ($i = 0; $i < count($idtt); $i++) {
-                $chitietthuoctinh__Update = $chitietthuoctinh->ChiTietThuocTinh__Update($id_cttt[$i], $idtt[$i], $masp, $noidung[$i]);
+            if (isset($idtt) && $idtt > 0) {
+                for ($i = 0; $i < count($idtt); $i++) {
+                    $chitietthuoctinh__Update = $chitietthuoctinh->ChiTietThuocTinh__Update($id_cttt[$i], $idtt[$i], $masp, $noidung[$i]);
+                }
             }
 
             $res += $sp->SanPham__Update($masp, $tensp, $mota, $ngaythem, $trangthai, $luotmua, $luotxem, $math, $maloai);

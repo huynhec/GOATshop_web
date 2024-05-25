@@ -98,4 +98,12 @@ class AnhSpModel extends Database
         $obj->execute(array($masp, $maanh));
         return $obj->fetchAll();
     }
+    public function AnhSp__Get_By_Id_Sp_Thumbnail($masp)
+    {
+        $maanh = $this->AnhSp__Get_By_Id_Sp_First($masp)->maanh;
+        $obj = $this->connect->prepare("SELECT * FROM anhsp WHERE masp = ? AND maanh !=? ORDER BY maanh ASC LIMIT 1");
+        $obj->setFetchMode(PDO::FETCH_OBJ);
+        $obj->execute(array($masp, $maanh));
+        return $obj->fetch();
+    }
 }

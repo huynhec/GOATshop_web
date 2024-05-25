@@ -52,12 +52,16 @@ $sanPham__Get_All = $sp->SanPham__Get_All(1);
             $total_pages = ceil(count($sanPham__Get_All) / 15);
             // Hiển thị nút đầu trang
             if ($page_number > 1) {
-                echo '<a href="index.php?pages=danh-muc&page=1" class="pagination-link">Đầu trang</a>';
+                echo '<a href="index.php?pages=danh-muc&page=1" class="pagination-link">
+                        <i class="fa fa-angle-double-left""></i>
+                      </a>';
             }
 
             // Hiển thị nút trước
             if ($page_number > 1) {
-                echo '<a href="index.php?pages=danh-muc&page=' . ($page_number - 1) . '" class="pagination-link">Trang trước</a>';
+                echo '<a href="index.php?pages=danh-muc&page=' . ($page_number - 1) . '" class="pagination-link">
+                        <i class="fas fa-angle-left"></i>
+                      </a>';
             }
 
             // Hiển thị các trang gần đó
@@ -67,12 +71,16 @@ $sanPham__Get_All = $sp->SanPham__Get_All(1);
 
             // Hiển thị nút sau
             if ($page_number < $total_pages) {
-                echo '<a href="index.php?pages=danh-muc&page=' . ($page_number + 1) . '" class="pagination-link">Trang sau</a>';
+                echo '<a href="index.php?pages=danh-muc&page=' . ($page_number + 1) . '" class="pagination-link">
+                          <i class="fas fa-angle-right"></i>
+                     </a>';
             }
 
             // Hiển thị nút cuối trang
             if ($page_number < $total_pages) {
-                echo '<a href="index.php?pages=danh-muc&page=' . $total_pages . '" class="pagination-link">Cuối trang</a>';
+                echo '<a href="index.php?pages=danh-muc&page=' . $total_pages . '" class="pagination-link">
+                         <i class="fa fa-angle-double-right""></i>
+                     </a>';
             }
             ?>
         </div>

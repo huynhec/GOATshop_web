@@ -37,7 +37,7 @@ class SanPhamModel extends Database
         if ($trangthai != -1) {
             $obj = $this->connect->prepare("SELECT * FROM sanpham");
         } else {
-            $obj = $this->connect->prepare("SELECT * FROM sanpham ");
+            $obj = $this->connect->prepare("SELECT * FROM sanpham");
         }
         $obj->setFetchMode(PDO::FETCH_OBJ);
         $obj->execute();
@@ -204,7 +204,7 @@ class SanPhamModel extends Database
     public function SanPham__Get_By_Th_Paged($page_number, $math)
     {
         // Số lượng sp trên mỗi trang
-        $items_per_page = 12;
+        $items_per_page = 15;
 
         // Tính toán giá trị bắt đầu và kết thúc cho phân trang
         $page_start = ($page_number - 1) * $items_per_page;
@@ -230,7 +230,7 @@ class SanPhamModel extends Database
     public function SanPham__Get_Ten_Sp_Paged($page_number, $tensp)
     {
         // Số lượng sp trên mỗi trang
-        $items_per_page = 12;
+        $items_per_page = 15;
 
         // Tính toán giá trị bắt đầu và kết thúc cho phân trang
         $page_start = ($page_number - 1) * $items_per_page;

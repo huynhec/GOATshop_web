@@ -70,7 +70,7 @@ $loaisp__Get_All_Exist = $loaiSp->LoaiSp__Get_All_Exist();
             <div id="inputDongia">
                 <div class="input-group mb-2">
                     <input type="number" min="0" max="1000000000" class="form-control" name="dongia[]"
-                        placeholder="Đơn giá 1" class="form-control" required>
+                        placeholder="Đơn giá " class="form-control" required>
                 </div>
             </div>
             <!-- <div class="col text-center">

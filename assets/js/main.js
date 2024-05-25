@@ -78,6 +78,9 @@ function viewSanpham(masp) {
     },
   });
 }
+
+
+
 let timer;
 let timeCounter = 0;
 let masp; // Khai báo biến masp ở cấp độ toàn cục

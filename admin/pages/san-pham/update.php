@@ -80,7 +80,11 @@ $loaiSp_Get_By_Id = $loaiSp->LoaiSp__Get_By_Id($maloai);
 <script>
 d_update_obj();
 
-CKEDITOR.replace('mota_u');
+ClassicEditor
+.create( document.querySelector( '#mota_u' ) )
+.catch( error => {
+    console.error( error );
+} );
 
 function d_update_obj() {
     $.post("pages/san-pham/d_update.php", {

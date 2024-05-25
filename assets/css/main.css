@@ -98,7 +98,7 @@ body{
   margin: auto;
   vertical-align: middle;
   overflow: hidden;
-  max-width: 1380px;
+  max-width: 100%;
   height: 100%;
   /* border-radius: 10px;  */
   background-color: #f0f0f0;
@@ -116,7 +116,7 @@ body{
   margin: auto;
   vertical-align: middle;
   overflow: hidden;
-  max-width: 1420px;
+  max-width: 100%;
   height: 100%;
   border-radius: 10px; 
   background-color: #EFEFEF;
@@ -154,7 +154,8 @@ body{
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  margin: 50px;
 }
 
 /* test */
@@ -165,7 +166,7 @@ body{
   transition: transform 0.3s ease-in-out;
 
   position: relative;
-  width: 15.875em;
+  width: 14.875em;
   height: 20.5em;
   box-shadow: 0px 1px 13px rgba(0,0,0,0.1);
   cursor: pointer;
@@ -359,7 +360,8 @@ body{
   margin: auto;
   float: left;
   overflow: hidden;
-  max-width: 730px;
+  max-width: 99%;
+  padding: 40px;
 }
 
 .main-title-container__left {
@@ -942,11 +944,12 @@ span.chapter-views {
 }
 
 .pagination-link:hover {
-  background-color: #ddd;
+  background-color: #000000;
+  color: white;
 }
 
 .pagination-link.active {
-  background-color: #4caf50;
+  background-color: #000000;
   color: white;
 }
 
@@ -1024,7 +1027,7 @@ select#chapterSelect {
 /*                                  truyenxem                                 */
 /* -------------------------------------------------------------------------- */
 .main-container {
-  padding: 2px;
+  /* padding: 2px; */
   margin-top: 45px;
 }
 .manga-container__comming_soon {
@@ -1227,6 +1230,7 @@ input.form-control.quantity {
 /* components-silde */
 .manga-sp-container__chitiet__left {
   z-index: 10;
+  width: 100%;
   height: 360px;
   background: #f8f8f8;
   border-radius: 10px;
@@ -1305,9 +1309,9 @@ table {
 
 .size-option {
   display: inline-block;
-  margin: 0.5rem;
+  margin: 0 0.5rem;
   padding: 0.5rem;
-  border: 2px solid #e29e76;
+  border: 2px solid #000000;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s, border-color 0.3s;
@@ -1318,9 +1322,9 @@ table {
 }
 
 .size-option:hover {
-  background-color: #34cddb; /* Màu sắc khi hover */
+  background-color: #000000; /* Màu sắc khi hover */
   color: #fff; /* Màu sắc chữ khi hover */
-  border-color: #34cddb; /* Màu sắc đường viền khi hover */  }
+  border-color: #0f0f0f; /* Màu sắc đường viền khi hover */  }
 
 .size-option input[type="radio"]:checked + label {
   background-color: #3498db;
@@ -1328,9 +1332,9 @@ table {
   border-color: #3498db;
 }
 .selected {
-  background-color: #34cddb;
+  background-color: #000000;
   color: #fff;
-  border: 2px solid #34cddb;
+  border: 2px solid #000000;
 
   /* Màu nền khi được chọn */
 }  
@@ -1420,4 +1424,152 @@ margin-right: 20px;
 
 .filter-group {
 margin-bottom: 10px;
+}
+
+
+.product-container {
+  display: flex;
+  /* justify-content: space-around; */
+  /* padding: 20px; */
+  list-style: none;
+  margin: 0 186px;
+  padding: 0;
+}
+
+.product-images {
+  display: flex;
+  flex-direction: row;
+  width: 70%;
+}
+
+.thumbnail-images {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-right: 10px;
+}
+
+.thumbnail-images img {
+  width: 80px;
+  /* Adjust this value as needed */
+  cursor: pointer;
+}
+
+.main-image img {
+  width: 100%;
+  display: block;
+}
+
+.product-details {
+  width: 45%;
+  padding: 10px;
+}
+
+.product-details h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-family: "Montserrat", sans-serif !important;
+}
+
+.product-details .brand {
+  font-size: 16px;
+  margin-bottom: 10px;
+  filter: contrast(35%);
+}
+
+.product-details .price {
+  font-size: 24px;
+  color: #EB5833;
+  margin-bottom: 10px;
+  font-weight: bold;
+
+}
+
+.product-details .installment {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.product-details .discount {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.product-details .discount a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.product-details .features {
+  list-style-type: none;
+  padding-left: 10px;
+  margin-bottom: 20px;
+}
+
+.product-details .features li {
+  margin-bottom: 5px;
+  list-style-type: disc;
+  font-size: 18px;
+  filter: contrast(10%);
+}
+
+/* .size-selection,
+.quantity-selection {
+  margin-bottom: 20px;
+}
+
+.size-selection label,
+.quantity-selection label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.size-selection select,
+.quantity-selection input {
+  padding: 5px;
+  font-size: 16px;
+  width: 100px;
+} */
+
+.quantity-selection button {
+  padding: 5px 10px;
+  font-size: 16px;
+}
+
+.actions {
+  padding-top: 20px;
+  display: flex;
+  gap: 20px;
+}
+
+.actions .buy-now {
+  padding: 10px 20px;
+  font-size: 16px;
+  width: 60%;
+  cursor: pointer;
+  border: none;
+}
+.actions .add-to-cart{
+  padding: 10px 20px;
+  font-size: 16px;
+  width: 100%;
+  cursor: pointer;
+  border: none;
+}
+
+
+.actions .add-to-cart {
+  background-color: #000000;
+  color: #fff;
+}
+
+.actions .buy-now {
+  background-color: #ffffff;
+  color: #000;
+  border: 2px solid #000000;
+
+}
+.product-size-hotline{
+  padding: 15px;
 }

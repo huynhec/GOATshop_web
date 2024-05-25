@@ -1,5 +1,7 @@
+<script src="../assets/js/diachi.js"></script>
+
 <div class="main-add">
-    <h3 class="section-title">Thêm khách hàng</h3>
+    <h3 class="text-title">Thêm khách hàng</h3>
     <form class="form-group" action="pages/khach-hang/action.php?req=add" method="post">
         <div class="col">
             <label for="tenkh" class="form-label">Tên khách hàng</label>
@@ -44,9 +46,39 @@
                 </select>
             </div>
         </div>
-        <div class="col">
-            <label for="diachi" class="form-label">Địa chỉ</label>
-            <input type="diachi" class="form-control" id="diachi" name="diachi" required>
+        <!-- Địa chỉ -->
+        <div class="form-group">
+            <label for="province">Tỉnh/Thành phố</label>
+            <select id="province" name="province" class="form-control">
+                <option value="">Chọn một tỉnh</option>
+                <?php foreach ($results as $row) : ?>
+                    <option value="<?php echo $row['province_id'] ?>"><?php echo $row['name'] ?></option>
+                <?php endforeach; ?>
+            </select>
+            <!-- Thêm hidden input để lưu tên tỉnh -->
+            <input type="hidden" id="province_name" name="province_name" value="">
+        </div>
+        <div class="form-group">
+            <label for="district">Quận/Huyện</label>
+            <select id="district" name="district" class="form-control">
+                <option value="">Chọn một quận/huyện</option>
+            </select>
+            <!-- Thêm hidden input để lưu tên huyện -->
+            <input type="hidden" id="district_name" name="district_name" value="">
+        </div>
+        <div class="form-group">
+            <label for="wards">Phường/Xã</label>
+            <select id="wards" name="wards" class="form-control">
+                <option value="">Chọn một xã</option>
+            </select>
+            <!-- Thêm hidden input để lưu tên xã -->
+            <input type="hidden" id="wards_name" name="wards_name" value="">
+        </div>
+
+
+        <div class="form-group">
+            <label for="road">Số nhà</label>
+            <input id="road" name="road" class="form-control">
         </div>
         <br />
         <div class="col text-center">

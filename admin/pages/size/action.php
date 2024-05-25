@@ -26,9 +26,9 @@ if (isset($_GET['req'])) {
 
 
             if ($res != 0) {
-                header('location: ../../index.php?pages=kich-co&msg=success');
+                header('location: ../../index.php?pages=size&msg=success');
             } else {
-                header('location: ../../index.php?pages=kich-co&msg=error');
+                header('location: ../../index.php?pages=size&msg=error');
             }
             break;
 
@@ -41,9 +41,9 @@ if (isset($_GET['req'])) {
 
             $res += $size->Size__Update($tensize,  $trangthai, $maloai, $idsize);
             if ($res != 0) {
-                header('location: ../../index.php?pages=kich-co&msg=success');
+                header('location: ../../index.php?pages=size&msg=success');
             } else {
-                header('location: ../../index.php?pages=kich-co&msg=error');
+                header('location: ../../index.php?pages=size&msg=error');
             }
             break;
 
@@ -69,9 +69,9 @@ if (isset($_GET['req'])) {
             }
 
             if ($res != 0) {
-                header('location: ../../index.php?pages=kich-co&msg=success');
+                header('location: ../../index.php?pages=size&msg=success');
             } else {
-                header('location: ../../index.php?pages=kich-co&msg=error');
+                header('location: ../../index.php?pages=size&msg=error');
             }
             break;
 
@@ -80,9 +80,9 @@ if (isset($_GET['req'])) {
             $idsize = $_GET['idsize'];
             $res += $size->Size__Delete($idtt);
             if ($res != 0) {
-                header('location: ../../index.php?pages=kich-co&msg=success');
+                header('location: ../../index.php?pages=size&msg=success');
             } else {
-                header('location: ../../index.php?pages=kich-co&msg=error');
+                header('location: ../../index.php?pages=size&msg=error');
             }
             break;
         default:

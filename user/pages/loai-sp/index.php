@@ -56,27 +56,35 @@ $sanPham__Get_By_Loai = $sp->SanPham__Get_By_IdLoai($maloai);
 
             // Hiển thị nút đầu trang
             if ($page_number > 1) {
-                echo '<a href="index.php?pages=loai-sp&page=1" class="pagination-link">Đầu trang</a>';
+                echo '<a href="index.php?pages=loai-sp&maloai='.$maloai.'&page=1" class="pagination-link">
+                        <i class="fa fa-angle-double-left""></i>
+                      </a>';
             }
 
             // Hiển thị nút trước
             if ($page_number > 1) {
-                echo '<a href="index.php?pages=loai-sp&page=' . ($page_number - 1) . '" class="pagination-link">Trang trước</a>';
+                echo '<a href="index.php?pages=loai-sp&maloai='.$maloai.'&page=' . ($page_number - 1) . '" class="pagination-link">
+                        <i class="fas fa-angle-left"></i>
+                      </a>';
             }
 
             // Hiển thị các trang gần đó
             for ($i = max(1, $page_number - 2); $i <= min($page_number + 2, $total_pages); $i++) {
-                echo '<a href="index.php?pages=loai-sp&page=' . $i . '" class="pagination-link ' . ($page_number == $i ? 'active' : '') . '">' . $i . '</a>';
+                echo '<a href="index.php?pages=loai-sp&maloai='.$maloai.'&page=' . $i . '" class="pagination-link ' . ($page_number == $i ? 'active' : '') . '">' . $i . '</a>';
             }
 
             // Hiển thị nút sau
             if ($page_number < $total_pages) {
-                echo '<a href="index.php?pages=loai-sp&page=' . ($page_number + 1) . '" class="pagination-link">Trang sau</a>';
+                echo '<a href="index.php?pages=loai-sp&maloai='.$maloai.'&page=' . ($page_number + 1) . '" class="pagination-link">
+                          <i class="fas fa-angle-right"></i>
+                      </a>';
             }
 
             // Hiển thị nút cuối trang
             if ($page_number < $total_pages) {
-                echo '<a href="index.php?pages=loai-sp&page=' . $total_pages . '" class="pagination-link">Cuối trang</a>';
+                echo '<a href="index.php?pages=loai-sp&maloai='.$maloai.'&page=' . $total_pages . '" class="pagination-link">
+                        <i class="fa fa-angle-double-right""></i>
+                      </a>';
             }
             ?>
         </div>
