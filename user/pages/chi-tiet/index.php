@@ -402,10 +402,19 @@ $anhSp__Get_By_Id_Sp_Thumbnail = $anhSp->AnhSp__Get_By_Id_Sp_Thumbnail($masp);
                     <i class="fa fa-mobile" aria-hidden="true"></i> Hotline &amp; Zalo hỗ trợ: 098 5259052 <a href="tel:"></a>
                 </div>
             </div>
-            <div class="actions">
-                <button class="buy-now">Mua ngay</button>
-                <button class="add-to-cart">Thêm vào giỏ</button>
-            </div>
+
+            <?php if (isset($_SESSION['user'])) : ?>
+                <div class="actions">
+                    <button class="buy-now" onclick="buyNow('<?= $masp ?>')">Mua ngay</button>
+                    <button class="add-to-cart" onclick="addCartSize('<?= $masp ?>')">Thêm vào giỏ</button>
+                </div>
+            <?php else : ?>
+                <div class="actions">
+                    <button class="buy-now" onclick="return checkLogin()">Mua ngay</button>
+                    <button class="add-to-cart" onclick="return checkLogin()">Thêm vào giỏ</button>
+                </div>
+            <?php endif ?>
+
         </div>
     </div>
 
@@ -419,23 +428,13 @@ $anhSp__Get_By_Id_Sp_Thumbnail = $anhSp->AnhSp__Get_By_Id_Sp_Thumbnail($masp);
                     <button class="pro-tablinks" onclick="openProTabs(event, 'protab3')">Chính sách bảo hành và đổi trả</button>
                 </div>
                 <div id="protab1" class="pro-tabcontent" style="display: block;">
-                    <h1 style="text-align: center;"><span style="font-size:22px"><strong>NIKE AIR ZOOM MERCURIAL VAPOR 15 ACADEMY IC - MAD READY PACK</strong></span></h1>
-                    <p><span style="font-size:18px"><strong>Tên sản phẩm</strong>: Nike Air Zoom Mercurial Vapor 15 Academy IC<br>
-                            <strong>Màu sắc</strong>: Xanh lục<br>
-                            <strong>Bộ sưu tập</strong>: Mad Ready Pack (2024)<br>
-                            <strong>Mã sản phẩm</strong>: DJ5633-700<br>
-                            <strong>Loại đế giày</strong>: Indoor Court (IC dành cho mặt sân sàn)<br>
-                            <strong>Phân khúc</strong>: Academy<br>
-                            <strong>Trọng lượng</strong>: 240 gram/chiếc (Size 41)<br>
-                            <strong>Lưỡi gà</strong>: Dạng lưỡi gà rời<br>
-                            <strong>Thời điểm ra mắt</strong>: 2024<br>
-                            <strong>Phong cách thi đấu</strong>: Tiền đạo, chạy cánh, tốc độ (vai trò như vị trí Ala)<br>
-                            <strong>Những cầu thủ đại diện</strong>: Bruno Fernandes, Theo Hernandez, ...<br>
-                            <strong>Công nghệ, chất liệu</strong>:<br>
-                            - Chất liệu Nikeskin giúp giày co giãn tốt.<br>
-                            - Khung Speedcage phía dưới upper tăng độ ôm chân khi di chuyển và giữ form giày tốt.<br>
-                            - Phần lưỡi gà được may một phần giúp hạn chế lệch lưỡi gà<br>
-                            - Bộ đệm độc quyền Air Zoom ở gót tạo độ êm ái và phản lực khi bứt tốc.</span></p>
+                    <?php if ($sp__Get_By_Id->mota != "") : ?>
+                        <?= $sp__Get_By_Id->mota ?>
+                    <?php else : ?>
+                        <a href="index.php?pages=sp-chi-tiet&masp=<?= $item->masp ?>&maloai=<?= $item->maloai ?>">
+                            <span class="chapter-name"></span>Đang cập nhật...</span>
+                        </a>
+                    <?php endif ?>
                 </div>
                 <div id="protab2" class="pro-tabcontent" style="display: none;">
                     <p><span style="font-size:18px"><strong>HƯỚNG DẪN SỬ DỤNG GIÀY BÓNG ĐÁ MỚI</strong></span></p>
@@ -452,7 +451,7 @@ $anhSp__Get_By_Id_Sp_Thumbnail = $anhSp->AnhSp__Get_By_Id_Sp_Thumbnail($masp);
                         <li><span style="font-size:18px">Nên định kỳ vệ sinh giày từ 5-7 ngày/lần bằng khăn sạch được thấm xà phòng hoặc dùng các dung dịch chuyên vệ sinh giày như Crep Protect để đôi giày của bạn luôn trong trạng thái tốt nhất.</span></li>
                         <li><span style="font-size:18px">Không chà mạnh tay và không dùng các chất tẩy rửa mạnh khi vệ sinh giày.</span></li>
                         <li><span style="font-size:18px">Hạn chế để nước thấm vào trong giày.</span></li>
-                        <li><span style="font-size:18px">Sau khi sử dụng giày, nên để giày ở nơi khô thoáng, không để vớ bên trong giày. Nên để giấy báo, các hạt hút ẩm vào bên trong giày để hạn chế mùi hôi hoặc dùng các công cụ chuyên dụng như viên tẩy mùi hôi của Crep Protect để giày của bạn luôn sẵn sàng cho trận đấu. Ngoài ra chúng tôi cũng có cung cấp dịch vụ vệ sinh giày bóng đá và sản phẩm Crep Protect, bạn có thể tham khảo tại website: urixx.com.</span></li>
+                        <li><span style="font-size:18px">Sau khi sử dụng giày, nên để giày ở nơi khô thoáng, không để vớ bên trong giày. Nên để giấy báo, các hạt hút ẩm vào bên trong giày để hạn chế mùi hôi hoặc dùng các công cụ chuyên dụng như viên tẩy mùi hôi của Crep Protect để giày của bạn luôn sẵn sàng cho trận đấu. Ngoài ra chúng tôi cũng có cung cấp dịch vụ vệ sinh giày bóng đá và sản phẩm Crep Protect, bạn có thể tham khảo tại website: GOATshop.com.</span></li>
                     </ul>
                 </div>
                 <div id="protab3" class="pro-tabcontent" style="display: none;">
@@ -470,7 +469,7 @@ $anhSp__Get_By_Id_Sp_Thumbnail = $anhSp->AnhSp__Get_By_Id_Sp_Thumbnail($masp);
                         <li><span style="font-size:18px">Không hỗ trợ đối với những sản phẩm có thông báo: không áp dụng đổi trả - bảo hành.</span></li>
                         <li><span style="font-size:18px">Không nhận bảo hành các sản phẩm thuộc dòng Sale.</span></li>
                     </ul>
-                    <p><span style="font-size:18px">Trường hợp hết thời gian bảo hành, giày dép hư hỏng do hao mòn tự nhiên hoặc bị tác động mạnh từ bên ngoài, Urixx vẫn tiếp nhận bảo hành tuy nhiên chi phí sửa chữa và vận chuyển khách hàng thanh toán.</span></p>
+                    <p><span style="font-size:18px">Trường hợp hết thời gian bảo hành, giày dép hư hỏng do hao mòn tự nhiên hoặc bị tác động mạnh từ bên ngoài, GOATshop vẫn tiếp nhận bảo hành tuy nhiên chi phí sửa chữa và vận chuyển khách hàng thanh toán.</span></p>
                     <p>&nbsp;</p>
                     <p><span style="font-size:18px"><strong>HƯỚNG DẪN ĐỔI TRẢ</strong></span></p>
                     <p><span style="font-size:18px"># Điều kiện áp dụng</span></p>
@@ -483,11 +482,11 @@ $anhSp__Get_By_Id_Sp_Thumbnail = $anhSp->AnhSp__Get_By_Id_Sp_Thumbnail($masp);
                     </ul>
                     <p><span style="font-size:18px">Chúng tôi chỉ hỗ trợ đổi 1 lần duy nhất cho mỗi đơn hàng.</span></p>
                     <p><span style="font-size:18px">Không hỗ trợ đổi hàng với các sản phẩm thuộc danh mục đặt trước (Pre-Order).</span></p>
-                    <p><span style="font-size:18px">Quý khách có thể liên hệ Hotline: 0339 400 730 hoặc Email: urixxfootball@gmail.com nếu muốn đổi trả sau 7 ngày kể từ ngày nhận hàng.</span></p>
+                    <p><span style="font-size:18px">Quý khách có thể liên hệ Hotline: 0339 400 730 hoặc Email: huynhbarca@gmail.com nếu muốn đổi trả sau 7 ngày kể từ ngày nhận hàng.</span></p>
                     <p><span style="font-size:18px"># Lưu ý:</span></p>
                     <ul>
-                        <li><span style="font-size:18px">Giày đổi phải có giá trị tương đương. Trường hợp sản phẩm mới có giá trị cao hơn, khách hàng vui lòng bù thêm khoản chênh lệch. Trường hợp sản phẩm đổi mới có giá trị thấp hơn, Urixx sẽ hoàn trả khoản chênh lệch (tối đa 500,000 VNĐ)</span></li>
-                        <li><span style="font-size:18px">Phí vận chuyển trả hàng khách hàng thanh toán (trừ trường hợp Urixx giao nhầm size hoặc mẫu so với đơn đặt hàng)</span></li>
+                        <li><span style="font-size:18px">Giày đổi phải có giá trị tương đương. Trường hợp sản phẩm mới có giá trị cao hơn, khách hàng vui lòng bù thêm khoản chênh lệch. Trường hợp sản phẩm đổi mới có giá trị thấp hơn, GOATshop sẽ hoàn trả khoản chênh lệch (tối đa 500,000 VNĐ)</span></li>
+                        <li><span style="font-size:18px">Phí vận chuyển trả hàng khách hàng thanh toán (trừ trường hợp GOATshop giao nhầm size hoặc mẫu so với đơn đặt hàng)</span></li>
                     </ul>
                 </div>
             </div>
@@ -496,10 +495,24 @@ $anhSp__Get_By_Id_Sp_Thumbnail = $anhSp->AnhSp__Get_By_Id_Sp_Thumbnail($masp);
             <div class="product-related-wrapper">
                 <p class="section-title">SẢN PHẨM LIÊN QUAN</p>
                 <div class="product-recommendations">
-                    <div class="recommendation">
-                        <img src="path_to_image" alt="Nike Tiempo Legend 10 Academy TF - Mad Brilliance Pack">
-                        <p><strong>Nike Tiempo Legend 10 Academy TF - Mad Brilliance Pack</strong> (2,090,000₫)</p>
-                    </div>
+
+                    <?php foreach ($sp__Get_Top_Same as $item) : ?>
+                        <?php if (count($sp__Get_Top_Same) > 0) : ?>
+                            <?php $anhSp__Get_By_Id_Sp_First = $anhSp->AnhSp__Get_By_Id_Sp_First($item->masp); ?>
+                            <?php if (isset($anhSp__Get_By_Id_Sp_First->masp)) : ?>
+                                <a href="index.php?pages=chi-tiet&masp=<?= $item->masp ?>&maloai=<?= $item->maloai ?>">
+                                    <div class="recommendation">
+                                        <img src="../assets/<?= $anhSp__Get_By_Id_Sp_First->hinhanh ?>" alt="">
+                                        <p>
+                                            <strong><?= $item->tensp ?></strong>
+                                            <span><?= number_format($dg->ShowDonGia__Get_By_Id_Spdg($item->masp)) ?>₫</span>
+                                        </p>
+                                    </div>
+                                </a>
+                            <?php endif ?>
+                        <?php endif ?>
+                    <?php endforeach ?>
+
                 </div>
             </div>
         </div>
@@ -511,11 +524,20 @@ $anhSp__Get_By_Id_Sp_Thumbnail = $anhSp->AnhSp__Get_By_Id_Sp_Thumbnail($masp);
 </html>
 
 <style>
+    .pro-tabcontent a,
+    .pro-tabcontent p, 
+    .pro-tabcontent span {
+        filter: contrast(0.5);
+    }
+    .buy-now,
+    .add-to-cart {
+        font-weight: bold;
+    }
+
     .grid {
         display: flex;
         /* flex-wrap: wrap; */
         list-style: none;
-
         max-width: 1200px;
         margin: 0 186px;
         padding-top: 20px;
@@ -538,10 +560,12 @@ $anhSp__Get_By_Id_Sp_Thumbnail = $anhSp->AnhSp__Get_By_Id_Sp_Thumbnail($masp);
         overflow: hidden;
         border-bottom: 1px solid #ccc;
         margin-bottom: 20px;
+        background: rgb(0, 0, 0, 0.5);
     }
 
     .tab button {
-        background-color: inherit;
+        background-color: #3F3F3F;
+        color: #fff;
         float: left;
         border: none;
         outline: none;
@@ -549,14 +573,18 @@ $anhSp__Get_By_Id_Sp_Thumbnail = $anhSp->AnhSp__Get_By_Id_Sp_Thumbnail($masp);
         padding: 14px 16px;
         transition: 0.3s;
         font-size: 17px;
+        font-weight: bold;
+
     }
 
     .tab button:hover {
-        background-color: #ddd;
+        background-color: #000000;
+        color: #fff;
     }
 
     .tab button.active {
-        background-color: #ccc;
+        background-color: #000000;
+        color: #fff;
     }
 
     .pro-tabcontent {
@@ -583,6 +611,7 @@ $anhSp__Get_By_Id_Sp_Thumbnail = $anhSp->AnhSp__Get_By_Id_Sp_Thumbnail($masp);
         cursor: pointer;
         padding: 15px;
         margin: 0px;
+        font-weight: bold;
     }
 
     .product-related-wrapper {
@@ -594,23 +623,70 @@ $anhSp__Get_By_Id_Sp_Thumbnail = $anhSp->AnhSp__Get_By_Id_Sp_Thumbnail($masp);
     }
 
     .product-recommendations {
+        padding: 15px;
+        background-color: white;
+    }
+
+    .product-recommendations a {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
+        align-items: center;
+        padding: 10px 0;
+        text-decoration: none;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .product-recommendations img {
+        width: 100px;
+        height: auto;
+        margin-right: 15px;
+    }
+
+    .product-recommendations p {
+        margin: 0;
+        color: black;
+    }
+
+    .product-recommendations p strong {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 14px;
+    }
+
+    .product-recommendations p span {
+        color: #D30000;
+        font-size: 14px;
+        font-weight: bold;
     }
 
     .recommendation {
+        display: flex;
         margin-bottom: 15px;
         text-align: center;
     }
 
     .recommendation img {
         max-width: 100%;
-        height: auto;
+        height: 100px;
         border-radius: 4px;
     }
 
     .recommendation p {
         margin: 5px 0 0;
+        text-align: left;
+        /* Ensure text is left-aligned */
+
+    }
+
+    .recommendation p strong {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 4;
+        /* Number of lines you want to display */
+        white-space: normal;
+        max-width: 100%;
     }
 </style>
 <script>
@@ -650,6 +726,7 @@ $anhSp__Get_By_Id_Sp_Thumbnail = $anhSp->AnhSp__Get_By_Id_Sp_Thumbnail($masp);
         document.getElementById(tabName).style.display = "block";
         evt.currentTarget.className += " active";
     }
+
     let idsize = null;
 
     function selectSize(size) {
@@ -691,6 +768,39 @@ $anhSp__Get_By_Id_Sp_Thumbnail = $anhSp->AnhSp__Get_By_Id_Sp_Thumbnail($masp);
                 });
             },
         });
+
+    }
+
+    function buyNow(masp) {
+        // Kiểm tra xem đã chọn size chưa
+        var selectedSize = document.querySelector('input[name="size"]:checked');
+        const cartDiv = document.querySelector('.navbar-display-cart');
+
+
+        if (!selectedSize) {
+            // Nếu chưa chọn size, hiển thị thông báo với SweetAlert2
+            Swal.fire({
+                icon: 'warning',
+                title: 'Vui lòng chọn kích thước',
+                text: 'Bạn cần chọn kích thước trước khi thêm vào giỏ hàng.',
+            });
+            return;
+        }
+        $.ajax({
+            type: "POST",
+            url: "./components/action.php",
+            data: {
+                action: "add",
+                masp: masp,
+                idsize: idsize
+            },
+            success: function(response) {
+                console.log(response);
+                $("#cart-item").text(response);
+                cartDiv.click();
+            },
+        });
+
 
     }
 

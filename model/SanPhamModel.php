@@ -194,7 +194,7 @@ class SanPhamModel extends Database
 
     public function SanPham__Get_Top_Sale()
     {
-        $sql = "SELECT * FROM sanpham WHERE trangthai=? ORDER BY luotmua DESC  LIMIT 3";
+        $sql = "SELECT * FROM sanpham WHERE trangthai=? ORDER BY luotmua DESC  LIMIT 9";
         $obj = $this->connect->prepare($sql);
         $obj->setFetchMode(PDO::FETCH_OBJ);
         $obj->execute(array(1));
