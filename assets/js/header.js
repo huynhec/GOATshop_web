@@ -20,17 +20,50 @@ let searchIcon = document.querySelector(".navbar-search .icon");
 
 // Hàm cuộn xuống sẽ mất header cuộn lên sẽ hiện ra
 
-window.addEventListener("scroll", function () {
-  let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+document.addEventListener("DOMContentLoaded", function () {
+  var lastScrollTop = 0;
+  var navbar = document.querySelector('.navbar');
+  var navbarHeight = navbar.offsetHeight;
 
-  if (currentScroll > lastScrollTop) {
-    navbar.style.top = "-100px";
-  } else {
-    navbar.style.top = "0";
-  }
+  window.addEventListener("scroll", function () {
+    var currentScroll = window.pageYOffset || document.documentElement.scrollTop;
 
-  lastScrollTop = currentScroll;
+    if (currentScroll > lastScrollTop) {
+      // Downscroll code
+      navbar.style.transition = 'opacity 0.5s ease-out'; // Thêm transition CSS
+      navbar.style.opacity = '0'; // Đặt opacity thành 0
+    } else {
+      // Upscroll code
+      navbar.style.transition = 'opacity 0.5s ease-out'; // Thêm transition CSS
+      navbar.style.opacity = '1'; // Đặt opacity thành 1
+    }
+
+    lastScrollTop = currentScroll;
+  });
 });
+
+
+
+// hàm cuộn lên đầu sẽ mất mũi tên điều hướng top 
+document.addEventListener('DOMContentLoaded', function () {
+  var backToTopButton = document.querySelector('.back-to-top');
+
+  window.addEventListener('scroll', function () {
+    if (window.pageYOffset > 100) { // Chỉ hiển thị nút khi cuộn xuống một phần của trang
+      backToTopButton.style.display = 'block';
+    } else {
+      backToTopButton.style.display = 'none';
+    }
+  });
+
+  backToTopButton.addEventListener('click', function () {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+});
+
 
 // Hàm kiểm tra và kích hoạt nút floating action
 function activeFloatingAction() {
@@ -41,21 +74,21 @@ function activeFloatingAction() {
   }
 }
 
-// Hàm kích hoạt menu người dùng
-function activeUserAction() {
-  navbar.classList.remove("active-menu"),
-    navbar.classList.add("active-user-menu"),
-    floatingAction.classList.remove("activated"),
-    (actionToggle.innerHTML = '<i class="bx bx-target-lock"></i>');
-}
+// // Hàm kích hoạt menu người dùng
+// function activeUserAction() {
+//   navbar.classList.remove("active-menu"),
+//     navbar.classList.add("active-user-menu"),
+//     floatingAction.classList.remove("activated"),
+//     (actionToggle.innerHTML = '<i class="fa fa-angle-up" aria-hidden="true"></i>');
+// }
 
-// Hàm kích hoạt menu danh sách
-function activeMenu() {
-  navbar.classList.add("active-menu"),
-    navbar.classList.remove("active-user-menu"),
-    floatingAction.classList.remove("activated"),
-    (actionToggle.innerHTML = '<i class="bx bx-target-lock"></i>');
-}
+// // Hàm kích hoạt menu danh sách
+// function activeMenu() {
+//   navbar.classList.add("active-menu"),
+//     navbar.classList.remove("active-user-menu"),
+//     floatingAction.classList.remove("activated"),
+//     (actionToggle.innerHTML = '<i class="fa fa-angle-up" aria-hidden="true"></i>');
+// }
 
 // Hàm cuộn trang
 function scrollTo(target, end, duration) {
@@ -74,7 +107,7 @@ function scrollPageTo(target, duration) {
     return void (document.body.scrollTop > 0
       ? scrollTo(document.body, target, duration)
       : scrollTo(document.documentElement, target, duration));
-  } catch (error) {}
+  } catch (error) { }
   window.scrollTo(0, target);
 }
 
@@ -131,7 +164,7 @@ navbarClose.onclick = function () {
 actionToggle.onclick = function () {
   floatingAction.classList.contains("activated")
     ? (floatingAction.classList.remove("activated"),
-      (this.innerHTML = '<i class="bx bx-target-lock"></i>'))
+      (this.innerHTML = '<i class="fa fa-angle-up" aria-hidden="true"></i>'))
     : (floatingAction.classList.add("activated"),
       (this.innerHTML = '<i class="bx bx-x"></i>'));
 };
@@ -143,7 +176,7 @@ actionHome.onclick = function () {
 
 // Bắt sự kiện click vào display-user người dùng
 navbarDisplayUser.onclick = function () {
-  activeUserAction(), userAction.classList.toggle("hidden");
+  userAction.classList.toggle("hidden");
 };
 
 // Bắt sự kiện click vào nút menu
@@ -153,13 +186,10 @@ actionMenu.onclick = function () {
 
 // Bắt sự kiện click vào nút người dùng
 actionUser.onclick = function () {
-  activeUserAction(), userAction.classList.remove("hidden");
+  userAction.classList.remove("hidden");
 };
 
-// Bắt sự kiện click vào nút lên đầu trang
-actionTop.onclick = function () {
-  scrollPageTo(0, 600);
-};
+
 
 // Bắt sự kiện nhấn phím Enter khi đang nhập vào ô tìm kiếm
 searchInput.onkeydown = function (event) {
@@ -195,4 +225,43 @@ window.addEventListener("click", function (event) {
   ) {
     navbar.classList.remove("active-menu");
   }
+});
+
+// scroll header
+$(document).ready(function () {
+  var lastScrollTop = 0;
+
+  // Lấy giá trị của tham số 'pages' từ URL
+  function getUrlParameter(name) {
+    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+    var results = regex.exec(location.search);
+    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+  };
+
+  var isHomePage = getUrlParameter('pages') === 'trang-chu';
+
+  $(window).scroll(function () {
+    var scrollTop = $(this).scrollTop();
+
+    if (isHomePage) {
+      // Nếu là trang chủ
+      if (scrollTop > lastScrollTop) {
+        // Downscroll code
+        $('.navbar').removeClass('black');
+      } else {
+        // Upscroll code
+        if (scrollTop === 0) {
+          $('.navbar').removeClass('black');
+        } else {
+          $('.navbar').addClass('black');
+        }
+      }
+    } else {
+      // Nếu không phải trang chủ, navbar luôn có màu đen
+      $('.navbar').addClass('black');
+    }
+
+    lastScrollTop = scrollTop;
+  });
 });

@@ -83,17 +83,21 @@
 .background-10 {
   background: #388e3c !important;
 }
-body{
+
+body {
   font-family: "Montserrat", sans-serif !important;
 }
+
 .main {
   position: relative;
   overflow-x: hidden;
   width: 100%;
-  background-image: linear-gradient(55deg, rgba(208, 208, 208, 0.03) 0%, rgba(208, 208, 208, 0.03) 20%,rgba(55, 55, 55, 0.03) 20%, rgba(55, 55, 55, 0.03) 40%,rgba(81, 81, 81, 0.03) 40%, rgba(81, 81, 81, 0.03) 60%,rgba(208, 208, 208, 0.03) 60%, rgba(208, 208, 208, 0.03) 80%,rgba(191, 191, 191, 0.03) 80%, rgba(191, 191, 191, 0.03) 100%),linear-gradient(291deg, rgba(190, 190, 190, 0.02) 0%, rgba(190, 190, 190, 0.02) 14.286%,rgba(105, 105, 105, 0.02) 14.286%, rgba(105, 105, 105, 0.02) 28.572%,rgba(230, 230, 230, 0.02) 28.572%, rgba(230, 230, 230, 0.02) 42.858%,rgba(216, 216, 216, 0.02) 42.858%, rgba(216, 216, 216, 0.02) 57.144%,rgba(181, 181, 181, 0.02) 57.144%, rgba(181, 181, 181, 0.02) 71.42999999999999%,rgba(129, 129, 129, 0.02) 71.43%, rgba(129, 129, 129, 0.02) 85.71600000000001%,rgba(75, 75, 75, 0.02) 85.716%, rgba(75, 75, 75, 0.02) 100.002%),linear-gradient(32deg, rgba(212, 212, 212, 0.03) 0%, rgba(212, 212, 212, 0.03) 12.5%,rgba(223, 223, 223, 0.03) 12.5%, rgba(223, 223, 223, 0.03) 25%,rgba(11, 11, 11, 0.03) 25%, rgba(11, 11, 11, 0.03) 37.5%,rgba(86, 86, 86, 0.03) 37.5%, rgba(86, 86, 86, 0.03) 50%,rgba(106, 106, 106, 0.03) 50%, rgba(106, 106, 106, 0.03) 62.5%,rgba(220, 220, 220, 0.03) 62.5%, rgba(220, 220, 220, 0.03) 75%,rgba(91, 91, 91, 0.03) 75%, rgba(91, 91, 91, 0.03) 87.5%,rgba(216, 216, 216, 0.03) 87.5%, rgba(216, 216, 216, 0.03) 100%),linear-gradient(312deg, rgba(113, 113, 113, 0.01) 0%, rgba(113, 113, 113, 0.01) 14.286%,rgba(54, 54, 54, 0.01) 14.286%, rgba(54, 54, 54, 0.01) 28.572%,rgba(166, 166, 166, 0.01) 28.572%, rgba(166, 166, 166, 0.01) 42.858%,rgba(226, 226, 226, 0.01) 42.858%, rgba(226, 226, 226, 0.01) 57.144%,rgba(109, 109, 109, 0.01) 57.144%, rgba(109, 109, 109, 0.01) 71.42999999999999%,rgba(239, 239, 239, 0.01) 71.43%, rgba(239, 239, 239, 0.01) 85.716%,rgba(54, 54, 54, 0.01) 85.716%, rgba(54, 54, 54, 0.01) 100.002%),linear-gradient(22deg, rgba(77, 77, 77, 0.03) 0%, rgba(77, 77, 77, 0.03) 20%,rgba(235, 235, 235, 0.03) 20%, rgba(235, 235, 235, 0.03) 40%,rgba(215, 215, 215, 0.03) 40%, rgba(215, 215, 215, 0.03) 60%,rgba(181, 181, 181, 0.03) 60%, rgba(181, 181, 181, 0.03) 80%,rgba(193, 193, 193, 0.03) 80%, rgba(193, 193, 193, 0.03) 100%),linear-gradient(80deg, rgba(139, 139, 139, 0.02) 0%, rgba(139, 139, 139, 0.02) 14.286%,rgba(114, 114, 114, 0.02) 14.286%, rgba(114, 114, 114, 0.02) 28.572%,rgba(240, 240, 240, 0.02) 28.572%, rgba(240, 240, 240, 0.02) 42.858%,rgba(221, 221, 221, 0.02) 42.858%, rgba(221, 221, 221, 0.02) 57.144%,rgba(74, 74, 74, 0.02) 57.144%, rgba(74, 74, 74, 0.02) 71.42999999999999%,rgba(201, 201, 201, 0.02) 71.43%, rgba(201, 201, 201, 0.02) 85.71600000000001%,rgba(187, 187, 187, 0.02) 85.716%, rgba(187, 187, 187, 0.02) 100.002%),linear-gradient(257deg, rgba(72, 72, 72, 0.03) 0%, rgba(72, 72, 72, 0.03) 16.667%,rgba(138, 138, 138, 0.03) 16.667%, rgba(138, 138, 138, 0.03) 33.334%,rgba(54, 54, 54, 0.03) 33.334%, rgba(54, 54, 54, 0.03) 50.001000000000005%,rgba(161, 161, 161, 0.03) 50.001%, rgba(161, 161, 161, 0.03) 66.668%,rgba(17, 17, 17, 0.03) 66.668%, rgba(17, 17, 17, 0.03) 83.33500000000001%,rgba(230, 230, 230, 0.03) 83.335%, rgba(230, 230, 230, 0.03) 100.002%),linear-gradient(47deg, rgba(191, 191, 191, 0.01) 0%, rgba(191, 191, 191, 0.01) 16.667%,rgba(27, 27, 27, 0.01) 16.667%, rgba(27, 27, 27, 0.01) 33.334%,rgba(66, 66, 66, 0.01) 33.334%, rgba(66, 66, 66, 0.01) 50.001000000000005%,rgba(36, 36, 36, 0.01) 50.001%, rgba(36, 36, 36, 0.01) 66.668%,rgba(230, 230, 230, 0.01) 66.668%, rgba(230, 230, 230, 0.01) 83.33500000000001%,rgba(93, 93, 93, 0.01) 83.335%, rgba(93, 93, 93, 0.01) 100.002%),linear-gradient(90deg, #ffffff,#ffffff);
-  box-shadow: 0 0 90px rgba(0, 0, 0, 0.3); /* Thêm hiệu ứng bóng */
+  background-image: linear-gradient(55deg, rgba(208, 208, 208, 0.03) 0%, rgba(208, 208, 208, 0.03) 20%, rgba(55, 55, 55, 0.03) 20%, rgba(55, 55, 55, 0.03) 40%, rgba(81, 81, 81, 0.03) 40%, rgba(81, 81, 81, 0.03) 60%, rgba(208, 208, 208, 0.03) 60%, rgba(208, 208, 208, 0.03) 80%, rgba(191, 191, 191, 0.03) 80%, rgba(191, 191, 191, 0.03) 100%), linear-gradient(291deg, rgba(190, 190, 190, 0.02) 0%, rgba(190, 190, 190, 0.02) 14.286%, rgba(105, 105, 105, 0.02) 14.286%, rgba(105, 105, 105, 0.02) 28.572%, rgba(230, 230, 230, 0.02) 28.572%, rgba(230, 230, 230, 0.02) 42.858%, rgba(216, 216, 216, 0.02) 42.858%, rgba(216, 216, 216, 0.02) 57.144%, rgba(181, 181, 181, 0.02) 57.144%, rgba(181, 181, 181, 0.02) 71.42999999999999%, rgba(129, 129, 129, 0.02) 71.43%, rgba(129, 129, 129, 0.02) 85.71600000000001%, rgba(75, 75, 75, 0.02) 85.716%, rgba(75, 75, 75, 0.02) 100.002%), linear-gradient(32deg, rgba(212, 212, 212, 0.03) 0%, rgba(212, 212, 212, 0.03) 12.5%, rgba(223, 223, 223, 0.03) 12.5%, rgba(223, 223, 223, 0.03) 25%, rgba(11, 11, 11, 0.03) 25%, rgba(11, 11, 11, 0.03) 37.5%, rgba(86, 86, 86, 0.03) 37.5%, rgba(86, 86, 86, 0.03) 50%, rgba(106, 106, 106, 0.03) 50%, rgba(106, 106, 106, 0.03) 62.5%, rgba(220, 220, 220, 0.03) 62.5%, rgba(220, 220, 220, 0.03) 75%, rgba(91, 91, 91, 0.03) 75%, rgba(91, 91, 91, 0.03) 87.5%, rgba(216, 216, 216, 0.03) 87.5%, rgba(216, 216, 216, 0.03) 100%), linear-gradient(312deg, rgba(113, 113, 113, 0.01) 0%, rgba(113, 113, 113, 0.01) 14.286%, rgba(54, 54, 54, 0.01) 14.286%, rgba(54, 54, 54, 0.01) 28.572%, rgba(166, 166, 166, 0.01) 28.572%, rgba(166, 166, 166, 0.01) 42.858%, rgba(226, 226, 226, 0.01) 42.858%, rgba(226, 226, 226, 0.01) 57.144%, rgba(109, 109, 109, 0.01) 57.144%, rgba(109, 109, 109, 0.01) 71.42999999999999%, rgba(239, 239, 239, 0.01) 71.43%, rgba(239, 239, 239, 0.01) 85.716%, rgba(54, 54, 54, 0.01) 85.716%, rgba(54, 54, 54, 0.01) 100.002%), linear-gradient(22deg, rgba(77, 77, 77, 0.03) 0%, rgba(77, 77, 77, 0.03) 20%, rgba(235, 235, 235, 0.03) 20%, rgba(235, 235, 235, 0.03) 40%, rgba(215, 215, 215, 0.03) 40%, rgba(215, 215, 215, 0.03) 60%, rgba(181, 181, 181, 0.03) 60%, rgba(181, 181, 181, 0.03) 80%, rgba(193, 193, 193, 0.03) 80%, rgba(193, 193, 193, 0.03) 100%), linear-gradient(80deg, rgba(139, 139, 139, 0.02) 0%, rgba(139, 139, 139, 0.02) 14.286%, rgba(114, 114, 114, 0.02) 14.286%, rgba(114, 114, 114, 0.02) 28.572%, rgba(240, 240, 240, 0.02) 28.572%, rgba(240, 240, 240, 0.02) 42.858%, rgba(221, 221, 221, 0.02) 42.858%, rgba(221, 221, 221, 0.02) 57.144%, rgba(74, 74, 74, 0.02) 57.144%, rgba(74, 74, 74, 0.02) 71.42999999999999%, rgba(201, 201, 201, 0.02) 71.43%, rgba(201, 201, 201, 0.02) 85.71600000000001%, rgba(187, 187, 187, 0.02) 85.716%, rgba(187, 187, 187, 0.02) 100.002%), linear-gradient(257deg, rgba(72, 72, 72, 0.03) 0%, rgba(72, 72, 72, 0.03) 16.667%, rgba(138, 138, 138, 0.03) 16.667%, rgba(138, 138, 138, 0.03) 33.334%, rgba(54, 54, 54, 0.03) 33.334%, rgba(54, 54, 54, 0.03) 50.001000000000005%, rgba(161, 161, 161, 0.03) 50.001%, rgba(161, 161, 161, 0.03) 66.668%, rgba(17, 17, 17, 0.03) 66.668%, rgba(17, 17, 17, 0.03) 83.33500000000001%, rgba(230, 230, 230, 0.03) 83.335%, rgba(230, 230, 230, 0.03) 100.002%), linear-gradient(47deg, rgba(191, 191, 191, 0.01) 0%, rgba(191, 191, 191, 0.01) 16.667%, rgba(27, 27, 27, 0.01) 16.667%, rgba(27, 27, 27, 0.01) 33.334%, rgba(66, 66, 66, 0.01) 33.334%, rgba(66, 66, 66, 0.01) 50.001000000000005%, rgba(36, 36, 36, 0.01) 50.001%, rgba(36, 36, 36, 0.01) 66.668%, rgba(230, 230, 230, 0.01) 66.668%, rgba(230, 230, 230, 0.01) 83.33500000000001%, rgba(93, 93, 93, 0.01) 83.335%, rgba(93, 93, 93, 0.01) 100.002%), linear-gradient(90deg, #ffffff, #ffffff);
+  box-shadow: 0 0 90px rgba(0, 0, 0, 0.3);
+  /* Thêm hiệu ứng bóng */
 }
-.main-view-item-container{
+
+.main-view-item-container {
   position: relative;
   margin: auto;
   vertical-align: middle;
@@ -103,10 +107,50 @@ body{
   /* border-radius: 10px;  */
   background-color: #f0f0f0;
   padding: 10px;
-  box-shadow: 0 0 90px rgba(0, 0, 0, 0.3); /* Thêm hiệu ứng bóng */
-
+  box-shadow: 0 0 90px rgba(0, 0, 0, 0.3);
+  /* Thêm hiệu ứng bóng */
 }
 
+/* Tùy chỉnh thanh cuộn cho toàn bộ trang web */
+::-webkit-scrollbar {
+  width: 12px;
+  /* Độ rộng của thanh cuộn dọc */
+  height: 12px;
+  /* Độ cao của thanh cuộn ngang */
+}
+
+/* Tùy chỉnh nền của thanh cuộn */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  /* Màu nền */
+  border-radius: 90px;
+  /* Bo tròn các góc */
+}
+
+/* Tùy chỉnh thanh kéo */
+::-webkit-scrollbar-thumb {
+  background: #000000;
+  /* Màu của thanh kéo */
+  border-radius: 10px;
+  /* Bo tròn các góc */
+}
+
+/* Tùy chỉnh thanh kéo khi hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+  /* Màu của thanh kéo khi hover */
+}
+/* Áp dụng cho Firefox */
+html {
+  scrollbar-width: thin; /* Độ rộng thanh cuộn */
+  scrollbar-color: #000000 #f1f1f1; /* Màu của thanh kéo và nền */
+}
+
+/* Tùy chỉnh cho các trình duyệt khác */
+body {
+  scrollbar-color: #000000 #f1f1f1;
+  scrollbar-width: thin;
+}
 /* -------------------------------------------------------------------------- */
 /*                                Moi cap nhat                                */
 /* -------------------------------------------------------------------------- */
@@ -118,7 +162,7 @@ body{
   overflow: hidden;
   max-width: 100%;
   height: 100%;
-  border-radius: 10px; 
+  border-radius: 10px;
   background-color: #F2F2F2;
   padding: 20px;
   /* padding-left: 60px; */
@@ -131,9 +175,10 @@ body{
   align-items: center;
   text-align: center;
   margin-bottom: 20px;
-  
+
 
 }
+
 .main-title-container .bx {
   font-size: 2rem;
   vertical-align: middle;
@@ -161,7 +206,7 @@ body{
 
 /* test */
 
-.manga-container{
+.manga-container {
   overflow: hidden;
   margin: 4px;
   transition: transform 0.3s ease-in-out;
@@ -169,7 +214,7 @@ body{
   position: relative;
   width: 14.875em;
   height: 20.5em;
-  box-shadow: 0px 1px 13px rgba(0,0,0,0.1);
+  box-shadow: 0px 1px 13px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   /* transition: all 120ms; */
   display: flex;
@@ -196,6 +241,7 @@ body{
   text-transform: uppercase;
   opacity: 0;
 }
+
 .manga-container .manga-title {
   font-family: Arial, Helvetica, sans-serif;
   /* font-size: 0.9em; */
@@ -223,25 +269,30 @@ body{
   bottom: 0;
   opacity: 1;
 }
-.manga-container:hover > .manga-title {
+
+.manga-container:hover>.manga-title {
   opacity: 0.8;
   font-weight: bold;
 }
+
 .manga-container:active {
   transform: scale(0.98);
 }
+
 .manga-container:active::after {
   content: "Mua ngay";
   height: 4.125em;
 }
-.manga-thumbnail{
+
+.manga-thumbnail {
   background: rgb(241, 241, 241);
   width: 100%;
   height: 100%;
   display: grid;
   place-items: center;
 }
-.manga-container:hover > .manga-thumbnail img {
+
+.manga-container:hover>.manga-thumbnail img {
   opacity: 0.8;
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
@@ -254,6 +305,7 @@ body{
   -ms-transform: scale(1.1);
   -o-transform: scale(1.1);
 }
+
 .manga-container .manga-thumbnail {
   position: relative;
   width: 100%;
@@ -266,6 +318,7 @@ body{
   -ms-border-radius: 1rem;
   -o-border-radius: 1rem;
 }
+
 .manga-container .manga-note {
   left: 10px;
   position: absolute;
@@ -295,6 +348,7 @@ body{
   align-items: center;
   text-align: center;
 }
+
 .main-title-container__left .bx {
   font-size: 2rem;
   vertical-align: middle;
@@ -328,14 +382,14 @@ body{
   align-items: center;
 }
 
-.manga-container__left:hover > .manga-title {
+.manga-container__left:hover>.manga-title {
   opacity: 0.8;
   font-weight: bold;
   filter: drop-shadow(0 -6mm 4mm crimson);
   -webkit-filter: drop-shadow(0 -6mm 4mm crimson);
 }
 
-.manga-container__left:hover > .manga-thumbnail img {
+.manga-container__left:hover>.manga-thumbnail img {
   opacity: 0.8;
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
@@ -393,6 +447,7 @@ body{
   height: 40px;
   line-height: 1.5;
 }
+
 .manga-chapter-container__left {
   display: flex;
   flex-direction: column;
@@ -406,6 +461,7 @@ body{
   overflow-y: auto;
   overflow-x: hidden;
 }
+
 span.chapter-views {
   font-size: 0.8rem;
   color: #999;
@@ -414,6 +470,7 @@ span.chapter-views {
   width: 100%;
   padding: 0.1rem;
 }
+
 .chapter-container__left {
   display: flex;
   flex-direction: column;
@@ -423,9 +480,11 @@ span.chapter-views {
   align-content: space-between;
   align-items: flex-start;
 }
+
 .chapter-container__left a {
   width: 100%;
 }
+
 .chapter-container__left a:hover {
   color: #303f9f;
   font-weight: bold;
@@ -437,6 +496,7 @@ span.chapter-views {
   width: 100%;
   justify-items: center;
 }
+
 .chapter-note {
   font-size: 0.8rem;
   font-weight: bold;
@@ -461,6 +521,7 @@ span.chapter-views {
   align-items: center;
   justify-content: flex-end;
 }
+
 .hr {
   width: 100%;
   color: inherit;
@@ -487,6 +548,7 @@ span.chapter-views {
   align-items: center;
   margin: 0 0 0.5rem 3.5rem;
 }
+
 .main-title-container__right .bx {
   font-size: 2rem;
   vertical-align: middle;
@@ -520,14 +582,14 @@ span.chapter-views {
   margin: 0 0 0.8rem 2rem;
 }
 
-.manga-container__right:hover > .manga-title {
+.manga-container__right:hover>.manga-title {
   opacity: 0.8;
   font-weight: bold;
   filter: drop-shadow(0 -6mm 4mm crimson);
   -webkit-filter: drop-shadow(0 -6mm 4mm crimson);
 }
 
-.manga-container__right:hover > .manga-thumbnail img {
+.manga-container__right:hover>.manga-thumbnail img {
   opacity: 0.8;
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
@@ -618,6 +680,7 @@ span.chapter-views {
   justify-items: center;
   align-items: center;
 }
+
 .main-title-container__chitiet__left .bx {
   font-size: 2rem;
   vertical-align: middle;
@@ -654,14 +717,14 @@ span.chapter-views {
   margin: 0 1rem;
 }
 
-.manga-container__chitiet__left:hover > .manga-title {
+.manga-container__chitiet__left:hover>.manga-title {
   opacity: 0.8;
   font-weight: bold;
   filter: drop-shadow(0 -6mm 4mm crimson);
   -webkit-filter: drop-shadow(0 -6mm 4mm crimson);
 }
 
-.manga-container__chitiet__left:hover > .manga-thumbnail img {
+.manga-container__chitiet__left:hover>.manga-thumbnail img {
   opacity: 0.8;
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
@@ -714,10 +777,12 @@ span.chapter-views {
   margin: 1.8rem 0;
   font-size: 0.9rem;
 }
+
 .tab-group-1 {
   width: 150px;
   margin: 2px;
 }
+
 .tab-group-2 {
   width: 150px;
   margin: 2px;
@@ -726,6 +791,7 @@ span.chapter-views {
 .manga-title.color-7 {
   font-size: 1.2rem;
 }
+
 .manga-container__chitiet__left .manga-title {
   text-transform: uppercase;
   margin: 0.1rem;
@@ -739,6 +805,7 @@ span.chapter-views {
   -webkit-box-orient: vertical;
   line-height: 1.5;
 }
+
 .manga-chapter-container__chitiet__left {
   display: flex;
   flex-direction: column;
@@ -749,6 +816,7 @@ span.chapter-views {
   padding-left: 0.5rem;
   width: 100%;
 }
+
 .truyen-note {
   padding: 2px 10px;
   color: #fff;
@@ -766,6 +834,7 @@ span.chapter-views {
   width: 90%;
   padding: 0.1rem;
 }
+
 .chapter-container__chitiet__bottom {
   display: flex;
   flex-direction: column;
@@ -782,6 +851,7 @@ span.chapter-views {
   font-weight: bold;
   font-style: normal !important;
 }
+
 .chapter-item-container__chitiet__bottom {
   display: flex;
   justify-content: space-between;
@@ -789,6 +859,7 @@ span.chapter-views {
   justify-items: center;
   padding: 0.4rem 0;
 }
+
 .chapter-note {
   font-size: 0.9rem;
   font-weight: bold;
@@ -813,6 +884,7 @@ span.chapter-views {
   font-size: 0.8rem;
   justify-content: flex-end;
 }
+
 .hr {
   width: 100%;
   color: inherit;
@@ -824,6 +896,7 @@ span.chapter-views {
 .chapter-container__chitiet__bottom__noi_dung {
   font-size: 0.9rem;
 }
+
 .chapter-list {
   justify-content: space-between;
   width: 100%;
@@ -837,12 +910,13 @@ span.chapter-views {
 .chapter-container__chitiet__bottom a {
   width: 100%;
 }
+
 .chapter-container__chitiet__bottom a:hover {
   color: #303f9f;
   font-weight: bold;
   border-left: 5px solid;
   padding-left: 5px;
-  
+
 }
 
 /* -------------------------------------------------------------------------- */
@@ -851,7 +925,8 @@ span.chapter-views {
 .pagination-container {
   text-align: center;
   min-height: 40px;
-  margin-top: 20px; /* Có thể điều chỉnh khoảng cách giữa nội dung và phân trang */
+  margin-top: 20px;
+  /* Có thể điều chỉnh khoảng cách giữa nội dung và phân trang */
 }
 
 .pagination {
@@ -929,6 +1004,7 @@ span.chapter-views {
   -ms-border-radius: 10px;
   -o-border-radius: 10px;
 }
+
 .chapter-selection {
   z-index: 20;
   display: flex;
@@ -960,14 +1036,14 @@ select#chapterSelect {
   border: 1px solid #dee2e6;
 }
 
-.manga-container__comming_soon:hover > .manga-title {
+.manga-container__comming_soon:hover>.manga-title {
   opacity: 0.8;
   font-weight: bold;
   filter: drop-shadow(0 -6mm 4mm crimson);
   -webkit-filter: drop-shadow(0 -6mm 4mm crimson);
 }
 
-.manga-container__comming_soon:hover > .manga-thumbnail img {
+.manga-container__comming_soon:hover>.manga-thumbnail img {
   opacity: 0.8;
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
@@ -1061,6 +1137,7 @@ select#chapterSelect {
   .main-container__left {
     width: 100%;
   }
+
   .main-item-container__right {
     display: flex;
     flex-direction: row;
@@ -1070,6 +1147,7 @@ select#chapterSelect {
     text-align: justify;
     padding: 5px;
   }
+
   .main-container__right {
     position: relative;
     margin: auto;
@@ -1078,6 +1156,7 @@ select#chapterSelect {
     max-width: 100%;
     width: 100%;
   }
+
   .manga-container__right {
     position: relative;
     overflow: hidden;
@@ -1088,6 +1167,7 @@ select#chapterSelect {
     margin: 4px;
   }
 }
+
 @media (max-width: 400px) {
   .main-item-container {
     display: flex;
@@ -1096,6 +1176,7 @@ select#chapterSelect {
     align-items: center;
     justify-content: space-around;
   }
+
   .manga-container__chitiet__left .manga-thumbnail {
     position: relative;
     width: 100%;
@@ -1110,6 +1191,7 @@ select#chapterSelect {
     border: 1px solid #dee2e6;
     padding: 10px;
   }
+
   .manga-container__chitiet__left {
     position: relative;
     overflow: hidden;
@@ -1120,7 +1202,7 @@ select#chapterSelect {
     align-items: flex-start;
   }
 
-  .manga-container__chitiet__left > img {
+  .manga-container__chitiet__left>img {
     border-radius: 10px;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
@@ -1145,6 +1227,7 @@ select#chapterSelect {
   width: 100px;
   justify-content: center;
 }
+
 input.form-control.quantity {
   text-align: center;
 }
@@ -1158,11 +1241,13 @@ input.form-control.quantity {
   border-radius: 10px;
   padding: 15px;
 }
+
 .slide-container {
   width: 300px;
   height: 360px;
   z-index: 1;
 }
+
 #slide {
   width: 300px;
   height: 300px;
@@ -1179,7 +1264,8 @@ img.item {
   transition: all 0.5s ease-in-out;
   border-radius: 1rem;
 }
-.thumbnail-container{
+
+.thumbnail-container {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -1202,13 +1288,14 @@ img.thumbnail {
   font-weight: bold;
   text-align: justify;
 }
+
 .text-small {
   color: crimson;
   font-size: 13px;
   font-weight: bold;
 }
 
-.mw-100{
+.mw-100 {
   max-width: 100px !important;
   width: 100%;
 }
@@ -1218,13 +1305,18 @@ table {
   caption-side: bottom;
   border-collapse: collapse;
 }
+
 .swal2-popup.swal2-modal.swal2-show {
   width: 50%;
 }
+
 .table-custom tbody {
   text-align: left !important;
 }
-.table-custom tr, .table-custom td, .table-custom th {
+
+.table-custom tr,
+.table-custom td,
+.table-custom th {
   line-height: 1.5;
   border: 1px solid #ff7043;
 }
@@ -1244,22 +1336,27 @@ table {
 }
 
 .size-option:hover {
-  background-color: #000000; /* Màu sắc khi hover */
-  color: #fff; /* Màu sắc chữ khi hover */
-  border-color: #0f0f0f; /* Màu sắc đường viền khi hover */  }
+  background-color: #000000;
+  /* Màu sắc khi hover */
+  color: #fff;
+  /* Màu sắc chữ khi hover */
+  border-color: #0f0f0f;
+  /* Màu sắc đường viền khi hover */
+}
 
-.size-option input[type="radio"]:checked + label {
+.size-option input[type="radio"]:checked+label {
   background-color: #3498db;
   color: #fff;
   border-color: #3498db;
 }
+
 .selected {
   background-color: #000000;
   color: #fff;
   border: 2px solid #000000;
 
   /* Màu nền khi được chọn */
-}  
+}
 
 
 
@@ -1275,33 +1372,38 @@ table {
 .carousel-caption {
   position: absolute;
   top: 70%;
-  right: 5%; /* Đặt vị trí từ phía bên phải */
+  right: 5%;
+  /* Đặt vị trí từ phía bên phải */
   -webkit-transform: translate(0%, -50%);
   transform: translate(0%, -50%);
-  width: 40%; /* Đặt chiều rộng */
+  width: 40%;
+  /* Đặt chiều rộng */
   height: 200px;
-  padding: 20px; /* Thêm padding nếu cần thiết */
+  padding: 20px;
+  /* Thêm padding nếu cần thiết */
 }
-.slide-light-text{
-position: absolute;
-bottom: 60%;
-left: 50%;
--webkit-transform: translate(-50%, -50%);
-transform: translate(-50%, -50%);
-width: 80%;
-height: auto;
-color: #ffffff;
-margin-bottom: 55px;
-font-size: 24px;
+
+.slide-light-text {
+  position: absolute;
+  bottom: 60%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  width: 80%;
+  height: auto;
+  color: #ffffff;
+  margin-bottom: 55px;
+  font-size: 24px;
 
 }
-.slide-bold-text{
+
+.slide-bold-text {
   font-size: 28px;
   color: #ffffff;
   margin-bottom: 15px;
 }
 
-a.slide-btn2{
+a.slide-btn2 {
   background: transparent;
   position: relative;
   display: inline-block;
@@ -1312,17 +1414,21 @@ a.slide-btn2{
   text-align: center;
   color: #ffffff;
   border: 1px solid #ffffff;
-  margin-right: 15px;    border: 1px solid #ffffff;
+  margin-right: 15px;
+  border: 1px solid #ffffff;
 }
+
 .carousel-item {
-  position: relative; /* Đặt vị trí cho carousel item là relative */
+  position: relative;
+  /* Đặt vị trí cho carousel item là relative */
 }
 
 
 
 .carousel-caption .slide-bold-text {
   font-weight: bold;
-  margin-bottom: 10px; /* Đặt khoảng cách giữa các đoạn văn bản */
+  margin-bottom: 10px;
+  /* Đặt khoảng cách giữa các đoạn văn bản */
 }
 
 .carousel-caption .slide-btn {
@@ -1331,28 +1437,29 @@ a.slide-btn2{
 }
 
 .slide-btn a {
-  margin-top: 10px; /* Đặt khoảng cách giữa các nút */
+  margin-top: 10px;
+  /* Đặt khoảng cách giữa các nút */
 }
 
 /* Đảm bảo class slide-btn1 và slide-btn2 có đủ CSS để trở thành các nút theo mong muốn của bạn */
 
 .filter-sidebar {
-width: 200px;
-padding: 20px;
-border: 1px solid #ccc;
-border-radius: 5px;
-margin-right: 20px;
+  width: 200px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-right: 20px;
 }
 
 .filter-group {
-margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 
 .product-container {
   display: flex;
   flex-wrap: nowrap;
-  /* margin: 0 186px; */
+  margin: 0 186px;
   padding: 0;
   overflow-x: auto;
   scroll-behavior: smooth;
@@ -1472,7 +1579,8 @@ margin-bottom: 10px;
   cursor: pointer;
   border: none;
 }
-.actions .add-to-cart{
+
+.actions .add-to-cart {
   padding: 10px 20px;
   font-size: 16px;
   width: 100%;
@@ -1492,6 +1600,7 @@ margin-bottom: 10px;
   border: 2px solid #000000;
 
 }
-.product-size-hotline{
+
+.product-size-hotline {
   padding: 20px;
 }

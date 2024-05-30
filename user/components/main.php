@@ -35,3 +35,4 @@ if (isset($_GET['pages']) && !isset($_GET['req'])) {
 } else {
     echo "<script>location.href='index.php?pages=trang-chu'</script>";
 }
+

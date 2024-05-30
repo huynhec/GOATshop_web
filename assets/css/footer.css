@@ -1,63 +1,162 @@
-.footer {
-  padding: 40px 0;
-  color: #2789ea;
-  background-image: repeating-linear-gradient(45deg, rgba(226,226,226, 0.14) 0px, rgba(226,226,226, 0.14) 2px,transparent 2px, transparent 4px),linear-gradient(90deg, rgb(33,33,33),rgb(33,33,33));
+footer {
+  background-color: #222;
+  color: #fff;
+  padding: 20px 0;
 }
 
-.footer ul {
-  padding: 0;
-  list-style: none;
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  max-width: 1500px;
+  margin: 20px ;
+  padding: 20px;
+}
+
+.footer-logo {
+  flex: 1;
+  min-width: 200px;
   text-align: center;
+  margin: 0 50px;
+}
+
+.footer-logo img {
+  max-width: 150px;
+}
+
+.footer-shop, .footer-info, .footer-connect, .footer-company {
+  flex: 1;
+  min-width: 200px;
+  margin: 0 25px;
+}
+
+.footer-shop h3, .footer-info h3, .footer-connect h3 {
   font-size: 18px;
-  line-height: 1.6;
-  margin-bottom: 0;
-}
-
-.footer li {
-  padding: 0 10px;
-}
-
-.footer ul a {
-  color: inherit;
-  text-decoration: none;
-  opacity: 0.8;
-}
-
-.footer ul a:hover {
-  opacity: 1;
-}
-
-.footer .social {
+  margin-bottom: 10px;
   text-align: center;
-  padding-bottom: 25px;
 }
 
-.footer .social > a {
-  font-size: 24px;
+.footer-info ul, .social-media {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-info ul li, .social-media li {
+  margin: 5px 0;
+}
+
+.footer-info ul li a, .social-media li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.social-media li img {
+  width: 24px;
+  height: 24px;
+}
+
+.footer-connect form {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-connect input[type="email"] {
+  padding: 10px;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 5px;
+}
+
+.footer-connect button {
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007BFF;
+  color: #fff;
+  cursor: pointer;
+}
+
+.footer-bottom {
+  text-align: center;
+  border-top: 1px solid #444;
+  padding: 10px;
+  margin-top: 20px;
+}
+
+.footer-bottom img {
+  width: 200px;
+  /* margin: 10px 0; */
+}
+
+
+.social-media {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  gap: 15px; /* space between icons */
+}
+
+.social-media li {
+  display: inline-block;
+}
+
+.social-media a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 40px;
   height: 40px;
-  line-height: 40px;
-  display: inline-block;
-  text-align: center;
+  color: #fff;
+  text-decoration: none;
   border-radius: 50%;
-  border: 1px solid #ccc;
-  margin: 0 8px;
-  color: inherit;
-  opacity: 0.75;
+  transition: background-color 0.3s ease;
 }
 
-.footer .social > a:hover {
-  opacity: 0.9;
+.fb-icon {
+  background-color: #3b5998;
 }
 
-.footer .copyright {
-  margin-top: 15px;
-  text-align: center;
-  font-size: 13px;
-  color: #535353;
-  margin-bottom: 0;
-}
-img.footer-img {
-  width: 100px;
+.fb-icon:hover {
+  background-color: #2d4373;
 }
 
+.ins-icon {
+  background-color: #e4405f;
+}
+
+.ins-icon:hover {
+  background-color: #bc2a8d;
+}
+
+.tiktok-icon {
+  background-color: #000;
+  padding: 8px;
+  border-radius: 50%;
+}
+
+.tiktok-icon:hover {
+  background-color: #444;
+}
+
+.tiktok-icon img {
+  width: 24px;
+  height: 24px;
+}
+
+.yt-icon {
+  background-color: #ff0000;
+}
+
+.yt-icon:hover {
+  background-color: #cc0000;
+}
+
+.fa {
+  font-size: 20px;
+}
+
+/* Optional: Add box-shadow for a more stylish look */
+.social-media a {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}

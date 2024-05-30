@@ -291,6 +291,15 @@ $top = 0;
         margin: 10px;
         /* Điều chỉnh theo nhu cầu */
     }
+
+    .product-container-random {
+        display: flex;
+        flex-wrap: nowrap;
+        /* margin: 0 186px; */
+        padding: 0;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+    }
 </style>
 <main class="main">
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -499,8 +508,8 @@ $top = 0;
 
             <div class="main-container">
                 <div class="main-title-container">
-                    <a href="index.php?pages=sp-ngau-nhien">
-                        <div class="item-title color-8"><i class='bx bx-book-reader'></i>HÔM NAY MUA GÌ?</div>
+                    <a href="index.php?pages=sp-moi&page=1">
+                        <div class="item-title color-2" style="font-weight: bold; font-size: 24px;">Bạn có thể mua !? </div>
                     </a>
                 </div>
                 <!-- <div class="main-item-container"> -->
@@ -521,7 +530,7 @@ $top = 0;
                         <?php endif ?>
                     <?php endforeach ?> -->
                 <div class="product-slider">
-                    <div class="product-container">
+                    <div class="product-container-random">
                         <!-- Products -->
                         <?php foreach ($sp__Get_Top_Updated_5 as $item) : ?>
                             <?php if (count($sp__Get_Top_Updated_5) > 0) : ?>

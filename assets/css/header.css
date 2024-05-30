@@ -95,13 +95,13 @@ img:hover {
   transition: width 0.3s, height 0.3s, background 0.6s;
 }
 
-.floating-action.activated {
+/* .floating-action.activated {
   width: 200px;
   height: 200px;
   background: rgba(0, 0, 0, 0.2);
-}
+} */
 
-.floating-action.activated .action-item {
+/* .floating-action.activated .action-item {
   opacity: 1;
 }
 
@@ -121,10 +121,107 @@ img:hover {
 .floating-action.activated .action-user {
   right: 65px;
   bottom: 110px;
+} */
+
+/* .floating-action.activated .action-top {
+  bottom: 135px;
+} */
+#fixed-social-network {
+  position: fixed;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-100%);
+  z-index: 1000;
 }
 
-.floating-action.activated .action-top {
-  bottom: 135px;
+#fixed-social-network a {
+  display: block;
+  margin: 10px 0;
+  padding: 10px;
+  color: white;
+  text-decoration: none;
+  text-align: center;
+  /* border-radius: 50%; */
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#fixed-contact {
+  position: fixed;
+  right: 10px;
+  top: 50%;
+  transform: translateY(50%);
+  z-index: 1000;
+}
+
+#fixed-contact a {
+  display: block;
+  margin: 10px 0;
+  padding: 10px;
+  color: white;
+  text-decoration: none;
+  text-align: center;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fb-icon {
+  background-color: #3b5998;
+}
+
+.ins-icon {
+  background-color: #E4405F;
+}
+
+.tiktok-icon {
+  background-color: #010101;
+}
+
+.yt-icon {
+  background-color: #FF0000;
+}
+
+.call-icon {
+  background-color: #D32F2F;
+}
+
+.location-icon {
+  background-color: #FFA000;
+}
+
+.messenger-icon {
+  background-color: #0084FF;
+}
+
+.fa-facebook,
+.fa-instagram,
+.fa-youtube-play,
+.fa-phone,
+.fa-map-marker,
+.fa-facebook-messenger {
+  font-size: 20px;
+}
+
+.tiktok-icon img {
+  width: 20px;
+  height: 20px;
+}
+
+.back-to-top {
+  background-color: #000;
+  display: none;
+
+}
+
+.fa-angle-up {
+  font-size: 20px;
 }
 
 .action-item {
@@ -140,7 +237,7 @@ img:hover {
   opacity: 0;
 }
 
-.action-item.action-toggle {
+/* .action-item.action-toggle {
   font-size: 25px;
   background: #d80f16;
   opacity: 1;
@@ -163,7 +260,7 @@ img:hover {
   padding-left: 2px;
   line-height: 45px;
   background: #00abfd;
-}
+} */
 
 /* -------------------------------------------------------------------------- */
 /*                                   navbar                                   */
@@ -175,11 +272,25 @@ img:hover {
   left: 0;
   right: 0;
   /* height: 50px; */
+  /* Set the height of the navbar */
   z-index: 100;
-  background-color: #000000;
-  transition: top 0.5s ease-in-out;
-  transform: translateX(-1.7px);
+  background-color: transparent;
+  /* Start with transparent background */
+  /* backdrop-filter: blur(10px); */
+  /* Start with blur effect */
+  transition: background-color 0.5s ease-in-out;
+  
 }
+
+.navbar.black {
+  background-color: #000000;
+  /* Change to black background when scrolling */
+
+}
+.black{
+  background-color: #000;
+}
+
 
 .navbar-container {
   margin: auto;
@@ -229,6 +340,7 @@ img:hover {
   display: flex;
   align-items: center;
   color: white;
+  font-weight: bold;
 }
 
 .navbar-item a i {
@@ -241,22 +353,43 @@ img:hover {
   box-shadow: 0 2px 2px #999 !important;
 }
 
+.navbar-item a:hover {
+  color: #f90;
+}
+
+.navbar-item {
+  position: relative;
+  white-space: nowrap;
+  overflow: visible; /* Hiển thị toàn bộ nội dung, không ẩn bất kỳ phần nào */
+}
+
 .navbar-item.has-sub .navbar-item-sub {
+  display: none;
+  min-width: 398px;
+  z-index: 1;
   position: absolute;
-  top: 43px;
+  /* top: 43px; */
+  top: 100%;
   left: 0;
+
   padding: 1rem 0;
   margin: 0;
-  background: #fffcfc;
+  /* background: linear-gradient(to right, rgb(255, 255, 255), rgb(189, 189, 189)); */
+  background-color: #fff;
+
   color: #000;
   box-shadow: 0 0 0 #999;
-  border-bottom-left-radius: 10px;
-  border-bottom-right-radius: 10px;
+  /* border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px; */
   visibility: hidden;
   opacity: 0;
-  overflow: visible;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sử dụng box-shadow để tạo hiệu ứng đổ bóng */
-  transition: visibility 0.3s, opacity 0.3s, box-shadow 0.3s; /* Áp dụng hiệu ứng chuyển động */
+  /* overflow: visible; */
+  overflow: hidden;
+  /* Ensure it stays within bounds */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  /* Sử dụng box-shadow để tạo hiệu ứng đổ bóng */
+  transition: visibility 0.3s, opacity 0.3s, box-shadow 0.3s;
+  /* Áp dụng hiệu ứng chuyển động */
 
   /* transition: min-height 0.3s, visibility 0.3s, opacity 0.3s, box-shadow 0.3s; */
   -webkit-transition: min-height 0.3s, visibility 0.3s, opacity 0.3s,
@@ -294,15 +427,19 @@ img:hover {
   width: 24%;
   margin: 0.1rem;
   padding: 0.1rem;
-  position: relative; /* Tính năng tương tác */
+  position: relative;
+  /* Tính năng tương tác */
   cursor: pointer;
-  transition: all 0.3s ease; /* Hiệu ứng chuyển động */
+  transition: all 0.3s ease;
+  /* Hiệu ứng chuyển động */
 }
 
 /* Khi trỏ vào mục menu, thêm hiệu ứng box-shadow và thay đổi màu sắc */
 .navbar-item.has-sub .menu-country li:hover {
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Hiệu ứng bóng */
-  background-color: #f0f0f0; /* Màu nền thay đổi khi trỏ vào */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  /* Hiệu ứng bóng */
+  background-color: #f0f0f0;
+  /* Màu nền thay đổi khi trỏ vào */
 }
 
 /* Định dạng văn bản trong mục menu */
@@ -313,7 +450,8 @@ img:hover {
 
 /* Khi trỏ vào văn bản, thay đổi màu sắc */
 .navbar-item.has-sub .menu-country li:hover a {
-  color: #ff6600; /* Màu sắc thay đổi khi trỏ vào */
+  color: #ff6600;
+  /* Màu sắc thay đổi khi trỏ vào */
 }
 
 /* Định dạng menu-genre */
@@ -337,18 +475,21 @@ img:hover {
 
 /* Khi trỏ vào mục menu-genre, thêm hiệu ứng box-shadow và thay đổi màu sắc */
 .navbar-item.has-sub .menu-genre li:hover {
-  background-color: #f0f0f0;
+  background-color: #000000;
 }
 
 /* Định dạng văn bản trong mục menu-genre */
 .navbar-item.has-sub .menu-genre li a {
   text-decoration: none;
   color: #333;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* Khi trỏ vào văn bản, thay đổi màu sắc */
 .navbar-item.has-sub .menu-genre li:hover a {
-  color: #ff6600;
+  color: #ffffff;
 }
 
 /* Hiệu ứng khi menu-genre được kích hoạt hoặc khi trỏ vào */
@@ -374,8 +515,8 @@ img:hover {
   padding: 0 30px 0 10px;
   line-height: 30px;
   outline: 0;
-  border: 1px solid #ddd;
-  border-radius: 10px;
+  border: 1px solid #ffffff;
+  /* border-radius: 10px; */
 }
 
 .navbar-search .icon {
@@ -387,13 +528,14 @@ img:hover {
   text-align: center;
   line-height: 30px;
   cursor: pointer;
-  color: #999;
+  color: #000000;
 }
 
 .navbar-display-user-action {
   position: relative;
   float: right;
   display: flex;
+  top: -5px;
 }
 
 .navbar-display-user {
@@ -403,10 +545,10 @@ img:hover {
   line-height: 35px;
   overflow: hidden;
   cursor: pointer;
-  background: #ccc;
+  /* background: #ccc; */
   text-align: center;
   vertical-align: middle;
-  margin: 5px;
+  margin: 10px;
 }
 
 .hidden {
@@ -416,7 +558,11 @@ img:hover {
 .navbar-display-user i,
 .navbar-display-cart i {
   font-size: 20px;
-  color: #999;
+  color: #ffffff;
+}
+.navbar-display-user i:hover,
+.navbar-display-cart i:hover{
+  color: #ff6600;
 }
 
 .navbar-display-cart {
@@ -428,19 +574,20 @@ img:hover {
   cursor: pointer;
   text-align: center;
   vertical-align: middle;
-  margin: 7px;
+  margin: 12px;
 }
 
 span#cart-item {
   position: absolute;
-  top: 2px;
+  top: 16px;
   left: 30px;
   color: white;
-  background: #f27474;
-  border-radius: 10px;
-  width: 20px;
-  height: 20px;
+  /* background: #f27474; */
+  /* border-radius: 10px; */
+  width: 30px;
+  height: 30px;
   font-size: 16px;
+  margin-left: 5px;
 }
 
 .navbar-display-action {
@@ -612,6 +759,3 @@ span#cart-item {
     padding: 0 5px;
   }
 }
-
-
-  
