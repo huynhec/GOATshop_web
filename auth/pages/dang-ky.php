@@ -46,99 +46,104 @@ try {
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 <div class="auth-container row">
-    <div class="logo-wrapper col-4">
-        <img src="../assets/images/register.jpeg" alt="login" class="img-fluid">
-    </div>
-    <div class=" form-wrapper col-8">
+    <div class=" form-wrapper-1 col-8">
         <a href="../user/index.php">
-            <img src="../assets/images/logo-no-background.png" style="height:80px;" alt="logo" class="img-fluid">
+            <img src="../assets/images/Black logo - no background.png" alt="logo" class="img-fluid" width="300px" style="display: block; margin-left: auto;margin-right: auto; width: 20%;">
         </a>
-        <h3 class="text-title">Chào mừng bạn mới!</h3>
-        <form action="pages/action.php?req=dang-ky" method="post" enctype="multipart/form-data">
-            <div class="col">
-                <label for="tenkh" class="form-label">Tên khách hàng</label>
-                <input type="text" class="form-control" id="tenkh" name="tenkh" required>
-
-                <label for="username" class="form-label">Username</label>
-                <input type="text" class="form-control" id="username" name="username" required>
-            </div>
+        <form class="form-control-1" action="pages/action.php?req=dang-ky" method="post" enctype="multipart/form-data">
             <div class="row">
-                <div class="col">
-                    <label for="ngaysinh" class="form-label">Ngày sinh</label>
-                    <input type="date" min="<?= date('Y-m-d', strtotime('-100 years')) ?>" max="<?= date('Y-m-d', strtotime('-18 years')) ?>" class="form-control" id="ngaysinh" name="ngaysinh" required>
-                </div>
-                <div class="col">
-                    <label for="gioitinh" class="form-label">Giới tính</label>
-                    <select class="form-select " aria-label=".gioitinh" id="gioitinh" name="gioitinh">
-                        <option value="0" selected>Nam</option>
-                        <option value="1">Nữ</option>
-                    </select>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" required>
-                </div>
-                <div class="col">
-                    <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="password" name="password" required>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <label for="sodienthoai" class="form-label">Số điện thoại</label>
-                    <input type="tel" pattern="[0-9]{10}" minlength="10" maxlength="10" class="form-control" id="sodienthoai" name="sodienthoai" required>
-                </div>
-            </div>
-            <!-- Địa chỉ -->
-            <div class="form-group">
-                <label for="province">Tỉnh/Thành phố</label>
-                <select id="province" name="province" class="form-control">
-                    <option value="">Chọn một tỉnh</option>
-                    <?php foreach ($results as $row) : ?>
-                        <option value="<?php echo $row['province_id'] ?>"><?php echo $row['name'] ?></option>
-                    <?php endforeach; ?>
-                </select>
-                <!-- Thêm hidden input để lưu tên tỉnh -->
-                <input type="hidden" id="province_name" name="province_name" value="">
-            </div>
-            <div class="form-group">
-                <label for="district">Quận/Huyện</label>
-                <select id="district" name="district" class="form-control">
-                    <option value="">Chọn một quận/huyện</option>
-                </select>
-                <!-- Thêm hidden input để lưu tên huyện -->
-                <input type="hidden" id="district_name" name="district_name" value="">
-            </div>
-            <div class="form-group">
-                <label for="wards">Phường/Xã</label>
-                <select id="wards" name="wards" class="form-control">
-                    <option value="">Chọn một xã</option>
-                </select>
-                <!-- Thêm hidden input để lưu tên xã -->
-                <input type="hidden" id="wards_name" name="wards_name" value="">
-            </div>
+                <div class="col-6">
+                    <!-- Left side of the form -->
+                    <p class="title">Đăng ký</p>
+                    <div class="input-field">
+                        <input required="" class="input" type="text" name="tenkh" />
+                        <label class="label" for="input">Họ tên</label>
+                    </div>
+
+                    <div class="input-field">
+                        <input required="" class="input" type="text" name="username" />
+                        <label class="label" for="input">Tên đăng nhập</label>
+                    </div>
+
+                    <div class="input-field">
+                        <input required="" class="input" type="email" name="email" />
+                        <label class="label" for="input">Email đăng nhập</label>
+                    </div>
+
+                    <div class="input-field">
+                        <input required="" class="input" type="password" name="password" />
+                        <label class="label" for="input">Mật khẩu</label>
+                    </div>
 
 
-            <div class="form-group">
-                <label for="road">Số nhà</label>
-                <input id="road" name="road" class="form-control">
+                    <div class="input-field">
+                        <input required="" class="input" type="tel" name="sodienthoai" pattern="[0-9]{10}" minlength="10" maxlength="10" />
+                        <label class="label" for="input">Số điện thoại</label>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <label for="ngaysinh" class="form-label">Ngày sinh:</label>
+                            <input required="" class="input-row" type="date" name="ngaysinh" min="<?= date('Y-m-d', strtotime('-100 years')) ?>" max="<?= date('Y-m-d', strtotime('-18 years')) ?>" />
+                        </div>
+                        <div class="col">
+                            <label for="ngaysinh" class="form-label">Giới tính:</label>
+                            <select class="form-select " aria-label=".gioitinh" id="gioitinh" name="gioitinh">
+                                <option value="0" selected>Nam</option>
+                                <option value="1">Nữ</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-6">
+                    <!-- Right side of the form -->
+                    <p class="title-1">Địa chỉ:</p>
+
+                    <!-- Địa chỉ -->
+                    <div class="form-group">
+                        <label class="form-label" for="province">Tỉnh/Thành phố</label>
+                        <select id="province" name="province" class="form-select">
+                            <option value="">Chọn một tỉnh</option>
+                            <?php foreach ($results as $row) : ?>
+                                <option value="<?php echo $row['province_id'] ?>"><?php echo $row['name'] ?></option>
+                            <?php endforeach; ?>
+                        </select>
+                        <!-- Thêm hidden input để lưu tên tỉnh -->
+                        <input type="hidden" id="province_name" name="province_name" value="">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="district">Quận/Huyện</label>
+                        <select id="district" name="district" class="form-select">
+                            <option value="">Chọn một quận/huyện</option>
+                        </select>
+                        <!-- Thêm hidden input để lưu tên huyện -->
+                        <input type="hidden" id="district_name" name="district_name" value="">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="wards">Phường/Xã</label>
+                        <select id="wards" name="wards" class="form-select">
+                            <option value="">Chọn một xã</option>
+                        </select>
+                        <!-- Thêm hidden input để lưu tên xã -->
+                        <input type="hidden" id="wards_name" name="wards_name" value="">
+                    </div>
+
+                    <div class="input-field">
+                        <input required="" id="road" class="input" type="text" name="road" />
+                        <label class="label" for="input">Số nhà</label>
+                    </div>
+                    <br>
+                    <div class="g-recaptcha" data-sitekey="6LeCaZkpAAAAADBw3Hip0xBcv6JdGRcEGMQU8HfS"></div>
+
+                </div>
             </div>
 
-            <br>
-            <div class="g-recaptcha" data-sitekey="6LeCaZkpAAAAADBw3Hip0xBcv6JdGRcEGMQU8HfS"></div>
-
-            <br>
-
-            <div class="form-group text-center">
-                <button class="btn btn-success w-100" type="submit">Đăng ký</button>
-            </div>
+            <button class="submit-btn" type="submit">Đăng ký</button>
             <input type="hidden" name="url" id="url" class="form-control" value="<?= $url ?>" />
-
         </form>
         <hr>
-        <p class="footer-text">Bạn đã có tài khoản? <a href="index.php?pages=dang-nhap" class="text-danger">Đăng nhập
+        <p class="footer-text">Bạn đã có tài khoản? <a href="index.php?pages=dang-nhap" class="text-succes">Đăng nhập
                 ngay!</a></p>
     </div>
 </div>

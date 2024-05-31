@@ -82,7 +82,7 @@ img:hover {
 /*                              .floating-action                              */
 /* -------------------------------------------------------------------------- */
 
-.floating-action {
+/* .floating-action {
   position: fixed;
   right: 0;
   bottom: 0;
@@ -93,7 +93,7 @@ img:hover {
   color: #fff;
   z-index: 999;
   transition: width 0.3s, height 0.3s, background 0.6s;
-}
+} */
 
 /* .floating-action.activated {
   width: 200px;
@@ -279,7 +279,7 @@ img:hover {
   /* backdrop-filter: blur(10px); */
   /* Start with blur effect */
   transition: background-color 0.5s ease-in-out;
-  
+
 }
 
 .navbar.black {
@@ -287,7 +287,8 @@ img:hover {
   /* Change to black background when scrolling */
 
 }
-.black{
+
+.black {
   background-color: #000;
 }
 
@@ -360,7 +361,8 @@ img:hover {
 .navbar-item {
   position: relative;
   white-space: nowrap;
-  overflow: visible; /* Hiển thị toàn bộ nội dung, không ẩn bất kỳ phần nào */
+  overflow: visible;
+  /* Hiển thị toàn bộ nội dung, không ẩn bất kỳ phần nào */
 }
 
 .navbar-item.has-sub .navbar-item-sub {
@@ -371,10 +373,10 @@ img:hover {
   /* top: 43px; */
   top: 100%;
   left: 0;
-
+  border: 2px solid black;
   padding: 1rem 0;
   margin: 0;
-  /* background: linear-gradient(to right, rgb(255, 255, 255), rgb(189, 189, 189)); */
+  /* background: linear-gradient(to right, rgb(255, 255, 255), rgb(237, 201, 183)); */
   background-color: #fff;
 
   color: #000;
@@ -560,8 +562,9 @@ img:hover {
   font-size: 20px;
   color: #ffffff;
 }
+
 .navbar-display-user i:hover,
-.navbar-display-cart i:hover{
+.navbar-display-cart i:hover {
   color: #ff6600;
 }
 

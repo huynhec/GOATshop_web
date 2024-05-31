@@ -129,17 +129,17 @@ footer {
   background-color: #bc2a8d;
 }
 
-.tiktok-icon {
+.tiktok-icon-bottom {
   background-color: #000;
   padding: 8px;
   border-radius: 50%;
 }
 
-.tiktok-icon:hover {
+.tiktok-icon-bottom:hover {
   background-color: #444;
 }
 
-.tiktok-icon img {
+.tiktok-icon-bottom img {
   width: 24px;
   height: 24px;
 }

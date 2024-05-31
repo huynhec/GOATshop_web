@@ -30,32 +30,26 @@ $url = $_SESSION['url'] ?? '../../user/';
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 <div class="auth-container row">
-    <!-- <div class="logo-wrapper col-4">
-        <img src="../assets/images/register.jpeg" alt="login" class="img-fluid">
-    </div> -->
     <div class="form-wrapper col-8">
         <a href="../user/index.php">
-            <img src="../assets/images/Black logo - no background.png" alt="logo" class="img-fluid" width="300px" style="display: block; margin-left: auto;margin-right: auto; width: 50%;">
-        </a><br>
-        <h3 class="text-title mb-7">Trang đăng nhập</h3>
-        <form action="pages/action.php?req=dang-nhap" method="post">
-            <div class="form-group">
-                <label for="email_or_username">Email hoặc Username</label>
-                <input type="text" name="email_or_username" id="email_or_username" class="form-control" required placeholder="Nhập email hoặc username">
+            <img src="../assets/images/Black logo - no background.png" alt="logo" class="img-fluid" width="300px" style="display: block; margin-left: auto;margin-right: auto; width: 40%;">
+        </a>
+        <form class="form-control" action="pages/action.php?req=dang-nhap" method="post">
+            <p class="title">Đăng nhập</p>
+            <div class="input-field">
+                <input required="" class="input" type="text" name="email_or_username"/>
+                <label class="label" for="input">Email hoặc username</label>
             </div>
-            <div class="form-group">
-                <label for="password">Mật khẩu</label>
-                <input type="password" name="password" id="password" class="form-control" required placeholder="Nhập mật khẩu">
+            <div class="input-field">
+                <input required="" class="input" type="password" name="password" />
+                <label class="label" for="input">Mật khẩu</label>
             </div>
-            <br>
             <div class="g-recaptcha" data-sitekey="6LeCaZkpAAAAADBw3Hip0xBcv6JdGRcEGMQU8HfS"></div>
-            <br>
-            <div class="form-group text-center">
-                <button class="btn btn-primary w-100" type="submit">Đăng nhập</button>
-            </div>
+            <a href="">Quên mật khẩu?</a>
+            <button class="submit-btn" type="submit">Đăng nhập</button>
             <input type="hidden" name="url" id="url" class="form-control" value="<?= $url ?>" />
-
         </form>
+
         <hr>
         <p class="footer-text">Bạn chưa có tài khoản? <a href="index.php?pages=dang-ky" class="text-primary">Đăng ký
                 ngay!</a></p>
