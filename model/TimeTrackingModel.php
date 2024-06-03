@@ -69,14 +69,43 @@ class TimeTrackingModel extends Database
         return $obj->fetchAll();
     }
 
-    public function User_item_tracking__Add($timeCounter, $masp, $typetrack, $ngay)
+    // public function User_item_tracking__Add($timeCounter, $masp, $typetrack, $ngay)
+    // {
+    //     // Kiểm tra xem có bản ghi nào đã tồn tại với cùng typetrack, masp và ngay hay không
+    //     $existingRecord = $this->connect->prepare("
+    //         SELECT * FROM user_item_tracking 
+    //         WHERE masp = ? AND typetrack = ? AND ngay = ?
+    //     ");
+    //     $existingRecord->execute(array($masp, $typetrack, $ngay));
+    //     $rowCount = $existingRecord->rowCount();
+    
+    //     if ($rowCount > 0) {
+    //         // Nếu đã tồn tại bản ghi, cập nhật trường thoigian
+    //         $updateRecord = $this->connect->prepare("
+    //             UPDATE user_item_tracking 
+    //             SET thoigian = thoigian + ?
+    //             WHERE masp = ? AND typetrack = ? AND ngay = ?
+    //         ");
+    //         $updateRecord->execute(array($timeCounter, $masp, $typetrack, $ngay));
+    //         return $updateRecord->rowCount();
+    //     } else {
+    //         // Nếu không có bản ghi tồn tại, thêm mới bản ghi
+    //         $newRecord = $this->connect->prepare("
+    //             INSERT INTO user_item_tracking(thoigian, masp, typetrack, ngay) 
+    //             VALUES (?, ?, ?, ?)
+    //         ");
+    //         $newRecord->execute(array($timeCounter, $masp, $typetrack, $ngay));
+    //         return $newRecord->rowCount();
+    //     }
+    // }
+    public function User_item_tracking__Add($timeCounter, $masp, $makh, $typetrack, $ngay)
     {
-        // Kiểm tra xem có bản ghi nào đã tồn tại với cùng typetrack, masp và ngay hay không
+        // Kiểm tra xem có bản ghi nào đã tồn tại với cùng masp, makh, typetrack và ngay hay không
         $existingRecord = $this->connect->prepare("
             SELECT * FROM user_item_tracking 
-            WHERE masp = ? AND typetrack = ? AND ngay = ?
+            WHERE masp = ? AND makh = ? AND typetrack = ? AND ngay = ?
         ");
-        $existingRecord->execute(array($masp, $typetrack, $ngay));
+        $existingRecord->execute(array($masp, $makh, $typetrack, $ngay));
         $rowCount = $existingRecord->rowCount();
     
         if ($rowCount > 0) {
@@ -84,20 +113,21 @@ class TimeTrackingModel extends Database
             $updateRecord = $this->connect->prepare("
                 UPDATE user_item_tracking 
                 SET thoigian = thoigian + ?
-                WHERE masp = ? AND typetrack = ? AND ngay = ?
+                WHERE masp = ? AND makh = ? AND typetrack = ? AND ngay = ?
             ");
-            $updateRecord->execute(array($timeCounter, $masp, $typetrack, $ngay));
+            $updateRecord->execute(array($timeCounter, $masp, $makh, $typetrack, $ngay));
             return $updateRecord->rowCount();
         } else {
             // Nếu không có bản ghi tồn tại, thêm mới bản ghi
             $newRecord = $this->connect->prepare("
-                INSERT INTO user_item_tracking(thoigian, masp, typetrack, ngay) 
-                VALUES (?, ?, ?, ?)
+                INSERT INTO user_item_tracking(thoigian, masp, makh, typetrack, ngay) 
+                VALUES (?, ?, ?, ?, ?)
             ");
-            $newRecord->execute(array($timeCounter, $masp, $typetrack, $ngay));
+            $newRecord->execute(array($timeCounter, $masp, $makh, $typetrack, $ngay));
             return $newRecord->rowCount();
         }
     }
+    
 
     public function User_item_tracking__Update($maanh, $hinhanh, $masp)
     {

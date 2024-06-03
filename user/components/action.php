@@ -149,7 +149,8 @@ if (isset($_POST['action'])) {
             break;
         case 'view':
             $masp = isset($_POST['masp']) ? intval($_POST['masp']) : 0;
-            $newViewCount = $lx->LuotXem__Add($masp);
+            $makh = $_POST['makh'];
+            $newViewCount = $lx->LuotXem__Add($masp, $makh);
 
             echo number_format($newViewCount);
             break;
@@ -157,13 +158,14 @@ if (isset($_POST['action'])) {
             $res = 0;
             $typetrack = $_POST['typetrack'];
             $masp = $_POST['masp'];
+            $makh = $_POST['makh'];
             $timeCounter = $_POST['timeCounter'];
             $ngay = date('Y-m-d');
             // Kiểm tra và xử lý tính toán của $typetrack
             if ($typetrack == 1) {
                 $timeCounter = $timeCounter * 2;
             }
-            $res += $ttr->User_item_tracking__Add($timeCounter, $masp, $typetrack, $ngay);
+            $res += $ttr->User_item_tracking__Add($timeCounter, $masp, $makh, $typetrack, $ngay);
             if ($res != 0) {
                 header('location: ../../index.php?pages=thoi-gian-theo-doi&msg=success');
             } else {

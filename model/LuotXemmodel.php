@@ -51,30 +51,50 @@ class LuotXemModel extends Database
         $obj->execute(array($masp));
         return $obj->fetchAll();
     }
+    public function LuotXem__Get_Alls()
+    {
+        $obj = $this->connect->prepare("  SELECT idlx, masp, makh, DATE(ngayxem) AS ngayxem, SUM(luotxem) AS luotxem FROM luotxem  GROUP BY masp");
+        $obj->setFetchMode(PDO::FETCH_OBJ);
+        $obj->execute();
+        return $obj->fetchAll();
+    }
 
 
 
-    public function LuotXem__Add($masp)
+    // public function LuotXem__Add($masp, $makh)
+    // {
+    //     // Lấy ngày hiện tại
+    //     $ngayxem = date("Y-m-d");
+    
+    //     // Kiểm tra xem có bản ghi nào trong cùng ngày và masp giống với sản phẩm được xem không
+    //     $obj = $this->connect->prepare("SELECT * FROM luotxem WHERE ngayxem = ? AND masp = ? AND makh = ?");
+    //     $obj->execute(array($ngayxem, $masp, $makh));
+    //     $result = $obj->fetch(PDO::FETCH_ASSOC);
+    
+    //     if ($result) {
+    //         // Nếu có, cập nhật số lượt xem của bản ghi đó bằng cách tăng lên 1
+    //         $luotxem = $result['luotxem'] + 1;
+    //         $obj = $this->connect->prepare("UPDATE luotxem SET luotxem = ? WHERE ngayxem = ? AND masp = ? AND makh = ?");
+    //         $obj->execute(array($luotxem, $ngayxem, $masp, $makh));
+    //     } else {
+    //         // Nếu không có, thêm một bản ghi mới vào bảng luotxem
+    //         $luotxem = 1;
+    //         $obj = $this->connect->prepare("INSERT INTO luotxem(luotxem, ngayxem, masp, makh) VALUES (?,?,?,?)");
+    //         $obj->execute(array($luotxem, $ngayxem, $masp, $makh));
+    //     }
+    
+    //     // Trả về ID của bản ghi vừa được thêm vào
+    //     return $this->connect->lastInsertId();
+    // }
+    public function LuotXem__Add($masp, $makh)
     {
         // Lấy ngày hiện tại
         $ngayxem = date("Y-m-d");
-    
-        // Kiểm tra xem có bản ghi nào trong cùng ngày và masp giống với sản phẩm được xem không
-        $obj = $this->connect->prepare("SELECT * FROM luotxem WHERE ngayxem = ? AND masp = ?");
-        $obj->execute(array($ngayxem, $masp));
-        $result = $obj->fetch(PDO::FETCH_ASSOC);
-    
-        if ($result) {
-            // Nếu có, cập nhật số lượt xem của bản ghi đó bằng cách tăng lên 1
-            $luotxem = $result['luotxem'] + 1;
-            $obj = $this->connect->prepare("UPDATE luotxem SET luotxem = ? WHERE ngayxem = ? AND masp = ?");
-            $obj->execute(array($luotxem, $ngayxem, $masp));
-        } else {
+
             // Nếu không có, thêm một bản ghi mới vào bảng luotxem
             $luotxem = 1;
-            $obj = $this->connect->prepare("INSERT INTO luotxem(luotxem, ngayxem, masp) VALUES (?,?,?)");
-            $obj->execute(array($luotxem, $ngayxem, $masp));
-        }
+            $obj = $this->connect->prepare("INSERT INTO luotxem(luotxem, ngayxem, masp, makh) VALUES (?,?,?,?)");
+            $obj->execute(array($luotxem, $ngayxem, $masp, $makh));
     
         // Trả về ID của bản ghi vừa được thêm vào
         return $this->connect->lastInsertId();

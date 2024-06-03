@@ -7,7 +7,7 @@ $lx = new LuotXemModel();
 $sp = new SanPhamModel();
 $anhSp = new AnhSpModel();
 
-$luotxem__Get_All = $lx->LuotXem__Get_All(-1);
+$luotxem__Get_Alls = $lx->LuotXem__Get_Alls();
 ?>
 
 <div id="main-container">
@@ -39,7 +39,7 @@ $luotxem__Get_All = $lx->LuotXem__Get_All(-1);
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($luotxem__Get_All as $item) : ?>
+                            <?php foreach ($luotxem__Get_Alls as $item) : ?>
                                 <tr>
                                     <td><?= $item->idlx ?></td>
                                     <td><img style="cursor:pointer; " src="../assets/<?= $anhSp->AnhSp__Get_By_Id_Sp_First($item->masp)->hinhanh ?>" alt="" srcset="" class="img-fluid" width="50" onclick="return luotxem_chart('<?= $item->masp ?>')"></td>

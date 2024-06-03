@@ -23,6 +23,12 @@
                     <span class="text">Import</span>
                 </a>
             </li>
+            <li class="<?= $_GET['pages'] == 'luot-xem-export' ? "active" : "" ?>">
+                <a href="index.php?pages=luot-xem-export">
+                    <i class='bx bxs-file'></i>
+                    <span class="text">view export</span>
+                </a>
+            </li>
             <li class="<?= $_GET['pages'] == 'don-hang' ? "active" : "" ?>">
                 <a href="index.php?pages=don-hang">
                     <i class='bx bx-file'></i>

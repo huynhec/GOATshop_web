@@ -68,11 +68,11 @@ setInterval(function () {
 });
 
 //luot xem
-function viewSanpham(masp) {
+function viewSanpham(masp, makh) {
   $.ajax({
     type: "POST",
     url: "components/action.php",
-    data: { action: "view", masp: masp },
+    data: { action: "view", masp: masp, makh: makh },
     success: function (response) {
       $("#view-count").text(response);
     },
