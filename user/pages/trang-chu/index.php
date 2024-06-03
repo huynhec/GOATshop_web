@@ -65,7 +65,7 @@ $top = 0;
         color: white;
         border: none;
         padding: 5px 10px;
-        margin: 4px;
+        margin: 3px;
         cursor: pointer;
         transition: transform 0.3s ease;
         /* Thêm hiệu ứng chuyển đổi mượt mà */

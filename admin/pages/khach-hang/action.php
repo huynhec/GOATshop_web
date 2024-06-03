@@ -19,8 +19,14 @@ if (isset($_GET['req'])) {
             // $password = $_POST['password'];
             $password =$user->Ma_Hoa_Mat_Khau(trim($_POST['password'])) ;
             $trangthai = $_POST['trangthai'];
+             // Lấy thông tin địa chỉ
+             $province_id = $_POST['tinh1_name'];
+             $district_id = $_POST['huyen1_name'];
+             $wards_id= $_POST['xa1'];
+             $road = $_POST['road'];
             if ($kh->KhachHang__Check_Email($email)  && $user->User__Check_Username($username)) {
-                $res += $kh->KhachHang__Add($tenkh, $gioitinh, $ngaysinh, $sodienthoai, $diachi, $email, $username, $password, $trangthai);
+                $res += $kh->KhachHang__Add($tenkh, $gioitinh, $ngaysinh, $sodienthoai, $province_id, $district_id, $wards_id, $road, $email, $username, $password, $trangthai);
+
             }
             if ($res != false) {
                 header('location: ../../index.php?pages=khach-hang&msg=success');

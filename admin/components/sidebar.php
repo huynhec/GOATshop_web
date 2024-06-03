@@ -17,6 +17,12 @@
                     <span class="text">Trang chủ</span>
                 </a>
             </li>
+            <li class="<?= $_GET['pages'] == 'import-from-excel' ? "active" : "" ?>">
+                <a href="index.php?pages=import-from-excel">
+                    <i class='bx bxs-file'></i>
+                    <span class="text">Import</span>
+                </a>
+            </li>
             <li class="<?= $_GET['pages'] == 'don-hang' ? "active" : "" ?>">
                 <a href="index.php?pages=don-hang">
                     <i class='bx bx-file'></i>
