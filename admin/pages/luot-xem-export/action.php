@@ -38,7 +38,7 @@ if (isset($_GET['req'])) {
 
             $status = 0;
 
-            $import__Get_All = $import->import__Get_All();
+            $import__Get_All = $import->import_View__Get_All();
 
             $objPHPExcel = new PHPExcel();
             $objPHPExcel->setActiveSheetIndex(0);
@@ -47,18 +47,15 @@ if (isset($_GET['req'])) {
 
             $objPHPExcel->getActiveSheet()->getStyle('A1')->getFont()->setBold(true);
             $objPHPExcel->getActiveSheet()->getStyle('B1')->getFont()->setBold(true);
-            $objPHPExcel->getActiveSheet()->getStyle('C1')->getFont()->setBold(true);
-            $objPHPExcel->getActiveSheet()->getStyle('D1')->getFont()->setBold(true);
 
-            $objPHPExcel->getActiveSheet()->SetCellValue('A1', "masp");
-            $objPHPExcel->getActiveSheet()->SetCellValue('B1', "masp_rec");
-            $objPHPExcel->getActiveSheet()->SetCellValue('C1', "sup");
-            $objPHPExcel->getActiveSheet()->SetCellValue('D1', "conf");
+
+            $objPHPExcel->getActiveSheet()->SetCellValue('A1', "makh");
+            $objPHPExcel->getActiveSheet()->SetCellValue('B1', "masp");
+
             foreach ($import__Get_All as $item) {
-                $objPHPExcel->getActiveSheet()->SetCellValue('A' . $row_hd, "" . $item->masp);
-                $objPHPExcel->getActiveSheet()->SetCellValue('B' . $row_hd, "" . $item->masp_rec);
-                $objPHPExcel->getActiveSheet()->SetCellValue('C' . $row_hd, "" . $item->sup);
-                $objPHPExcel->getActiveSheet()->SetCellValue('D' . $row_hd, "" . $item->conf);
+                $objPHPExcel->getActiveSheet()->SetCellValue('A' . $row_hd, "" . $item->makh);
+                $objPHPExcel->getActiveSheet()->SetCellValue('B' . $row_hd, "" . $item->masp);
+
 
                 $row_hd += 1;
             }
