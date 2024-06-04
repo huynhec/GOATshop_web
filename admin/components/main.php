@@ -29,9 +29,6 @@ if (isset($_GET['pages']) && !isset($_GET['req'])) {
         case "luot-xem":
             require_once "pages/luot-xem/index.php";
             break;
-        case "luot-xem-export":
-            require_once "pages/luot-xem-export/index.php";
-            break;
         case "trang-thai":
             require_once "pages/trang-thai/index.php";
             break;

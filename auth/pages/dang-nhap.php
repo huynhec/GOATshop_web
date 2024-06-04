@@ -32,7 +32,7 @@ $url = $_SESSION['url'] ?? '../../user/';
 <div class="auth-container row">
     <div class="form-wrapper col-8">
         <a href="../user/index.php">
-            <img src="~/assets/images/Black logo - no background.png" alt="logo" class="img-fluid" width="300px" style="display: block; margin-left: auto;margin-right: auto; width: 40%;">
+            <img src="../assets/images/Black logo - no background.png" alt="logo" class="img-fluid" width="300px" style="display: block; margin-left: auto;margin-right: auto; width: 40%;">
         </a>
         <form class="form-control" action="pages/action.php?req=dang-nhap" method="post">
             <p class="title">Đăng nhập</p>

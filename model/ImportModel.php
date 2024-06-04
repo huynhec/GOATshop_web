@@ -46,6 +46,13 @@ class ImportModel extends Database
         $obj->execute();
         return $obj->fetchAll();
     }
+    public function import_Tracking__Get_All()
+    {
+        $obj = $this->connect->prepare("SELECT * FROM user_item_tracking");
+        $obj->setFetchMode(PDO::FETCH_OBJ);
+        $obj->execute();
+        return $obj->fetchAll();
+    }
     public function import__Add($masp, $masp_rec, $sup, $conf)
     {
         $obj = $this->connect->prepare("INSERT INTO goiy(masp, masp_rec, sup, conf) VALUES (?,?,?,?)");

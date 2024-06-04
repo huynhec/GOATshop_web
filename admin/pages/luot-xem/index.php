@@ -26,6 +26,7 @@ $luotxem__Get_Alls = $lx->LuotXem__Get_Alls();
     <div class="row section-container">
         <div class="col-7">
             <div class="main-data">
+                <a href="pages/luot-xem/action.php?req=export" class="btn btn-danger float-right">EXPORT</a>
                 <h3 class="section-title">Danh sách lượt xem</h3>
                 <div class="table-responsive">
                     <table id="table_js" class="table table-striped" style="width:100%">
@@ -77,5 +78,4 @@ $luotxem__Get_Alls = $lx->LuotXem__Get_Alls();
             $(".main-form").html(data);
         });
     };
-
 </script>

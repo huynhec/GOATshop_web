@@ -28,6 +28,7 @@ $timeTracking__Get_TwoD = $ttr->User_item_tracking__Get_TwoD();
     <div class="row section-container">
         <div class="col-7">
             <div class="main-data">
+                <a href="pages/thoi-gian-theo-doi/action.php?req=export" class="btn btn-danger float-right">EXPORT</a>
                 <h3 class="section-title">Danh sách theo dõi</h3>
                 <div class="table-responsive">
                     <table id="table_js" class="table table-striped" style="width:100%">
@@ -43,7 +44,7 @@ $timeTracking__Get_TwoD = $ttr->User_item_tracking__Get_TwoD();
                             </tr>
                         </thead>
                         <tbody>
-                             <?php foreach ($timeTracking__Get_All as $item) : ?>
+                            <?php foreach ($timeTracking__Get_All as $item) : ?>
                                 <tr>
                                     <td><?= $item->uitrack_id ?></td>
                                     <td><?= $item->makh ?></td>
@@ -71,19 +72,19 @@ $timeTracking__Get_TwoD = $ttr->User_item_tracking__Get_TwoD();
             </div>
         </div>
 
-</div>
+    </div>
 
-<script>
-    window.addEventListener('load', function() {
-        document.getElementById('dynamicTitle').innerText = "ADMIN | Quản lý thời gian theo dõi";
-    })
+    <script>
+        window.addEventListener('load', function() {
+            document.getElementById('dynamicTitle').innerText = "ADMIN | Quản lý thời gian theo dõi";
+        })
 
 
-    function trackingitem_chart(masp) {
-        $.post("pages/thoi-gian-theo-doi/trackingitem_chart.php", {
-            masp: masp,
-        }, function(data, status) {
-            $(".main-form").html(data);
-        });
-    };
-</script>
+        function trackingitem_chart(masp) {
+            $.post("pages/thoi-gian-theo-doi/trackingitem_chart.php", {
+                masp: masp,
+            }, function(data, status) {
+                $(".main-form").html(data);
+            });
+        };
+    </script>
