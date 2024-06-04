@@ -23,28 +23,65 @@ $sanPham__Get_By_Loai = $sp->SanPham__Get_By_IdLoai($maloai);
 <main class="main">
     <div class="main-container">
         <div class="main-title-container">
-            <a href="index.php?pages=danh-muc">
-                <div class="item-title color-2"><i class='bx bx-star bx-tada'></i>Sản phẩm loại <?=$loaiSp->LoaiSp__Get_By_Id($maloai)->tenloai?> </div>
+            <a href="index.php?pages=sp-moi&page=1">
+                <div class="item-title color-2" style="font-weight: bold; font-size: 24px; margin-top: 60px">Loại sản phẩm: <?=$loaiSp->LoaiSp__Get_By_Id($maloai)->tenloai?></div>
             </a>
         </div>
         <div class="main-item-container">
-        <?php if (count($sanPham__Get_By_Loai_Paged) > 0) : ?>
             <?php foreach ($sanPham__Get_By_Loai_Paged as $item) : ?>
-                <?php $anhSp__Get_By_Id_Sp_First = $anhSp->AnhSp__Get_By_Id_Sp_First($item->masp); ?>
-
-                    <a href="index.php?pages=chi-tiet&masp=<?= $item->masp ?>&maloai=<?= $item->maloai ?>">
-                        <div class="manga-container">
-                            <div class="manga-thumbnail">
-                                <img src="../assets/<?= $anhSp__Get_By_Id_Sp_First->hinhanh?>">
-                                <span class="manga-note background-2"><?= number_format($dg->ShowDonGia__Get_By_Id_Spdg($item->masp)) ?>₫ <i class="bx bxs-star"></i></span>
+                <?php if (count($sanPham__Get_By_Loai_Paged) > 0) : ?>
+                    <?php $anhSp__Get_By_Id_Sp_First = $anhSp->AnhSp__Get_By_Id_Sp_First($item->masp); ?>
+                    <?php if (isset($anhSp__Get_By_Id_Sp_First->masp)) : ?>
+                        <div class="product-item" data-masp="<?= $anhSp__Get_By_Id_Sp_First->masp ?>" onmouseenter="startTimer(this)" onmouseleave="endTimer()" onclick="endTimer()">
+                            <div class="product-normal">
+                                <div class="product-img">
+                                    <a href="index.php?pages=chi-tiet&masp=<?= $anhSp__Get_By_Id_Sp_First->masp ?>&maloai=<?= $item->maloai ?>">
+                                        <img src="../assets/<?= $anhSp__Get_By_Id_Sp_First->hinhanh ?>" loading="lazy">
+                                    </a>
+                                    <!-- khuyến mãi -->
+                                    <!-- <div class="product-tags">
+                                        <div class="tag-saleoff text-center">-23%</div>
+                                    </div> -->
+                                    <div class="product-actions text-center clearfix">
+                                        <div>
+                                            <button type="button" class="btnQuickView quick-view medium--hide small--hide" data-handle="/products/nike-mercurial-vapor-13-academy-tf-2">
+                                                <span><i class="fa fa-search-plus" aria-hidden="true"></i></span>
+                                            </button>
+                                            <button type="button" class="btnBuyNow buy-now medium--hide small--hide" data-id="1085955545"><span>Mua ngay</span></button>
+                                            <button type="button" class="btnAddToCart add-to-cart medium--hide small--hide" data-id="1085955545">
+                                                <span><i class="fa fa-cart-plus" aria-hidden="true"></i></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="product-variants-info">
+                                    <!-- <div class="product-variants-count">1 phiên bản màu sắc</div> -->
+                                </div>
+                                <div class="product-title">
+                                    <a href="index.php?pages=chi-tiet&masp=<?= $anhSp__Get_By_Id_Sp_First->masp ?>&maloai=<?= $item->maloai ?>">
+                                        <?= $item->tensp ?>
+                                    </a>
+                                </div>
+                                <div class="product-price clearfix">
+                                    <span class="current-price"><?= number_format($dg->ShowDonGia__Get_By_Id_Spdg($item->masp)) ?>₫</span>
+                                    <span class="original-price"><s>1,750,000₫</s></span>
+                                </div>
+                                <!-- <div class="fundiin__block-render-ui__loop" data-fundiin-loop-product-price-origin="1350000">
+                                    <div class="fundiin__wrapper">
+                                        <div shop-data-origin-panel="">
+                                            <span class="fundiin__panel">Trả sau <span data-origin-price="">675.000đ</span> x2 kỳ</span>
+                                            <a class="fundiin__logo">
+                                                <img src="https://assets.fundiin.vn/merchant/logo_transparent.png" width="70" height="40" style="object-fit: contain;height:40px;width:70px">
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div> -->
                             </div>
-                            <div class="manga-title color-2"><?= $item->tensp ?></div>
                         </div>
-                    </a>
+                    <?php else : ?>
+                    <?php endif ?>
+                <?php endif ?>
             <?php endforeach ?>
-            <?php else: ?>
-                Không tìm thấy...
-            <?php endif ?>
 
         </div>
     </div>
@@ -52,37 +89,37 @@ $sanPham__Get_By_Loai = $sp->SanPham__Get_By_IdLoai($maloai);
     <div class="pagination-container">
         <div class="pagination">
             <?php
-            $total_pages = ceil(count($sanPham__Get_By_Loai) / 15);
+            $total_pages = ceil(count($sanPham__Get_By_Loai) / 18);
 
             // Hiển thị nút đầu trang
             if ($page_number > 1) {
-                echo '<a href="index.php?pages=loai-sp&maloai='.$maloai.'&page=1" class="pagination-link">
+                echo '<a href="index.php?pages=loai-sp&maloai=' . $maloai . '&page=1" class="pagination-link">
                         <i class="fa fa-angle-double-left""></i>
                       </a>';
             }
 
             // Hiển thị nút trước
             if ($page_number > 1) {
-                echo '<a href="index.php?pages=loai-sp&maloai='.$maloai.'&page=' . ($page_number - 1) . '" class="pagination-link">
+                echo '<a href="index.php?pages=loai-sp&maloai=' . $maloai . '&page=' . ($page_number - 1) . '" class="pagination-link">
                         <i class="fas fa-angle-left"></i>
                       </a>';
             }
 
             // Hiển thị các trang gần đó
             for ($i = max(1, $page_number - 2); $i <= min($page_number + 2, $total_pages); $i++) {
-                echo '<a href="index.php?pages=loai-sp&maloai='.$maloai.'&page=' . $i . '" class="pagination-link ' . ($page_number == $i ? 'active' : '') . '">' . $i . '</a>';
+                echo '<a href="index.php?pages=loai-sp&maloai=' . $maloai . '&page=' . $i . '" class="pagination-link ' . ($page_number == $i ? 'active' : '') . '">' . $i . '</a>';
             }
 
             // Hiển thị nút sau
             if ($page_number < $total_pages) {
-                echo '<a href="index.php?pages=loai-sp&maloai='.$maloai.'&page=' . ($page_number + 1) . '" class="pagination-link">
+                echo '<a href="index.php?pages=loai-sp&maloai=' . $maloai . '&page=' . ($page_number + 1) . '" class="pagination-link">
                           <i class="fas fa-angle-right"></i>
                       </a>';
             }
 
             // Hiển thị nút cuối trang
             if ($page_number < $total_pages) {
-                echo '<a href="index.php?pages=loai-sp&maloai='.$maloai.'&page=' . $total_pages . '" class="pagination-link">
+                echo '<a href="index.php?pages=loai-sp&maloai=' . $maloai . '&page=' . $total_pages . '" class="pagination-link">
                         <i class="fa fa-angle-double-right""></i>
                       </a>';
             }

@@ -18,30 +18,75 @@ $sanPham__Get_All = $sp->SanPham__Get_All(1);
 ?>
 
 <main class="main">
-    <div class="main-container">
-        <div class="main-title-container">
-            <a href="index.php?pages=danh-muc">
-                <div class="item-title color-2"><i class='bx bx-star bx-tada'></i>Tất cả sản phẩm</div>
-            </a>
-        </div>
-        <div class="main-item-container">
-            <?php if (count($sanPham__Get_Ten_Sp_Paged) > 0) : ?>
+    <div class="main-view-item-container">
+        <div class="main-container">
+            <div class="main-title-container">
+                <a href="index.php?pages=sp-moi&page=1">
+                    <div class="item-title color-2" style="font-weight: bold; font-size: 24px; margin-top: 60px">Tất cả sản phẩm</div>
+                </a>
+            </div>
+            <div class="main-item-container">
                 <?php foreach ($sanPham__Get_Ten_Sp_Paged as $item) : ?>
-                    <?php $anhSp__Get_By_Id_Sp_First = $anhSp->AnhSp__Get_By_Id_Sp_First($item->masp); ?>
-
-                    <a href="index.php?pages=chi-tiet&masp=<?= $item->masp ?>&maloai=<?= $item->maloai ?>">
-                        <div class="manga-container" data-masp="<?= $anhSp__Get_By_Id_Sp_First->masp ?>" onmouseenter="startTimer(this)" onmouseleave="endTimer()">
-                            <div class="manga-thumbnail">
-                                <img src="../assets/<?= $anhSp__Get_By_Id_Sp_First->hinhanh ?>">
-                                <span class="manga-note background-2"><?= number_format($dg->ShowDonGia__Get_By_Id_Spdg($item->masp)) ?>₫ <i class="bx bxs-star"></i></span>
+                    <?php if (count($sanPham__Get_Ten_Sp_Paged) > 0) : ?>
+                        <?php $anhSp__Get_By_Id_Sp_First = $anhSp->AnhSp__Get_By_Id_Sp_First($item->masp); ?>
+                        <?php if (isset($anhSp__Get_By_Id_Sp_First->masp)) : ?>
+                            <div class="product-item" data-masp="<?= $anhSp__Get_By_Id_Sp_First->masp ?>" onmouseenter="startTimer(this)" onmouseleave="endTimer()" onclick="endTimer()">
+                                <div class="product-normal">
+                                    <div class="product-img">
+                                        <a href="index.php?pages=chi-tiet&masp=<?= $anhSp__Get_By_Id_Sp_First->masp ?>&maloai=<?= $item->maloai ?>">
+                                            <img src="../assets/<?= $anhSp__Get_By_Id_Sp_First->hinhanh ?>" loading="lazy">
+                                        </a>
+                                        <!-- khuyến mãi -->
+                                        <!-- <div class="product-tags">
+                                        <div class="tag-saleoff text-center">-23%</div>
+                                    </div> -->
+                                        <div class="product-actions text-center clearfix">
+                                            <div>
+                                                <button type="button" class="btnQuickView quick-view medium--hide small--hide" data-handle="/products/nike-mercurial-vapor-13-academy-tf-2">
+                                                    <span><i class="fa fa-search-plus" aria-hidden="true"></i></span>
+                                                </button>
+                                                <button type="button" class="btnBuyNow buy-now medium--hide small--hide" data-id="1085955545"><span>Mua ngay</span></button>
+                                                <button type="button" class="btnAddToCart add-to-cart medium--hide small--hide" data-id="1085955545">
+                                                    <span><i class="fa fa-cart-plus" aria-hidden="true"></i></span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="product-variants-info">
+                                        <!-- <div class="product-variants-count">1 phiên bản màu sắc</div> -->
+                                    </div>
+                                    <div class="product-title">
+                                        <a href="index.php?pages=chi-tiet&masp=<?= $anhSp__Get_By_Id_Sp_First->masp ?>&maloai=<?= $item->maloai ?>">
+                                            <?= $item->tensp ?>
+                                        </a>
+                                    </div>
+                                    <div class="product-price clearfix">
+                                        <span class="current-price"><?= number_format($dg->ShowDonGia__Get_By_Id_Spdg($item->masp)) ?>₫</span>
+                                        <span class="original-price"><s>1,750,000₫</s></span>
+                                    </div>
+                                    <!-- <div class="fundiin__block-render-ui__loop" data-fundiin-loop-product-price-origin="1350000">
+                                    <div class="fundiin__wrapper">
+                                        <div shop-data-origin-panel="">
+                                            <span class="fundiin__panel">Trả sau <span data-origin-price="">675.000đ</span> x2 kỳ</span>
+                                            <a class="fundiin__logo">
+                                                <img src="https://assets.fundiin.vn/merchant/logo_transparent.png" width="70" height="40" style="object-fit: contain;height:40px;width:70px">
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div> -->
+                                </div>
                             </div>
-                            <div class="manga-title color-2"><?= $item->tensp ?></div>
-                        </div>
-                    </a>
+                        <?php else : ?>
+                        <?php endif ?>
+                    <?php endif ?>
                 <?php endforeach ?>
-            <?php else : ?>
-                Không tìm thấy...
-            <?php endif ?>
+
+
+
+
+            </div>
+
+
 
         </div>
     </div>
@@ -49,7 +94,7 @@ $sanPham__Get_All = $sp->SanPham__Get_All(1);
     <div class="pagination-container">
         <div class="pagination">
             <?php
-            $total_pages = ceil(count($sanPham__Get_All) / 15);
+            $total_pages = ceil(count($sanPham__Get_All) / 18);
             // Hiển thị nút đầu trang
             if ($page_number > 1) {
                 echo '<a href="index.php?pages=danh-muc&page=1" class="pagination-link">

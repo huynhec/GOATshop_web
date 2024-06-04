@@ -120,10 +120,15 @@ $anhSp__Get_By_Id_Sp_Thumbnail = $anhSp->AnhSp__Get_By_Id_Sp_Thumbnail($masp);
                     <button class="add-to-cart" onclick="addCartSize('<?= $masp ?>')">Thêm vào giỏ</button>
                 </div>
             <?php else : ?>
+                <a href="../auth?pages=dang-nhap">
+
                 <div class="actions">
-                    <button class="buy-now" onclick="return checkLogin()">Mua ngay</button>
-                    <button class="add-to-cart" onclick="return checkLogin()">Thêm vào giỏ</button>
+                    <!-- <button class="buy-now" onclick="return checkLogin()">Mua ngay</button>
+                    <button class="add-to-cart" onclick="return checkLogin()">Thêm vào giỏ</button> -->
+                        <button class="buy-now" >Mua ngay</button>
+                        <button class="add-to-cart" >Thêm vào giỏ</button>
                 </div>
+                </a>
             <?php endif ?>
 
         </div>
@@ -377,7 +382,7 @@ $anhSp__Get_By_Id_Sp_Thumbnail = $anhSp->AnhSp__Get_By_Id_Sp_Thumbnail($masp);
 
     window.addEventListener('load', function() {
         // luot xem
-        viewSanpham('<?= $masp ?>','<?= $makh ?>');
+        viewSanpham('<?= $masp ?>', '<?= $makh ?>');
 
         // Lấy masp khi trang được tải
         masp = <?= $masp ?>;
@@ -385,7 +390,7 @@ $anhSp__Get_By_Id_Sp_Thumbnail = $anhSp->AnhSp__Get_By_Id_Sp_Thumbnail($masp);
 
         typetrack = 1;
         // Bắt đầu tính thời gian khi trang được tải
-        startTimerCt(); 
+        startTimerCt();
     });
 
     window.addEventListener('beforeunload', function() {

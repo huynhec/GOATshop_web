@@ -19,7 +19,7 @@ $luotxem__Get_Alls = $lx->LuotXem__Get_Alls();
             </li>
             <li><i class='bx bx-chevron-right'></i></li>
             <li>
-                <a class="active" href="index.php?pages=thoi-gian-theo-doi">Danh sách theo dõi</a>
+                <a class="active" href="index.php?pages=thoi-gian-theo-doi">Danh sách lượt xem</a>
             </li>
         </ul>
     </div>

@@ -215,7 +215,7 @@ $dc__Get_By_Id_makh = $dc->DiaChi__Get_By_Id($makh);
                                                                 ?>
 
 
-                                                                <input id="road" name="road" class="form-control" value="<?= isset($road_cur->road) ? $road_cur->road : '' ?>">
+                                                                <input id="road" name="road" class="form-control" value="<?= isset($road_cur->road) ? $road_cur->road : '' ?>" requ>
                                                             </div>
 
                                                             <div class="row mb-4">
@@ -246,7 +246,7 @@ $dc__Get_By_Id_makh = $dc->DiaChi__Get_By_Id($makh);
                                                             <div class="section-header">
                                                                 <h2 class="section-title">Phương thức thanh toán</h2>
                                                             </div>
-                                                            <div class="section-content">
+                                                            <!-- <div class="section-content">
                                                                 <div class="content-box">
 
 
@@ -288,16 +288,13 @@ $dc__Get_By_Id_makh = $dc->DiaChi__Get_By_Id($makh);
 
                                                                     <div class="radio-wrapper content-box-row content-box-row-secondary hidden" for="payment_method_id_1002112115">
                                                                         <div class="blank-slate">
-                                                                            <!-- NH Vietcombank Chi nhánh Tân Định
-                                                                            TK: Le Thanh Chau
-                                                                            STK: 0371000478398 -->
                                                                             <img src='https://img.vietqr.io/image/vietinbank-113366668888-compact.jpg' />
                                                                         </div>
                                                                     </div>
 
 
                                                                 </div>
-                                                            </div>
+                                                            </div> -->
                                                         </div>
                                                         <hr class="my-2">
                                                         <button type="button" onclick="return checkout()" class="btn btn-lg btn-danger w-100">

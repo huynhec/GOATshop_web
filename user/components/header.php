@@ -46,12 +46,12 @@ $thuongHieu__Get_All = $th->ThuongHieu__Get_All();
                 <div class="navbar-search">
                     <input id="search-box" type="text" name="search" autocomplete="off" placeholder="Tìm kiếm sản phẩm">
                     <div class="icon">
-                       <i class="fas fa-search"></i>
+                        <i class="fas fa-search"></i>
                     </div>
                 </div>
                 <!-- Danh sách -->
                 <div class="navbar-item has-sub">
-                    <a href="index.php?pages=loai-sp">Danh mục<i class="fas fa-chevron-down"></i></a>
+                    <a href="index.php?pages=danh-muc">Danh mục<i class="fas fa-chevron-down"></i></a>
                     <ul class="navbar-item-sub">
                         <div class="menu-genre">
                             <?php foreach ($loaiSp__Get_All as $item) : ?>
@@ -106,11 +106,18 @@ $thuongHieu__Get_All = $th->ThuongHieu__Get_All();
                 </div>
 
             <?php else : ?>
-                <div class="navbar-display-cart" onclick="return checkLogin()">
+                <a href="../auth?pages=dang-nhap">
+                    <div class="navbar-display-cart">
+                        <i class="fas fa-shopping-cart">
+                            <span id="cart-item">(0)</span>
+                        </i>
+                    </div>
+                </a>
+                <!-- <div class="navbar-display-cart" onclick="return checkLogin()">
                     <i class="fas fa-shopping-cart">
                         <span id="cart-item">(0)</span>
                     </i>
-                </div>
+                </div> -->
             <?php endif ?>
 
             <?php if (isset($_SESSION['user'])) : ?>

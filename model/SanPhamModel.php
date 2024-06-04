@@ -80,6 +80,62 @@ class SanPhamModel extends Database
         $obj->execute(array(1));
         return $obj->fetchAll();
     }
+    public function SanPham__Get_Top_Attribute_1($limit = 9)
+    {
+        $sql = "SELECT * FROM `sanpham` 
+        JOIN `chitietthuoctinh` ON `sanpham`.`masp` = `chitietthuoctinh`.`masp` 
+        WHERE maloai = '1' AND noidung = 'nhan tao' 
+        GROUP BY sanpham.masp 
+        ORDER BY luotmua 
+        DESC LIMIT $limit;";
+
+        $obj = $this->connect->prepare($sql);
+        $obj->setFetchMode(PDO::FETCH_OBJ);
+        $obj->execute();
+        return $obj->fetchAll();
+    }
+    public function SanPham__Get_Top_Attribute_2($limit = 9)
+    {
+        $sql = "SELECT * FROM `sanpham` 
+        JOIN `chitietthuoctinh` ON `sanpham`.`masp` = `chitietthuoctinh`.`masp` 
+        WHERE maloai = '1' AND noidung = 'tu nhien' 
+        GROUP BY sanpham.masp 
+        ORDER BY luotmua 
+        DESC LIMIT $limit;";
+
+        $obj = $this->connect->prepare($sql);
+        $obj->setFetchMode(PDO::FETCH_OBJ);
+        $obj->execute();
+        return $obj->fetchAll();
+    }
+    public function SanPham__Get_Top_Attribute_3($limit = 9)
+    {
+        $sql = "SELECT * FROM `sanpham` 
+        JOIN `chitietthuoctinh` ON `sanpham`.`masp` = `chitietthuoctinh`.`masp` 
+        WHERE maloai = '6'
+        GROUP BY sanpham.masp 
+        ORDER BY luotmua 
+        DESC LIMIT $limit;";
+
+        $obj = $this->connect->prepare($sql);
+        $obj->setFetchMode(PDO::FETCH_OBJ);
+        $obj->execute();
+        return $obj->fetchAll();
+    }
+    public function SanPham__Get_Top_Attribute_4($limit = 9)
+    {
+        $sql = "SELECT * FROM `sanpham` 
+        JOIN `chitietthuoctinh` ON `sanpham`.`masp` = `chitietthuoctinh`.`masp` 
+        WHERE maloai = '4'
+        GROUP BY sanpham.masp 
+        ORDER BY luotmua 
+        DESC LIMIT $limit;";
+
+        $obj = $this->connect->prepare($sql);
+        $obj->setFetchMode(PDO::FETCH_OBJ);
+        $obj->execute();
+        return $obj->fetchAll();
+    }
 
     public function SanPham__Add($tensp, $mota, $ngaythem, $trangthai, $luotmua, $luotxem, $math, $maloai)
     {
@@ -118,7 +174,7 @@ class SanPhamModel extends Database
     public function SanPham__Get_All_Paged($page_number)
     {
         // Số lượng card trên mỗi trang
-        $items_per_page = 15;
+        $items_per_page = 18;
 
         // Tính toán giá trị bắt đầu và kết thúc cho phân trang
         $page_start = ($page_number - 1) * $items_per_page;
@@ -204,7 +260,7 @@ class SanPhamModel extends Database
     public function SanPham__Get_By_Th_Paged($page_number, $math)
     {
         // Số lượng sp trên mỗi trang
-        $items_per_page = 15;
+        $items_per_page = 18;
 
         // Tính toán giá trị bắt đầu và kết thúc cho phân trang
         $page_start = ($page_number - 1) * $items_per_page;
@@ -230,7 +286,7 @@ class SanPhamModel extends Database
     public function SanPham__Get_Ten_Sp_Paged($page_number, $tensp)
     {
         // Số lượng sp trên mỗi trang
-        $items_per_page = 15;
+        $items_per_page = 18;
 
         // Tính toán giá trị bắt đầu và kết thúc cho phân trang
         $page_start = ($page_number - 1) * $items_per_page;
@@ -252,11 +308,19 @@ class SanPhamModel extends Database
         $obj->execute();
         return $obj->fetchAll();
     }
+    public function SanPham__Get_All_Tensp($tensp)
+    {
+
+        $obj = $this->connect->prepare("SELECT * FROM sanpham WHERE trangthai = 1 AND tensp LIKE '%$tensp%' GROUP BY masp  ");
+        $obj->setFetchMode(PDO::FETCH_OBJ);
+        $obj->execute();
+        return $obj->fetchAll();
+    }
 
     public function SanPham__Get_By_Loai_Paged($page_number, $maloai)
     {
         // Số lượng sp trên mỗi trang
-        $items_per_page = 15;
+        $items_per_page = 18;
 
         // Tính toán giá trị bắt đầu và kết thúc cho phân trang
         $page_start = ($page_number - 1) * $items_per_page;
