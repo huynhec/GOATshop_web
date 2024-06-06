@@ -24,15 +24,15 @@ if (isset($_GET['req'])) {
             $objPHPExcel->getActiveSheet()->getStyle('C1')->getFont()->setBold(true);
 
 
-            $objPHPExcel->getActiveSheet()->SetCellValue('A1', "makh");
-            $objPHPExcel->getActiveSheet()->SetCellValue('B1', "masp");
-            $objPHPExcel->getActiveSheet()->SetCellValue('C1', "timetracking");
+            $objPHPExcel->getActiveSheet()->SetCellValue('A1', "user");
+            $objPHPExcel->getActiveSheet()->SetCellValue('B1', "item");
+            $objPHPExcel->getActiveSheet()->SetCellValue('C1', "rating");
 
 
             foreach ($import__Get_All as $item) {
-                $objPHPExcel->getActiveSheet()->SetCellValue('A' . $row_hd, "" . $item->makh);
-                $objPHPExcel->getActiveSheet()->SetCellValue('B' . $row_hd, "" . $item->masp);
-                $objPHPExcel->getActiveSheet()->SetCellValue('C' . $row_hd, "" . $item->thoigian);
+                $objPHPExcel->getActiveSheet()->SetCellValue('A' . $row_hd, "" . $item->user);
+                $objPHPExcel->getActiveSheet()->SetCellValue('B' . $row_hd, "" . $item->item);
+                $objPHPExcel->getActiveSheet()->SetCellValue('C' . $row_hd, "" . $item->rating);
 
 
                 $row_hd += 1;

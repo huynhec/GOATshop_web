@@ -48,7 +48,14 @@ class ImportModel extends Database
     }
     public function import_Tracking__Get_All()
     {
-        $obj = $this->connect->prepare("SELECT * FROM user_item_tracking");
+        $obj = $this->connect->prepare("SELECT 
+        kh.makh AS user, 
+        sp.masp AS item, 
+        tr.thoigian AS rating
+        FROM khachhang kh
+        CROSS JOIN sanpham sp
+        LEFT JOIN user_item_tracking tr ON kh.makh = tr.makh AND sp.masp = tr.masp
+        ORDER BY kh.makh, sp.masp;");
         $obj->setFetchMode(PDO::FETCH_OBJ);
         $obj->execute();
         return $obj->fetchAll();
