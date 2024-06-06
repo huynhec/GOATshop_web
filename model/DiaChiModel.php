@@ -39,10 +39,10 @@ class DiaChiModel extends Database
         $obj->execute();
         return $obj->fetchAll();
     }
-    public function DiaChi__Add($hinhanh, $masp)
+    public function DiaChi__Add($makh, $province, $district, $wards, $road)
     {
-        $obj = $this->connect->prepare("INSERT INTO diachi(hinhanh, masp) VALUES (?,?)");
-        $obj->execute(array($hinhanh, $masp));
+        $obj = $this->connect->prepare("INSERT INTO diachi(makh, province, district, wards, road) VALUES (?,?,?,?,?)");
+        $obj->execute(array($makh, $province, $district, $wards, $road));
         return $obj->rowCount();
     }
 
@@ -104,7 +104,7 @@ class DiaChiModel extends Database
         if ($des != null) {
             $obj = $this->connect->prepare("SELECT * FROM `$des` WHERE `name` IN (SELECT `$des` FROM `diachi` WHERE `makh` = ?) LIMIT 1");
         } else {
-            $obj = $this->connect->prepare("SELECT * FROM `diachi` WHERE `makh` = ? LIMIT 1");
+            $obj = $this->connect->prepare("SELECT * FROM `diachi` WHERE `makh` = ? ORDER BY `diachi_id` DESC LIMIT 1");
         }
         $obj->setFetchMode(PDO::FETCH_OBJ);
         $obj->execute(array($makh));

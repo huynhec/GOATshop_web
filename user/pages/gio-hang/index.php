@@ -152,7 +152,7 @@ $dc__Get_By_Id_makh = $dc->DiaChi__Get_By_Id($makh);
                                                                 <input type="text" name="tenkh" id="tenkh" class="form-control" siez="17" placeholder="Tên người nhận" value="<?= $_SESSION['user']->tenkh ?>" required />
 
                                                             </div>
-                                                        <!-- địa chỉ -->
+                                                            <!-- địa chỉ -->
                                                             <div class="form-group">
                                                                 <label for="tinh">Tỉnh/Thành phố</label>
                                                                 <select id="tinh" name="tinh" class="form-control" onchange="clear_road();">
@@ -173,7 +173,7 @@ $dc__Get_By_Id_makh = $dc->DiaChi__Get_By_Id($makh);
                                                                     <?php endforeach; ?>
                                                                 </select>
                                                                 <!-- Thêm hidden input để lưu tên tỉnh -->
-                                                                <input type="hidden" id="tinh_name" name="tinh_name" value="">
+                                                                <input type="hidden" id="tinh_name" name="tinh_name" value="<?php echo $row['name'] ?>">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="huyen">Quận/Huyện</label>
@@ -215,7 +215,7 @@ $dc__Get_By_Id_makh = $dc->DiaChi__Get_By_Id($makh);
                                                                 ?>
 
 
-                                                                <input id="road" name="road" class="form-control" value="<?= isset($road_cur->road) ? $road_cur->road : '' ?>" requ>
+                                                                <input id="road" name="road" class="form-control" value="<?= isset($road_cur->road) ? $road_cur->road : '' ?>" >
                                                             </div>
 
                                                             <div class="row mb-4">
@@ -361,10 +361,25 @@ $dc__Get_By_Id_makh = $dc->DiaChi__Get_By_Id($makh);
     }
 
     function checkout() {
-        var tinh = document.getElementById('tinh').value;
-        var huyen = document.getElementById('huyen').value;
+        // var tinh = document.getElementById('tinh').value;
+        // var huyen = document.getElementById('huyen').value;
+        // var xa = document.getElementById('xa').value;
+        // var road = document.getElementById('road').value;
+        // Lấy giá trị của các trường input
+        var tenkh = document.getElementById('tenkh').value;
+        var tinh = document.getElementById('tinh_name').value;
+        var huyen = document.getElementById('huyen_name').value;
         var xa = document.getElementById('xa').value;
         var road = document.getElementById('road').value;
+        var sodienthoai = document.getElementById('sodienthoai').value;
+        var email = document.getElementById('email').value;
+
+        // Kiểm tra xem các trường đã được điền đầy đủ hay không
+        if (tenkh.trim() === '' || tinh.trim() === '' || huyen.trim() === '' || xa.trim() === '' || road.trim() === '' || sodienthoai.trim() === '' || email.trim() === '') {
+            // Nếu có trường nào chưa được điền đầy đủ, hiển thị thông báo lỗi
+            alert('Vui lòng điền đầy đủ thông tin.');
+            return false; 
+        }
 
         $.ajax({
             type: "POST",

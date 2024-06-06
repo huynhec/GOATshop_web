@@ -41,6 +41,13 @@ if (isset($_POST['action'])) {
             $tenkh = $_POST['tenkh'];
             //địa chỉ
             $diachi = $_POST['diachi'];
+            $diachi_parts = explode(', ', $_POST['diachi']);
+            $tinh = $diachi_parts[0]; // "Hà Nội"
+            $huyen = $diachi_parts[1]; // "Ba Đình"
+            $xa = $diachi_parts[2]; // "Kim Mã"
+            $road = $diachi_parts[3]; // "123 đường ABC"
+
+            $diachi_add = $dc->DiaChi__Add($makh, $tinh, $huyen, $xa, $road);
             $diachi__Get_By_Id_Kh =$dc->DiaChi__Get_By_Id_Kh($makh);
             $diachi_id = $diachi__Get_By_Id_Kh->diachi_id;
 
@@ -51,7 +58,7 @@ if (isset($_POST['action'])) {
             // cập nhật thông tin khách hàng (vì giữ cái liên kết khóa ngoại ở đơn hàng)
             $khRes = $kh->KhachHang__Update_Info($makh, $tenkh, $sodienthoai, $email);
             $resKh = $kh->KhachHang__Get_By_Id($makh);
-            $_SESSION['user'] = $resKh;
+            $_SESSION['user'] = $resKh; 
             // Thêm đơn hàng
             $ngaythem = Date('Y-m-d H:i:s');
             $tongdh = $ctgh->ChiTietGioHang__Sum_Tien_GH($magh)->sum_tien;
