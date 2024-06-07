@@ -152,16 +152,24 @@ class SanPhamModel extends Database
         $query->execute([$maloai]);
         $result = $query->fetch(PDO::FETCH_ASSOC);
         $trangThaiLoai = $result['trangthai'];
-
-        // Nếu trạng thái của loại sản phẩm là hiển thị, thì mới cập nhật sản phẩm
-        if ($trangThaiLoai == 1) {
-            $obj = $this->connect->prepare("UPDATE sanpham SET tensp=?, mota=?, ngaythem=?, trangthai=?, luotmua=?, luotxem=?, math=?, maloai=? WHERE masp=?");
-            $obj->execute(array($tensp, $mota, $ngaythem, $trangthai, $luotmua, $luotxem, $math, $maloai, $masp));
-            return $obj->rowCount();
-        } else {
-            return 0;
+    
+        // Kiểm tra trạng thái của thương hiệu
+        $query = $this->connect->prepare("SELECT trangthai FROM thuonghieu WHERE math = ?");
+        $query->execute([$math]);
+        $result = $query->fetch(PDO::FETCH_ASSOC);
+        $trangThaiThuonghieu = $result['trangthai'];
+    
+        // Nếu trạng thái của loại sản phẩm hoặc thương hiệu không phải là hiển thị, thì không cập nhật sản phẩm
+        if ($trangThaiLoai != 1 || $trangThaiThuonghieu != 1) {
+            return false;
         }
+    
+        // Cập nhật sản phẩm nếu cả hai trạng thái đều là hiển thị
+        $obj = $this->connect->prepare("UPDATE sanpham SET tensp=?, mota=?, ngaythem=?, trangthai=?, luotmua=?, luotxem=?, math=?, maloai=? WHERE masp=?");
+        $obj->execute(array($tensp, $mota, $ngaythem, $trangthai, $luotmua, $luotxem, $math, $maloai, $masp));
+        return $obj->rowCount();
     }
+    
 
     public function SanPham__Delete($masp)
     {

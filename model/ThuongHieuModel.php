@@ -54,8 +54,13 @@ class ThuongHieuModel extends Database
     {
         $obj = $this->connect->prepare("UPDATE thuonghieu SET tenth=?, mota=?, trangthai=? WHERE math=?");
         $obj->execute(array($tenth, $mota, $trangthai, $math));
+
+        // Cập nhật trạng thái của các sản phẩm tương ứng
+        $updateSanPham = $this->connect->prepare("UPDATE sanpham SET trangthai=? WHERE math=?");
+        $updateSanPham->execute(array($trangthai, $math));
         return $obj->rowCount();
     }
+
     public function ThuongHieu__Delete($math)
     {
         $obj = $this->connect->prepare("DELETE FROM thuonghieu WHERE math = ?");
