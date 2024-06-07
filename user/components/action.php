@@ -58,7 +58,7 @@ if (isset($_POST['action'])) {
             $magh = $_POST['magh'];
             $username = $_POST['username'];
             // cập nhật thông tin khách hàng (vì giữ cái liên kết khóa ngoại ở đơn hàng)
-            $khRes = $kh->KhachHang__Update_Info($makh, $tenkh, $sodienthoai, $email);
+            // $khRes = $kh->KhachHang__Update_Info($makh, $tenkh, $sodienthoai, $email);
             $resKh = $kh->KhachHang__Get_By_Id($makh);
             $_SESSION['user'] = $resKh;
             // Thêm đơn hàng
@@ -78,7 +78,7 @@ if (isset($_POST['action'])) {
                 $idsize = $item->idsize;
                 $luotmua = $sp->SanPham__Get_By_Id($masp)->luotmua + 1;
                 // Thêm chi tiết đơn hàng
-                $resDh = $ctdh->ChiTietDonHang__Add($madh, $masp, $soluong, $dongia, $idsize);
+                $resDh = $ctdh->ChiTietDonHang__Add($madh, $masp, $soluong, $dongia, $idsize, $tenkh, $sodienthoai);
                 $resSp = $sp->SanPham__Update_Luot_Mua($masp, $luotmua);
             }
             $res = $gh->GioHang__Update_Trang_Thai($magh, 0);

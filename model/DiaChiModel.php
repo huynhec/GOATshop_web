@@ -64,7 +64,7 @@ class DiaChiModel extends Database
             return $insertQuery->rowCount();
         } else {
             // Nếu có địa chỉ giống, không thực hiện chèn và trả về 0
-            return 0;
+            return false;
         }
     }
     

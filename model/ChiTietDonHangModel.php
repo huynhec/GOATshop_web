@@ -40,10 +40,10 @@ class ChiTietDonHangModel extends Database
         return $obj->fetchAll();
     }
 
-    public function ChiTietDonHang__Add($madon, $masp, $soluong, $dongia, $masize)
+    public function ChiTietDonHang__Add($madon, $masp, $soluong, $dongia, $masize, $tenkh, $sodienthoai)
     {
-        $obj = $this->connect->prepare("INSERT INTO chitietdonhang(madon, masp, soluong, dongia, masize) VALUES (?,?,?,?,?)");
-        $obj->execute(array($madon, $masp, $soluong, $dongia, $masize));
+        $obj = $this->connect->prepare("INSERT INTO chitietdonhang(madon, masp, soluong, dongia, masize, tenkh, sdt) VALUES (?,?,?,?,?,?,?)");
+        $obj->execute(array($madon, $masp, $soluong, $dongia, $masize, $tenkh, $sodienthoai));
 
         return $this->connect->lastInsertId();
     }
@@ -90,6 +90,13 @@ class ChiTietDonHangModel extends Database
         $obj->setFetchMode(PDO::FETCH_OBJ);
         $obj->execute(array($madon));
         return $obj->fetchAll();
+    }
+    public function ChiTietDonHang__Get_By_Id_DH_info($madon)
+    {
+        $obj = $this->connect->prepare("SELECT tenkh, sdt FROM chitietdonhang WHERE madon=? ORDER BY mactdh DESC");
+        $obj->setFetchMode(PDO::FETCH_OBJ);
+        $obj->execute(array($madon));
+        return $obj->fetch();
     }
 
     public function ChiThietDonHang__Top_Ban_Chart()

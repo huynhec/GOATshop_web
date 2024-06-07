@@ -20,7 +20,7 @@ $dc = new DiaChiModel();
 
 $madon = $_POST['madon'];
 $donHang__Get_By_Id = $dh->DonHang__Get_By_Id($madon);
-
+$chiTietDonHang__Get_By_Id_DH_info = $ctdh->ChiTietDonHang__Get_By_Id_DH_info($madon);
 $chiTietDonHang__Get_By_Id_DH = $ctdh->ChiTietDonHang__Get_By_Id_DH($madon);
 $chiTietTrangThai__Get_By_Id_DH = $cttt->ChiTietTrangThai__Get_By_Id_DH($madon);
 $trangThai__Get_BY_Id_DH = $tt->TrangThai__Get_By_Id_DH($madon);
@@ -29,8 +29,8 @@ $trangThai__Get_BY_Id_DH = $tt->TrangThai__Get_By_Id_DH($madon);
 
 <div class="main-update">
     <h3 class="section-title">Chi tiết đơn hàng</h3>
-    <p>Họ tên người mua:..<?= $kh->KhachHang__Get_By_Id($donHang__Get_By_Id->makh)->tenkh ?>....</p>
-    <p>Số điện thoại:..<?= $kh->KhachHang__Get_By_Id($donHang__Get_By_Id->makh)->sodienthoai ?>...</p>
+    <p>Họ tên người mua:..<?= $chiTietDonHang__Get_By_Id_DH_info->tenkh ?>....</p>
+    <p>Số điện thoại:..<?=  $chiTietDonHang__Get_By_Id_DH_info->sdt ?>...</p>
     <p>Địa chỉ nhận:..<?= $dc->DiaChi__Get_By_Full_Ad($donHang__Get_By_Id->diachi_id)->full_dc; ?>....</p>
     <div class="table-responsive">
         <table id="table_js" class="table table-striped" style="width:100%">
