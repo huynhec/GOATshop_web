@@ -53,7 +53,7 @@ class DiaChiModel extends Database
         ");
         $checkQuery->execute(array($makh, $province, $district, $wards, $road));
         $count = $checkQuery->fetchColumn();
-    
+
         if ($count == 0) {
             // Nếu không có địa chỉ giống, thực hiện chèn dữ liệu mới
             $insertQuery = $this->connect->prepare("
@@ -67,13 +67,15 @@ class DiaChiModel extends Database
             return false;
         }
     }
-    
-    
 
-    public function DiaChi__Update($maanh, $hinhanh, $masp)
+
+
+    public function DiaChi__Reset($makh, $province_id, $district_id, $wards_id, $road)
     {
-        $obj = $this->connect->prepare("UPDATE diachi SET hinhanh=?, masp=? WHERE maanh=?");
-        $obj->execute(array($hinhanh, $masp, $maanh));
+        $obj = $this->connect->prepare("DELETE FROM `diachi` WHERE makh = ?");
+        $obj->execute(array($makh));
+        $obj = $this->connect->prepare("INSERT INTO `diachi` (makh, province, district, wards, road) VALUES (?, ?, ?, ?, ?)");
+        $obj->execute(array($makh, $province_id, $district_id, $wards_id, $road));
         return $obj->rowCount();
     }
     public function DiaChi__Delete($maanh)

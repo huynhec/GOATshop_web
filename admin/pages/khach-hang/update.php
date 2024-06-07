@@ -1,6 +1,9 @@
 <?php
 require_once '../../../model/KhachHangModel.php';
 require_once '../../../model/UserModel.php';
+require_once '../../../model/DiaChiModel.php';
+
+$dc = new DiaChiModel();
 $kh = new KhachHangModel();
 $user = new UserModel();
 $makh = $_POST['makh'];
@@ -13,6 +16,21 @@ if ($khachHang__Get_By_Id) {
     // Lấy thông tin user từ bảng users bằng mauser
     $user__Get_By_Id = $user->User__Get_By_Id($mauser);
 }
+
+$database = new Database();
+$pdo = $database->connect;
+
+// Chuẩn bị và thực thi truy vấn SQL để lấy dữ liệu từ bảng 'province'
+try {
+    $sql = "SELECT * FROM province";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+    $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    echo "Lỗi truy vấn: " . $e->getMessage();
+    die();
+}
+
 ?>
 
 <div class="main-update">
@@ -61,18 +79,91 @@ if ($khachHang__Get_By_Id) {
             <div class="col">
                 <label for="trangthai" class="form-label">Trạng thái</label>
                 <select class="form-select " aria-label=".trangthai" id="trangthai" name="trangthai">
-                    <option value="1"<?= $user__Get_By_Id->trangthai == 1 ? 'selected' : '' ?>>Hoạt động</option>
-                    <option value="0"<?= $user__Get_By_Id->trangthai == 0 ? 'selected' : '' ?>>Tạm khóa</option>
+                    <option value="1" <?= $user__Get_By_Id->trangthai == 1 ? 'selected' : '' ?>>Hoạt động</option>
+                    <option value="0" <?= $user__Get_By_Id->trangthai == 0 ? 'selected' : '' ?>>Tạm khóa</option>
                 </select>
             </div>
         </div>
-        <div class="col">
+        <!-- <div class="col">
             <label for="diachi" class="form-label">Địa chỉ</label>
             <input type="diachi" class="form-control" id="diachi" name="diachi" required value="<?= $khachHang__Get_By_Id->diachi ?>">
+        </div> -->
+        <!-- địa chỉ -->
+        <div class="form-group">
+            <label for="tinh2">Tỉnh/Thành phố</label>
+            <select id="tinh2" name="tinh2" class="form-control" onchange="clear_road();">
+                <?php
+                $province_cur = $dc->DiaChi__Get_By_Id_Kh($makh, 'province');
+                ?>
+                <?php if (isset($province_cur->province_id)) : ?>
+                    <option value="<?php echo $province_cur->province_id ?>" selected><?php echo $province_cur->name ?></option>
+                <?php else : ?>
+                    <option value="">Chọn một tỉnh/thành phố</option>
+
+                <?php endif ?>
+
+                <?php foreach ($results as $row) : ?>
+                    <?php if ($row['province_id'] != $province_cur->province_id) : ?>
+                        <option value="<?php echo $row['province_id'] ?>"><?php echo $row['name'] ?></option>
+                    <?php endif ?>
+                <?php endforeach; ?>
+            </select>
+            <!-- Thêm hidden input để lưu tên tỉnh -->
+            <input type="hidden" id="tinh2_name" name="tinh2_name" value="<?php echo $row['name'] ?>">
         </div>
+        <div class="form-group">
+            <label for="huyen2">Quận/Huyện</label>
+            <select id="huyen2" name="huyen2" class="form-control">
+                <?php
+                $district_cur = $dc->DiaChi__Get_By_Id_Kh($makh, 'district');
+                ?>
+
+                <?php if (isset($district_cur->district_id)) : ?>
+                    <option value="<?php echo $district_cur->district_id ?>" selected><?php echo $district_cur->name ?></option>
+                <?php else : ?>
+                    <option value="">Chọn một quận/huyện</option>
+                <?php endif ?>
+            </select>
+
+            <!-- Thêm hidden input để lưu tên huyện -->
+            <input type="hidden" id="huyen2_name" name="huyen2_name" value="">
+        </div>
+        <div class="form-group">
+            <label for="xa2">Phường/Xã</label>
+            <select id="xa2" name="xa2" class="form-control">
+                <?php
+                $wards_cur = $dc->DiaChi__Get_By_Id_Kh($makh, 'wards');
+                ?>
+                <?php if (isset($wards_cur->wards_id)) : ?>
+                    <option value="<?php echo $wards_cur->wards_id ?>" selected><?php echo $wards_cur->name ?></option>
+                <?php else : ?>
+                    <option value="">Chọn một xã</option>
+
+                <?php endif ?>
+            </select>
+            <!-- Thêm hidden input để lưu tên xã -->
+            <input type="hidden" id="xa2_name" name="xa2_name" value="">
+        </div>
+        <div class="form-group">
+            <label for="road">Số nhà</label>
+            <?php
+            $road_cur = $dc->Road__Get_By_Id_Kh($makh);
+            ?>
+
+
+            <input id="road" name="road" class="form-control" value="<?= isset($road_cur->road) ? $road_cur->road : '' ?>">
+        </div>
+
         <br />
         <div class="col text-center">
             <button type="submit" class="btn btn-primary">Lưu thông tin</button>
         </div>
     </form>
 </div>
+<script src="../assets/js/diachi.js"></script>
+
+<script>
+    function clear_road() {
+        document.getElementById("road").value = '';
+    }
+</script>

@@ -1,6 +1,8 @@
 <?php
 require_once '../../../model/KhachHangModel.php';
 require_once '../../../model/UserModel.php';
+require_once '../../../model/DiachiModel.php';
+$dc = new DiaChiModel();
 $user = new UserModel();
 $kh = new KhachHangModel();
 
@@ -12,7 +14,7 @@ if (isset($_GET['req'])) {
             $gioitinh = $_POST['gioitinh'];
             $ngaysinh = $_POST['ngaysinh'];
             $sodienthoai = $_POST['sodienthoai'];
-            $diachi = $_POST['diachi'];
+            // $diachi = $_POST['diachi'];
             $email = $_POST['email'];
             $username = $_POST['username'];
             // $password = trim($_POST['password']);
@@ -42,7 +44,12 @@ if (isset($_GET['req'])) {
             $gioitinh = $_POST['gioitinh'];
             $ngaysinh = $_POST['ngaysinh'];
             $sodienthoai = $_POST['sodienthoai'];
-            $diachi = $_POST['diachi'];
+             // Lấy thông tin địa chỉ
+             $province_id = $_POST['tinh2_name'];
+             $district_id = $_POST['huyen2_name'];
+             $wards_id= $_POST['xa2'];
+             $road = $_POST['road'];
+
             $trangthai = $_POST['trangthai'];
 
 
@@ -84,8 +91,9 @@ if (isset($_GET['req'])) {
                 $password = $user->Ma_Hoa_Mat_Khau(trim($password_new));
             }
 
-            echo $res += $kh->KhachHang__Update($makh, $tenkh, $username, $gioitinh, $ngaysinh, $sodienthoai, $diachi, $email, $password, $trangthai);
-            if ($res != false) {
+             $res += $kh->KhachHang__Update($makh, $tenkh, $username, $gioitinh, $ngaysinh, $sodienthoai, $email, $password, $trangthai);
+             $res1 += $dc->DiaChi__Reset($makh, $province_id, $district_id, $wards_id, $road );
+             if ($res !== false) {
                 header('location: ../../index.php?pages=khach-hang&msg=success');
             } else {
                 header('location: ../../index.php?pages=khach-hang&msg=error');

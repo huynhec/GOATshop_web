@@ -112,11 +112,11 @@ class KhachHangModel extends Database
         }
     }
 
-    public function KhachHang__Update($makh, $tenkh, $username, $gioitinh, $ngaysinh, $sodienthoai, $diachi, $email, $password, $trangthai)
+    public function KhachHang__Update($makh, $tenkh, $username, $gioitinh, $ngaysinh, $sodienthoai, $email, $password, $trangthai)
     {
         $obj = $this->connect->prepare("UPDATE khachhang kh JOIN users u ON kh.mauser = u.mauser 
-        SET kh.tenkh=?, u.username=?, kh.gioitinh=?, kh.ngaysinh=?, kh.sodienthoai=?, kh.diachi=?, kh.email=?, u.password=?, kh.trangthai=?, u.trangthai=? WHERE kh.makh=?");
-        $obj->execute(array($tenkh, $username, $gioitinh, $ngaysinh, $sodienthoai, $diachi, $email, $password, $trangthai, $trangthai, $makh));
+        SET kh.tenkh=?, u.username=?, kh.gioitinh=?, kh.ngaysinh=?, kh.sodienthoai=?, kh.email=?, u.password=?, kh.trangthai=?, u.trangthai=? WHERE kh.makh=?");
+        $obj->execute(array($tenkh, $username, $gioitinh, $ngaysinh, $sodienthoai, $email, $password, $trangthai, $trangthai, $makh));
         return $obj->rowCount();
     }
 
