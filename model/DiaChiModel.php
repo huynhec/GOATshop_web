@@ -43,19 +43,18 @@ class DiaChiModel extends Database
     {
         // Kiểm tra xem có bản ghi nào giống với địa chỉ mới không
         $checkQuery = $this->connect->prepare("
-            SELECT * 
+            SELECT COUNT(*) 
             FROM diachi 
             WHERE makh = ? 
               AND province = ? 
               AND district = ? 
               AND wards = ? 
               AND road = ?
-            LIMIT 1
         ");
         $checkQuery->execute(array($makh, $province, $district, $wards, $road));
-        $existingAddress = $checkQuery->fetch(PDO::FETCH_ASSOC);
+        $count = $checkQuery->fetchColumn();
     
-        if (!$existingAddress) {
+        if ($count == 0) {
             // Nếu không có địa chỉ giống, thực hiện chèn dữ liệu mới
             $insertQuery = $this->connect->prepare("
                 INSERT INTO diachi(makh, province, district, wards, road) 
@@ -68,6 +67,7 @@ class DiaChiModel extends Database
             return 0;
         }
     }
+    
     
 
     public function DiaChi__Update($maanh, $hinhanh, $masp)
@@ -126,7 +126,7 @@ class DiaChiModel extends Database
     public function DiaChi__Get_By_Id_Kh($makh, $des = null)
     {
         if ($des != null) {
-            $obj = $this->connect->prepare("SELECT * FROM `$des` WHERE `name` IN (SELECT `$des` FROM `diachi` WHERE `makh` = ?) ");
+            $obj = $this->connect->prepare("SELECT * FROM `$des` WHERE `name` IN (SELECT `$des` FROM `diachi` WHERE `makh` = ?) LIMIT 1 ");
         } else {
             $obj = $this->connect->prepare("SELECT * FROM `diachi` WHERE `makh` = ? ORDER BY `diachi_id` DESC LIMIT 1");
         }
