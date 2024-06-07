@@ -211,11 +211,11 @@ $dc__Get_By_Id_makh = $dc->DiaChi__Get_By_Id($makh);
                                                             <div class="form-group">
                                                                 <label for="road">Số nhà</label>
                                                                 <?php
-                                                                $road_cur = $dc->DiaChi__Get_By_Id_Kh($makh);
+                                                                $road_cur = $dc->Road__Get_By_Id_Kh($makh);
                                                                 ?>
 
 
-                                                                <input id="road" name="road" class="form-control" value="<?= isset($road_cur->road) ? $road_cur->road : '' ?>" >
+                                                                <input id="road" name="road" class="form-control" value="<?= isset($road_cur->road) ? $road_cur->road : '' ?>">
                                                             </div>
 
                                                             <div class="row mb-4">
@@ -367,9 +367,9 @@ $dc__Get_By_Id_makh = $dc->DiaChi__Get_By_Id($makh);
         // var road = document.getElementById('road').value;
         // Lấy giá trị của các trường input
         var tenkh = document.getElementById('tenkh').value;
-        var tinh = document.getElementById('tinh_name').value;
-        var huyen = document.getElementById('huyen_name').value;
-        var xa = document.getElementById('xa').value;
+        var tinh = document.getElementById('tinh').options[document.getElementById('tinh').selectedIndex].text;
+        var huyen = document.getElementById('huyen').options[document.getElementById('huyen').selectedIndex].text;
+        var xa = document.getElementById('xa').options[document.getElementById('xa').selectedIndex].text;
         var road = document.getElementById('road').value;
         var sodienthoai = document.getElementById('sodienthoai').value;
         var email = document.getElementById('email').value;
@@ -378,7 +378,7 @@ $dc__Get_By_Id_makh = $dc->DiaChi__Get_By_Id($makh);
         if (tenkh.trim() === '' || tinh.trim() === '' || huyen.trim() === '' || xa.trim() === '' || road.trim() === '' || sodienthoai.trim() === '' || email.trim() === '') {
             // Nếu có trường nào chưa được điền đầy đủ, hiển thị thông báo lỗi
             alert('Vui lòng điền đầy đủ thông tin.');
-            return false; 
+            return false;
         }
 
         $.ajax({

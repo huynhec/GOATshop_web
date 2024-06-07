@@ -41,10 +41,34 @@ class DiaChiModel extends Database
     }
     public function DiaChi__Add($makh, $province, $district, $wards, $road)
     {
-        $obj = $this->connect->prepare("INSERT INTO diachi(makh, province, district, wards, road) VALUES (?,?,?,?,?)");
-        $obj->execute(array($makh, $province, $district, $wards, $road));
-        return $obj->rowCount();
+        // Kiểm tra xem có bản ghi nào giống với địa chỉ mới không
+        $checkQuery = $this->connect->prepare("
+            SELECT * 
+            FROM diachi 
+            WHERE makh = ? 
+              AND province = ? 
+              AND district = ? 
+              AND wards = ? 
+              AND road = ?
+            LIMIT 1
+        ");
+        $checkQuery->execute(array($makh, $province, $district, $wards, $road));
+        $existingAddress = $checkQuery->fetch(PDO::FETCH_ASSOC);
+    
+        if (!$existingAddress) {
+            // Nếu không có địa chỉ giống, thực hiện chèn dữ liệu mới
+            $insertQuery = $this->connect->prepare("
+                INSERT INTO diachi(makh, province, district, wards, road) 
+                VALUES (?, ?, ?, ?, ?)
+            ");
+            $insertQuery->execute(array($makh, $province, $district, $wards, $road));
+            return $insertQuery->rowCount();
+        } else {
+            // Nếu có địa chỉ giống, không thực hiện chèn và trả về 0
+            return 0;
+        }
     }
+    
 
     public function DiaChi__Update($maanh, $hinhanh, $masp)
     {
@@ -102,7 +126,7 @@ class DiaChiModel extends Database
     public function DiaChi__Get_By_Id_Kh($makh, $des = null)
     {
         if ($des != null) {
-            $obj = $this->connect->prepare("SELECT * FROM `$des` WHERE `name` IN (SELECT `$des` FROM `diachi` WHERE `makh` = ?) LIMIT 1");
+            $obj = $this->connect->prepare("SELECT * FROM `$des` WHERE `name` IN (SELECT `$des` FROM `diachi` WHERE `makh` = ?) ");
         } else {
             $obj = $this->connect->prepare("SELECT * FROM `diachi` WHERE `makh` = ? ORDER BY `diachi_id` DESC LIMIT 1");
         }
@@ -110,7 +134,14 @@ class DiaChiModel extends Database
         $obj->execute(array($makh));
         return $obj->fetch();
     }
-// nối chuỗi 
+    public function Road__Get_By_Id_Kh($makh)
+    {
+        $obj = $this->connect->prepare("SELECT * FROM `diachi` WHERE `makh` = ? ORDER BY `diachi_id` ASC LIMIT 1");
+        $obj->setFetchMode(PDO::FETCH_OBJ);
+        $obj->execute(array($makh));
+        return $obj->fetch();
+    }
+    // nối chuỗi 
     public function DiaChi__Get_By_Full_Ad($diachi_id)
     {
         $obj = $this->connect->prepare("SELECT CONCAT_WS(', ' ,`road`,`wards`,`district`,`province`) AS full_dc FROM `diachi` WHERE `diachi_id`= ?");
