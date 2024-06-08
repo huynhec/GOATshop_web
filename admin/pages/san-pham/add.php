@@ -61,7 +61,7 @@ $loaisp__Get_All_Exist = $loaiSp->LoaiSp__Get_All_Exist();
         <div class="col">
             <label for="anhsp" class="form-label">Chọn file (nhiều file có thể chọn)</label>
             <div class="input-group">
-                <input type="file" class="form-control" id="anhsp" name="anhsp[]" multiple>
+                <input type="file" class="form-control" id="anhsp" name="anhsp[]" multiple required>
             </div>
             <div id="anhsp_preview" class="image-preview"></div>
         </div>
