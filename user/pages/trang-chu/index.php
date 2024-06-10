@@ -9,10 +9,6 @@ $sp = new SanPhamModel();
 $anhSp = new AnhSpModel();
 $cm = new CommonModel();
 $sp__Get_Top_Updated_5 = $sp->SanPham__Get_Top_Updated(6);
-$sp__Get_Top9_Attribute_1 = $sp->SanPham__Get_Top_Attribute_1(9);
-$sp__Get_Top9_Attribute_2 = $sp->SanPham__Get_Top_Attribute_2(9);
-$sp__Get_Top9_Attribute_3 = $sp->SanPham__Get_Top_Attribute_3(9);
-$sp__Get_Top9_Attribute_4 = $sp->SanPham__Get_Top_Attribute_4(9);
 $sp__Get_Top_Updated_24 = $sp->SanPham__Get_Top_Updated(24);
 $sp__Get_Top_Sale = $sp->SanPham__Get_Top_Sale();
 $sp__Get_Top_Random = $sp->SanPham__Get_Top_Random(6);
@@ -79,7 +75,8 @@ $top = 0;
         <div class="main-container">
             <div class="main-title-container">
                 <a href="index.php?pages=sp-moi&page=1">
-                    <div class="item-title color-2" style="font-weight: bold; font-size: 24px;">Sản phẩm khuyến mãi</div>
+                    <div class="item-title color-2" style="font-weight: bold; font-size: 24px;">Sản phẩm khuyến mãi
+                    </div>
                 </a>
             </div>
             <div class="main-item-container">
@@ -143,107 +140,103 @@ $top = 0;
             <div class="main-container">
                 <div class="main-title-container">
                     <a href="index.php?pages=sp-moi&page=1">
-                        <div class="item-title color-2" style="font-weight: bold; font-size: 24px;">Sản phẩm nổi bật</div>
+                        <div class="item-title color-2" style="font-weight: bold; font-size: 24px;">Sản phẩm nổi bật
+                        </div>
                     </a>
                 </div>
                 <div class="container">
                     <div class="filter-buttons">
-                        <button class="filter-button" value="1">Giày đế cỏ nhân tạo (TF)</button>
-                        <button class="filter-button" value="2">Giày đế cỏ tự nhiên (FG)</button>
-                        <button class="filter-button" value="3">Găng tay thủ môn</button>
-                        <button class="filter-button" value="4">Phụ kiện bóng đá</button>
+                        <button type="button" class="filter-button" onclick=view_obj(1)>Giày đế cỏ nhân tạo
+                            (TF)</button>
+                        <button type="button" class="filter-button" onclick=view_obj(2)>Giày đế cỏ tự nhiên
+                            (FG)</button>
+                        <button type="button" class="filter-button" onclick=view_obj(3)>Găng tay thủ môn</button>
+                        <button type="button" class="filter-button" onclick=view_obj(4)>Phụ kiện bóng đá</button>
                     </div>
-                    <div class="product-grid" id="product-grid">
-                        <?php
-                        $your_value = isset($_GET['your_value']) ? $_GET['your_value'] : '1';
-                        $productArrays = [
-                            '1' => $sp__Get_Top9_Attribute_1,
-                            '2' => $sp__Get_Top9_Attribute_2,
-                            '3' => $sp__Get_Top9_Attribute_3,
-                            '4' => $sp__Get_Top9_Attribute_4
-                        ];
 
-                        function renderProducts($products, $anhSp)
-                        {
-                            foreach ($products as $item) {
-                                $anhSp__Get_By_Id_Sp_First = $anhSp->AnhSp__Get_By_Id_Sp_First($item->masp);
-                        ?>
-                                <div class="product-card" data-masp="<?= $anhSp__Get_By_Id_Sp_First->masp ?>" onmouseenter="startTimer(this)" onmouseleave="endTimer()" onclick="endTimer()">
-                                    <a href="index.php?pages=chi-tiet&masp=<?= $anhSp__Get_By_Id_Sp_First->masp ?>&maloai=<?= $item->maloai ?>">
-                                        <img src="../assets/<?= $anhSp__Get_By_Id_Sp_First->hinhanh ?>" loading="lazy" alt="">
-                                    </a>
-                                    <div class="product-info">
-                                        <h2><?= $item->tensp ?></h2>
-                                        <p>Sắp mở bán</p>
-                                        <div class="product-actions text-center clearfix">
-                                            <div>
-                                                <button type="button" class="btnQuickView quick-view medium--hide small--hide" data-handle="/products/nike-mercurial-vapor-13-academy-tf-2">
-                                                    <span><i class="fa fa-search-plus" aria-hidden="true"></i></span>
-                                                </button>
-                                                <button type="button" class="btnBuyNow buy-now medium--hide small--hide" data-id="1085955545"><span>Mua ngay</span></button>
-                                                <button type="button" class="btnAddToCart add-to-cart medium--hide small--hide" data-id="1085955545">
-                                                    <span><i class="fa fa-cart-plus" aria-hidden="true"></i></span>
-                                                </button>
+                    <style>
+                        .loading {
+                            width: 100%;
+                            text-align: center;
+
+                        }
+
+                        img.gif {
+                            width: 50px;
+                            display: flex;
+                        }
+                    </style>
+
+                    <div class="view_obj">
+                        <div class="loading">
+                            <img src="../assets/images/loading.gif" alt="" class="gif">
+                        </div>
+                    </div>
+
+                    <script>
+                        window.addEventListener('load', function() {
+                            view_obj(1);
+                        })
+
+                        function view_obj(your_value) {
+                            $.post("pages/trang-chu/view_obj.php", {
+                                your_value: your_value,
+                            }, function(data, status) {
+                                if (status) {
+                                    $(".view_obj").html(data);
+                                }
+                            });
+                        };
+                    </script>
+
+
+                </div>
+                <a href="index.php?pages=danh-muc">
+                    <span class="block-button block-button--outline-black">Xem tất cả</span>
+                </a>
+            </div>
+
+
+
+            <div class="main-container">
+                <div class="main-title-container">
+                    <a href="index.php?pages=sp-moi&page=1">
+                        <div class="item-title color-2" style="font-weight: bold; font-size: 24px;">Bạn có thể mua
+                            !? </div>
+                    </a>
+                </div>
+                <div class="product-slider">
+                    <div class="product-container-random">
+                        <!-- Products -->
+                        <?php foreach ($sp__Get_Top_Updated_5 as $item) : ?>
+                            <?php if (count($sp__Get_Top_Updated_5) > 0) : ?>
+                                <?php $anhSp__Get_By_Id_Sp_First = $anhSp->AnhSp__Get_By_Id_Sp_First($item->masp); ?>
+                                <?php if (isset($anhSp__Get_By_Id_Sp_First->masp)) : ?>
+                                    <div class="product-item-random" data-masp="<?= $anhSp__Get_By_Id_Sp_First->masp ?>" onmouseenter="startTimer(this)" onmouseleave="endTimer()" onclick="endTimer()">
+                                        <div class="product-normal">
+                                            <div class="product-img">
+                                                <a href="index.php?pages=chi-tiet&masp=<?= $anhSp__Get_By_Id_Sp_First->masp ?>&maloai=<?= $item->maloai ?>">
+                                                    <img src="../assets/<?= $anhSp__Get_By_Id_Sp_First->hinhanh ?>" loading="lazy">
+                                                </a>
+                                            </div>
+                                            <div class="product-title">
+                                                <a href="index.php?pages=chi-tiet&masp=<?= $anhSp__Get_By_Id_Sp_First->masp ?>&maloai=<?= $item->maloai ?>">
+                                                    <?= $item->tensp ?>
+                                                </a>
+                                            </div>
+                                            <div class="product-price clearfix">
+                                                <span class="current-price"><?= number_format($dg->ShowDonGia__Get_By_Id_Spdg($item->masp)) ?>₫</span>
+                                                <span class="original-price"><s>1,750,000₫</s></span>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                        <?php
-                            }
-                        }
-
-                        if (array_key_exists($your_value, $productArrays)) {
-                            renderProducts($productArrays[$your_value], $anhSp);
-                        } else {
-                            renderProducts($sp__Get_Top9_Attribute_1, $anhSp);
-                        }
-                        ?>
-                    </div>
-                    <a href="index.php?pages=danh-muc">
-                        <span class="block-button block-button--outline-black">Xem tất cả</span>
-                    </a>
-                </div>
-
-
-
-                <div class="main-container">
-                    <div class="main-title-container">
-                        <a href="index.php?pages=sp-moi&page=1">
-                            <div class="item-title color-2" style="font-weight: bold; font-size: 24px;">Bạn có thể mua !? </div>
-                        </a>
-                    </div>
-                    <div class="product-slider">
-                        <div class="product-container-random">
-                            <!-- Products -->
-                            <?php foreach ($sp__Get_Top_Updated_5 as $item) : ?>
-                                <?php if (count($sp__Get_Top_Updated_5) > 0) : ?>
-                                    <?php $anhSp__Get_By_Id_Sp_First = $anhSp->AnhSp__Get_By_Id_Sp_First($item->masp); ?>
-                                    <?php if (isset($anhSp__Get_By_Id_Sp_First->masp)) : ?>
-                                        <div class="product-item-random" data-masp="<?= $anhSp__Get_By_Id_Sp_First->masp ?>" onmouseenter="startTimer(this)" onmouseleave="endTimer()" onclick="endTimer()">
-                                            <div class="product-normal">
-                                                <div class="product-img">
-                                                    <a href="index.php?pages=chi-tiet&masp=<?= $anhSp__Get_By_Id_Sp_First->masp ?>&maloai=<?= $item->maloai ?>">
-                                                        <img src="../assets/<?= $anhSp__Get_By_Id_Sp_First->hinhanh ?>" loading="lazy">
-                                                    </a>
-                                                </div>
-                                                <div class="product-title">
-                                                    <a href="index.php?pages=chi-tiet&masp=<?= $anhSp__Get_By_Id_Sp_First->masp ?>&maloai=<?= $item->maloai ?>">
-                                                        <?= $item->tensp ?>
-                                                    </a>
-                                                </div>
-                                                <div class="product-price clearfix">
-                                                    <span class="current-price"><?= number_format($dg->ShowDonGia__Get_By_Id_Spdg($item->masp)) ?>₫</span>
-                                                    <span class="original-price"><s>1,750,000₫</s></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    <?php endif ?>
                                 <?php endif ?>
-                            <?php endforeach ?>
-                        </div>
+                            <?php endif ?>
+                        <?php endforeach ?>
                     </div>
                 </div>
             </div>
+        </div>
 
 </main>
 
@@ -276,35 +269,35 @@ $top = 0;
     // });
     // Tạo một đối tượng XMLHttpRequest
     // Lấy danh sách các nút
-    document.addEventListener('DOMContentLoaded', function() {
-        const filterButtons = document.querySelectorAll('.filter-button');
+    // document.addEventListener('DOMContentLoaded', function() {
+    //     const filterButtons = document.querySelectorAll('.filter-button');
 
-        filterButtons.forEach(function(button) {
-            button.addEventListener('click', function() {
-                const value = this.value;
-                console.log("Giá trị của nút:", value);
-                doSomethingWithValue(value);
-            });
-        });
+    //     filterButtons.forEach(function(button) {
+    //         button.addEventListener('click', function() {
+    //             const value = this.value;
+    //             console.log("Giá trị của nút:", value);
+    //             doSomethingWithValue(value);
+    //         });
+    //     });
 
-       function doSomethingWithValue(value) {
-    const url = "../user/index.php?pages=trang-chu&your_value=" + value;
+    //     function doSomethingWithValue(value) {
+    //         const url = "../user/index.php?pages=trang-chu&your_value=" + value;
 
-    $.ajax({
-        url: url,
-        type: "GET",
-        success: function(response) {
-            // Xử lý khi nhận được phản hồi thành công
-            window.location.href = url;
-        },
-        error: function(xhr, status, error) {
-            // Xử lý khi gặp lỗi
-            console.error('Đã xảy ra lỗi:', error);
-        }
-    });
-}
+    //         $.ajax({
+    //             url: url,
+    //             type: "GET",
+    //             success: function(response) {
+    //                 // Xử lý khi nhận được phản hồi thành công
+    //                 window.location.href = url;
+    //             },
+    //             error: function(xhr, status, error) {
+    //                 // Xử lý khi gặp lỗi
+    //                 console.error('Đã xảy ra lỗi:', error);
+    //             }
+    //         });
+    //     }
 
-    });
+    // });
 
 
 
@@ -329,7 +322,9 @@ $top = 0;
     }
 
     function reverseGeocodingWithGoogle(latitude, longitude) {
-        fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=AIzaSyBWzRuWS-rxMCENShE23x4Gh1f7R3vAL1Y`)
+        fetch(
+                `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=AIzaSyBWzRuWS-rxMCENShE23x4Gh1f7R3vAL1Y`
+            )
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');

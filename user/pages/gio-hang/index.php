@@ -388,7 +388,7 @@ $dc__Get_By_Id_makh = $dc->DiaChi__Get_By_Id($makh);
                 action: "checkout",
                 makh: document.getElementById('makh').value,
                 tenkh: document.getElementById('tenkh').value,
-                diachi: `${tinh}, ${huyen}, ${xa}, ${road}`, // Kết hợp các phần thành địa chỉ hoàn chỉnh
+                diachi: `${tinh}, ${huyen}, ${xa}, ${road}`,
                 sodienthoai: document.getElementById('sodienthoai').value,
                 email: document.getElementById('email').value,
                 magh: document.getElementById('magh').value,
@@ -396,7 +396,7 @@ $dc__Get_By_Id_makh = $dc->DiaChi__Get_By_Id($makh);
                 password: document.getElementById('username').value
             },
             success: function(response) {
-                console.log(response);
+                console.log(response); // Xác minh phản hồi từ server
                 if (response == true) {
                     Swal.fire({
                         icon: "success",
@@ -405,10 +405,21 @@ $dc__Get_By_Id_makh = $dc->DiaChi__Get_By_Id($makh);
                     }).then((result) => {
                         location.href = '?pages=trang-chu';
                     });
-
+                } else {
+                    Swal.fire({
+                        icon: "error",
+                        title: "Đặt hàng thất bại!",
+                        text: response, // Hiển thị lỗi từ server nếu có
+                        confirmButtonText: "OK"
+                    });
                 }
             },
+            error: function(xhr, status, error) {
+                console.error("Error: " + status + " " + error); // Kiểm tra lỗi từ server
+                console.error(xhr.responseText); // Xem phản hồi lỗi chi tiết từ server
+            }
         });
+
     }
 
     function decrease(button) {

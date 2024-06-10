@@ -44,11 +44,12 @@ $timeTracking__Get_TwoD = $ttr->User_item_tracking__Get_TwoD();
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($timeTracking__Get_All as $item) : ?>
-                                <tr>
+                            <?php foreach ($timeTracking__Get_All as $key => $item) : ?>
+                                <input type="hidden" id="masp_1" value="<?= $key == 0 ? $item->masp : 0 ?>">
+                                <tr onclick="return trackingitem_chart('<?= $item->masp ?>')" style="cursor:pointer; ">
                                     <td><?= $item->uitrack_id ?></td>
                                     <td><?= $item->makh ?></td>
-                                    <td><img style="cursor:pointer; " src="../assets/<?= $anhSp->AnhSp__Get_By_Id_Sp_First($item->masp)->hinhanh ?>" alt="" srcset="" class="img-fluid" width="50" onclick="return trackingitem_chart('<?= $item->masp ?>')"></td>
+                                    <td><img style="cursor:pointer; " src="../assets/<?= $anhSp->AnhSp__Get_By_Id_Sp_First($item->masp)->hinhanh ?>" alt="" srcset="" class="img-fluid" width="50"></td>
                                     <td>
                                         <span data-toggle="tooltip" title="<?= $sp->SanPham__Get_By_Id($item->masp)->tensp ?>">
                                             <?= strlen($sp->SanPham__Get_By_Id($item->masp)->tensp) > 60 ? substr($sp->SanPham__Get_By_Id($item->masp)->tensp, 0, 60) . '...' : $sp->SanPham__Get_By_Id($item->masp)->tensp ?>
@@ -77,6 +78,8 @@ $timeTracking__Get_TwoD = $ttr->User_item_tracking__Get_TwoD();
     <script>
         window.addEventListener('load', function() {
             document.getElementById('dynamicTitle').innerText = "ADMIN | Quản lý thời gian theo dõi";
+            masp_1 = document.getElementById('masp_1').value;
+            trackingitem_chart(masp_1)
         })
 
 

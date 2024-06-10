@@ -72,7 +72,7 @@
                 </a>
             </li>
 
-            <?php if (isset($_SESSION['admin']) || isset($_SESSION['manager'])) : ?>
+            <?php if (isset($_SESSION['admin'])) : ?>
                 <li class="<?= $_GET['pages'] == 'trang-thai' ? "active" : "" ?>">
                     <a href="index.php?pages=trang-thai">
                         <i class='bx bx-stats'></i>
@@ -93,7 +93,7 @@
                 </li>
             <?php endif ?>
             <li>
-                <a href="../user/">
+                <a href="../user/" target="_blank">
                     <i class='bx bx-desktop'></i>
                     <span class="text">Trang người dùng</span>
                 </a>

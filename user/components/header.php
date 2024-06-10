@@ -141,7 +141,7 @@ $thuongHieu__Get_All = $th->ThuongHieu__Get_All();
                         <li><i class='bx bx-book-bookmark'></i> Đang theo dõi</li>
                     </a> -->
                     <hr>
-                    <a href="#../auth/pages/chinh-sua.php">
+                    <a href="../auth/pages/chinh-sua.php">
                         <li> <i class='bx bx-cog'></i> Chỉnh sửa</li>
                     </a>
                     <hr>

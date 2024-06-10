@@ -6,6 +6,17 @@ $import = new ImportModel();
 
 if (isset($_GET['req'])) {
     switch ($_GET['req']) {
+        
+        case "training":
+            // xuat excel
+
+            // Thuc thi traing
+            $python = shell_exec("python test.py");
+
+            // import
+
+            echo $python;
+            break;
         case "import":
             $status = 0;
 

@@ -114,7 +114,7 @@ function scrollPageTo(target, duration) {
 // Hàm tìm kiếm
 function search() {
   searchInput.value.length &&
-    (window.location.href = "index.php?pages=tim-kiem&tu-khoa=" + slugify(searchInput.value));
+    (window.location.href = "index.php?pages=tim-kiem&tu-khoa=" + (searchInput.value));
 }
 
 // Hàm chuyển đổi chuỗi thành dạng slug

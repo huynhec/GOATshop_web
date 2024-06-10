@@ -40,14 +40,25 @@ $khachHang__Get_All = $kh->KhachHang__Get_All(-1);
                                     <td><?= $item->tenkh ?></td>
                                     <td><?= $item->gioitinh == 1  ? 'Nữ'  : 'Nam' ?></td>
                                     <td><?= $item->email ?></td>
-                                    <td><?= $item->trangthai == 1 ? '<span class="text-success">Hoạt động</span>' : '<span class="text-danger">Tạm khóa</span>' ?></td>
+                                    <td>
+                                        <?=
+                                        $item->trangthai == 1
+                                            ? '<span class="text-success">Hoạt động</span>'
+                                            : ($item->trangthai == 0
+                                                ? '<span class="text-success">Tạm khóa</span>'
+                                                : '<span class="text-danger">Đã xóa</span>'
+                                            )
+                                        ?>
+                                    </td>
+                                    </td>
                                     <td class="text-center font-weight-bold">
                                         <button type="button" class="btn btn-warning btn-update" onclick="return update_obj('<?= $item->makh ?>')">
                                             <i class="bx bx-edit" aria-hidden="true"></i> Sửa
                                         </button>
                                         <?php if (isset($_SESSION['admin'])) : ?>
-                                            <button type="button" class="btn btn-danger btn-delete" onclick="return delete_obj('<?= $item->makh ?>')">
-                                                <i class="fa fa-trash" aria-hidden="true"></i> Xóa
+                                            <button type="button" class="btn btn-danger btn-delete" onclick="return delete_obj('<?= $item->makh ?>', <?= $item->trangthai ?>)">
+                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                                <?= $item->trangthai == -1 ? 'Khôi phục' : 'Xóa' ?>
                                             </button>
                                         <?php endif ?>
                                     </td>
@@ -76,7 +87,7 @@ $khachHang__Get_All = $kh->KhachHang__Get_All(-1);
         });
     };
 
-    function delete_obj(makh) {
+    function delete_obj(makh, trangthai) {
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
                 confirmButton: "m-2 btn btn-danger",
@@ -94,7 +105,7 @@ $khachHang__Get_All = $kh->KhachHang__Get_All(-1);
             reverseButtons: true
         }).then((result) => {
             if (result.isConfirmed) {
-                location.href = "pages/khach-hang/action.php?req=delete&makh=" + makh;
+                location.href = "pages/khach-hang/action.php?req=delete&makh=" + makh + "&trangthai=" + trangthai;
             } else if (
                 result.dismiss === Swal.DismissReason.cancel
             );

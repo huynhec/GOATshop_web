@@ -1,19 +1,4 @@
 <?PHP
-if (isset($_SESSION['admin'])) {
-    unset($_SESSION['admin']);
-}
-if (isset($_SESSION['manager'])) {
-    unset($_SESSION['manager']);
-}
-if (isset($_SESSION['nhanvien'])) {
-    unset($_SESSION['nhanvien']);
-}
-if (isset($_SESSION['user'])) {
-    unset($_SESSION['user']);
-}
-if (isset($_SESSION['url'])) {
-    unset($_SESSION['url']);
-}
 
 if (isset($_SERVER["HTTP_REFERER"])) {
     if (strlen(strstr($_SERVER["HTTP_REFERER"], "dang-nhap")) < 1) {
@@ -37,7 +22,7 @@ $url = $_SESSION['url'] ?? '../../user/';
         <form class="form-control" action="pages/action.php?req=dang-nhap" method="post">
             <p class="title">Đăng nhập</p>
             <div class="input-field">
-                <input required="" class="input" type="text" name="email_or_username"/>
+                <input required="" class="input" type="text" name="email_or_username" />
                 <label class="label" for="input">Email hoặc username</label>
             </div>
             <div class="input-field">

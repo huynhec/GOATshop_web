@@ -38,17 +38,31 @@ if (isset($_GET['req'])) {
                     header('location: ../index.php?pages=dang-nhap&msg=warning');
                 } else {
                     if ($resad->phanquyen == 1) {
+                        if (isset($_SESSION['manager'])) {
+                            unset($_SESSION['manager']);
+                        }
                         $_SESSION['manager'] = $resad;
+
                         header('location: ../../admin/');
                     } elseif ($resad->phanquyen == 2) {
+                        if (isset($_SESSION['nhanvien'])) {
+                            unset($_SESSION['nhanvien']);
+                        }
                         $_SESSION['nhanvien'] = $resad;
+
                         header('location: ../../admin/');
                     } elseif ($resad->phanquyen == 0) {
+                        if (isset($_SESSION['admin'])) {
+                            unset($_SESSION['admin']);
+                        }
                         $_SESSION['admin'] = $resad;
                         header('location: ../../admin/');
                     }
                 }
             } else {
+                if (isset($_SESSION['user'])) {
+                    unset($_SESSION['user']);
+                }
                 $_SESSION['user'] = $res;
                 header('location:' . $url);
             }
@@ -66,7 +80,7 @@ if (isset($_GET['req'])) {
             // Lấy thông tin địa chỉ
             $province_id = $_POST['province_name'];
             $district_id = $_POST['district_name'];
-            $wards_id= $_POST['wards'];
+            $wards_id = $_POST['wards'];
             $road = $_POST['road'];
 
             $email = $_POST['email'];

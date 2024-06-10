@@ -10,10 +10,11 @@ $sanPham__Get_By_Id = $sp->SanPham__Get_By_Id($masp);
 ?>
 
 <div class="main-chart update">
+    <h4 class="section-title"><?= $sanPham__Get_By_Id->tensp ?></h4>
     <canvas id="lineChart"></canvas>
 </div>
 <div class="main-data">
-    <h3 class="section-title">Biểu đồ</h3>
+    <h4 class="section-title">Chi tiết</h4>
     <input type="hidden" class="form-control" id="masp" name="masp" required value="<?= $sanPham__Get_By_Id->masp ?>">
     <div class="col">
         <label for="tensp" class="form-label">Tên sản phẩm</label>

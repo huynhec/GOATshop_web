@@ -41,7 +41,6 @@ class ChiTietTrangThaiModel extends Database
     }
     public function ChiTietTrangThai__Add($madon, $matt, $manv, $ngaytao)
     {
-        var_dump($manv);  // In giá trị của các biến
 
         $obj = $this->connect->prepare("INSERT INTO chitiettrangthai(madon, matt, manv, ngaytao) VALUES (?,?,?,?)");
         $obj->execute(array($madon, $matt, $manv, $ngaytao));
@@ -54,7 +53,7 @@ class ChiTietTrangThaiModel extends Database
         $obj->execute(array($madon, $matt, $manv, $ngaytao, $machitiet));
         return $obj->rowCount();
     }
-    
+
     public function ChiTietTrangThai__Delete($machitiet)
     {
         $obj = $this->connect->prepare("DELETE FROM chitiettrangthai WHERE machitiet = ?");
@@ -81,7 +80,7 @@ class ChiTietTrangThaiModel extends Database
 
     public function ChiTietTrangThai__Get_Last_By_DH($madon)
     {
-        $obj = $this->connect->prepare("SELECT * FROM chitiettrangthai INNER JOIN trangthai ON chitiettrangthai.matt = trangthai.matt WHERE madon = ? ORDER BY chitiettrangthai.matt DESC LIMIT 1");
+        $obj = $this->connect->prepare("SELECT chitiettrangthai.*, trangthai.tentt, trangthai.mota FROM chitiettrangthai INNER JOIN trangthai ON chitiettrangthai.matt = trangthai.matt WHERE madon = ? ORDER BY chitiettrangthai.matt DESC LIMIT 1");
         $obj->setFetchMode(PDO::FETCH_OBJ);
         $obj->execute(array($madon));
         return $obj->fetch();
@@ -100,9 +99,9 @@ class ChiTietTrangThaiModel extends Database
         $obj = $this->connect->prepare("SELECT * FROM chitiettrangthai WHERE madon = ? AND matt=?");
         $obj->setFetchMode(PDO::FETCH_OBJ);
         $obj->execute(array($madon, $matt));
-        if($obj->rowCount()>0){
+        if ($obj->rowCount() > 0) {
             return $obj->fetch();
-        }else{
+        } else {
             return false;
         }
     }

@@ -40,10 +40,11 @@ $luotxem__Get_Alls = $lx->LuotXem__Get_Alls();
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($luotxem__Get_Alls as $item) : ?>
-                                <tr>
+                            <?php foreach ($luotxem__Get_Alls as $key => $item) : ?>
+                                <input type="hidden" id="masp_1" value="<?= $key == 0 ? $item->masp : 0 ?>">
+                                <tr onclick="return luotxem_chart('<?= $item->masp ?>')" style="cursor:pointer; ">
                                     <td><?= $item->idlx ?></td>
-                                    <td><img style="cursor:pointer; " src="../assets/<?= $anhSp->AnhSp__Get_By_Id_Sp_First($item->masp)->hinhanh ?>" alt="" srcset="" class="img-fluid" width="50" onclick="return luotxem_chart('<?= $item->masp ?>')"></td>
+                                    <td><img style="cursor:pointer; " src="../assets/<?= $anhSp->AnhSp__Get_By_Id_Sp_First($item->masp)->hinhanh ?>" alt="" srcset="" class="img-fluid" width="50"></td>
                                     <td>
                                         <span data-toggle="tooltip" title="<?= $sp->SanPham__Get_By_Id($item->masp)->tensp ?>">
                                             <?= strlen($sp->SanPham__Get_By_Id($item->masp)->tensp) > 60 ? substr($sp->SanPham__Get_By_Id($item->masp)->tensp, 0, 60) . '...' : $sp->SanPham__Get_By_Id($item->masp)->tensp ?>
@@ -69,6 +70,8 @@ $luotxem__Get_Alls = $lx->LuotXem__Get_Alls();
 <script>
     window.addEventListener('load', function() {
         document.getElementById('dynamicTitle').innerText = "ADMIN | Quản lý thời gian theo dõi";
+        masp_1 = document.getElementById('masp_1').value;
+        luotxem_chart(masp_1)
     })
 
     function luotxem_chart(masp) {

@@ -88,15 +88,15 @@ $chiTietTrangThai__Get_By_Id_DH = $cttt->ChiTietTrangThai__Get_By_Id_DH($madon);
                                                                                     <i class="bx bxs-happy-heart-eyes" aria-hidden="true"></i> Đơn đã giao
                                                                                 </button>
                                                                             <?php else : ?>
-                                                                                <?php if (!isset($cttt->ChiTietTrangThai__Get_Last_By_DH($item->madon)->tentt)) : ?>
-                                                                                    <button type="button" class="btn btn-sm btn-danger btn-update" onclick="return remove('<?= $item->madon ?>')">
-                                                                                        <i class="bx bxs-edit" aria-hidden="true"></i> Hủy đơn
-                                                                                    </button>
+                                                                                <?php if (!isset($cttt->ChiTietTrangThai__Get_Last_By_DH($item->madon)->tentt) || $cttt->ChiTietTrangThai__Get_Last_By_DH($item->madon)->matt == 0) : ?>s
+                                                                                <button type="button" class="btn btn-sm btn-danger btn-update" onclick="return remove('<?= $item->madon ?>')">
+                                                                                    <i class="bx bxs-edit" aria-hidden="true"></i> Hủy đơn
+                                                                                </button>
 
-                                                                                    <button type="button" class="btn btn-sm btn-primary btn-update" onclick="return view('<?= $item->madon ?>')">
-                                                                                        <i class="bx bxs-happy-heart-eyes" aria-hidden="true"></i> Xem
-                                                                                    <?php endif ?>
+                                                                                <button type="button" class="btn btn-sm btn-primary btn-update" onclick="return view('<?= $item->madon ?>')">
+                                                                                    <i class="bx bxs-happy-heart-eyes" aria-hidden="true"></i> Xem
                                                                                 <?php endif ?>
+                                                                            <?php endif ?>
                                                                         </td>
 
                                                                         <td class="text-center font-weight-bold">

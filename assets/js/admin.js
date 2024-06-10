@@ -191,7 +191,7 @@ function addInput2() {
     colStatus.appendChild(selectStatus);
     // nut xoa
   var colDeleteButton = document.createElement('div');
-  colDeleteButton.className = 'col-2';
+  colDeleteButton.className = 'col-2 flx-s';
   var button = document.createElement('button');
   button.type = 'button';
   button.className = 'btn btn-danger';

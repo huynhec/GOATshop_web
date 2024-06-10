@@ -19,7 +19,6 @@ session_start();
     <link rel="stylesheet" href="../assets/css/main.css">
     <link rel="stylesheet" href="../assets/css/footer.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 </head>
 
 <body>
@@ -27,6 +26,7 @@ session_start();
     <?php require_once 'components/main.php' ?>
     <?php require_once 'components/footer.php' ?>
 
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <script src="../assets/vendor/jquery-3.7.1.js"></script>
     <script src="../assets/vendor/bootstrap-5.2.3-dist/js/bootstrap.min.js"></script>
     <script src="../assets/vendor/sweetalert2@11.js"></script>

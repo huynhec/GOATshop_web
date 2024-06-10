@@ -11,7 +11,8 @@ require_once "../../model/TimeTrackingModel.php";
 require_once "../../model/LuotXemModel.php";
 require_once "../../model/DonGiaModel.php";
 require_once "../../model/DiaChiModel.php";
-
+require_once '../../model/ChiTietTrangThaiModel.php';
+$cttt = new ChiTietTrangThaiModel();
 $kh = new KhachHangModel();
 $gh = new GioHangModel();
 $ctgh = new ChiTietGioHangModel();
@@ -66,9 +67,6 @@ if (isset($_POST['action'])) {
             $tongdh = $ctgh->ChiTietGioHang__Sum_Tien_GH($magh)->sum_tien;
             $madh = $dh->DonHang__Add($ngaythem, $makh, $diachi_id, $tongdh);
 
-            // cập nhật trạng thái 
-
-
             // Lấy thông tin giỏ hàng
             $ctghRes = $ctgh->ChiTietGioHang__Get_By_Id_GH($magh);
             foreach ($ctghRes as $item) {
@@ -81,8 +79,15 @@ if (isset($_POST['action'])) {
                 $resDh = $ctdh->ChiTietDonHang__Add($madh, $masp, $soluong, $dongia, $idsize, $tenkh, $sodienthoai);
                 $resSp = $sp->SanPham__Update_Luot_Mua($masp, $luotmua);
             }
-            $res = $gh->GioHang__Update_Trang_Thai($magh, 0);
-            if ($res > 0) {
+            // cập nhật trạng thái 
+
+            $matt = 0;
+            $manv = null;
+            $ngaytao = date('Y-m-d H:i:s');
+
+            $res = $cttt->ChiTietTrangThai__Add($madh, $matt, $manv, $ngaytao);
+            $res1 = $gh->GioHang__Update_Trang_Thai($magh, 0);
+            if ($res !== 0 && $res1 !== 0) {
                 echo true;
             } else {
                 echo false;
