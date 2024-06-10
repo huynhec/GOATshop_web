@@ -1318,7 +1318,7 @@ table {
 .table-custom td,
 .table-custom th {
   line-height: 1.5;
-  border: 1px solid #ff7043;
+  border: 1px solid #000000;
 }
 
 .size-option {

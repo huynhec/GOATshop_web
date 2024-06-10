@@ -69,7 +69,7 @@ class DonHangModel extends Database
     }
     public function DonHang__Get_By_Id_KH($makh)
     {
-        $obj = $this->connect->prepare("SELECT * FROM donhang WHERE  makh =?");
+        $obj = $this->connect->prepare("SELECT *,  CONCAT('GOAT-', madon, DATE_FORMAT(ngaythem, '%H%i%s')) AS ma_don_hang FROM donhang Where makh = ?");
         $obj->setFetchMode(PDO::FETCH_OBJ);
         $obj->execute(array($makh));
         return $obj->fetchAll();

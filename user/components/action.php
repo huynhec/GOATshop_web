@@ -33,7 +33,6 @@ if (isset($_POST['action'])) {
 
             $madon = $_POST['madon'];
             $res = $dh->DonHang__Delete($madon);
-
             echo $res;
             break;
 
@@ -79,8 +78,8 @@ if (isset($_POST['action'])) {
                 $resDh = $ctdh->ChiTietDonHang__Add($madh, $masp, $soluong, $dongia, $idsize, $tenkh, $sodienthoai);
                 $resSp = $sp->SanPham__Update_Luot_Mua($masp, $luotmua);
             }
+            
             // cập nhật trạng thái 
-
             $matt = 0;
             $manv = null;
             $ngaytao = date('Y-m-d H:i:s');

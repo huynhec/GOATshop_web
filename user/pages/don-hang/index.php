@@ -55,7 +55,7 @@ $chiTietTrangThai__Get_By_Id_DH = $cttt->ChiTietTrangThai__Get_By_Id_DH($madon);
                                                         <table id="table_js" class="table table-striped" style="width:100%">
                                                             <thead>
                                                                 <tr>
-                                                                    <th>ID</th>
+                                                                    <th>Mã Đơn</th>
                                                                     <th>Ngày đặt</th>
                                                                     <th>Số tiền</th>
                                                                     <th>Tình trạng</th>
@@ -66,7 +66,7 @@ $chiTietTrangThai__Get_By_Id_DH = $cttt->ChiTietTrangThai__Get_By_Id_DH($madon);
                                                             <tbody>
                                                                 <?php foreach ($donHang__Get_By_Id_Kh as $item) : ?>
                                                                     <tr>
-                                                                        <td><?= $item->madon ?></td>
+                                                                        <td><?= $item->ma_don_hang ?></td>
                                                                         <td><?= $item->ngaythem ?></td>
                                                                         <td><?= number_format($item->tongdh) ?>đ</td>
                                                                         <td><?= isset($cttt->ChiTietTrangThai__Get_Last_By_DH($item->madon)->tentt) ?  $cttt->ChiTietTrangThai__Get_Last_By_DH($item->madon)->tentt : 'Chưa xác nhận!' ?>
@@ -88,7 +88,7 @@ $chiTietTrangThai__Get_By_Id_DH = $cttt->ChiTietTrangThai__Get_By_Id_DH($madon);
                                                                                     <i class="bx bxs-happy-heart-eyes" aria-hidden="true"></i> Đơn đã giao
                                                                                 </button>
                                                                             <?php else : ?>
-                                                                                <?php if (!isset($cttt->ChiTietTrangThai__Get_Last_By_DH($item->madon)->tentt) || $cttt->ChiTietTrangThai__Get_Last_By_DH($item->madon)->matt == 0) : ?>s
+                                                                                <?php if (!isset($cttt->ChiTietTrangThai__Get_Last_By_DH($item->madon)->tentt) || $cttt->ChiTietTrangThai__Get_Last_By_DH($item->madon)->matt == 0) : ?>
                                                                                 <button type="button" class="btn btn-sm btn-danger btn-update" onclick="return remove('<?= $item->madon ?>')">
                                                                                     <i class="bx bxs-edit" aria-hidden="true"></i> Hủy đơn
                                                                                 </button>
