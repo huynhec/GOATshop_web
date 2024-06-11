@@ -101,7 +101,7 @@ class ChiTietDonHangModel extends Database
 
     public function ChiThietDonHang__Top_Ban_Chart()
     {
-        $obj = $this->connect->prepare("SELECT sanpham.tensp, SUM(soluong) as sum_soluong FROM chitietdonhang INNER JOIN sanpham ON chitietdonhang.masp = sanpham.masp GROUP BY chitietdonhang.masp ORDER BY chitietdonhang.masp DESC LIMIT 10");
+        $obj = $this->connect->prepare("SELECT sanpham.tensp, SUM(soluong) as sum_soluong FROM chitietdonhang INNER JOIN sanpham ON chitietdonhang.masp = sanpham.masp GROUP BY chitietdonhang.masp ORDER BY sum_soluong DESC LIMIT 10");
         $obj->setFetchMode(PDO::FETCH_OBJ);
         $obj->execute(array());
         return $obj->fetchAll();
@@ -109,7 +109,7 @@ class ChiTietDonHangModel extends Database
 
     public function ChiThietDonHang__Doanh_Thu_Chart($startDate, $endDate)
     {
-        $obj = $this->connect->prepare("SELECT DATE(donhang.ngaythem) as ngaythem, tongdh AS sum_doanhthu FROM donhang WHERE ngaythem >= (?) AND ngaythem <= (?) GROUP BY madon ORDER BY madon");
+        $obj = $this->connect->prepare("SELECT DATE(donhang.ngaythem) as ngay, SUM(tongdh) AS tong_doanhthu FROM donhang WHERE ngaythem >= (?) AND ngaythem <= (?) GROUP BY DATE(donhang.ngaythem) ORDER BY ngay");
         $obj->setFetchMode(PDO::FETCH_OBJ);
         $obj->execute(array(date('Y-m-d 00:00:01', strtotime($startDate)), date('Y-m-d 23:59:59', strtotime($endDate))));
         return $obj->fetchAll();

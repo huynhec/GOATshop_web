@@ -30,10 +30,18 @@ if (isset($_POST['action'])) {
     switch ($_POST['action']) {
 
         case 'delete':
-
+            $res = 0;
             $madon = $_POST['madon'];
-            $res = $dh->DonHang__Delete($madon);
-            echo $res;
+            $matt = 8;
+            $manv = null;
+            $ngaytao = date('Y-m-d H:i:s');
+            $res += $cttt->ChiTietTrangThai__Add($madon, $matt, $manv, $ngaytao);
+            if ($res != 0) {
+                echo true;
+            } else {
+                echo false;
+            }
+
             break;
 
         case 'checkout':
@@ -78,7 +86,7 @@ if (isset($_POST['action'])) {
                 $resDh = $ctdh->ChiTietDonHang__Add($madh, $masp, $soluong, $dongia, $idsize, $tenkh, $sodienthoai);
                 $resSp = $sp->SanPham__Update_Luot_Mua($masp, $luotmua);
             }
-            
+
             // cập nhật trạng thái 
             $matt = 0;
             $manv = null;

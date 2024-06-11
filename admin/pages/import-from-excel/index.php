@@ -22,6 +22,7 @@ $import__Get_All = $import->import__Get_All();
         <div class="col-8">
             <div class="main-data">
                 <a href="pages/import-from-excel/action.php?req=export" class="btn btn-danger float-right">EXPORT</a>
+                <a href="pages/import-from-excel/action.php?req=training" class="btn btn-primary float-right">Training . . .</a>
 
                 <h3 class="section-title">Danh sách import</h3>
                 <div class="table-responsive">

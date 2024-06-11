@@ -53,10 +53,10 @@ class DonHangModel extends Database
         return $obj->rowCount();
     }
 
-    public function DonHang__Delete($madon)
+    public function DonHang__Delete($madon, $trangthai)
     {
-        $obj = $this->connect->prepare("DELETE FROM donhang WHERE madon = ?");
-        $obj->execute(array($madon));
+        $obj = $this->connect->prepare("UPDATE donhang SET trangthai = ? WHERE madon = ?");
+        $obj->execute(array($madon, $trangthai));
         return $obj->rowCount();
     }
 
@@ -69,7 +69,7 @@ class DonHangModel extends Database
     }
     public function DonHang__Get_By_Id_KH($makh)
     {
-        $obj = $this->connect->prepare("SELECT *,  CONCAT('GOAT-', madon, DATE_FORMAT(ngaythem, '%H%i%s')) AS ma_don_hang FROM donhang Where makh = ?");
+        $obj = $this->connect->prepare("SELECT *,  CONCAT('GOAT-', madon, DATE_FORMAT(ngaythem, '%H%i%s')) AS ma_don_hang FROM donhang WHERE makh = ? ");
         $obj->setFetchMode(PDO::FETCH_OBJ);
         $obj->execute(array($makh));
         return $obj->fetchAll();

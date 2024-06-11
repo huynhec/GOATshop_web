@@ -14,10 +14,10 @@ $chiTietDonHang__Doanh_Thu_Chart = $ctdh->ChiThietDonHang__Doanh_Thu_Chart($star
 <div class="main-data">
     <h3 class="section-title">Doanh Thu</h3>
     <div class="table-responsive">
-        <table id="" class="table table-striped" style="width:100%">
+        <table id="table_js" class="table table-striped" style="width:100%">
             <thead>
                 <tr>
-                    <th>Top</th>
+                    <th>#</th>
                     <th>Ngày</th>
                     <th>Tổng số tiền</th>
                 </tr>
@@ -32,8 +32,8 @@ $chiTietDonHang__Doanh_Thu_Chart = $ctdh->ChiThietDonHang__Doanh_Thu_Chart($star
                 <?php foreach ($chiTietDonHang__Doanh_Thu_Chart as $item) : ?>
                     <tr>
                         <td><?= $count++ ?></td>
-                        <td><?= $item->ngaythem ?></td>
-                        <td><?= number_format($item->sum_doanhthu) ?></td>
+                        <td><?= $item->ngay ?></td>
+                        <td><?= number_format($item->tong_doanhthu) ?></td>
                     </tr>
                 <?php endforeach ?>
             </tbody>
@@ -45,8 +45,8 @@ $chiTietDonHang__Doanh_Thu_Chart = $ctdh->ChiThietDonHang__Doanh_Thu_Chart($star
 <script>
     // Line Chart
 
-    var ngaythem = <?php echo json_encode(array_column($chiTietDonHang__Doanh_Thu_Chart, 'ngaythem')); ?>;
-    var sum_doanhthu = <?php echo json_encode(array_column($chiTietDonHang__Doanh_Thu_Chart, 'sum_doanhthu')); ?>;
+    var ngaythem = <?php echo json_encode(array_column($chiTietDonHang__Doanh_Thu_Chart, 'ngay')); ?>;
+    var sum_doanhthu = <?php echo json_encode(array_column($chiTietDonHang__Doanh_Thu_Chart, 'tong_doanhthu')); ?>;
 
     var lineChartColors = ['#FF6384', '#36A2EB', '#FFCE56', '#4CAF50', '#FF5733'];
 

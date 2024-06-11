@@ -239,3 +239,7 @@ hoaibao|1234567
 admin|123456
 hoaibao|1234567
 tutrinh|1234567
+admin|123456
+hoaibao|1234567
+tutrinh|1234567
+hoaibao|1234567

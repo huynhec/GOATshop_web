@@ -61,10 +61,13 @@ $donHang__Get_All = $dh->DonHang__Get_All();
                                                 <i class="bx bx-edit" aria-hidden="true"></i> Đơn đã hủy
                                             </button>
 
-                                        <?php elseif ($cttt->ChiTietTrangThai__Check($item->madon, 6) != false) :   // đơn được giao thành công)
-                                        ?>
+                                        <?php elseif ($cttt->ChiTietTrangThai__Check($item->madon, 6) != false) :   // đơn được giao thành công?>
                                             <button type="button" class="btn btn-success btn-update" onclick="return update_obj('<?= $item->madon ?>')">
                                                 <i class="bx bx-edit" aria-hidden="true"></i> Đơn đã giao
+                                            </button>
+                                        <?php elseif ($cttt->ChiTietTrangThai__Check($item->madon, 8) != false) :   // đơn bị huỷ bởi người mua?>
+                                            <button type="button" class="btn btn-danger btn-update" onclick="return update_obj('<?= $item->madon ?>')">
+                                                <i class="bx bx-edit" aria-hidden="true"></i> Đơn đã huỷ
                                             </button>
                                         <?php else : ?>
                                             <button type="button" class="btn btn-warning btn-update" onclick="return update_obj('<?= $item->madon ?>')">

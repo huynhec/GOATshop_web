@@ -29,6 +29,7 @@ $timeTracking__Get_TwoD = $ttr->User_item_tracking__Get_TwoD();
         <div class="col-7">
             <div class="main-data">
                 <a href="pages/thoi-gian-theo-doi/action.php?req=export" class="btn btn-danger float-right">EXPORT</a>
+                <a href="pages/thoi-gian-theo-doi/action.php?req=training" class="btn btn-primary float-right">TRAINING</a>
                 <h3 class="section-title">Danh sách theo dõi</h3>
                 <div class="table-responsive">
                     <table id="table_js" class="table table-striped" style="width:100%">

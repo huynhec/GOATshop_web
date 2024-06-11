@@ -97,7 +97,7 @@ $trangThai__Get_BY_Id_DH = $tt->TrangThai__Get_By_Id_DH($madon);
             <?php
             $lastMATT = isset($cttt->ChiTietTrangThai__Get_Last_By_DH($madon)->matt) ? $cttt->ChiTietTrangThai__Get_Last_By_DH($madon)->matt : null;
 
-            if (($lastMATT == 1) || ($lastMATT == 6)) :
+            if (($lastMATT == 1) || ($lastMATT == 6) || ($lastMATT == 8)) :
             ?>
                 <label class="form-check-label" for="matt<?= $item->matt ?>">...</label>
             <?php else : ?>
