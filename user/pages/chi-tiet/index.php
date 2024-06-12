@@ -41,7 +41,7 @@ $anhSp__Get_By_Id_Sp_Thumbnail = $anhSp->AnhSp__Get_By_Id_Sp_Thumbnail($masp);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Giày bóng đá trẻ em Nike Air Zoom Mercurial</title>
+    <title>GOATshop</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -122,12 +122,12 @@ $anhSp__Get_By_Id_Sp_Thumbnail = $anhSp->AnhSp__Get_By_Id_Sp_Thumbnail($masp);
             <?php else : ?>
                 <a href="../auth?pages=dang-nhap">
 
-                <div class="actions">
-                    <!-- <button class="buy-now" onclick="return checkLogin()">Mua ngay</button>
+                    <div class="actions">
+                        <!-- <button class="buy-now" onclick="return checkLogin()">Mua ngay</button>
                     <button class="add-to-cart" onclick="return checkLogin()">Thêm vào giỏ</button> -->
-                        <button class="buy-now" >Mua ngay</button>
-                        <button class="add-to-cart" >Thêm vào giỏ</button>
-                </div>
+                        <button class="buy-now">Mua ngay</button>
+                        <button class="add-to-cart">Thêm vào giỏ</button>
+                    </div>
                 </a>
             <?php endif ?>
 

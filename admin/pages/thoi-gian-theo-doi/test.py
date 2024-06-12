@@ -223,7 +223,11 @@ def main(file_name, min_quota, k):
 if __name__ == "__main__":
     now = datetime.now()
     folder_name = f"results/{now.strftime('%Y-%m-%d')}"
-    os.makedirs(folder_name, exist_ok=True)
+    
+    # Kiểm tra nếu thư mục đã tồn tại, không cần tạo lại
+    if not os.path.exists(folder_name):
+        os.makedirs(folder_name)
+    
     file_log = f"{folder_name}/1_log_{now.strftime('%Y-%m-%d-%H-%M-%S')}.log"
     logging.basicConfig(filename=file_log, level=logging.INFO, encoding="UTF-8",
                         format='%(asctime)s - %(levelname)s - %(message)s')

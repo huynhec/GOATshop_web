@@ -36,6 +36,9 @@ if (isset($_POST['action'])) {
             $manv = null;
             $ngaytao = date('Y-m-d H:i:s');
             $res += $cttt->ChiTietTrangThai__Add($madon, $matt, $manv, $ngaytao);
+            // cập nhật trạng thái đơn hàng
+            $trangthai = 0;
+            $dh->DonHang__Update_State($madon, $trangthai);
             if ($res != 0) {
                 echo true;
             } else {

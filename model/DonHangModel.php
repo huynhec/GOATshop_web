@@ -52,6 +52,12 @@ class DonHangModel extends Database
         $obj->execute(array($ngaythem, $makh, $tongdh, $madon));
         return $obj->rowCount();
     }
+    public function DonHang__Update_State($madon, $trangthai)
+    {
+        $obj = $this->connect->prepare("UPDATE donhang SET trangthai=? WHERE madon=?");
+        $obj->execute(array($trangthai, $madon));
+        return $obj->rowCount();
+    }
 
     public function DonHang__Delete($madon, $trangthai)
     {

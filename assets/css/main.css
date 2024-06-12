@@ -1307,7 +1307,7 @@ table {
 }
 
 .swal2-popup.swal2-modal.swal2-show {
-  width: 50%;
+  width: 70%;
 }
 
 .table-custom tbody {
@@ -1499,6 +1499,7 @@ a.slide-btn2 {
   margin-bottom: 10px;
   font-weight: bold;
   font-family: "Montserrat", sans-serif !important;
+  text-align: left !important;
 }
 
 .product-details .brand {

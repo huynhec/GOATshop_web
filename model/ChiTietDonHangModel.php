@@ -109,7 +109,13 @@ class ChiTietDonHangModel extends Database
 
     public function ChiThietDonHang__Doanh_Thu_Chart($startDate, $endDate)
     {
-        $obj = $this->connect->prepare("SELECT DATE(donhang.ngaythem) as ngay, SUM(tongdh) AS tong_doanhthu FROM donhang WHERE ngaythem >= (?) AND ngaythem <= (?) GROUP BY DATE(donhang.ngaythem) ORDER BY ngay");
+        $obj = $this->connect->prepare("SELECT DATE(donhang.ngaythem) as ngay, 
+        SUM(CASE WHEN donhang.trangthai = 1 THEN donhang.tongdh ELSE 0 END) AS tong_doanhthu 
+        FROM donhang 
+        WHERE donhang.ngaythem >= (?) AND donhang.ngaythem <= (?) 
+        GROUP BY DATE(donhang.ngaythem) 
+        ORDER BY ngay;
+        ");
         $obj->setFetchMode(PDO::FETCH_OBJ);
         $obj->execute(array(date('Y-m-d 00:00:01', strtotime($startDate)), date('Y-m-d 23:59:59', strtotime($endDate))));
         return $obj->fetchAll();

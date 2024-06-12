@@ -96,11 +96,11 @@ $top = 0;
                                     </div> -->
                                         <div class="product-actions text-center clearfix">
                                             <div>
-                                                <button type="button" class="btnQuickView quick-view medium--hide small--hide" data-handle="/products/nike-mercurial-vapor-13-academy-tf-2">
+                                                <button type="button" class="btnQuickView quick-view medium--hide small--hide" data-handle="/products/nike-mercurial-vapor-13-academy-tf-2" onclick="return view('<?= $item->masp ?>','<?= $item->maloai ?>','<?= $_SESSION['user']->makh ?? 0; ?>')">
                                                     <span><i class="fa fa-search-plus" aria-hidden="true"></i></span>
                                                 </button>
-                                                <button type="button" class="btnBuyNow buy-now medium--hide small--hide" data-id="1085955545"><span>Mua ngay</span></button>
-                                                <button type="button" class="btnAddToCart add-to-cart medium--hide small--hide" data-id="1085955545">
+                                                <button type="button" class="btnBuyNow buy-now medium--hide small--hide" data-id="1085955545" onclick="buyNow('<?= $item->masp ?>')"><span>Mua ngay</span></button>
+                                                <button type="button" class="btnAddToCart add-to-cart medium--hide small--hide" data-id="1085955545" onclick="addCartSize('<?= $item->masp ?>')">
                                                     <span><i class="fa fa-cart-plus" aria-hidden="true"></i></span>
                                                 </button>
                                             </div>
@@ -241,66 +241,91 @@ $top = 0;
 </main>
 
 <script>
-    // // Lấy danh sách các nút
-    // var buttons = document.querySelectorAll('button');
+    function addCartSize(masp) {
+        // Kiểm tra xem đã chọn size chưa
+        var selectedSize = document.querySelector('input[name="size"]:checked');
 
-    // // Lặp qua từng nút và thêm sự kiện click
-    // buttons.forEach(function(button) {
-    //     button.addEventListener('click', function() {
-    //         // Lấy giá trị từ thuộc tính value của nút
-    //         var value = this.value;
-    //         console.log("Giá trị củah nút:", value);
+        if (!selectedSize) {
+            // Nếu chưa chọn size, hiển thị thông báo với SweetAlert2
+            Swal.fire({
+                icon: 'warning',
+                title: 'Vui lòng chọn kích thước',
+                text: 'Bạn cần chọn kích thước trước khi thêm vào giỏ hàng.',
+            });
+            return;
+        }
+        $.ajax({
+            type: "POST",
+            url: "./components/action.php",
+            data: {
+                action: "add",
+                masp: masp,
+                idsize: idsize
+            },
+            success: function(response) {
+                console.log(response);
+                $("#cart-item").text(response);
+                Swal.fire({
+                    icon: "success",
+                    title: "Đã thêm vào giỏ",
+                    confirmButtonText: "OK",
+                });
+            },
+        });
 
-    //         // Gửi yêu cầu AJAX sử dụng jQuery
-    //         $.ajax({
-    //             url: './pages/trang-chu/index.php',
-    //             type: "GET",
-    //             data: {
-    //                 your_value: value
-    //             },
-    //             success: function(response) {
-    //                 // Xử lý phản hồi ở đây
-    //             },
-    //             error: function(xhr, status, error) {
-    //                 console.error(xhr.responseText);
-    //             }
-    //         });
-    //     });
-    // });
-    // Tạo một đối tượng XMLHttpRequest
-    // Lấy danh sách các nút
-    // document.addEventListener('DOMContentLoaded', function() {
-    //     const filterButtons = document.querySelectorAll('.filter-button');
+    }
 
-    //     filterButtons.forEach(function(button) {
-    //         button.addEventListener('click', function() {
-    //             const value = this.value;
-    //             console.log("Giá trị của nút:", value);
-    //             doSomethingWithValue(value);
-    //         });
-    //     });
-
-    //     function doSomethingWithValue(value) {
-    //         const url = "../user/index.php?pages=trang-chu&your_value=" + value;
-
-    //         $.ajax({
-    //             url: url,
-    //             type: "GET",
-    //             success: function(response) {
-    //                 // Xử lý khi nhận được phản hồi thành công
-    //                 window.location.href = url;
-    //             },
-    //             error: function(xhr, status, error) {
-    //                 // Xử lý khi gặp lỗi
-    //                 console.error('Đã xảy ra lỗi:', error);
-    //             }
-    //         });
-    //     }
-
-    // });
+    function buyNow(masp) {
+        // Kiểm tra xem đã chọn size chưa
+        var selectedSize = document.querySelector('input[name="size"]:checked');
+        const cartDiv = document.querySelector('.navbar-display-cart');
 
 
+        if (!selectedSize) {
+            // Nếu chưa chọn size, hiển thị thông báo với SweetAlert2
+            Swal.fire({
+                icon: 'warning',
+                title: 'Vui lòng chọn kích thước',
+                text: 'Bạn cần chọn kích thước trước khi thêm vào giỏ hàng.',
+            });
+            return;
+        }
+        $.ajax({
+            type: "POST",
+            url: "./components/action.php",
+            data: {
+                action: "add",
+                masp: masp,
+                idsize: idsize
+            },
+            success: function(response) {
+                console.log(response);
+                $("#cart-item").text(response);
+                cartDiv.click();
+            },
+        });
+    }
 
+    function view(masp, maloai, makh) {
+        $.ajax({
+            url: './pages/trang-chu/view.php',
+            type: 'GET',
+            data: {
+                masp: masp,
+                maloai: maloai,
+                makh: makh
+            },
+            success: function(response) {
+                Swal.fire({
+                    showCloseButton: true,
+                    html: response
+                });
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    }
 
     function getLocation() {
         if (navigator.geolocation) {
