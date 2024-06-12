@@ -6,16 +6,54 @@ require_once '../model/CommonModel.php';
 $ctdh = new ChiTietDonHangModel();
 $cm = new CommonModel();
 
+if (isset($_POST['startDate'])) {
+    $startDate = $_POST['startDate'];
+} else {
+    $startDate = date('Y-m-d', strtotime('-1 month'));
+}
+if (isset($_POST['endDate'])) {
+    $endDate = $_POST['endDate'];
+} else {
+    $endDate = date('Y-m-d');
+}
+
 $chiTietDonHang__Top_Ban_Chart = $ctdh->ChiThietDonHang__Top_Ban_Chart();
-
+$chiThietDonHang__So_Mat_Hang = $ctdh->ChiThietDonHang__So_Mat_Hang();
+$chiThietDonHang__Tong_Danh_Thu = $ctdh->ChiThietDonHang__Tong_Danh_Thu();
+$chiThietDonHang__So_Mat_Hang_By_Date = $ctdh->ChiThietDonHang__So_Mat_Hang_By_Date($startDate, $endDate);
+$chiThietDonHang__Tong_Danh_Thu_By_Date = $ctdh->ChiThietDonHang__Tong_Danh_Thu_By_Date($startDate, $endDate);
 ?>
+<style>
+    .stats-container {
+        display: flex;
+        justify-content: space-between;
+    }
 
+    .stats-section {
+        width: 50%;
+    }
+</style>
 <div id="main-container">
     <div class="main-title">
         <h3>Thống kê</h3>
-        <ul class="breadcrumb">
-            <li>Tổng mặt hàng: </li>
-        </ul>
+        <div class="stats-container">
+            <div class="stats-section">
+                <h5>Một tháng gần nhất</h5>
+                <ul>
+                    <li>Tổng mặt hàng đã bán: <?= $chiThietDonHang__So_Mat_Hang_By_Date ?></li>
+                    <li>Tổng doanh thu: <?= number_format($chiThietDonHang__Tong_Danh_Thu_By_Date->tong_doanhthu) ?> ₫</li>
+                </ul>
+            </div>
+            <div class="stats-section">
+                <h5>Từ trước đến nay</h5>
+                <ul>
+                    <li>Tổng mặt hàng đã bán: <?= $chiThietDonHang__So_Mat_Hang ?></li>
+                    <li>Tổng doanh thu: <?= number_format($chiThietDonHang__Tong_Danh_Thu->tong_doanhthu) ?> ₫</li>
+                </ul>
+            </div>
+        </div>
+        <a href="pages/trang-chu/action.php?req=export" class="btn btn-danger float-right">EXPORT</a>
+
     </div>
 
     <hr>

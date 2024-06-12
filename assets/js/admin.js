@@ -8,7 +8,7 @@ menuBar.addEventListener("click", function () {
 
 window.addEventListener("load", function () {
   $("#table_js").DataTable({
-    // order: [[0, "desc"]], // Sắp xếp theo cột đầu tiên (index 0) giảm dần ("desc")
+    order: [[0, "desc"]], // Sắp xếp theo cột đầu tiên (index 0) giảm dần ("desc")
   });
 
   // reSize();
@@ -30,7 +30,7 @@ $('#daterange').daterangepicker({
   opens: 'left'
 }, function(start, end, label) {
   var startDate = start.format('YYYY-MM-DD');
-  var endDate = end.format('YYYY-MM-DD');
+  var endDate =  end.format('YYYY-MM-DD');
   $.post("pages/trang-chu/update.php", {
       startDate: startDate,
       endDate: endDate,

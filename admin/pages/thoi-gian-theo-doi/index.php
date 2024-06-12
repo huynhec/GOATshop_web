@@ -68,6 +68,36 @@ $timeTracking__Get_TwoD = $ttr->User_item_tracking__Get_TwoD();
                 </div>
             </div>
         </div>
+        <form class="row form" action="pages/thoi-gian-theo-doi/action.php?req=import" method="post"
+                    enctype="multipart/form-data">
+                    <div class="col-12">
+                        <div class="card card-success">
+                            <div class="card-header">
+                                <h3 class="card-title">Import</h3>
+
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse"
+                                        title="Collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label for="">Chọn file import <span class="color-crimson">(*)</span></label>
+                                    <input type="file" id="file" name="file" class="form-control" required>
+
+                                </div>
+
+                            </div>
+                            <!-- /.card-body -->
+                            <div class="card-footer">
+                                <input type="submit" value="Import" class="btn btn-success float-right">
+                            </div>
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </form>
         <div class="col-4">
             <div class="main-form">
                 <!-- <button>1 ngày</button> <button>2 ngày</button> -->

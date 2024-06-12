@@ -98,6 +98,53 @@ class ChiTietDonHangModel extends Database
         $obj->execute(array($madon));
         return $obj->fetch();
     }
+    // tổng từ đầu đến giờ
+    public function ChiThietDonHang__So_Mat_Hang()
+    {
+        $obj = $this->connect->prepare("SELECT sanpham.tensp
+        FROM chitietdonhang 
+        INNER JOIN sanpham ON chitietdonhang.masp = sanpham.masp 
+        GROUP BY chitietdonhang.masp 
+        ");
+        $obj->execute();
+        $results = $obj->fetchAll();
+        return count($results);
+    }
+    public function ChiThietDonHang__Tong_Danh_Thu()
+    {
+        $obj = $this->connect->prepare("SELECT DATE(donhang.ngaythem) as ngay, 
+        SUM(CASE WHEN donhang.trangthai = 1 THEN donhang.tongdh ELSE 0 END) AS tong_doanhthu 
+        FROM donhang 
+        ");
+        $obj->setFetchMode(PDO::FETCH_OBJ);
+        $obj->execute();
+        return $obj->fetch();
+    }
+    // ------------------------
+
+    public function ChiThietDonHang__So_Mat_Hang_By_Date($startDate, $endDate)
+    {
+        $obj = $this->connect->prepare("SELECT sanpham.tensp, donhang.ngaythem
+        FROM chitietdonhang 
+        INNER JOIN sanpham ON chitietdonhang.masp = sanpham.masp 
+        INNER JOIN donhang ON chitietdonhang.madon = donhang.madon
+        WHERE donhang.ngaythem >= (?) AND donhang.ngaythem <= (?)     
+        GROUP BY chitietdonhang.masp
+        ");
+        $obj->execute(array(date('Y-m-d 00:00:01', strtotime($startDate)), date('Y-m-d 23:59:59', strtotime($endDate))));
+        $results = $obj->fetchAll();
+        return count($results);
+    }
+    public function ChiThietDonHang__Tong_Danh_Thu_By_Date($startDate, $endDate)
+    {
+        $obj = $this->connect->prepare("SELECT DATE(donhang.ngaythem) as ngay, 
+    SUM(CASE WHEN donhang.trangthai = 1 THEN donhang.tongdh ELSE 0 END) AS tong_doanhthu 
+    FROM donhang WHERE donhang.ngaythem >= (?) AND donhang.ngaythem <= (?) 
+    ");
+        $obj->setFetchMode(PDO::FETCH_OBJ);
+        $obj->execute(array(date('Y-m-d 00:00:01', strtotime($startDate)), date('Y-m-d 23:59:59', strtotime($endDate))));
+        return $obj->fetch();
+    }
 
     public function ChiThietDonHang__Top_Ban_Chart()
     {

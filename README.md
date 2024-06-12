@@ -26,3 +26,16 @@
     - Tài khoản user
         + username: khachhang
         + password: 123456
+        
+# 1. Tạo môi trường conda (nếu chưa tạo)
+conda create -n code python=3.9
+
+# 2. Activate env (Trước khi chạy các file code)
+cmd (chỉ nhập cmd trên Windows, MacOS không cần)
+conda activate code
+
+# 3. Cài packages
+pip install -r requirements.txt
+
+# 4. Run predict
+python main.py -min_quota=10 -k=2 -file_name="datasets/data.xlsx"

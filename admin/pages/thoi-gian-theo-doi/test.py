@@ -59,7 +59,6 @@ def load_data(file_name, folder_name, min_quota):
     df_pivot.columns = [str(col).title() for col in df_pivot.columns]
     
     # Lưu dữ liệu đã chuyển đổi vào một file mới
-    os.makedirs(folder_name, exist_ok=True)
     # Lưu ma trận gốc
     df_pivot.to_excel(os.path.join(folder_name, '1_original_matrix.xlsx'), index=False)
     trans_file_name = f'{folder_name}/1_original_matrix.xlsx'
@@ -112,8 +111,6 @@ def display_and_save_results(data, cos_sim, predict_matrix):
     log("Ma trận dự đoán:")
     log(pd.DataFrame(predict_matrix, columns=data.columns[1:], index=data.iloc[:, 0]).to_string())
     
-    # Tạo thư mục nếu chưa tồn tại
-    os.makedirs(folder_name, exist_ok=True)
     # Lưu ma trận độ tương tự cosine
     pd.DataFrame(cos_sim, columns=data.iloc[:, 0], index=data.iloc[:, 0]).to_excel(os.path.join(folder_name, '2_cosine_similarity_matrix.xlsx'))
     # Lưu ma trận dự đoán
@@ -222,11 +219,7 @@ def main(file_name, min_quota, k):
 
 if __name__ == "__main__":
     now = datetime.now()
-    folder_name = f"results/{now.strftime('%Y-%m-%d')}"
-    
-    # Kiểm tra nếu thư mục đã tồn tại, không cần tạo lại
-    if not os.path.exists(folder_name):
-        os.makedirs(folder_name)
+    folder_name = "result"
     
     file_log = f"{folder_name}/1_log_{now.strftime('%Y-%m-%d-%H-%M-%S')}.log"
     logging.basicConfig(filename=file_log, level=logging.INFO, encoding="UTF-8",

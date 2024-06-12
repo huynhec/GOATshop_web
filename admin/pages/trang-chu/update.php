@@ -59,6 +59,7 @@ $chiTietDonHang__Doanh_Thu_Chart = $ctdh->ChiThietDonHang__Doanh_Thu_Chart($star
     var lineChartData = {
         labels: ngaythem,
         datasets: [{
+            label: "Doanh thu",
             data: sum_doanhthu,
             backgroundColor: lineChartColors,
             borderColor: lineChartColors,
