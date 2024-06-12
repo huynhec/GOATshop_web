@@ -43,11 +43,11 @@ $sanPham__Get_Ten_Sp_Paged = $sp->SanPham__Get_Ten_Sp_Paged($page_number, $tu_kh
                                     </div> -->
                                     <div class="product-actions text-center clearfix">
                                         <div>
-                                            <button type="button" class="btnQuickView quick-view medium--hide small--hide" data-handle="/products/nike-mercurial-vapor-13-academy-tf-2">
+                                            <button type="button" class="btnQuickView quick-view medium--hide small--hide" data-handle="/products/nike-mercurial-vapor-13-academy-tf-2" onclick="return view('<?= $item->masp ?>','<?= $item->maloai ?>','<?= $_SESSION['user']->makh ?? 0; ?>')">
                                                 <span><i class="fa fa-search-plus" aria-hidden="true"></i></span>
                                             </button>
-                                            <button type="button" class="btnBuyNow buy-now medium--hide small--hide" data-id="1085955545"><span>Mua ngay</span></button>
-                                            <button type="button" class="btnAddToCart add-to-cart medium--hide small--hide" data-id="1085955545">
+                                            <button type="button" class="btnBuyNow buy-now medium--hide small--hide" data-id="1085955545" onclick="buyNow('<?= $item->masp ?>')"><span>Mua ngay</span></button>
+                                            <button type="button" class="btnAddToCart add-to-cart medium--hide small--hide" data-id="1085955545" onclick="addCartSize('<?= $item->masp ?>')">
                                                 <span><i class="fa fa-cart-plus" aria-hidden="true"></i></span>
                                             </button>
                                         </div>
@@ -128,3 +128,90 @@ $sanPham__Get_Ten_Sp_Paged = $sp->SanPham__Get_Ten_Sp_Paged($page_number, $tu_kh
     </div>
 
 </main>
+<script>
+        function addCartSize(masp) {
+        // Kiểm tra xem đã chọn size chưa
+        var selectedSize = document.querySelector('input[name="size"]:checked');
+
+        if (!selectedSize) {
+            // Nếu chưa chọn size, hiển thị thông báo với SweetAlert2
+            Swal.fire({
+                icon: 'warning',
+                title: 'Vui lòng chọn kích thước',
+                text: 'Bạn cần chọn kích thước trước khi thêm vào giỏ hàng.',
+            });
+            return;
+        }
+        $.ajax({
+            type: "POST",
+            url: "./components/action.php",
+            data: {
+                action: "add",
+                masp: masp,
+                idsize: idsize
+            },
+            success: function(response) {
+                console.log(response);
+                $("#cart-item").text(response);
+                Swal.fire({
+                    icon: "success",
+                    title: "Đã thêm vào giỏ",
+                    confirmButtonText: "OK",
+                });
+            },
+        });
+
+    }
+
+    function buyNow(masp) {
+        // Kiểm tra xem đã chọn size chưa
+        var selectedSize = document.querySelector('input[name="size"]:checked');
+        const cartDiv = document.querySelector('.navbar-display-cart');
+
+
+        if (!selectedSize) {
+            // Nếu chưa chọn size, hiển thị thông báo với SweetAlert2
+            Swal.fire({
+                icon: 'warning',
+                title: 'Vui lòng chọn kích thước',
+                text: 'Bạn cần chọn kích thước trước khi thêm vào giỏ hàng.',
+            });
+            return;
+        }
+        $.ajax({
+            type: "POST",
+            url: "./components/action.php",
+            data: {
+                action: "add",
+                masp: masp,
+                idsize: idsize
+            },
+            success: function(response) {
+                console.log(response);
+                $("#cart-item").text(response);
+                cartDiv.click();
+            },
+        });
+    }
+
+    function view(masp, maloai, makh) {
+        $.ajax({
+            url: './pages/trang-chu/view.php',
+            type: 'GET',
+            data: {
+                masp: masp,
+                maloai: maloai,
+                makh: makh
+            },
+            success: function(response) {
+                Swal.fire({
+                    showCloseButton: true,
+                    html: response
+                });
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    }
+</script>

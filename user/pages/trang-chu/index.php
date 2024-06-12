@@ -201,15 +201,14 @@ $top = 0;
             <div class="main-container">
                 <div class="main-title-container">
                     <a href="index.php?pages=sp-moi&page=1">
-                        <div class="item-title color-2" style="font-weight: bold; font-size: 24px;">Bạn có thể mua
-                            !? </div>
+                        <div class="item-title color-2" style="font-weight: bold; font-size: 24px;">Bạn có thể mua !? </div>
                     </a>
                 </div>
                 <div class="product-slider">
                     <div class="product-container-random">
                         <!-- Products -->
-                        <?php foreach ($sp__Get_Top_Updated_5 as $item) : ?>
-                            <?php if (count($sp__Get_Top_Updated_5) > 0) : ?>
+                        <?php foreach ($sp__Get_Top_Random as $item) : ?>
+                            <?php if (count($sp__Get_Top_Random) > 0) : ?>
                                 <?php $anhSp__Get_By_Id_Sp_First = $anhSp->AnhSp__Get_By_Id_Sp_First($item->masp); ?>
                                 <?php if (isset($anhSp__Get_By_Id_Sp_First->masp)) : ?>
                                     <div class="product-item-random" data-masp="<?= $anhSp__Get_By_Id_Sp_First->masp ?>" onmouseenter="startTimer(this)" onmouseleave="endTimer()" onclick="endTimer()">

@@ -248,3 +248,4 @@ admin|123456
 tutrinh|1234567
 haison|1234567
 hoaibao|1234567
+admin|123456

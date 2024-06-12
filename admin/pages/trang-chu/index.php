@@ -7,15 +7,14 @@ $ctdh = new ChiTietDonHangModel();
 $cm = new CommonModel();
 
 $chiTietDonHang__Top_Ban_Chart = $ctdh->ChiThietDonHang__Top_Ban_Chart();
+
 ?>
 
 <div id="main-container">
     <div class="main-title">
         <h3>Thống kê</h3>
         <ul class="breadcrumb">
-            <li>
-                <a href="#">Thống kê</a>
-            </li>
+            <li>Tổng mặt hàng: </li>
         </ul>
     </div>
 
