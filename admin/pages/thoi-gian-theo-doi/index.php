@@ -29,7 +29,9 @@ $timeTracking__Get_TwoD = $ttr->User_item_tracking__Get_TwoD();
         <div class="col-7">
             <div class="main-data">
                 <a href="pages/thoi-gian-theo-doi/action.php?req=export" class="btn btn-danger float-right">EXPORT</a>
-                <a href="pages/thoi-gian-theo-doi/action.php?req=training" class="btn btn-primary float-right">TRAINING</a>
+                <!-- <a href="pages/thoi-gian-theo-doi/action.php?req=training" class="btn btn-primary float-right">TRAINING</a> -->
+                <a onclick="training_model()" class="btn-primary float-right">TRAINING</a>
+
                 <h3 class="section-title">Danh sách theo dõi</h3>
                 <div class="table-responsive">
                     <table id="table_js" class="table table-striped" style="width:100%">
@@ -68,36 +70,6 @@ $timeTracking__Get_TwoD = $ttr->User_item_tracking__Get_TwoD();
                 </div>
             </div>
         </div>
-        <form class="row form" action="pages/thoi-gian-theo-doi/action.php?req=import" method="post"
-                    enctype="multipart/form-data">
-                    <div class="col-12">
-                        <div class="card card-success">
-                            <div class="card-header">
-                                <h3 class="card-title">Import</h3>
-
-                                <div class="card-tools">
-                                    <button type="button" class="btn btn-tool" data-card-widget="collapse"
-                                        title="Collapse">
-                                        <i class="fas fa-minus"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="card-body">
-                                <div class="form-group">
-                                    <label for="">Chọn file import <span class="color-crimson">(*)</span></label>
-                                    <input type="file" id="file" name="file" class="form-control" required>
-
-                                </div>
-
-                            </div>
-                            <!-- /.card-body -->
-                            <div class="card-footer">
-                                <input type="submit" value="Import" class="btn btn-success float-right">
-                            </div>
-                        </div>
-                        <!-- /.card -->
-                    </div>
-                </form>
         <div class="col-4">
             <div class="main-form">
                 <!-- <button>1 ngày</button> <button>2 ngày</button> -->
@@ -114,11 +86,49 @@ $timeTracking__Get_TwoD = $ttr->User_item_tracking__Get_TwoD();
         })
 
 
+
         function trackingitem_chart(masp) {
             $.post("pages/thoi-gian-theo-doi/trackingitem_chart.php", {
                 masp: masp,
             }, function(data, status) {
                 $(".main-form").html(data);
             });
+        };
+
+        function training_model() {
+
+
+            $.get("pages/thoi-gian-theo-doi/action.php?req=create_data", {}, function(data, status) {
+                console.log(data);
+                // Swal.fire({
+                //     title: "Đang thực thi!!",
+                //     html: "Vui lòng không đóng cửa sổ này!!!",
+                //     timerProgressBar: true,
+                //     showCancelButton: false,
+                //     showCloseButton: false,
+                //     didOpen: () => {
+                //         Swal.showLoading();
+                //         $.ajax({
+                //             url: './pages/thoi-gian-theo-doi/datasets/training_user_based.xlsx',
+                //             type: 'HEAD',
+                //             success: function(data, res) {
+                //                 //file exists 
+                //                 $.get("pages/thoi-gian-theo-doi/action.php?req=training", {}, function(data, status) {
+                //                     // return data;
+                //                     console.log('Email đã được gửi thành công!');
+                //                 });
+                //             }
+                //         });
+
+                //     },
+                //     willClose: () => {}
+                // }).then((result) => {
+                //     console.log('Email đã được gửi thành công!');
+                // });
+            });
+
+
+
+
         };
     </script>

@@ -66,10 +66,22 @@ class ImportModel extends Database
         $obj->execute(array($masp, $masp_rec, $sup, $conf));
         return $obj->rowCount();
     }
+    //INSERT INTO goiy(masp, masp_rec, sup, conf) VALUES (?,?,?,?)
+    //UPDATE  goiy_user_based SET user =?, rank = ?, item = ?
+
     public function import__Add_User_Based($user, $rank, $item)
     {
-        $obj = $this->connect->prepare("UPDATE  goiy_user_based SET user =?, rank = ?, item = ?");
+        
+        $obj = $this->connect->prepare("INSERT INTO goiy_user_based(user, rank, item) VALUES (?,?,?)");
         $obj->execute(array($user, $rank, $item));
+        return $obj->rowCount();
+    }
+    
+    public function import__Delete_User_Based()
+    {
+        $obj = $this->connect->prepare("
+        DELETE FROM goiy_user_based");
+        $obj->execute();
         return $obj->rowCount();
     }
 }

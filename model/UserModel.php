@@ -1,4 +1,4 @@
-<?PHP 
+<?PHP
 $a = "./config/connect.php";
 $b = "../config/connect.php";
 $c = "../../config/connect.php";
@@ -48,10 +48,10 @@ class   UserModel extends Database
         $obj = $this->connect->prepare("INSERT INTO users (tenhienthi, username, password, phanquyen, trangthai)
                                         VALUES (?, ?, ?, ?, ?)");
         $obj->execute(array($tenhienthi, $username, $password, $phanquyen, $trangthai));
-    
+
         // Lấy mauser vừa được thêm
         $mauser = $this->connect->lastInsertId();
-    
+
         // Thêm thông tin vào bảng nhanvien hoặc khachhang tùy thuộc vào giá trị của $phanquyen
         if ($phanquyen == 1) {
             $stmt = $this->connect->prepare("INSERT INTO nhanvien (mauser) VALUES (?)");
@@ -62,12 +62,18 @@ class   UserModel extends Database
         }
         return $obj->rowCount();
     }
-    
+
 
     public function User__Update($tenhienthi, $username, $password, $phanquyen, $trangthai, $mauser)
     {
         $obj = $this->connect->prepare("UPDATE users SET tenhienthi = ?, username = ?, `password` = ?, phanquyen = ?, trangthai = ? WHERE mauser = ? ");
-        $obj->execute(array( $tenhienthi, $username, $password, $phanquyen, $trangthai, $mauser));
+        $obj->execute(array($tenhienthi, $username, $password, $phanquyen, $trangthai, $mauser));
+        return $obj->rowCount();
+    }
+    public function User__Update_Password_By_Email($password, $email, $token)
+    {
+        $obj = $this->connect->prepare("UPDATE users INNER JOIN khachhang ON khachhang.mauser = users.mauser SET users.password = ?, khachhang.reset_token = NULL, khachhang.reset_token_expire = NULL WHERE khachhang.email = ? AND khachhang.reset_token = ?");
+        $obj->execute(array($password, $email, $token));
         return $obj->rowCount();
     }
 
@@ -78,51 +84,51 @@ class   UserModel extends Database
     //     return $obj->rowCount();
     // }
     public function User__Delete($mauser)
-{
-    // Lấy phân quyền của người dùng cần xoá
-    $query = "SELECT phanquyen FROM users WHERE mauser = ?";
-    $stmt = $this->connect->prepare($query);
-    $stmt->execute([$mauser]);
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
-
-    // Kiểm tra phân quyền và xoá tương ứng
-    if ($result) {
-        $phanquyen = $result['phanquyen'];
-
-        if ($phanquyen == 1) {
-            // Xoá nhân viên
-            $this->deleteNhanVien($mauser);
-        } elseif ($phanquyen == 2) {
-            // Xoá khách hàng
-            $this->deleteKhachHang($mauser);
-        }
-
-        // Xoá người dùng
-        $query = "DELETE FROM users WHERE mauser = ?";
+    {
+        // Lấy phân quyền của người dùng cần xoá
+        $query = "SELECT phanquyen FROM users WHERE mauser = ?";
         $stmt = $this->connect->prepare($query);
         $stmt->execute([$mauser]);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        return $stmt->rowCount();
+        // Kiểm tra phân quyền và xoá tương ứng
+        if ($result) {
+            $phanquyen = $result['phanquyen'];
+
+            if ($phanquyen == 1) {
+                // Xoá nhân viên
+                $this->deleteNhanVien($mauser);
+            } elseif ($phanquyen == 2) {
+                // Xoá khách hàng
+                $this->deleteKhachHang($mauser);
+            }
+
+            // Xoá người dùng
+            $query = "DELETE FROM users WHERE mauser = ?";
+            $stmt = $this->connect->prepare($query);
+            $stmt->execute([$mauser]);
+
+            return $stmt->rowCount();
+        }
+
+        return 0;
     }
 
-    return 0;
-}
+    private function deleteNhanVien($mauser)
+    {
+        // Xoá nhân viên dựa trên mauser
+        $query = "DELETE FROM nhanvien WHERE mauser = ?";
+        $stmt = $this->connect->prepare($query);
+        $stmt->execute([$mauser]);
+    }
 
-private function deleteNhanVien($mauser)
-{
-    // Xoá nhân viên dựa trên mauser
-    $query = "DELETE FROM nhanvien WHERE mauser = ?";
-    $stmt = $this->connect->prepare($query);
-    $stmt->execute([$mauser]);
-}
-
-private function deleteKhachHang($mauser)
-{
-    // Xoá khách hàng dựa trên mauser
-    $query = "DELETE FROM khachhang WHERE mauser = ?";
-    $stmt = $this->connect->prepare($query);
-    $stmt->execute([$mauser]);
-}
+    private function deleteKhachHang($mauser)
+    {
+        // Xoá khách hàng dựa trên mauser
+        $query = "DELETE FROM khachhang WHERE mauser = ?";
+        $stmt = $this->connect->prepare($query);
+        $stmt->execute([$mauser]);
+    }
 
 
     public function User__Get_By_Id($mauser)
@@ -164,6 +170,3 @@ private function deleteKhachHang($mauser)
         return $decryption;
     }
 }
-
-
-?>

@@ -30,7 +30,7 @@ $url = $_SESSION['url'] ?? '../../user/';
                 <label class="label" for="input">Mật khẩu</label>
             </div>
             <div class="g-recaptcha" data-sitekey="6LeCaZkpAAAAADBw3Hip0xBcv6JdGRcEGMQU8HfS"></div>
-            <a href="">Quên mật khẩu?</a>
+            <a href="index.php?pages=quen-mat-khau">Quên mật khẩu?</a>
             <button class="submit-btn" type="submit">Đăng nhập</button>
             <input type="hidden" name="url" id="url" class="form-control" value="<?= $url ?>" />
         </form>

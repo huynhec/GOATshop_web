@@ -8,7 +8,7 @@ if (isset($_GET['req'])) {
     switch ($_GET['req']) {
 
 
-        case "training":
+        case "create_data":
             // xuat excel
             $status = 0;
 
@@ -38,7 +38,7 @@ if (isset($_GET['req'])) {
                 $row_hd += 1;
             }
 
-            $file = 'training_user_based.xlsx';
+            $file = __DIR__ . 'training_user_based.xlsx';
             $objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel);
             try {
                 $objWriter->save($file);
@@ -62,26 +62,31 @@ if (isset($_GET['req'])) {
             readfile($file);
             // xóa file tạm
             $status .= unlink($file);
+            echo $file;
 
             // Thuc thi traing
             // Đợi 30 giây
-            sleep(10);
+            // sleep(10);
+
+            break;
+        case 'training':
 
             // Thực thi training sau khi đợi 30 giây
             $command = "source /opt/anaconda3/bin/activate; python test.py 2>&1";
             $output = shell_exec($command);
 
-            sleep(5);
+            // sleep(5);
             // Import from the specified file
             $importStatus = 0;
-            $fileToImport = '/Applications/XAMPP/xamppfiles/htdocs/GOATshop/admin/pages/thoi-gian-theo-doi/result/4_prediction_export.xlsx';
+            $fileToImport = __DIR__ . '/result/4_prediction_export.xlsx';
 
             if (file_exists($fileToImport)) {
+                $import->import__Delete_User_Based();
                 $reader = PHPExcel_IOFactory::createReaderForFile($fileToImport);
                 $spreadsheet = $reader->load($fileToImport);
                 $sheetData = $spreadsheet->getActiveSheet()->toArray(null, true, true, true);
                 $highestRow = $spreadsheet->getActiveSheet()->getHighestRow();
-
+                $import->import__Delete_User_Based();
                 for ($row = 2; $row <= $highestRow; $row++) {
                     $user = $sheetData[$row]['A'];
                     $rank = $sheetData[$row]['B'];
@@ -89,16 +94,8 @@ if (isset($_GET['req'])) {
 
                     $importStatus .= $import->import__Add_User_Based($user, $rank, $item);
                 }
-            } else {
-                header("location:../../index.php?pages=import-from-excel&status=file_not_found");
-                exit();
             }
-
-            if ($importStatus == 0) {
-                header("location:../../index.php?pages=import-from-excel&status=fail");
-            } else {
-                header("location:../../index.php?pages=import-from-excel&status=success");
-            }
+            echo 1;
             break;
 
 

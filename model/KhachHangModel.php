@@ -91,6 +91,25 @@ class KhachHangModel extends Database
             return true;
         }
     }
+    public function KhachHang__Check_Exist_Email($email)
+    {
+        $obj = $this->connect->prepare("SELECT * FROM khachhang WHERE email = ?");
+        $obj->setFetchMode(PDO::FETCH_OBJ);
+        $obj->execute(array($email));
+        if ($obj->rowCount() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public function KhachHang__Save_Token($token, $email)
+    {
+        $time = date('Y-m-d H:i:s', strtotime('+ 5 minutes'));
+        $obj = $this->connect->prepare("UPDATE khachhang SET reset_token = ?, reset_token_expire = ? WHERE email = ?");
+        $obj->setFetchMode(PDO::FETCH_OBJ);
+        $obj->execute(array($token, $time, $email));
+        return $obj->rowCount();
+    }
 
     public function KhachHang__Dang_Nhap($emailOrUsername, $password)
     {
@@ -126,11 +145,18 @@ class KhachHangModel extends Database
         $obj->execute(array($tenkh, $sodienthoai, $email, $makh));
         return $obj->rowCount();
     }
-    
+
     public function KhachHang__Delete($makh, $trangthai)
     {
         $obj = $this->connect->prepare("UPDATE khachhang SET trangthai=? WHERE makh=?");
         $obj->execute(array($trangthai, $makh));
         return $obj->rowCount();
+    }
+    public function XacMinh_Token()
+    {
+        $obj = $this->connect->prepare("SELECT * FROM khachhang");
+        $obj->setFetchMode(PDO::FETCH_OBJ);
+        $obj->execute();
+        return $obj->fetch();
     }
 }

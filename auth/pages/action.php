@@ -1,11 +1,26 @@
 <?php
 session_start();
+//Import PHPMailer classes into the global namespace
+//These must be at the top of your script, not inside a function
+
+require "../../assets/vendor/PHPMailer/src/PHPMailer.php";
+require "../../assets/vendor/PHPMailer/src/Exception.php";
+require "../../assets/vendor/PHPMailer/src/SMTP.php";
+// require "../../models/getModel.php";
+
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+
 require_once '../../model/KhachHangModel.php';
 require_once '../../model/NhanVienModel.php';
 require_once '../../model/UserModel.php';
 $kh = new KhachHangModel();
 $nhanVien = new NhanVienModel();
 $user = new UserModel();
+
 
 if (isset($_GET['req'])) {
     switch ($_GET['req']) {
@@ -124,7 +139,117 @@ if (isset($_GET['req'])) {
                 header('location: ../index.php?pages=dang-ky&msg=error');
             }
             break;
+        case "send_reset_link":
 
+            if (isset($_POST['email'])) {
+                $email = $_POST['email'];
+                $token = bin2hex(random_bytes(50)); // Tạo token ngẫu nhiên
+
+                // Kiểm tra email có tồn tại trong cơ sở dữ liệu không
+                if ($kh->KhachHang__Check_Exist_Email($email)) {
+                    // Lưu token vào cơ sở dữ liệu
+                    $kh->KhachHang__Save_Token($token, $email);
+
+                    // Gửi email đặt lại mật khẩu
+                    $resetLink = "http://localhost/GOATshop/auth/index.php?pages=reset-password&token=$token";
+
+
+
+
+
+
+
+
+                    //Create an instance; passing `true` enables exceptions
+                    $mail = new PHPMailer(true);
+
+                    // $href = $_SERVER["HTTP_REFERER"];
+                    // if (strlen(strpos($href, '&status')) > 0) {
+                    //     $href = explode('&status', $href)[0];
+                    // }
+
+                    $status = 0;
+
+                    try {
+                        //Server settings
+                        $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+                        $mail->isSMTP();                                            //Send using SMTP
+                        $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+                        $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+                        $mail->Username   = 'huynhbarca@gmail.com';                     //SMTP username
+                        $mail->Password   = 'fjal neiz xplr nnpn';                               //SMTP password
+                        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+                        $mail->CharSet = PHPMailer::CHARSET_UTF8;            //Enable implicit TLS encryption
+                        $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+                        //Recipients
+                        $mail->setFrom('huynhbarca@gmail.com', 'GOATshop');
+                        $mail->addAddress($email, $email);     //Add a recipient
+                        // $mail->addReplyTo('info@gmail.com', 'Information');
+                        $mail->addCC('fdcvlinh6@gmail.com');
+                        // $mail->addBCC('bcc@gmail.com');
+
+                        //Attachments
+                        // $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
+                        // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
+
+                        //Content
+                        $mail->isHTML(true);
+                        $mail->Subject = 'Đặt lại mật khẩu';
+                        $mail->Body    = "Nhấp vào liên kết sau để đặt lại mật khẩu của bạn: $resetLink";
+                        $mail->AltBody = "Nhấp vào liên kết sau để đặt lại mật khẩu của bạn: $resetLink";
+                    
+                        $mail->send();
+                        echo 'Message has been sent';
+                    } catch (Exception $e) {
+                        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                        // header("location: $href&status=failed");
+                    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    echo "Yêu cầu đặt lại mật khẩu đã được gửi tới email của bạn.";
+                } else {
+                    echo "Email không tồn tại.";
+                }
+            } else {
+                echo "Vui lòng nhập email.";
+            }
+            break;
+        case "update_password":
+
+            $res = $kh->XacMinh_Token();
+            echo $res->reset_token;
+            if (isset($_POST['token']) && isset($_POST['password'])) {
+                 $token = $_POST['token'];
+                // $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+                $password = $user->Ma_Hoa_Mat_Khau(trim($_POST['password']));
+               
+
+                // // Xác minh token
+                // if ($kh->XacMinh_Token($password, $token)) {
+
+                //     echo "Mật khẩu của bạn đã được đặt lại thành công.";
+                // } else {
+                //     echo "Token không hợp lệ hoặc đã hết hạn.";
+                // }
+            } else {
+                echo "Vui lòng nhập đầy đủ thông tin.";
+            }
+            break;
         case "chinh-sua":
             $res = 0;
             $makh = $_POST['makh'];
