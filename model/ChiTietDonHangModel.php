@@ -39,6 +39,29 @@ class ChiTietDonHangModel extends Database
         $obj->execute();
         return $obj->fetchAll();
     }
+    public function ThongKe__Get_All()
+    {
+        $obj = $this->connect->prepare("SELECT dh.madon, dh.ngaythem, dh.tongdh, ctdh.tenkh, ctdh.sdt, sp.masp, sp.tensp, ctdh.soluong, ctdh.dongia, kc.tensize
+            FROM donhang dh JOIN chitietdonhang ctdh ON dh.madon = ctdh.madon
+                    JOIN sanpham sp ON ctdh.masp = sp.masp
+                    JOIN kichco kc ON ctdh.masize = kc.idsize
+            GROUP BY dh.madon;");
+        $obj->setFetchMode(PDO::FETCH_OBJ);
+        $obj->execute();
+        return $obj->fetchAll();
+    }
+    public function ThongKe__Get_By_Madon($madon)
+    {
+        $obj = $this->connect->prepare("SELECT dh.madon, dh.ngaythem, dh.tongdh, ctdh.tenkh, ctdh.sdt, sp.masp, sp.tensp, ctdh.soluong, ctdh.dongia, kc.tensize
+            FROM donhang dh JOIN chitietdonhang ctdh ON dh.madon = ctdh.madon
+                    JOIN sanpham sp ON ctdh.masp = sp.masp
+                    JOIN kichco kc ON ctdh.masize = kc.idsize
+                    WHERE dh.madon = ?
+            ORDER BY dh.madon;");
+        $obj->setFetchMode(PDO::FETCH_OBJ);
+        $obj->execute(array($madon));
+        return $obj->fetchAll();
+    }
 
     public function ChiTietDonHang__Add($madon, $masp, $soluong, $dongia, $masize, $tenkh, $sodienthoai)
     {
