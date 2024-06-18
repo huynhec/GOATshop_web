@@ -29,8 +29,8 @@ $timeTracking__Get_TwoD = $ttr->User_item_tracking__Get_TwoD();
         <div class="col-7">
             <div class="main-data">
                 <a href="pages/thoi-gian-theo-doi/action.php?req=export" class="btn btn-danger float-right">EXPORT</a>
-                <!-- <a href="pages/thoi-gian-theo-doi/action.php?req=training" class="btn btn-primary float-right">TRAINING</a> -->
-                <a onclick="training_model()" class="btn-primary float-right">TRAINING</a>
+                <!-- <a href="pages/thoi-gian-theo-doi/action.php?req=training" class="btn btn-primary float-right">TRAININGdd</a> -->
+                <a onclick="training_model()" class="btn btn-primary float-right">TRAINING</a>
 
                 <h3 class="section-title">Danh sách theo dõi</h3>
                 <div class="table-responsive">
@@ -72,11 +72,13 @@ $timeTracking__Get_TwoD = $ttr->User_item_tracking__Get_TwoD();
         </div>
         <div class="col-4">
             <div class="main-form">
-                <!-- <button>1 ngày</button> <button>2 ngày</button> -->
             </div>
         </div>
 
     </div>
+
+
+
 
     <script>
         window.addEventListener('load', function() {
@@ -95,40 +97,34 @@ $timeTracking__Get_TwoD = $ttr->User_item_tracking__Get_TwoD();
             });
         };
 
+        
+        /* -------------------------------------------------------------------------- */
+        /*                               training_model                               */
+        /* -------------------------------------------------------------------------- */
         function training_model() {
-
-
-            $.get("pages/thoi-gian-theo-doi/action.php?req=create_data", {}, function(data, status) {
-                console.log(data);
-                // Swal.fire({
-                //     title: "Đang thực thi!!",
-                //     html: "Vui lòng không đóng cửa sổ này!!!",
-                //     timerProgressBar: true,
-                //     showCancelButton: false,
-                //     showCloseButton: false,
-                //     didOpen: () => {
-                //         Swal.showLoading();
-                //         $.ajax({
-                //             url: './pages/thoi-gian-theo-doi/datasets/training_user_based.xlsx',
-                //             type: 'HEAD',
-                //             success: function(data, res) {
-                //                 //file exists 
-                //                 $.get("pages/thoi-gian-theo-doi/action.php?req=training", {}, function(data, status) {
-                //                     // return data;
-                //                     console.log('Email đã được gửi thành công!');
-                //                 });
-                //             }
-                //         });
-
-                //     },
-                //     willClose: () => {}
-                // }).then((result) => {
-                //     console.log('Email đã được gửi thành công!');
-                // });
+            Swal.fire({
+                title: "Đang thực thi!!",
+                html: "Vui lòng không đóng cửa sổ này!!!",
+                timerProgressBar: true,
+                showCancelButton: false,
+                allowOutsideClick: false,
+                showCloseButton: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                    $.get("pages/thoi-gian-theo-doi/action.php?req=training", {}, function(data, status) {
+                        if (data && !data.includes("failed")) {
+                            console.log("Tệp đã được tạo thành công. Đường dẫn: " + data);
+                            window.location = '?pages=thoi-gian-theo-doi&msg=success'
+                        } else {
+                            console.log("Lỗi: " + data);
+                            window.location = '?pages=thoi-gian-theo-doi&msg=fail'
+                        }
+                    });
+                },
+                willClose: () => {}
+            }).then((result) => {
+                console.log('Results: ' + result);
             });
 
-
-
-
-        };
+        }
     </script>

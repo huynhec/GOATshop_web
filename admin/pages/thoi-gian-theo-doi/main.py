@@ -13,7 +13,7 @@ import numpy as np
 # Hàm để ghi log thông báo
 def log(message):
     logging.info(message)
-    print(message)
+    # print(message)
 
 # Hàm tìm các cặp (user, item) bị trùng lặp
 def find_duplicates(df):
@@ -83,7 +83,13 @@ def predict_user_based(A, u, i, cos_sim, k):
     a = np.argsort(sim)[-k:]
     nearest_s = sim[a]
     rating = A[user_rated_i[a], i]
-    r_bar = (rating * nearest_s).sum() / (np.abs(nearest_s).sum())
+    # r_bar = (rating * nearest_s).sum() / (np.abs(nearest_s).sum())
+    nearest_s_abs_sum = np.abs(nearest_s).sum()
+    if nearest_s_abs_sum != 0:
+        r_bar = (rating * nearest_s).sum() / nearest_s_abs_sum
+    else:
+        r_bar = np.nan 
+        
     return np.round(r_bar)
 
 # Hàm tạo ma trận dự đoán dựa trên các user

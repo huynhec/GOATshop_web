@@ -42,7 +42,6 @@ $anhSp__Get_By_Id_Sp_Thumbnail = $anhSp->AnhSp__Get_By_Id_Sp_Thumbnail($masp);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GOATshop</title>
-    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
@@ -277,15 +276,15 @@ $anhSp__Get_By_Id_Sp_Thumbnail = $anhSp->AnhSp__Get_By_Id_Sp_Thumbnail($masp);
         evt.currentTarget.className += " active";
     }
 
-    let idsize = null;
+    // let idsize = null;
 
-    function selectSize(size) {
-        // Loại bỏ lớp "selected" từ tất cả các kích thước trước đó
-        $('.size-option').removeClass('selected');
-        // Thêm lớp "selected" cho kích thước được chọn
-        $(`#size-label-${size}`).addClass('selected');
-        idsize = size;
-    }
+    // function selectSize(size) {
+    //     // Loại bỏ lớp "selected" từ tất cả các kích thước trước đó
+    //     $('.size-option').removeClass('selected');
+    //     // Thêm lớp "selected" cho kích thước được chọn
+    //     $(`#size-label-${size}`).addClass('selected');
+    //     idsize = size;
+    // }
 
     function addCartSize(masp) {
         // Kiểm tra xem đã chọn size chưa
@@ -376,8 +375,6 @@ $anhSp__Get_By_Id_Sp_Thumbnail = $anhSp->AnhSp__Get_By_Id_Sp_Thumbnail($masp);
         });
 
     }
-
-
 
 
     window.addEventListener('load', function() {

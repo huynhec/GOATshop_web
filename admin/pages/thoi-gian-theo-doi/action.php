@@ -7,96 +7,122 @@ $import = new ImportModel();
 if (isset($_GET['req'])) {
     switch ($_GET['req']) {
 
+        case 'training':
+            // Thử lấy đường dẫn từ __DIR__, nếu không thành công, sử dụng đường dẫn tạm thời
+            try {
+                $fileDirectory = __DIR__ . '/datasets/';
+                // Kiểm tra và tạo thư mục nếu không tồn tại
+                if (!file_exists($fileDirectory)) {
+                    mkdir($fileDirectory, 777, true);
+                }
+            } catch (Exception $e) {
+                $fileDirectory = '/Applications/XAMPP/xamppfiles/temp/';
+                // Kiểm tra và tạo thư mục nếu không tồn tại
+                if (!file_exists($fileDirectory)) {
+                    mkdir($fileDirectory, 0777, true);
+                }
+            }
 
-        case "create_data":
-            // xuat excel
-            $status = 0;
+            // Đặt tên và đường dẫn đầy đủ của tệp Excel
+            $fileName = 'training_user_based.xlsx';
+            $fileFullPath = $fileDirectory . $fileName;
 
-            $import__Get_All = $import->import_Tracking__Get_All();
+            // Lấy dữ liệu từ $import
+            $importData = $import->import_Tracking__Get_All();
 
+            // Khởi tạo một đối tượng PHPExcel
             $objPHPExcel = new PHPExcel();
             $objPHPExcel->setActiveSheetIndex(0);
 
             $row_hd = 2;
 
-            $objPHPExcel->getActiveSheet()->getStyle('A1')->getFont()->setBold(true);
-            $objPHPExcel->getActiveSheet()->getStyle('B1')->getFont()->setBold(true);
-            $objPHPExcel->getActiveSheet()->getStyle('C1')->getFont()->setBold(true);
-
-
+            // Thiết lập tiêu đề cột
+            $objPHPExcel->getActiveSheet()->getStyle('A1:C1')->getFont()->setBold(true);
             $objPHPExcel->getActiveSheet()->SetCellValue('A1', "user");
             $objPHPExcel->getActiveSheet()->SetCellValue('B1', "item");
             $objPHPExcel->getActiveSheet()->SetCellValue('C1', "rating");
 
-
-            foreach ($import__Get_All as $item) {
+            // Điền dữ liệu vào tệp Excel
+            foreach ($importData as $item) {
                 $objPHPExcel->getActiveSheet()->SetCellValue('A' . $row_hd, "" . $item->user);
                 $objPHPExcel->getActiveSheet()->SetCellValue('B' . $row_hd, "" . $item->item);
                 $objPHPExcel->getActiveSheet()->SetCellValue('C' . $row_hd, "" . $item->rating);
-
-
-                $row_hd += 1;
+                $row_hd++;
             }
 
-            $file = __DIR__ . 'training_user_based.xlsx';
+            // Lưu tệp Excel
             $objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel);
+            $objWriter->save($fileFullPath);
+
+            // Tiếp tục xử lý với thư mục kết quả
+
+            // Thử lấy đường dẫn từ __DIR__, nếu không thành công, sử dụng đường dẫn tạm thời
             try {
-                $objWriter->save($file);
-            } catch (PHPExcel_Writer_Exception $e) {
-                // If saving fails, try saving to backup directory
-                $file = '/Applications/XAMPP/xamppfiles/temp/training_user_based.xlsx';
-                $objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel);
-                $objWriter->save($file);
+                $fileDir = __DIR__ . '/result/';
+                // Kiểm tra và tạo thư mục nếu không tồn tại
+                if (!file_exists($fileDir)) {
+                    mkdir($fileDir, 777, true);
+                }
+            } catch (Exception $e) {
+                $fileDir = '/Applications/XAMPP/xamppfiles/temp/';
+                // Kiểm tra và tạo thư mục nếu không tồn tại
+                if (!file_exists($fileDir)) {
+                    mkdir($fileDir, 0777, true);
+                }
             }
-            // download
-            header('Content-Description: File Transfer');
-            header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-            header('Content-Disposition: attachment; filename=' . basename($file));
-            header('Content-Transfer-Encoding: binary');
-            header('Expires: 0');
-            header('Cache-Control: must-revalidate');
-            header('Pragma: public');
-            header('Content-Length: ' . filesize($file));
-            ob_clean();
-            flush();
-            readfile($file);
-            // xóa file tạm
-            $status .= unlink($file);
-            echo $file;
 
-            // Thuc thi traing
-            // Đợi 30 giây
-            // sleep(10);
+            // Thiết lập đường dẫn đến Python
+            $pythonPath = (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') ?
+                "%USERPROFILE%\\Anaconda3\\python.exe" :
+                "/opt/anaconda3/bin/python";
 
-            break;
-        case 'training':
+            // // Thiết lập lệnh Python với đường dẫn và tên file
+            // $pythonCommand = 'conda run --name code ' . $pythonPath . " main.py 2>&1";
+            // Thiết lập đường dẫn đến Python
+            // $pythonPath = "/opt/anaconda3/envs/python=3.9/bin/python";
+            // $pythonCommand = 'source activate python=3.9 ' . $pythonPath . " main.py 2>&1";
 
-            // Thực thi training sau khi đợi 30 giây
-            $command = "source /opt/anaconda3/bin/activate; python test.py 2>&1";
+            $command = "source /opt/anaconda3/bin/activate; /opt/anaconda3/envs/python=3.9/bin/python main.py 2>&1";
             $output = shell_exec($command);
 
-            // sleep(5);
-            // Import from the specified file
+
+            // encoding  UTF-8
+            // putenv("PYTHONIOENCODING=utf-8");
+
+            // Thực thi lệnh Python
+            // $output = shell_exec($pythonCommand);
+
+            // Tiếp tục xử lý với tệp kết quả
+            $fileToImport = $fileDir . '4_prediction_export.xlsx';
+
+            // Thực hiện nhập dữ liệu từ tệp Excel
             $importStatus = 0;
-            $fileToImport = __DIR__ . '/result/4_prediction_export.xlsx';
 
             if (file_exists($fileToImport)) {
+                // Xóa dữ liệu hiện có trước khi nhập
                 $import->import__Delete_User_Based();
+
+                // Tạo một đối tượng Reader để đọc dữ liệu từ tệp Excel
                 $reader = PHPExcel_IOFactory::createReaderForFile($fileToImport);
                 $spreadsheet = $reader->load($fileToImport);
                 $sheetData = $spreadsheet->getActiveSheet()->toArray(null, true, true, true);
                 $highestRow = $spreadsheet->getActiveSheet()->getHighestRow();
-                $import->import__Delete_User_Based();
+
+                // Lặp qua từng dòng trong tệp Excel và nhập dữ liệu
                 for ($row = 2; $row <= $highestRow; $row++) {
                     $user = $sheetData[$row]['A'];
                     $rank = $sheetData[$row]['B'];
                     $item = $sheetData[$row]['C'];
 
+                    // Thêm dữ liệu vào cơ sở dữ liệu
                     $importStatus .= $import->import__Add_User_Based($user, $rank, $item);
                 }
             }
-            echo 1;
+
+            echo ($importStatus != 0) ? "success" : "failed";
+
             break;
+
 
 
         case "export":
@@ -155,9 +181,9 @@ if (isset($_GET['req'])) {
             $status .= unlink($file);
 
             if ($status == 0) {
-                header("location:../../index.php?pages=import-from-excel&status=fail");
+                header("location:../../index.php?pages=thoi-gian-theo-doi&status=fail");
             } else {
-                header("location:../../index.php?pages=import-from-excel&status=success");
+                header("location:../../index.php?pages=thoi-gian-theo-doi&status=success");
             }
             break;
 
@@ -183,9 +209,9 @@ if (isset($_GET['req'])) {
             }
 
             if ($status == 0) {
-                header("location:../../index.php?pages=import-from-excel&status=fail");
+                header("location:../../index.php?pages=thoi-gian-theo-doi&status=fail");
             } else {
-                header("location:../../index.php?pages=import-from-excel&status=success");
+                header("location:../../index.php?pages=thoi-gian-theo-doi&status=success");
             }
             break;
     }
