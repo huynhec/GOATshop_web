@@ -140,7 +140,7 @@ if (isset($_GET['req'])) {
             }
             break;
         case "send_reset_link":
-
+            ob_start();
             if (isset($_POST['email'])) {
                 $email = $_POST['email'];
                 $token = bin2hex(random_bytes(50)); // Tạo token ngẫu nhiên
@@ -153,101 +153,73 @@ if (isset($_GET['req'])) {
                     // Gửi email đặt lại mật khẩu
                     $resetLink = "http://localhost/GOATshop/auth/index.php?pages=reset-password&token=$token";
 
-
-
-
-
-
-
-
                     //Create an instance; passing `true` enables exceptions
                     $mail = new PHPMailer(true);
 
                     // $href = $_SERVER["HTTP_REFERER"];
-                    // if (strlen(strpos($href, '&status')) > 0) {
+                    // if (strpos($href, '&status') !== false) {
                     //     $href = explode('&status', $href)[0];
                     // }
 
-                    $status = 0;
-
                     try {
-                        //Server settings
-                        $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
-                        $mail->isSMTP();                                            //Send using SMTP
-                        $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
-                        $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-                        $mail->Username   = 'huynhbarca@gmail.com';                     //SMTP username
-                        $mail->Password   = 'fjal neiz xplr nnpn';                               //SMTP password
-                        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
-                        $mail->CharSet = PHPMailer::CHARSET_UTF8;            //Enable implicit TLS encryption
-                        $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+                        // Server settings
+                        $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      // Enable verbose debug output
+                        $mail->isSMTP();                                            // Send using SMTP
+                        $mail->Host       = 'smtp.gmail.com';                       // Set the SMTP server to send through
+                        $mail->SMTPAuth   = true;                                   // Enable SMTP authentication
+                        $mail->Username   = 'huynhbarca@gmail.com';                 // SMTP username
+                        $mail->Password   = 'fjal neiz xplr nnpn';                  // SMTP password
+                        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            // Enable implicit TLS encryption
+                        $mail->CharSet = PHPMailer::CHARSET_UTF8;                   // Set charset
+                        $mail->Port       = 465;                                    // TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
-                        //Recipients
+                        // Recipients
                         $mail->setFrom('huynhbarca@gmail.com', 'GOATshop');
-                        $mail->addAddress($email, $email);     //Add a recipient
-                        // $mail->addReplyTo('info@gmail.com', 'Information');
-                        $mail->addCC('fdcvlinh6@gmail.com');
-                        // $mail->addBCC('bcc@gmail.com');
+                        $mail->addAddress($email, $email);                          // Add a recipient
 
-                        //Attachments
-                        // $mail->addAttachment('/var/tmp/file.tar.gz');         //Add attachments
-                        // $mail->addAttachment('/tmp/image.jpg', 'new.jpg');    //Optional name
-
-                        //Content
+                        // Content
                         $mail->isHTML(true);
                         $mail->Subject = 'Đặt lại mật khẩu';
                         $mail->Body    = "Nhấp vào liên kết sau để đặt lại mật khẩu của bạn: $resetLink";
                         $mail->AltBody = "Nhấp vào liên kết sau để đặt lại mật khẩu của bạn: $resetLink";
-                    
+
                         $mail->send();
-                        echo 'Message has been sent';
+                        // Chuyển hướng sang trang đăng nhập sau khi gửi email thành công
+                        header('location: ../index.php?pages=dang-nhap');
+                        exit(); // Dừng thực thi ngay lập tức sau khi chuyển hướng
                     } catch (Exception $e) {
-                        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
-                        // header("location: $href&status=failed");
+                        // Gửi email thất bại
+                        header('location: ../index.php?pages=quen-mat-khau&msg=reset_error');
                     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    echo "Yêu cầu đặt lại mật khẩu đã được gửi tới email của bạn.";
                 } else {
+                    // Email không tồn tại trong cơ sở dữ liệu
+                    header('location: ../index.php?pages=quen-mat-khau&msg=reset_error_exist');
                     echo "Email không tồn tại.";
                 }
             } else {
-                echo "Vui lòng nhập email.";
+                header('location: ../index.php?pages=quen-mat-khau&msg=reset_error');
             }
+            ob_end_flush();
             break;
         case "update_password":
 
-            $res = $kh->XacMinh_Token();
-            echo $res->reset_token;
             if (isset($_POST['token']) && isset($_POST['password'])) {
-                 $token = $_POST['token'];
+                $res = 0;
+                $token = $_POST['token'];
+                $date = date('Y-m-d H:i:s');
                 // $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
                 $password = $user->Ma_Hoa_Mat_Khau(trim($_POST['password']));
-               
-
-                // // Xác minh token
-                // if ($kh->XacMinh_Token($password, $token)) {
-
-                //     echo "Mật khẩu của bạn đã được đặt lại thành công.";
-                // } else {
-                //     echo "Token không hợp lệ hoặc đã hết hạn.";
-                // }
+                // Xác minh token
+                if ($kh->XacMinh_Token($token, $date)) {
+                    $res += $kh->Update_Password($password, $token);
+                } else {
+                    header('location: ../index.php?pages=reset-password&msg=reset_error');
+                }
+            }
+            if ($res != 0) {
+                header('location: ../index.php?pages=notification');
             } else {
-                echo "Vui lòng nhập đầy đủ thông tin.";
+                header('location: ../index.php?pages=reset-password&msg=reset_error');
             }
             break;
         case "chinh-sua":

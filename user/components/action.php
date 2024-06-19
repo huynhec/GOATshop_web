@@ -190,11 +190,11 @@ if (isset($_POST['action'])) {
                 $timeCounter = $timeCounter * 2;
             }
             $res += $ttr->User_item_tracking__Add($timeCounter, $masp, $makh, $typetrack, $ngay);
-            if ($res != 0) {
-                header('location: ../../index.php?pages=thoi-gian-theo-doi&msg=success');
-            } else {
-                header('location: ../../index.php?pages=thoi-gian-theo-doi&msg=error');
-            }
+            // if ($res != 0) {
+            //     header('location: ../../index.php?pages=thoi-gian-theo-doi&msg=success');
+            // } else {
+            //     header('location: ../../index.php?pages=thoi-gian-theo-doi&msg=error');
+            // }
             break;
     }
 }

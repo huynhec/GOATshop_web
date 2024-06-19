@@ -52,6 +52,25 @@ if (isset($_SESSION['manager'])) {
                     });
                 </script>";
                 break;
+            case 'reset_success':
+                echo "<script>
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 2000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                        toast.onmouseenter = Swal.stopTimer;
+                        toast.onmouseleave = Swal.resumeTimer;
+                        }
+                    });
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'Cập nhật mật khẩu thành công!'
+                    });
+                </script>";
+                break;
 
             case 'error':
                 echo "<script>
@@ -69,6 +88,44 @@ if (isset($_SESSION['manager'])) {
                         Toast.fire({
                             icon: 'error',
                             title: 'Đăng ký không thành công! Tài khoản đã tồn tại'
+                        });
+                    </script>";
+                break;
+            case 'reset_error':
+                echo "<script>
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 2000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                            toast.onmouseenter = Swal.stopTimer;
+                            toast.onmouseleave = Swal.resumeTimer;
+                            }
+                        });
+                        Toast.fire({
+                            icon: 'error',
+                            title: 'Token không hợp lệ hoặc đã hết hạn!'
+                        });
+                    </script>";
+                break;
+            case 'reset_error_exist':
+                echo "<script>
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: 'top-end',
+                            showConfirmButton: false,
+                            timer: 2000,
+                            timerProgressBar: true,
+                            didOpen: (toast) => {
+                            toast.onmouseenter = Swal.stopTimer;
+                            toast.onmouseleave = Swal.resumeTimer;
+                            }
+                        });
+                        Toast.fire({
+                            icon: 'error',
+                            title: 'Email không tồn tại!'
                         });
                     </script>";
                 break;

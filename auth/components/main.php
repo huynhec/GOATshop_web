@@ -16,6 +16,9 @@ if (isset($_GET['pages']) && !isset($_GET['req'])) {
         case "chinh-sua":
             require_once "pages/chinh-sua.php";
             break;
+        case "notification":
+            require_once "pages/notification.php";
+            break;
         case "trang-loi":
             require_once "pages/trang-loi.php";
             break;

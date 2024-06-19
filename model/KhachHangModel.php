@@ -152,11 +152,26 @@ class KhachHangModel extends Database
         $obj->execute(array($trangthai, $makh));
         return $obj->rowCount();
     }
-    public function XacMinh_Token()
+    public function XacMinh_Token($token, $date)
     {
-        $obj = $this->connect->prepare("SELECT * FROM khachhang");
+        $obj = $this->connect->prepare("SELECT * FROM khachhang WHERE reset_token = (?) AND reset_token_expire > (?) ");
         $obj->setFetchMode(PDO::FETCH_OBJ);
-        $obj->execute();
-        return $obj->fetch();
+        $obj->execute(array($token, $date));
+        // return $obj->fetch();
+        if ($obj->rowCount() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function Update_Password($password, $token)
+    {
+        $obj = $this->connect->prepare("UPDATE users
+            INNER JOIN khachhang ON users.mauser = khachhang.mauser
+            SET users.password = ?, khachhang.reset_token = NULL, khachhang.reset_token_expire = NULL
+            WHERE khachhang.reset_token = ? ;");
+        $obj->execute(array($password, $token));
+        return $obj->rowCount();
     }
 }
