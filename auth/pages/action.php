@@ -348,7 +348,8 @@ if (isset($_GET['req'])) {
             if (isset($_SESSION['nhanvien'])) {
                 unset($_SESSION['nhanvien']);
             }
-            header('location:' . $_SERVER["HTTP_REFERER"]);
+            // header('location:' . $_SERVER["HTTP_REFERER"]);
+            header('location: ../../user/');
             // echo $_SERVER["HTTP_REFERER"];
             break;
         default:

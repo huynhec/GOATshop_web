@@ -175,9 +175,9 @@ actionHome.onclick = function () {
 };
 
 // Bắt sự kiện click vào display-user người dùng
-navbarDisplayUser.onclick = function () {
-  userAction.classList.toggle("hidden");
-};
+// navbarDisplayUser.onclick = function () {
+//   userAction.classList.toggle("hidden");
+// };
 
 // Bắt sự kiện click vào nút menu
 actionMenu.onclick = function () {
@@ -185,9 +185,9 @@ actionMenu.onclick = function () {
 };
 
 // Bắt sự kiện click vào nút người dùng
-actionUser.onclick = function () {
-  userAction.classList.remove("hidden");
-};
+// actionUser.onclick = function () {
+//   userAction.classList.remove("hidden");
+// };
 
 
 
@@ -205,16 +205,16 @@ searchIcon.onclick = function () {
 window.addEventListener("scroll", activeFloatingAction);
 
 // Bắt sự kiện click bên ngoài để đóng menu người dùng
-window.addEventListener("click", function (event) {
-  if (
-    !navbarDisplayUser.contains(event.target) &&
-    !userAction.contains(event.target) &&
-    !actionUser.contains(event.target)
-  ) {
-    userAction.classList.add("hidden");
-    navbar.classList.remove("active-user-menu");
-  }
-});
+// window.addEventListener("click", function (event) {
+//   if (
+//     !navbarDisplayUser.contains(event.target) &&
+//     !userAction.contains(event.target) &&
+//     !actionUser.contains(event.target)
+//   ) {
+//     userAction.classList.add("hidden");
+//     navbar.classList.remove("active-user-menu");
+//   }
+// });
 
 // Bắt sự kiện click bên ngoài để đóng menu danh sách
 window.addEventListener("click", function (event) {

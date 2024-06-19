@@ -1,5 +1,5 @@
-<!-- <?php
-session_start();
+<?php
+
 if (!isset($_SESSION['user'])) {
     header("location: ../../auth/?pages=dang-nhap");
     exit();
@@ -159,4 +159,4 @@ if (!isset($_SESSION['user'])) {
     } ?>
 </body>
 
-</html> -->
+</html>

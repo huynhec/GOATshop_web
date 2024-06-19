@@ -297,7 +297,7 @@ img:hover {
   margin: auto;
   width: 100%;
   vertical-align: middle;
-  max-width: 1120px;
+  max-width: 1145px;
 }
 
 /* navbar-logo */
@@ -543,7 +543,7 @@ img:hover {
 .navbar-display-user {
   width: 35px;
   height: 35px;
-  border-radius: 20px;
+  /* border-radius: 20px; */
   line-height: 35px;
   overflow: hidden;
   cursor: pointer;

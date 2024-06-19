@@ -123,23 +123,20 @@ $thuongHieu__Get_All = $th->ThuongHieu__Get_All();
             <?php if (isset($_SESSION['user'])) : ?>
                 <!-- display-user người dùng đã đăng nhập -->
                 <div class="navbar-display-user">
-                    <!-- <i class='bx bxs-user-detail'></i> -->
-                    <i class="fas fa-user"></i>
+
+                    <a href="../user/index.php?pages=thong-tin-user"><i class="fas fa-user"></i></a>
                 </div>
+                <div class="navbar-display-user">
+
+                    <a href="../auth/pages/action.php?req=dang-xuat"><i class="fa fa-sign-out"></i></a>
+                </div>
+                <!-- <i class='bx bxs-user-detail'></i> -->
+
                 <!-- Menu hành động của người dùng -->
-                <div class="navbar-display-action hidden">
+                <!-- <div class="navbar-display-action hidden">
                     <a href="#">
                         <li><b><i class='bx bx-user-check'></i><?= $_SESSION['user']->tenkh ?></b></li>
                     </a>
-                    <!-- <a href="index.php?pages=san-phan-da-xem">
-                        <li> <i class='bx bx-book-reader'></i> Sản phẩm đã xem</li>
-                    </a> -->
-                    <!-- <a href="index.php?pages=san-phan-da-thich">
-                        <li> <i class='bx bx-book-heart'></i> Sản phẩm đã thích</li>
-                    </a> -->
-                    <!-- <a href="index.php?pages=san-phan-theo-doi">
-                        <li><i class='bx bx-book-bookmark'></i> Đang theo dõi</li>
-                    </a> -->
                     <hr>
                     <a href="../auth/pages/chinh-sua.php">
                         <li> <i class='bx bx-cog'></i> Chỉnh sửa</li>
@@ -148,18 +145,17 @@ $thuongHieu__Get_All = $th->ThuongHieu__Get_All();
                     <a href="../auth/pages/action.php?req=dang-xuat">
                         <li><i class='bx bx-log-out'></i> Đăng xuất</li>
                     </a>
-                </div>
+                </div> -->
             <?php else : ?>
                 <!-- display-user người dùng chưa đăng nhập -->
                 <div class="navbar-display-user">
                     <!-- <i class="bx bx-user"></i> -->
-                    <a href="../auth?pages=dang-nhap"><i class="fas fa-user"></i></a></i>
-
+                    <a href="../auth?pages=dang-nhap"><i class="fas fa-user"></i></a>
                 </div>
                 <!-- Menu hành động khi chưa đăng nhập -->
-                <div class="navbar-display-action hidden">
+                <!-- <div class="navbar-display-action hidden">
                     <li><i class='bx bx-log-in'></i> <a href="../auth?pages=dang-nhap">Đăng nhập</a></li>
-                </div>
+                </div> -->
             <?php endif ?>
         </div>
     </div>
