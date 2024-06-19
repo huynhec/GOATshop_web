@@ -42,15 +42,29 @@ try {
     die();
 }
 ?>
+<link rel="stylesheet" href="../assets/vendor/boxicons-2.1.4/css/boxicons.min.css">
 <script src="../assets/js/diachi.js"></script>
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<style>
+    .password-wrapper {
+        position: relative;
+    }
 
+    .eye-icon {
+        position: absolute;
+        right: 10px;
+        top: 65%;
+        transform: translateY(-50%);
+        cursor: pointer;
+    }
+
+</style>
 <div class="auth-container row">
     <div class=" form-wrapper-1 col-8">
         <a href="../user/index.php">
-            <img src="../assets/images/Black logo - no background.png" alt="logo" class="img-fluid" width="300px" style="display: block; margin-left: auto;margin-right: auto; width: 20%;">
+            <img src="../assets/images/Black logo - no background.png" alt="logo" class="img-fluid" width="300px" style="display: block; margin-left: auto;margin-right: auto; width: 17%;">
         </a>
-        <form class="form-control-1" action="pages/action.php?req=dang-ky" method="post" enctype="multipart/form-data">
+        <form class="form-control-1" action="pages/action.php?req=dang-ky" method="post" enctype="multipart/form-data" onsubmit="return validatePasswords()">
             <div class="row">
                 <div class="col-6">
                     <!-- Left side of the form -->
@@ -71,8 +85,18 @@ try {
                     </div>
 
                     <div class="input-field">
-                        <input required="" class="input" type="password" name="password" />
+                        <input required="" id="password" class="input" type="password" name="password" />
                         <label class="label" for="input">Mật khẩu</label>
+                        <span class="eye-icon" onclick="togglePasswordVisibility('password', 'eye-icon-password')">
+                            <i id="eye-icon-password" class="bx bx-show"></i>
+                        </span>
+                    </div>
+                    <div class="input-field">
+                        <input required="" id="confirm_password" class="input" type="password" name="confirm_password" />
+                        <label class="label" for="confirm_password">Xác nhận mật khẩu</label>
+                        <span class="eye-icon" onclick="togglePasswordVisibility('confirm_password', 'eye-icon-confirm')">
+                            <i id="eye-icon-confirm" class="bx bx-show"></i>
+                        </span>
                     </div>
 
 
@@ -138,12 +162,41 @@ try {
 
                 </div>
             </div>
-
+            <p id="error-message" style="color: red; display: none;">Mật khẩu không khớp. Vui lòng thử lại.</p>
             <button class="submit-btn" type="submit">Đăng ký</button>
             <input type="hidden" name="url" id="url" class="form-control" value="<?= $url ?>" />
         </form>
         <hr>
-        <p class="footer-text">Bạn đã có tài khoản? <a href="index.php?pages=dang-nhap" class="text-succes">Đăng nhập
-                ngay!</a></p>
+        <p class="footer-text">Bạn đã có tài khoản? <a href="index.php?pages=dang-nhap" class="text-succes">Đăng nhập ngay!</a></p>
     </div>
 </div>
+
+<script>
+    function validatePasswords() {
+        var password = document.getElementById("password").value;
+        var confirmPassword = document.getElementById("confirm_password").value;
+        var errorMessage = document.getElementById("error-message");
+
+        if (password !== confirmPassword) {
+            errorMessage.style.display = "block";
+            return false;
+        } else {
+            errorMessage.style.display = "none";
+            return true;
+        }
+    }
+
+    function togglePasswordVisibility(inputId, iconId) {
+        var input = document.getElementById(inputId);
+        var icon = document.getElementById(iconId);
+        if (input.type === "password") {
+            input.type = "text";
+            icon.classList.remove("bx-show");
+            icon.classList.add("bxs-show");
+        } else {
+            input.type = "password";
+            icon.classList.remove("bxs-show");
+            icon.classList.add("bx-show");
+        }
+    }
+</script>

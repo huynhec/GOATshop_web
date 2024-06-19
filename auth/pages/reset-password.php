@@ -1,13 +1,8 @@
-<!-- reset_password.html -->
+<!-- reset_password -->
+<link rel="stylesheet" href="../assets/vendor/boxicons-2.1.4/css/boxicons.min.css">
 <style>
     .password-wrapper {
         position: relative;
-    }
-
-    .password-wrapper .input {
-        width: 100%;
-        padding-right: 30px;
-        /* Space for the eye icon */
     }
 
     .eye-icon {
@@ -18,18 +13,6 @@
         cursor: pointer;
     }
 
-    .input-field {
-        position: relative;
-        margin-bottom: 20px;
-    }
-
-    .label {
-        position: absolute;
-        top: -20px;
-        left: 10px;
-        font-size: 12px;
-        color: #999;
-    }
 </style>
 <div class="auth-container row">
     <div class="form-wrapper col-8">
@@ -94,6 +77,3 @@
 </script>
 
 
-<!-- Add FontAwesome CDN link for the eye icon -->
-<link rel="stylesheet" href="../assets/vendor/boxicons-2.1.4/css/boxicons.min.css">
-<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> -->

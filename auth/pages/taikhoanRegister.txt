@@ -3,3 +3,5 @@ chilinh|chilinh@gmail.com|1234567
 tutrinh|tutrinh@gmail.com|1234567
 khanhvan|khanhvan@gmail.com|1234567
 anhliem|huynhdev02@gmail.com|1234567
+vanbao|vanbao@gmail.com|1234567
+thanhhop|thanhhop@gmail.com|1234567
