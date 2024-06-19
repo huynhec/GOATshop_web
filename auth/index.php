@@ -71,6 +71,25 @@ if (isset($_SESSION['manager'])) {
                     });
                 </script>";
                 break;
+            case 'sent_success':
+                echo "<script>
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 2000,
+                        timerProgressBar: true,
+                        didOpen: (toast) => {
+                        toast.onmouseenter = Swal.stopTimer;
+                        toast.onmouseleave = Swal.resumeTimer;
+                        }
+                    });
+                    Toast.fire({
+                        icon: 'success',
+                        title: 'Đã gửi qua email thành công!'
+                    });
+                </script>";
+                break;
 
             case 'error':
                 echo "<script>

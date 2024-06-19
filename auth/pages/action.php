@@ -156,11 +156,6 @@ if (isset($_GET['req'])) {
                     //Create an instance; passing `true` enables exceptions
                     $mail = new PHPMailer(true);
 
-                    // $href = $_SERVER["HTTP_REFERER"];
-                    // if (strpos($href, '&status') !== false) {
-                    //     $href = explode('&status', $href)[0];
-                    // }
-
                     try {
                         // Server settings
                         $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      // Enable verbose debug output
@@ -180,12 +175,86 @@ if (isset($_GET['req'])) {
                         // Content
                         $mail->isHTML(true);
                         $mail->Subject = 'Đặt lại mật khẩu';
-                        $mail->Body    = "Nhấp vào liên kết sau để đặt lại mật khẩu của bạn: $resetLink";
-                        $mail->AltBody = "Nhấp vào liên kết sau để đặt lại mật khẩu của bạn: $resetLink";
+                        $mail->Body    = '
+                        <!DOCTYPE html>
+                        <html lang="vi">
+                        <head>
+                            <meta charset="UTF-8">
+                            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                            <title>Đặt lại mật khẩu</title>
+                            <style>
+                                body {
+                                    font-family: Arial, sans-serif;
+                                    line-height: 1.6;
+                                    color: #333;
+                                }
+                                .container {
+                                    max-width: 600px;
+                                    margin: 0 auto;
+                                    padding: 20px;
+                                    border: 1px solid #ddd;
+                                    border-radius: 5px;
+                                    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                                }
+                                .header {
+                                    text-align: center;
+                                    margin-bottom: 20px;
+                                }
+                                .header h1 {
+                                    margin: 0;
+                                    font-size: 24px;
+                                }
+                                .header p {
+                                    margin: 0;
+                                    font-size: 16px;
+                                    color: #555;
+                                }
+                                .content p {
+                                    font-size: 16px;
+                                }
+                                .button {
+                                    display: inline-block;
+                                    padding: 10px 20px;
+                                    margin: 20px 0;
+                                    font-size: 16px;
+                                    color: #fff !important;
+                                    background-color: #007bff;
+                                    text-decoration: none;
+                                    border-radius: 5px;
+                                }
+                                .footer {
+                                    margin-top: 20px;
+                                    font-size: 14px;
+                                    color: #777;
+                                }
+                                .footer a {
+                                    color: #007bff;
+                                    text-decoration: none;
+                                }
+                            </style>
+                        </head>
+                        <body>
+                            <div class="container">
+                                <div class="header">
+                                    <h1>GOATshop | Make sport great</h1>
+                                    <p>Thiết lập mật khẩu</p>
+                                </div>
+                                <div class="content">
+                                    <p>Click vào đường dẫn dưới đây để thiết lập mật khẩu tài khoản của bạn tại GOATshop | Make sport great. Nếu bạn không có yêu cầu thay đổi mật khẩu, xin hãy xóa email này để bảo mật thông tin.</p>
+                                    <a href="' . $resetLink . '" class="button">Thiết lập mật khẩu</a> hoặc <a href="http://localhost/GOATshop/user/index.php?pages=trang-chu" class="button">Đến cửa hàng của chúng tôi</a>
+                                </div>
+                                <div class="footer">
+                                    <p>Nếu bạn có bất cứ câu hỏi nào, đừng ngần ngại liên lạc với chúng tôi tại <a href="mailto:huynhbarca@gmail.com">huynhbarca@gmail.com</a></p>
+                                </div>
+                            </div>
+                        </body>
+                        </html>';
+                        $mail->AltBody = 'Nhấp vào liên kết sau để đặt lại mật khẩu của bạn: ' . $resetLink;
+                        
 
                         $mail->send();
                         // Chuyển hướng sang trang đăng nhập sau khi gửi email thành công
-                        header('location: ../index.php?pages=dang-nhap');
+                        header('location: ../index.php?pages=dang-nhap&msg=sent_success');
                         exit(); // Dừng thực thi ngay lập tức sau khi chuyển hướng
                     } catch (Exception $e) {
                         // Gửi email thất bại
