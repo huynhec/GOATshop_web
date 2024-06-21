@@ -297,7 +297,7 @@ img:hover {
   margin: auto;
   width: 100%;
   vertical-align: middle;
-  max-width: 1145px;
+  max-width: 1180px;
 }
 
 /* navbar-logo */
@@ -324,7 +324,7 @@ img:hover {
 .navbar-menu {
   position: relative;
   float: left;
-  width: 700px;
+  width: 720px;
   padding: 3px 0;
 }
 

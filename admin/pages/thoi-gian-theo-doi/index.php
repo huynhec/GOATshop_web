@@ -97,34 +97,5 @@ $timeTracking__Get_TwoD = $ttr->User_item_tracking__Get_TwoD();
             });
         };
 
-        
-        /* -------------------------------------------------------------------------- */
-        /*                               training_model                               */
-        /* -------------------------------------------------------------------------- */
-        function training_model() {
-            Swal.fire({
-                title: "Đang thực thi!!",
-                html: "Vui lòng không đóng cửa sổ này!!!",
-                timerProgressBar: true,
-                showCancelButton: false,
-                allowOutsideClick: false,
-                showCloseButton: false,
-                didOpen: () => {
-                    Swal.showLoading();
-                    $.get("pages/thoi-gian-theo-doi/action.php?req=training", {}, function(data, status) {
-                        if (data && !data.includes("failed")) {
-                            console.log("Tệp đã được tạo thành công. Đường dẫn: " + data);
-                            window.location = '?pages=thoi-gian-theo-doi&msg=success'
-                        } else {
-                            console.log("Lỗi: " + data);
-                            window.location = '?pages=thoi-gian-theo-doi&msg=fail'
-                        }
-                    });
-                },
-                willClose: () => {}
-            }).then((result) => {
-                console.log('Results: ' + result);
-            });
 
-        }
     </script>

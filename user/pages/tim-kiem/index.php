@@ -46,8 +46,8 @@ $sanPham__Get_Ten_Sp_Paged = $sp->SanPham__Get_Ten_Sp_Paged($page_number, $tu_kh
                                             <button type="button" class="btnQuickView quick-view medium--hide small--hide" data-handle="/products/nike-mercurial-vapor-13-academy-tf-2" onclick="return view('<?= $item->masp ?>','<?= $item->maloai ?>','<?= $_SESSION['user']->makh ?? 0; ?>')">
                                                 <span><i class="fa fa-search-plus" aria-hidden="true"></i></span>
                                             </button>
-                                            <button type="button" class="btnBuyNow buy-now medium--hide small--hide" data-id="1085955545" onclick="buyNow('<?= $item->masp ?>')"><span>Mua ngay</span></button>
-                                            <button type="button" class="btnAddToCart add-to-cart medium--hide small--hide" data-id="1085955545" onclick="addCartSize('<?= $item->masp ?>')">
+                                            <button type="button" class="btnBuyNow buy-now medium--hide small--hide" data-id="1085955545" onclick="viewBuy('<?= $item->masp ?>','<?= $item->maloai ?>','<?= $_SESSION['user']->makh ?? 0; ?>')"><span>Mua ngay</span></button>
+                                            <button type="button" class="btnAddToCart add-to-cart medium--hide small--hide" data-id="1085955545" onclick="viewCart('<?= $item->masp ?>','<?= $item->maloai ?>','<?= $_SESSION['user']->makh ?? 0; ?>')">
                                                 <span><i class="fa fa-cart-plus" aria-hidden="true"></i></span>
                                             </button>
                                         </div>
@@ -214,4 +214,46 @@ $sanPham__Get_Ten_Sp_Paged = $sp->SanPham__Get_Ten_Sp_Paged($page_number, $tu_kh
             }
         });
     }
+    function viewBuy(masp, maloai, makh) {
+        $.ajax({
+            url: './pages/trang-chu/viewBuy.php',
+            type: 'GET',
+            data: {
+                masp: masp,
+                maloai: maloai,
+                makh: makh
+            },
+            success: function(response) {
+                Swal.fire({
+                    showCloseButton: true,
+                    html: response
+                });
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    }
+
+    function viewCart(masp, maloai, makh) {
+        $.ajax({
+            url: './pages/trang-chu/viewCart.php',
+            type: 'GET',
+            data: {
+                masp: masp,
+                maloai: maloai,
+                makh: makh
+            },
+            success: function(response) {
+                Swal.fire({
+                    showCloseButton: true,
+                    html: response
+                });
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    }
+
 </script>

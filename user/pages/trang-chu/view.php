@@ -111,61 +111,8 @@ $anhSp__Get_By_Id_Sp_Thumbnail = $anhSp->AnhSp__Get_By_Id_Sp_Thumbnail($masp);
         </div>
         <div class="main-image">
 
-            <img id="currentImage" src="../assets/<?= $anhSp__Get_By_Id_Sp_Thumbnail->hinhanh ?>" alt="" style=" height: 490px; width: 490px;">
+            <img id="currentImage" src="../assets/<?= $anhSp__Get_By_Id_Sp_Thumbnail->hinhanh ?>" alt="" style=" height: 650px; width: 650px;">
         </div>
     </div>
-    <div class="product-details_view">
-        <h1><?= $sp__Get_By_Id->tensp ?></h1>
-        <p class="brand">Thương hiệu: <?= ($th->ThuongHieu__Get_By_Id($sp__Get_By_Id->math))->tenth ?> | </p>
-        <!-- <p class="brand"> Loại: Giày sân cỏ tự nhiên - Firm Ground</p> -->
-        <p class="price"><?= number_format($dg->ShowDonGia__Get_By_Id_Spdg($masp)) ?>đ</p>
-        <!-- <p class="installment">Trả sau 2,475,000đ x2 kỳ với Fundiin</p>
-            <p class="discount">Giảm đến 100K khi thanh toán qua Fundiin. <a href="#">xem thêm</a></p> -->
-        <ul class="features">
-            <li>Ưu đãi cho khách hàng thành viên</li>
-            <li>Freeship toàn quốc</li>
-            <li>Được đổi trả lên đến 7 ngày</li>
-            <li>Bảo hành miễn phí lên đến 1 năm</li>
-            <li>Hỗ trợ đổi trả hàng thuận tiện</li>
-            <li>Cam kết 100% chính hãng</li>
-        </ul>
-        <div class="size-selection">
-            <div class="row">
-                <h5 class="text-normal-view">Kích thước: </h5>
-                <div>
-                    <?php foreach ($size__Get_By_IdLoai as $item) : ?>
-                        <?php if ($item->trangthai == 1) : ?>
-                            <label class="size-option" id="size-label-<?= $item->idsize ?>" onclick="selectSize('<?= $item->idsize ?>')">
-                                <input type="radio" name="size" id="idsize<?= $item->idsize ?>" value="<?= $item->tensize ?>">
-                                <?= $item->tensize ?>
-                            </label>
-                        <?php endif; ?>
-                    <?php endforeach; ?>
-                </div>
-            </div>
-        </div>
-
-        <div class="product-size-hotline">
-            <div class="product-hotline">
-                <i class="fa fa-mobile" aria-hidden="true"></i> Hotline &amp; Zalo hỗ trợ: 098 5259052 <a href="tel:"></a>
-            </div>
-        </div>
-        <?php if ($makh != 0 && $makh > 0) : ?>
-            <div class="actions">
-                <button class="buy-now" onclick="buyNowView('<?= $masp ?>')">Mua ngay</button>
-                <button class="add-to-cart" onclick="addCartSizeView('<?= $masp ?>')">Thêm vào giỏ</button>
-            </div>
-        <?php else : ?>
-            <a href="../auth?pages=dang-nhap">
-
-                <div class="actions">
-                    <!-- <button class="buy-now" onclick="return checkLogin()">Mua ngay</button>
-                    <button class="add-to-cart" onclick="return checkLogin()">Thêm vào giỏ</button> -->
-                    <button class="buy-now">Mua ngay</button>
-                    <button class="add-to-cart">Thêm vào giỏ</button>
-                </div>
-            </a>
-        <?php endif ?>
-
-    </div>
+   
 </div>

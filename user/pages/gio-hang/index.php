@@ -361,11 +361,6 @@ $dc__Get_By_Id_makh = $dc->DiaChi__Get_By_Id($makh);
     }
 
     function checkout() {
-        // var tinh = document.getElementById('tinh').value;
-        // var huyen = document.getElementById('huyen').value;
-        // var xa = document.getElementById('xa').value;
-        // var road = document.getElementById('road').value;
-        // Lấy giá trị của các trường input
         var tenkh = document.getElementById('tenkh').value;
         var tinh = document.getElementById('tinh').options[document.getElementById('tinh').selectedIndex].text;
         var huyen = document.getElementById('huyen').options[document.getElementById('huyen').selectedIndex].text;

@@ -79,53 +79,53 @@ $top = 0;
     </div>
     <div class="main-view-item-container">
         <div class="main-container">
-        <?php if (isset($_SESSION['user'])) : ?>
-            <div class="main-title-container">
-                <a href="index.php?pages=sp-moi&page=1">
-                    <div class="item-title color-2" style="font-weight: bold; font-size: 24px;">Dành riêng cho bạn!
-                    </div>
-                </a>
-            </div>
-            <div class="main-item-container">
-                <?php foreach ($goi_Y_User_Based as $item) : ?>
-                    <?php if (count($goi_Y_User_Based) > 0) : ?>
-                        <?php $anhSp__Get_By_Id_Sp_First = $anhSp->AnhSp__Get_By_Id_Sp_First($item->masp); ?>
-                        <?php if (isset($anhSp__Get_By_Id_Sp_First->masp)) : ?>
-                            <div class="product-item" data-masp="<?= $anhSp__Get_By_Id_Sp_First->masp ?>" onmouseenter="startTimer(this)" onmouseleave="endTimer()" onclick="endTimer()">
-                                <div class="product-normal">
-                                    <div class="product-img">
-                                        <a href="index.php?pages=chi-tiet&masp=<?= $anhSp__Get_By_Id_Sp_First->masp ?>&maloai=<?= $item->maloai ?>">
-                                            <img src="../assets/<?= $anhSp__Get_By_Id_Sp_First->hinhanh ?>" loading="lazy">
-                                        </a>
-                                        <!-- khuyến mãi -->
-                                        <!-- <div class="product-tags">
+            <?php if (isset($_SESSION['user']) && count($goi_Y_User_Based) > 0) : ?>
+                <div class="main-title-container">
+                    <a href="index.php?pages=sp-moi&page=1">
+                        <div class="item-title color-2" style="font-weight: bold; font-size: 24px;">Dành riêng cho bạn!
+                        </div>
+                    </a>
+                </div>
+                <div class="main-item-container">
+                    <?php foreach ($goi_Y_User_Based as $item) : ?>
+                        <?php if (count($goi_Y_User_Based) > 0) : ?>
+                            <?php $anhSp__Get_By_Id_Sp_First = $anhSp->AnhSp__Get_By_Id_Sp_First($item->masp); ?>
+                            <?php if (isset($anhSp__Get_By_Id_Sp_First->masp)) : ?>
+                                <div class="product-item" data-masp="<?= $anhSp__Get_By_Id_Sp_First->masp ?>" onmouseenter="startTimer(this)" onmouseleave="endTimer()" onclick="endTimer()">
+                                    <div class="product-normal">
+                                        <div class="product-img">
+                                            <a href="index.php?pages=chi-tiet&masp=<?= $anhSp__Get_By_Id_Sp_First->masp ?>&maloai=<?= $item->maloai ?>">
+                                                <img src="../assets/<?= $anhSp__Get_By_Id_Sp_First->hinhanh ?>" loading="lazy">
+                                            </a>
+                                            <!-- khuyến mãi -->
+                                            <!-- <div class="product-tags">
                                         <div class="tag-saleoff text-center">-23%</div>
                                     </div> -->
-                                        <div class="product-actions text-center clearfix">
-                                            <div>
-                                                <button type="button" class="btnQuickView quick-view medium--hide small--hide" data-handle="/products/nike-mercurial-vapor-13-academy-tf-2" onclick="return view('<?= $item->masp ?>','<?= $item->maloai ?>','<?= $_SESSION['user']->makh ?? 0; ?>')">
-                                                    <span><i class="fa fa-search-plus" aria-hidden="true"></i></span>
-                                                </button>
-                                                <button type="button" class="btnBuyNow buy-now medium--hide small--hide" data-id="1085955545" onclick="buyNow('<?= $item->masp ?>')"><span>Mua ngay</span></button>
-                                                <button type="button" class="btnAddToCart add-to-cart medium--hide small--hide" data-id="1085955545" onclick="addCartSize('<?= $item->masp ?>')">
-                                                    <span><i class="fa fa-cart-plus" aria-hidden="true"></i></span>
-                                                </button>
+                                            <div class="product-actions text-center clearfix">
+                                                <div>
+                                                    <button type="button" class="btnQuickView quick-view medium--hide small--hide" onclick="return view('<?= $item->masp ?>','<?= $item->maloai ?>','<?= $_SESSION['user']->makh ?? 0; ?>')">
+                                                        <span><i class="fa fa-search-plus" aria-hidden="true"></i></span>
+                                                    </button>
+                                                    <button type="button" class="btnBuyNow buy-now medium--hide small--hide" data-id="1085955545" onclick="viewBuy('<?= $item->masp ?>','<?= $item->maloai ?>','<?= $_SESSION['user']->makh ?? 0; ?>')"><span>Mua ngay</span></button>
+                                                    <button type="button" class="btnAddToCart add-to-cart medium--hide small--hide" data-id="1085955545" onclick="viewCart('<?= $item->masp ?>','<?= $item->maloai ?>','<?= $_SESSION['user']->makh ?? 0; ?>')">
+                                                        <span><i class="fa fa-cart-plus" aria-hidden="true"></i></span>
+                                                    </button>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="product-variants-info">
-                                        <!-- <div class="product-variants-count">1 phiên bản màu sắc</div> -->
-                                    </div>
-                                    <div class="product-title">
-                                        <a href="index.php?pages=chi-tiet&masp=<?= $anhSp__Get_By_Id_Sp_First->masp ?>&maloai=<?= $item->maloai ?>">
-                                            <?= $item->tensp ?>
-                                        </a>
-                                    </div>
-                                    <div class="product-price clearfix">
-                                        <span class="current-price"><?= number_format($dg->ShowDonGia__Get_By_Id_Spdg($item->masp)) ?>₫</span>
-                                        <span class="original-price"><s>1,750,000₫</s></span>
-                                    </div>
-                                    <!-- <div class="fundiin__block-render-ui__loop" data-fundiin-loop-product-price-origin="1350000">
+                                        <div class="product-variants-info">
+                                            <!-- <div class="product-variants-count">1 phiên bản màu sắc</div> -->
+                                        </div>
+                                        <div class="product-title">
+                                            <a href="index.php?pages=chi-tiet&masp=<?= $anhSp__Get_By_Id_Sp_First->masp ?>&maloai=<?= $item->maloai ?>">
+                                                <?= $item->tensp ?>
+                                            </a>
+                                        </div>
+                                        <div class="product-price clearfix">
+                                            <span class="current-price"><?= number_format($dg->ShowDonGia__Get_By_Id_Spdg($item->masp)) ?>₫</span>
+                                            <span class="original-price"><s>1,750,000₫</s></span>
+                                        </div>
+                                        <!-- <div class="fundiin__block-render-ui__loop" data-fundiin-loop-product-price-origin="1350000">
                                     <div class="fundiin__wrapper">
                                         <div shop-data-origin-panel="">
                                             <span class="fundiin__panel">Trả sau <span data-origin-price="">675.000đ</span> x2 kỳ</span>
@@ -135,14 +135,14 @@ $top = 0;
                                         </div>
                                     </div>
                                 </div> -->
+                                    </div>
                                 </div>
-                            </div>
-                        <?php else : ?>
+                            <?php else : ?>
+                            <?php endif ?>
                         <?php endif ?>
-                    <?php endif ?>
-                <?php endforeach ?>
-            </div>
-            <?php endif;?>
+                    <?php endforeach ?>
+                </div>
+            <?php endif; ?>
             <div class="main-title-container">
                 <a href="index.php?pages=sp-moi&page=1">
                     <div class="item-title color-2" style="font-weight: bold; font-size: 24px;">Sản phẩm khuyến mãi
@@ -169,8 +169,8 @@ $top = 0;
                                                 <button type="button" class="btnQuickView quick-view medium--hide small--hide" data-handle="/products/nike-mercurial-vapor-13-academy-tf-2" onclick="return view('<?= $item->masp ?>','<?= $item->maloai ?>','<?= $_SESSION['user']->makh ?? 0; ?>')">
                                                     <span><i class="fa fa-search-plus" aria-hidden="true"></i></span>
                                                 </button>
-                                                <button type="button" class="btnBuyNow buy-now medium--hide small--hide" data-id="1085955545" onclick="buyNow('<?= $item->masp ?>')"><span>Mua ngay</span></button>
-                                                <button type="button" class="btnAddToCart add-to-cart medium--hide small--hide" data-id="1085955545" onclick="addCartSize('<?= $item->masp ?>')">
+                                                <button type="button" class="btnBuyNow buy-now medium--hide small--hide" data-id="1085955545" onclick="viewBuy('<?= $item->masp ?>','<?= $item->maloai ?>','<?= $_SESSION['user']->makh ?? 0; ?>')"><span>Mua ngay</span></button>
+                                                <button type="button" class="btnAddToCart add-to-cart medium--hide small--hide" data-id="1085955545" onclick="viewCart('<?= $item->masp ?>','<?= $item->maloai ?>','<?= $_SESSION['user']->makh ?? 0; ?>')">
                                                     <span><i class="fa fa-cart-plus" aria-hidden="true"></i></span>
                                                 </button>
                                             </div>
@@ -216,12 +216,12 @@ $top = 0;
                 </div>
                 <div class="container">
                     <div class="filter-buttons">
-                        <button type="button" class="filter-button" onclick=view_obj(1)>Giày đế cỏ nhân tạo
+                        <button type="button" class="filter-button" onclick="view_obj(1,'<?= $makh ?>')">Giày đế cỏ nhân tạo
                             (TF)</button>
-                        <button type="button" class="filter-button" onclick=view_obj(2)>Giày đế cỏ tự nhiên
+                        <button type="button" class="filter-button" onclick="view_obj(2,'<?= $makh ?>')">Giày đế cỏ tự nhiên
                             (FG)</button>
-                        <button type="button" class="filter-button" onclick=view_obj(3)>Găng tay thủ môn</button>
-                        <button type="button" class="filter-button" onclick=view_obj(4)>Phụ kiện bóng đá</button>
+                        <button type="button" class="filter-button" onclick="view_obj(3,'<?= $makh ?>')">Găng tay thủ môn</button>
+                        <button type="button" class="filter-button" onclick="view_obj(4,'<?= $makh ?>')">Phụ kiện bóng đá</button>
                     </div>
 
                     <style>
@@ -244,13 +244,17 @@ $top = 0;
                     </div>
 
                     <script>
-                        window.addEventListener('load', function() {
-                            view_obj(1);
-                        })
+                        // Giả sử $makh là biến PHP chứa giá trị cần thiết
+                        let makh = <?= json_encode($makh) ?>; // Xuất $makh an toàn vào JavaScript
 
-                        function view_obj(your_value) {
+                        window.addEventListener('load', function() {
+                            view_obj(1, makh); // Sử dụng biến JavaScript makh
+                        });
+
+                        function view_obj(your_value, makh) {
                             $.post("pages/trang-chu/view_obj.php", {
                                 your_value: your_value,
+                                makh: makh
                             }, function(data, status) {
                                 if (status) {
                                     $(".view_obj").html(data);
@@ -258,6 +262,7 @@ $top = 0;
                             });
                         };
                     </script>
+
 
 
                 </div>
@@ -378,6 +383,48 @@ $top = 0;
     function view(masp, maloai, makh) {
         $.ajax({
             url: './pages/trang-chu/view.php',
+            type: 'GET',
+            data: {
+                masp: masp,
+                maloai: maloai,
+                makh: makh
+            },
+            success: function(response) {
+                Swal.fire({
+                    showCloseButton: true,
+                    html: response
+                });
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    }
+
+    function viewBuy(masp, maloai, makh) {
+        $.ajax({
+            url: './pages/trang-chu/viewBuy.php',
+            type: 'GET',
+            data: {
+                masp: masp,
+                maloai: maloai,
+                makh: makh
+            },
+            success: function(response) {
+                Swal.fire({
+                    showCloseButton: true,
+                    html: response
+                });
+            },
+            error: function(xhr, status, error) {
+                console.error(xhr.responseText);
+            }
+        });
+    }
+
+    function viewCart(masp, maloai, makh) {
+        $.ajax({
+            url: './pages/trang-chu/viewCart.php',
             type: 'GET',
             data: {
                 masp: masp,

@@ -2,8 +2,11 @@
 if (isset($_GET['pages']) && !isset($_GET['req'])) {
     switch ($_GET['pages']) {
 
-        case "import-from-excel":
-            require_once "pages/import-from-excel/index.php";
+        case "Association-Rules":
+            require_once "pages/Association-Rules/index.php";
+            break;
+        case "User-Based":
+            require_once "pages/User-Based/index.php";
             break;
         case "trang-chu":
             require_once "pages/trang-chu/index.php";

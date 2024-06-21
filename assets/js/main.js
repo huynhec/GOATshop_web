@@ -160,7 +160,7 @@ function addCartSizeView(masp) {
       Swal.fire({
         icon: "success",
         title: "Đã thêm vào giỏ",
-        confirmButtonText: "OK",
+        confirmButtonText: "Đóng",
       });
     },
   });

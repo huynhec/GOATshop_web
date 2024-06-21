@@ -30,8 +30,8 @@ $anhSp__Get_By_Id_Sp_Thumbnail = $anhSp->AnhSp__Get_By_Id_Sp_Thumbnail($masp);
 ?>
 <style>
     .product-container_view {
-        display: flex;
-        flex-wrap: nowrap;
+        /* display: flex;
+        flex-wrap: nowrap; */
         /* margin: 0 186px; */
         padding: 0;
         overflow-x: auto;
@@ -39,7 +39,7 @@ $anhSp__Get_By_Id_Sp_Thumbnail = $anhSp->AnhSp__Get_By_Id_Sp_Thumbnail($masp);
     }
 
     .product-details_view {
-        width: 45%;
+        width: 95%;
         padding: 0;
     }
 
@@ -99,20 +99,64 @@ $anhSp__Get_By_Id_Sp_Thumbnail = $anhSp->AnhSp__Get_By_Id_Sp_Thumbnail($masp);
     .text-normal-view {
         text-align: left !important;
     }
+
+    .view-buy-now {
+
+        background-color: #ffffff;
+        color: #000;
+        border: 2px solid #000000;
+        padding: 10px 20px;
+        font-size: 16px;
+        width: 100%;
+        cursor: pointer;
+        font-weight: bold;
+        /* border: none; */
+    }
 </style>
 
 <div class="product-container_view">
-    <div class="product-images">
-        <div class="thumbnail-images">
-            <?php foreach ($anhSp__Get_By_Id_Sp_Not_First as $key => $item) : ?>
-                <img src="../assets/<?= $item->hinhanh ?>" alt="" onclick="changeImage('../assets/<?= $item->hinhanh ?>')">
-            <?php endforeach ?>
-
+    <div class="product-details_view">
+        <h1><?= $sp__Get_By_Id->tensp ?></h1>
+        <p class="brand">Thương hiệu: <?= ($th->ThuongHieu__Get_By_Id($sp__Get_By_Id->math))->tenth ?> | </p>
+        <!-- <p class="brand"> Loại: Giày sân cỏ tự nhiên - Firm Ground</p> -->
+        <p class="price"><?= number_format($dg->ShowDonGia__Get_By_Id_Spdg($masp)) ?>đ</p>
+        <div class="size-selection">
+            <div class="row">
+                <h5 class="text-normal-view">Kích thước: </h5>
+                <div>
+                    <?php foreach ($size__Get_By_IdLoai as $item) : ?>
+                        <?php if ($item->trangthai == 1) : ?>
+                            <label class="size-option" id="size-label-<?= $item->idsize ?>" onclick="selectSize('<?= $item->idsize ?>')">
+                                <input type="radio" name="size" id="idsize<?= $item->idsize ?>" value="<?= $item->tensize ?>">
+                                <?= $item->tensize ?>
+                            </label>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </div>
+            </div>
         </div>
-        <div class="main-image">
 
-            <img id="currentImage" src="../assets/<?= $anhSp__Get_By_Id_Sp_Thumbnail->hinhanh ?>" alt="" style=" height: 650px; width: 650px;">
+        <div class="product-size-hotline">
+            <div class="product-hotline">
+                <i class="fa fa-mobile" aria-hidden="true"></i> Hotline &amp; Zalo hỗ trợ: 098 5259052 <a href="tel:"></a>
+            </div>
         </div>
+        <?php if ($makh != 0 && $makh > 0) : ?>
+            <div class="view-actions">
+                <button class="view-buy-now" onclick="buyNowView('<?= $masp ?>')">Mua ngay</button>
+                <!-- <button class="add-to-cart" onclick="addCartSizeView('<?= $masp ?>')">Thêm vào giỏ</button> -->
+            </div>
+        <?php else : ?>
+            <a href="../auth?pages=dang-nhap">
+
+                <div class="view-actions">
+                    <!-- <button class="buy-now" onclick="return checkLogin()">Mua ngay</button>
+                    <button class="add-to-cart" onclick="return checkLogin()">Thêm vào giỏ</button> -->
+                    <button class="view-buy-now">Mua ngay</button>
+                    <!-- <button class="add-to-cart">Thêm vào giỏ</button> -->
+                </div>
+            </a>
+        <?php endif ?>
+
     </div>
-   
 </div>

@@ -17,10 +17,16 @@
                     <span class="text">Trang chủ</span>
                 </a>
             </li>
-            <li class="<?= $_GET['pages'] == 'import-from-excel' ? "active" : "" ?>">
-                <a href="index.php?pages=import-from-excel">
-                    <i class='bx bxs-file'></i>
-                    <span class="text">Import</span>
+            <li class="<?= $_GET['pages'] == 'Association-Rules' ? "active" : "" ?>">
+                <a href="index.php?pages=Association-Rules">
+                    <i class='bx bxs-cog'></i>
+                    <span class="text">Training Association Rules</span>
+                </a>
+            </li>
+            <li class="<?= $_GET['pages'] == 'User-Based' ? "active" : "" ?>">
+                <a href="index.php?pages=User-Based">
+                    <i class='bx bxs-cog'></i>
+                    <span class="text">Training User Based</span>
                 </a>
             </li>
             <li class="<?= $_GET['pages'] == 'don-hang' ? "active" : "" ?>">

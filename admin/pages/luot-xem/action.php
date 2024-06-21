@@ -21,26 +21,41 @@ if (isset($_GET['req'])) {
 
             $objPHPExcel->getActiveSheet()->getStyle('A1')->getFont()->setBold(true);
             $objPHPExcel->getActiveSheet()->getStyle('B1')->getFont()->setBold(true);
+            $objPHPExcel->getActiveSheet()->getStyle('C1')->getFont()->setBold(true);
+            $objPHPExcel->getActiveSheet()->getStyle('D1')->getFont()->setBold(true);
+            $objPHPExcel->getActiveSheet()->getStyle('E1')->getFont()->setBold(true);
+            $objPHPExcel->getActiveSheet()->getStyle('F1')->getFont()->setBold(true);
+            $objPHPExcel->getActiveSheet()->getStyle('G1')->getFont()->setBold(true);
 
 
-            $objPHPExcel->getActiveSheet()->SetCellValue('A1', "makh");
+            $objPHPExcel->getActiveSheet()->SetCellValue('A1', "ngayxem");
             $objPHPExcel->getActiveSheet()->SetCellValue('B1', "masp");
+            $objPHPExcel->getActiveSheet()->SetCellValue('C1', "makh");
+            $objPHPExcel->getActiveSheet()->SetCellValue('D1', "");
+            $objPHPExcel->getActiveSheet()->SetCellValue('E1', "");
+            $objPHPExcel->getActiveSheet()->SetCellValue('F1', "");
+            $objPHPExcel->getActiveSheet()->SetCellValue('G1', "");
 
             foreach ($import__Get_All as $item) {
-                $objPHPExcel->getActiveSheet()->SetCellValue('A' . $row_hd, "" . $item->makh);
+                $objPHPExcel->getActiveSheet()->SetCellValue('A' . $row_hd, "" . $item->ngayxem);
                 $objPHPExcel->getActiveSheet()->SetCellValue('B' . $row_hd, "" . $item->masp);
+                $objPHPExcel->getActiveSheet()->SetCellValue('C' . $row_hd, "" . $item->makh);
+                $objPHPExcel->getActiveSheet()->SetCellValue('D' . $row_hd, "");
+                $objPHPExcel->getActiveSheet()->SetCellValue('E' . $row_hd, "");
+                $objPHPExcel->getActiveSheet()->SetCellValue('F' . $row_hd, "");
+                $objPHPExcel->getActiveSheet()->SetCellValue('G' . $row_hd, "");
 
 
                 $row_hd += 1;
             }
 
-            $file = 'export.xlsx';
+            $file = 'viewlist.xlsx';
             $objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel);
             try {
                 $objWriter->save($file);
             } catch (PHPExcel_Writer_Exception $e) {
                 // If saving fails, try saving to backup directory
-                $file = '/Applications/XAMPP/xamppfiles/temp/export.xlsx';
+                $file = '/Applications/XAMPP/xamppfiles/temp/viewlist.xlsx';
                 $objWriter = new PHPExcel_Writer_Excel2007($objPHPExcel);
                 $objWriter->save($file);
             }

@@ -21,8 +21,8 @@ $import__Get_All = $import->import__Get_All();
 
         <div class="col-8">
             <div class="main-data">
-                <a href="pages/import-from-excel/action.php?req=export" class="btn btn-danger float-right">EXPORT</a>
-                <a href="pages/import-from-excel/action.php?req=training" class="btn btn-primary float-right">Training . . .</a>
+                <a href="pages/Association-Rules/action.php?req=export" class="btn btn-danger float-right">EXPORT</a>
+                <a href="pages/Association-Rules/action.php?req=training" class="btn btn-primary float-right">Training . . .</a>
 
                 <h3 class="section-title">Danh sách import</h3>
                 <div class="table-responsive">
@@ -55,7 +55,7 @@ $import__Get_All = $import->import__Get_All();
         </div>
         <div class="col-4">
             <div class="main-form">
-                <form class="row form" action="pages/import-from-excel/action.php?req=import" method="post"
+                <form class="row form" action="pages/Association-Rules/action.php?req=import" method="post"
                     enctype="multipart/form-data">
                     <div class="col-12">
                         <div class="card card-success">

@@ -11,7 +11,6 @@ $sp__Get_Top9_Attribute_1 = $sp->SanPham__Get_Top_Attribute_1(9);
 $sp__Get_Top9_Attribute_2 = $sp->SanPham__Get_Top_Attribute_2(9);
 $sp__Get_Top9_Attribute_3 = $sp->SanPham__Get_Top_Attribute_3(9);
 $sp__Get_Top9_Attribute_4 = $sp->SanPham__Get_Top_Attribute_4(9);
-
 $your_value = isset($_POST['your_value']) ? $_POST['your_value'] : '1';
 $productArrays = [
     '1' => $sp__Get_Top9_Attribute_1,
@@ -23,7 +22,7 @@ $productArrays = [
 <style>
     .current-price-view {
         color: #d9534f !important;
-        font-weight: bold !important ;
+        font-weight: bold !important;
         font-size: larger;
     }
 </style>
@@ -35,6 +34,8 @@ $productArrays = [
         $dg = new DonGiaModel();
 
         foreach ($products as $item) {
+            $makh = isset($_POST['makh']) ? $_POST['makh'] : 0;
+
             $anhSp__Get_By_Id_Sp_First = $anhSp->AnhSp__Get_By_Id_Sp_First($item->masp);
     ?>
             <div class="product-card" data-masp="<?= $anhSp__Get_By_Id_Sp_First->masp ?>" onmouseenter="startTimer(this)" onmouseleave="endTimer()" onclick="endTimer()">
@@ -43,16 +44,16 @@ $productArrays = [
                 </a>
                 <div class="product-info">
                     <h2><?= $item->tensp ?></h2>
-                    
+
                     <span class="current-price-view"><?= number_format($dg->ShowDonGia__Get_By_Id_Spdg($item->masp)) ?>₫</span>
 
                     <div class="product-actions text-center clearfix">
                         <div>
-                            <button type="button" class="btnQuickView quick-view medium--hide small--hide" data-handle="/products/nike-mercurial-vapor-13-academy-tf-2" onclick="return view('<?= $item->masp ?>','<?= $item->maloai ?>','<?= $_SESSION['user']->makh ?? 0; ?>')">
+                            <button type="button" class="btnQuickView quick-view medium--hide small--hide" data-handle="/products/nike-mercurial-vapor-13-academy-tf-2" onclick="return views('<?= $item->masp ?>','<?= $item->maloai ?>','<?= $_SESSION['user']->makh ?? 0; ?>')">
                                 <span><i class="fa fa-search-plus" aria-hidden="true"></i></span>
                             </button>
-                            <button type="button" class="btnBuyNow buy-now medium--hide small--hide" data-id="1085955545" onclick="buyNow('<?= $item->masp ?>')"><span>Mua ngay</span></button>
-                            <button type="button" class="btnAddToCart add-to-cart medium--hide small--hide" data-id="1085955545" onclick="addCartSize('<?= $item->masp ?>')">
+                            <button type="button" class="btnBuyNow buy-now medium--hide small--hide" data-id="1085955545" onclick="viewBuys('<?= $item->masp ?>','<?= $item->maloai ?>','<?= $makh ?>')"><span>Mua ngay</span></button>
+                            <button type="button" class="btnAddToCart add-to-cart medium--hide small--hide" data-id="1085955545" onclick="viewCarts('<?= $item->masp ?>','<?= $item->maloai ?>','<?= $makh ?>')">
                                 <span><i class="fa fa-cart-plus" aria-hidden="true"></i></span>
                             </button>
                         </div>
@@ -69,3 +70,67 @@ $productArrays = [
         renderProducts($sp__Get_Top9_Attribute_1, $anhSp);
     }
     ?>
+    <script>
+        function views(masp, maloai, makh) {
+            $.ajax({
+                url: './pages/trang-chu/view.php',
+                type: 'GET',
+                data: {
+                    masp: masp,
+                    maloai: maloai,
+                    makh: makh
+                },
+                success: function(response) {
+                    Swal.fire({
+                        showCloseButton: true,
+                        html: response
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+            });
+        }
+
+        function viewBuys(masp, maloai, makh) {
+            $.ajax({
+                url: './pages/trang-chu/viewBuy.php',
+                type: 'GET',
+                data: {
+                    masp: masp,
+                    maloai: maloai,
+                    makh: makh
+                },
+                success: function(response) {
+                    Swal.fire({
+                        showCloseButton: true,
+                        html: response
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+            });
+        }
+
+        function viewCarts(masp, maloai, makh) {
+            $.ajax({
+                url: './pages/trang-chu/viewCart.php',
+                type: 'GET',
+                data: {
+                    masp: masp,
+                    maloai: maloai,
+                    makh: makh
+                },
+                success: function(response) {
+                    Swal.fire({
+                        showCloseButton: true,
+                        html: response
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText);
+                }
+            });
+        }
+    </script>

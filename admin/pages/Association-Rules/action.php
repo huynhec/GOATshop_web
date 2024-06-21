@@ -90,9 +90,9 @@ if (isset($_GET['req'])) {
             }
 
             if ($status == 0) {
-                header("location:../../index.php?pages=import-from-excel&status=fail");
+                header("location:../../index.php?pages=Association-Rules&status=fail");
             } else {
-                header("location:../../index.php?pages=import-from-excel&status=success");
+                header("location:../../index.php?pages=Association-Rules&status=success");
             }
             break;
 
@@ -151,9 +151,9 @@ if (isset($_GET['req'])) {
             $status .= unlink($file);
 
             if ($status == 0) {
-                header("location:../../index.php?pages=import-from-excel&status=fail");
+                header("location:../../index.php?pages=Association-Rules&status=fail");
             } else {
-                header("location:../../index.php?pages=import-from-excel&status=success");
+                header("location:../../index.php?pages=Association-Rules&status=success");
             }
             break;
     }

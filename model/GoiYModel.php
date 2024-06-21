@@ -43,4 +43,12 @@ class GoiYModel extends Database
         $obj->execute(array($makh));
         return $obj->fetchAll();
     }
+    public function Goi_Y_User_Based__Get_All()
+    {
+        $obj = $this->connect->prepare("SELECT *
+        FROM goiy_user_based");
+        $obj->setFetchMode(PDO::FETCH_OBJ);
+        $obj->execute();
+        return $obj->fetchAll();
+    }
 }
