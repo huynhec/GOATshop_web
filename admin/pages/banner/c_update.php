@@ -1,31 +1,23 @@
 <?php
-require_once '../../../model/AnhSpModel.php';
-require_once '../../../model/SanPhamModel.php';
-$anhSp = new AnhSpModel();
-$sp = new SanPhamModel();
-$maanh = $_POST['maanh'];
-$anhSp__Get_By_Id = $anhSp->AnhSp__Get_By_Id($maanh);
-$masp = $anhSp__Get_By_Id->masp;
-$sanPham__Get_By_Id = $sp->SanPham__Get_By_Id($masp);
+require_once '../../../model/BannerModel.php';
+$bn = new BannerModel();
+$id_banner = $_POST['id_banner'];
+$anh_Banner__Get_By_Id_Sp_First = $bn->Anh_Banner__Get_By_Id_Sp_First($id_banner);
 ?>
 
 <div class="main-update">
     <h3 class="section-title">Cập nhật sp nội dung</h3>
-    <form class="form-group" action="pages/san-pham/action.php?req=c_update" method="post" enctype="multipart/form-data">
-        <input type="hidden" class="form-control" id="anhsp_cu" name="anhsp_cu" value="<?= $anhSp__Get_By_Id->hinhanh ?>" readonly>
-        <input type="hidden" class="form-control" id="maanh" name="maanh" value="<?= $anhSp__Get_By_Id->maanh ?>" readonly>
-        <input type="hidden" class="form-control" id="masp" name="masp" value="<?= $masp ?>" readonly>
-
+    <form class="form-group" action="pages/banner/action.php?req=c_update" method="post" enctype="multipart/form-data">
+        <input type="hidden" class="form-control" id="anhbanner_cu" name="anhbanner_cu" required value="<?=$anh_Banner__Get_By_Id_Sp_First->anhbanner?>" readonly>
+        <input type="hidden" class="form-control" id="id_banner" name="id_banner" required value="<?=$anh_Banner__Get_By_Id_Sp_First->id_banner?>" readonly>
         <div class="col">
-            <label for="c_anhsp" class="form-label">Hình ảnh</label>
-            <input accept="image/*" type="file" class="form-control" id="anhsp" name="anhsp">
-            <div id="anhsp_preview">
-                <img src="../assets/<?= $anhSp__Get_By_Id->hinhanh ?>" alt="<?= $anhSp__Get_By_Id->maanh ?>" class="img-fluid" width="200">
-            </div>
+            <label for="c_anh" class="form-label">Hình ảnh</label>
+            <input accept="image/*" type='file' class="form-control" id="anhbanner" name="anhbanner">
+            <div id="anhsp_preview"><img src="../assets/<?=$anh_Banner__Get_By_Id_Sp_First->anhbanner ?>" alt="<?= $anhSp__Get_By_Id->maanh ?>" class="img-fluid" width="200"></div>
         </div>
         <div class="col">
             <label for="tensp" class="form-label">Tên sản phẩm</label>
-            <input type="text" class="form-control" id="tensp" name="tensp" value="<?= $sanPham__Get_By_Id->tensp ?>" readonly>
+            <input type="text" class="form-control" id="tensp" name="tensp" required value="<?=$sanPham__Get_By_Id->tensp?>" readonly>
         </div>
         <br>
         <div class="col text-center">
@@ -37,7 +29,8 @@ $sanPham__Get_By_Id = $sp->SanPham__Get_By_Id($masp);
 
 
 <script>
-    // Lấy ra đối tượng input có id là 'anhsp'
+
+// Lấy ra đối tượng input có id là 'anhsp'
     var anhsp = document.getElementById('anhsp');
     // Lấy ra đối tượng hiển thị ảnh preview có id là 'anhsp_preview'
     var anhsp_preview = document.getElementById('anhsp_preview');

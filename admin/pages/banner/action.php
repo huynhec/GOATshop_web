@@ -5,11 +5,13 @@ require_once '../../../model/CommonModel.php';
 require_once '../../../model/ThuocTinhModel.php';
 require_once '../../../model/ChiTietThuocTinhModel.php';
 require_once '../../../model/DonGiaModel.php';
+require_once '../../../model/BannerModel.php';
 
 $dg = new DonGiaModel();
 $sp = new SanPhamModel();
 $anhSp = new AnhSpModel();
 $cm = new CommonModel();
+$bn = new BannerModel();
 $thuoctinh = new ThuocTinhModel();
 $chitietthuoctinh = new ChiTietThuocTinhModel();
 $defaultImagePath = "uploads/cover.png";
@@ -17,98 +19,60 @@ $defaultImagePath = "uploads/cover.png";
 if (isset($_GET['req'])) {
     switch ($_GET['req']) {
         case "add":
-            $tensp = $_POST["tensp"];
-            $dongia = $_POST["dongia"];
-            $mota = $_POST["mota"];
+            $tenbanner = $_POST["tenbanner"];
             $ngaythem = date("Y-m-d H:i:s");
             $trangthai = $_POST["trangthai"];
-            $luotmua = 0;
-            $luotxem = 0;
-            $math = $_POST["math"];
-            $maloai = $_POST["maloai"];
-            $masp = $sp->SanPham__Add($tensp, $mota, $ngaythem, $trangthai, $luotmua, $luotxem, $math, $maloai);
-            $idtt = $_POST["idtt"] != "" ? $_POST["idtt"] : 0;
-            $noidung = $_POST["noidung"];
-            $apdung = 1;
-            $ngaynhap = date("Y-m-d H:i:s");
-
-            if (isset($idtt) && $idtt > 0) {
-                for ($i = 0; $i < count($idtt); $i++) {
-                    $chitietthuoctinh__Add = $chitietthuoctinh->ChiTietThuocTinh__Add($idtt[$i], $masp, $noidung[$i]);
-                }
-            }
-
-            if (isset($_POST['dongia']) && is_array($_POST['dongia'])) {
-                foreach ($_POST['dongia'] as $item) {
-                    // Xử lý và lưu vào cơ sở dữ liệu ở đây
-                    $dongia = $item;
-                    $res += $dg->DonGia__Add($dongia, $apdung, $ngaynhap, $masp);
-                }
-            }
+            //tạo tên folder
+            $foldername = 'banner_' . $ngaythem;
             $totalRes = 0;
 
             // Kiểm tra xem có tệp ảnh đã tải lên không
-            if (!empty($_FILES["anhsp"]["name"])) {
+            if (isset($_FILES["anhsp"]["name"]) && !empty($_FILES["anhsp"]["name"])) {
 
                 // Tạo một mảng để lưu trữ đường dẫn ảnh cho mỗi sp
-                $anhsp = [];
+                $anhsp = ''; // Khai báo biến chuỗi để lưu trữ đường dẫn ảnh
 
-                foreach ($_FILES["anhsp"]["name"] as $key => $filename) {
-                    // Xử lý và kiểm tra tệp ảnh
-                    $processedImageFilePath = $cm->processAndValidateUploadedFile($_FILES["anhsp"], $masp, $key);
+                $fileName = $_FILES["anhsp"]["name"];
 
-                    // Kiểm tra xem xử lý tệp ảnh thành công hay không
-                    if ($processedImageFilePath) {
-                        // Lưu đường dẫn ảnh vào mảng và thêm vào cơ sở dữ liệu
-                        $anhsp[$key] = $processedImageFilePath;
-                        $totalRes += $anhSp->AnhSp__Add($processedImageFilePath, $masp);
-                    } else {
-                        // Sử dụng hình ảnh mặc định nếu xử lý thất bại và thêm vào cơ sở dữ liệu
-                        $anhsp[$key] = $defaultImagePath;
-                        $totalRes += $anhSp->AnhSp__Add($defaultImagePath, $masp);
-                    }
+                // Xử lý và kiểm tra tệp ảnh
+                $processedImageFilePath = $cm->processAndValidateUploadedFileNotArray($_FILES["anhsp"], $foldername);
+
+                // Kiểm tra xem xử lý tệp ảnh thành công hay không
+                if ($processedImageFilePath) {
+                    // Lưu đường dẫn ảnh vào mảng và thêm vào cơ sở dữ liệu
+                    $anhsp = $processedImageFilePath;
+                    $totalRes += $bn->Banner__Add($tenbanner, $processedImageFilePath, $trangthai);
+                } else {
+                    // Sử dụng hình ảnh mặc định nếu xử lý thất bại và thêm vào cơ sở dữ liệu
+                    $anhsp = $defaultImagePath;
+                    $totalRes += $bn->Banner__Add($tenbanner, $defaultImagePath, $trangthai);
                 }
             } else {
                 // Sử dụng hình ảnh mặc định nếu không có tệp ảnh được tải lên và thêm vào cơ sở dữ liệu
-                $totalRes += $anhSp->AnhSp__Add($defaultImagePath, $masp);
+                $totalRes += $bn->Banner__Add($tenbanner, $defaultImagePath, $trangthai);
             }
 
-            if ($totalRes > 0 && $masp > 0) {
-                header("location: ../../index.php?pages=san-pham&msg=success");
+            if ($totalRes > 0 && $foldername > 0) {
+                header("location: ../../index.php?pages=banner&msg=success");
                 exit();
             } else {
-                header("location: ../../index.php?pages=san-pham&msg=error");
+                header("location: ../../index.php?pages=banner&msg=error");
                 exit();
             }
 
             break;
         case "update":
             $res = 0;
-            $masp = $_POST['masp'];
-            $tensp = $_POST["tensp"];
-            $mota = $_POST["mota"];
-            $ngaythem = date("Y-m-d H:i:s");
+            $id_banner = $_POST['id_banner'];
+            $tenbanner = $_POST["tenbanner"];
             $trangthai = $_POST["trangthai"];
-            $luotmua = $_POST["luotmua"];
-            $luotxem = $_POST["luotxem"];
-            $math = $_POST["math"];
-            $maloai = $_POST["maloai"];
 
-            $id_cttt = $_POST["id_cttt"];
-            $idtt = $_POST["idtt"] != "" ? $_POST["idtt"] : 0;
-            $noidung = $_POST["noidung"];
 
-            if (isset($idtt) && $idtt > 0) {
-                for ($i = 0; $i < count($idtt); $i++) {
-                    $chitietthuoctinh__Update = $chitietthuoctinh->ChiTietThuocTinh__Update($id_cttt[$i], $idtt[$i], $masp, $noidung[$i]);
-                }
-            }
-
-            $res += $sp->SanPham__Update($masp, $tensp, $mota, $ngaythem, $trangthai, $luotmua, $luotxem, $math, $maloai);
+            $res += $bn->Banner__Update($id_banner, $tenbanner, $trangthai);
             if ($res != 0) {
-                header('location: ../../index.php?pages=san-pham&msg=success');
+                header('location: ../../index.php?pages=banner&msg=success');
             } else {
-                header('location: ../../index.php?pages=san-pham&msg=error');
+                header('location: ../../index.php?pages=banner&msg=error');
             }
             break;
 
@@ -191,19 +155,15 @@ if (isset($_GET['req'])) {
             }
             // Xóa ảnh nếu đường dẫn tồn tại
             if (file_exists("../../../assets/$anhsp_cu")) {
-                chmod("../../../assets/$anhsp_cu", 0755); // Thiết lập quyền cho tệp cũ
                 unlink("../../../assets/$anhsp_cu");
             }
             $res += $anhSp->AnhSp__Update($maanh, $anhsp, $masp);
 
-            error_reporting(E_ALL);
-            ini_set('display_errors', 1);
-            
-            // if ($res != 0) {
-            //     header("location: ../../index.php?pages=anh-san-pham&masp=$masp&msg=success");
-            // } else {
-            //     header("location: ../../index.php?pages=anh-san-pham&masp=$masp&msg=error");
-            // }
+            if ($res != 0) {
+                header("location: ../../index.php?pages=anh-san-pham&masp=$masp&msg=success");
+            } else {
+                header("location: ../../index.php?pages=anh-san-pham&masp=$masp&msg=error");
+            }
             break;
 
         case "c_delete":
@@ -221,38 +181,6 @@ if (isset($_GET['req'])) {
             } else {
                 header("location: ../../index.php?pages=anh-san-pham&masp=$masp&msg=error");
             }
-            break;
-        case "gia_add":
-            $res = 0;
-            $masp = $_POST["masp"];
-            $dongia = $_POST["dongia"];
-            $apdung = 1;
-            $ngaynhap = date("Y-m-d H:i:s");
-            if (isset($_POST['dongia']) && is_array($_POST['dongia'])) {
-                foreach ($_POST['dongia'] as $item) {
-                    // Xử lý và lưu vào cơ sở dữ liệu ở đây
-                    $dongia = $item;
-                    $res += $dg->DonGia__Add($dongia, $apdung, $ngaynhap, $masp);
-                }
-            }
-            if ($res != 0) {
-                header("location: ../../index.php?pages=san-pham#product_" . $masp);
-            } else {
-                header("location: ../../index.php?pages=san-pham&msg=error");
-            }
-            break;
-        case "gia_update":
-            $res = 0;
-            $id_dongia = $_POST["id_dongia"];
-            $masp = $_POST['masp'];
-
-            $res += $dg->DonGia__Update_ApDung($masp, $id_dongia);
-
-            // if ($res != 0) {
-            //     header("location: ../../index.php?pages=dongia-san-pham&msg=success");
-            // } else {
-            //     header("location: ../../index.php?pages=dongia-san-pham&msg=error");
-            // }
             break;
         default:
             break;

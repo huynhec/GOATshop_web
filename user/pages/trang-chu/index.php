@@ -4,12 +4,14 @@ require_once '../model/AnhSpModel.php';
 require_once '../model/CommonModel.php';
 require_once '../model/DonGiaModel.php';
 require_once '../model/GoiYModel.php';
+require_once '../model/BannerModel.php';
 
 $dg = new DonGiaModel();
 $sp = new SanPhamModel();
 $anhSp = new AnhSpModel();
 $cm = new CommonModel();
 $gy = new GoiYModel();
+$bn = new BannerModel();
 
 $makh = isset($_SESSION['user']->makh) ? $_SESSION['user']->makh : 0;
 
@@ -18,55 +20,35 @@ $sp__Get_Top_Updated_24 = $sp->SanPham__Get_Top_Updated(24);
 $sp__Get_Top_Sale = $sp->SanPham__Get_Top_Sale();
 $sp__Get_Top_Random = $sp->SanPham__Get_Top_Random(6);
 $goi_Y_User_Based = $gy->Goi_Y_User_Based($makh);
-
+$banner__Get_All = $bn->Banner__Get_All(-1);
 $top = 0;
 ?>
 
 <main class="main">
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
-            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            <?php $count = 0; ?>
+            <?php foreach ($banner__Get_All as $item) : ?>
+                <li data-target="#carouselExampleIndicators" data-slide-to="<?= $count++ ?>"></li>
+            <?php endforeach ?>
+
         </ol>
 
         <div class="carousel-inner">
-            <div class="carousel-item active">
-                <img class="d-block w-100" src="../assets/images/banner_img.png" alt="First slide">
-                <div class="carousel-caption d-none d-md-block">
-                    <div class="slide-light-text"> Sắp ra mắt </div>
-                    <div class="slide-bold-text">
-                        NIKE PHÁT HÀNH BỘ SƯU TẬP GIÀY ĐÁ BÓNG MAD READY KHỞI ĐỘNG 2024
-                    </div>
-                    <div class="slide-btn">
-                        <a href="index.php?pages=loai-sp" class="slide-btn2">MUA HÀNG</a>
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <img class="d-block w-100" src="../assets/images/banner_img1.png" alt="Second slide">
-                <div class="carousel-caption d-none d-md-block">
-                    <div class="slide-light-text"> Sắp ra mắt </div>
-                    <div class="slide-bold-text">
-                        BỘ SƯU TẬP PUMA PHENOMENAL PACK
-                    </div>
-                    <div class="slide-btn">
-                        <a href="index.php?pages=loai-sp" class="slide-btn2">MUA HÀNG</a>
+            <?php foreach ($banner__Get_All as $item) : ?>
+                <div class="carousel-item">
+                    <img class="d-block w-100" src="../assets/<?= $item->anhbanner ?>" alt="First slide">
+                    <div class="carousel-caption d-none d-md-block">
+                        <div class="slide-light-text"> Sắp ra mắt </div>
+                        <div class="slide-bold-text">
+                            <?= $item->tenbanner ?> 
+                        </div>
+                        <div class="slide-btn">
+                            <a href="index.php?pages=loai-sp" class="slide-btn2">MUA HÀNG</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="carousel-item">
-                <img class="d-block w-100" src="../assets/images/banner_img2.webp" alt="Third slide">
-                <div class="carousel-caption d-none d-md-block">
-                    <div class="slide-light-text"> Sắp ra mắt </div>
-                    <div class="slide-bold-text">
-                        BỘ SƯU TẬP ADIDAS SOLAR ENERGY PACK
-                    </div>
-                    <div class="slide-btn">
-                        <a href="index.php?pages=loai-sp" class="slide-btn2">MUA HÀNG</a>
-                    </div>
-                </div>
-            </div>
+            <?php endforeach ?>
         </div>
         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>

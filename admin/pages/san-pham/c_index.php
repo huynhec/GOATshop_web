@@ -28,7 +28,7 @@ $anhSp__Get_By_Id_Sp_Not_First = $anhSp->AnhSp__Get_By_Id_Sp_Not_First($masp);
         </ul>
     </div>
     <div class="row section-container">
-        <div class="col-8">
+        <div class="col-6">
             <div class="main-data">
                 <h3 class="section-title">Danh sách hình ảnh sản phẩm: <b><?= $sanPham__Get_By_Id->tensp ?></b></h3>
                 <div class="table-responsive">
@@ -79,7 +79,7 @@ $anhSp__Get_By_Id_Sp_Not_First = $anhSp->AnhSp__Get_By_Id_Sp_Not_First($masp);
             </div>
 
         </div>
-        <div class="col-7">
+        <div class="col-5">
             <div class="main-form">
                 <?php require_once 'c_add.php' ?>
             </div>

@@ -44,8 +44,14 @@ if (isset($_GET['pages']) && !isset($_GET['req'])) {
         case "san-pham":
             require_once "pages/san-pham/index.php";
             break;
+        case "banner":
+            require_once "pages/banner/index.php";
+            break;
         case "anh-san-pham":
             require_once "pages/san-pham/c_index.php";
+            break;
+        case "anh-banner":
+            require_once "pages/banner/c_index.php";
             break;
         case "dongia-san-pham":
             require_once "pages/san-pham/gia_index.php";

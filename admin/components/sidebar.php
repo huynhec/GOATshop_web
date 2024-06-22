@@ -59,6 +59,12 @@
                     <span class="text">Quản lý size</span>
                 </a>
             </li>
+            <li class="<?= $_GET['pages'] == 'banner' ? "active" : "" ?>">
+                <a href="index.php?pages=banner">
+                    <i class='bx bx-image'></i>
+                    <span class="text">Quản lý banner</span>
+                </a>
+            </li>
             <li class="<?= $_GET['pages'] == 'thuong-hieu' ? "active" : "" ?>">
                 <a href="index.php?pages=thuong-hieu">
                     <i class='bx bx-purchase-tag-alt'></i>
