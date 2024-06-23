@@ -22,7 +22,8 @@ $import__Get_All = $import->import__Get_All();
         <div class="col-8">
             <div class="main-data">
                 <a href="pages/Association-Rules/action.php?req=export" class="btn btn-danger float-right">EXPORT</a>
-                <a href="pages/Association-Rules/action.php?req=training" class="btn btn-primary float-right">Training . . .</a>
+                <a onclick="training_model()" class="btn btn-primary float-right">TRAINING</a>
+
 
                 <h3 class="section-title">Danh sách import</h3>
                 <div class="table-responsive">
@@ -102,4 +103,35 @@ window.addEventListener("load", function() {
         // "buttons": ["copy", "csv", "excel", "pdf", "print"]
     }).buttons().container().appendTo('#tablejs_wrapper .col-md-6:eq(0)');
 });
+
+
+        /* -------------------------------------------------------------------------- */
+        /*                               training_model                               */
+        /* -------------------------------------------------------------------------- */
+        function training_model() {
+            Swal.fire({
+                title: "Đang thực thi!!",
+                html: "Vui lòng không đóng cửa sổ này!!!",
+                timerProgressBar: true,
+                showCancelButton: false,
+                allowOutsideClick: false,
+                showCloseButton: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                    $.get("pages/Association-Rules/action.php?req=training", {}, function(data, status) {
+                        if (data && !data.includes("failed")) {
+                            console.log("Tệp đã được tạo thành công. Đường dẫn: " + data);
+                            window.location = '?pages=Association-Rules&msg=success'
+                        } else {
+                            console.log("Lỗi: " + data);
+                            window.location = '?pages=Association-Rules&msg=fail'
+                        }
+                    });
+                },
+                willClose: () => {}
+            }).then((result) => {
+                console.log('Results: ' + result);
+            });
+
+        }
 </script>

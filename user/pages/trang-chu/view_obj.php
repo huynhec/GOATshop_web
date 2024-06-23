@@ -25,6 +25,9 @@ $productArrays = [
         font-weight: bold !important;
         font-size: larger;
     }
+    .original-price{
+        color: #AAAAAA !important;
+    }
 </style>
 <div class="product-grid" id="product-grid">
 
@@ -46,7 +49,9 @@ $productArrays = [
                     <h2><?= $item->tensp ?></h2>
 
                     <span class="current-price-view"><?= number_format($dg->ShowDonGia__Get_By_Id_Spdg($item->masp)) ?>₫</span>
-
+                    <?php if (number_format($dg->ShowDonGia__Get_By_Id_Spdg($item->masp)) < number_format($dg->ShowDonGiaMax__Get_By_Id_Spdg($item->masp))) : ?>
+                        <span class="original-price"><s><?= number_format($dg->ShowDonGiaMax__Get_By_Id_Spdg($item->masp)) ?>₫</s></span>
+                    <?php endif ?>
                     <div class="product-actions text-center clearfix">
                         <div>
                             <button type="button" class="btnQuickView quick-view medium--hide small--hide" data-handle="/products/nike-mercurial-vapor-13-academy-tf-2" onclick="return views('<?= $item->masp ?>','<?= $item->maloai ?>','<?= $_SESSION['user']->makh ?? 0; ?>')">

@@ -5,6 +5,7 @@ require_once '../model/CommonModel.php';
 require_once '../model/DonGiaModel.php';
 require_once '../model/SizeModel.php';
 require_once '../model/ThuongHieuModel.php';
+require_once '../model/GoiYModel.php';
 
 $th = new ThuongHieuModel();
 $size = new SizeModel();
@@ -12,7 +13,7 @@ $dg = new DonGiaModel();
 $sp = new SanPhamModel();
 $anhSp = new AnhSpModel();
 $cm = new CommonModel();
-
+$gy = new GoiYModel();
 if (!isset($_GET['masp'])) {
     return;
 }
@@ -32,6 +33,7 @@ $sp__Get_Top_Sale = $sp->SanPham__Get_Top_Sale();
 $sp__Get_Top_Same = $sp->SanPham__Get_Top_Same($sp__Get_By_Id->math,  $masp);
 $anhSp__Get_By_Id_Sp_Not_First = $anhSp->AnhSp__Get_By_Id_Sp_Not_First($sp__Get_By_Id->masp);
 $anhSp__Get_By_Id_Sp_Thumbnail = $anhSp->AnhSp__Get_By_Id_Sp_Thumbnail($masp);
+$goi_Y_Association_Rules__Get_By_Id = $gy->Goi_Y_Association_Rules__Get_By_Id($masp);
 ?>
 
 
@@ -211,8 +213,8 @@ $anhSp__Get_By_Id_Sp_Thumbnail = $anhSp->AnhSp__Get_By_Id_Sp_Thumbnail($masp);
                 <p class="section-title">SẢN PHẨM LIÊN QUAN</p>
                 <div class="product-recommendations">
 
-                    <?php foreach ($sp__Get_Top_Same as $item) : ?>
-                        <?php if (count($sp__Get_Top_Same) > 0) : ?>
+                    <?php foreach ($goi_Y_Association_Rules__Get_By_Id as $item) : ?>
+                        <?php if (count($goi_Y_Association_Rules__Get_By_Id) > 0) : ?>
                             <?php $anhSp__Get_By_Id_Sp_First = $anhSp->AnhSp__Get_By_Id_Sp_First($item->masp); ?>
                             <?php if (isset($anhSp__Get_By_Id_Sp_First->masp)) : ?>
                                 <a href="index.php?pages=chi-tiet&masp=<?= $item->masp ?>&maloai=<?= $item->maloai ?>">
@@ -232,7 +234,43 @@ $anhSp__Get_By_Id_Sp_Thumbnail = $anhSp->AnhSp__Get_By_Id_Sp_Thumbnail($masp);
             </div>
         </div>
     </div>
-
+    <div class="main-container">
+    <div class="main-title-container">
+        <a href="index.php?pages=sp-moi&page=1">
+            <div class="item-title color-2" style="font-weight: bold; font-size: 24px;">Sản phẩm cùng hãng </div>
+        </a>
+    </div>
+    <div class="product-slider">
+        <div class="product-container-random">
+            <!-- Products -->
+            <?php foreach ($sp__Get_Top_Same as $item) : ?>
+                <?php if (count($sp__Get_Top_Same) > 0) : ?>
+                    <?php $anhSp__Get_By_Id_Sp_First = $anhSp->AnhSp__Get_By_Id_Sp_First($item->masp); ?>
+                    <?php if (isset($anhSp__Get_By_Id_Sp_First->masp)) : ?>
+                        <div class="product-item-random" data-masp="<?= $anhSp__Get_By_Id_Sp_First->masp ?>" onmouseenter="startTimer(this)" onmouseleave="endTimer()" onclick="endTimer()">
+                            <div class="product-normal">
+                                <div class="product-img">
+                                    <a href="index.php?pages=chi-tiet&masp=<?= $anhSp__Get_By_Id_Sp_First->masp ?>&maloai=<?= $item->maloai ?>">
+                                        <img src="../assets/<?= $anhSp__Get_By_Id_Sp_First->hinhanh ?>" loading="lazy">
+                                    </a>
+                                </div>
+                                <div class="product-title">
+                                    <a href="index.php?pages=chi-tiet&masp=<?= $anhSp__Get_By_Id_Sp_First->masp ?>&maloai=<?= $item->maloai ?>">
+                                        <?= $item->tensp ?>
+                                    </a>
+                                </div>
+                                <div class="product-price clearfix">
+                                    <span class="current-price"><?= number_format($dg->ShowDonGia__Get_By_Id_Spdg($item->masp)) ?>₫</span>
+                                    <span class="original-price"><s>1,750,000₫</s></span>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endif ?>
+                <?php endif ?>
+            <?php endforeach ?>
+        </div>
+    </div>
+    </div>
 
 </body>
 
@@ -434,4 +472,47 @@ $anhSp__Get_By_Id_Sp_Thumbnail = $anhSp->AnhSp__Get_By_Id_Sp_Thumbnail($masp);
     }
 
     // code here
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const latitude = position.coords.latitude;
+                    const longitude = position.coords.longitude;
+                    console.log("Latitude:", latitude);
+                    console.log("Longitude:", longitude);
+                    reverseGeocodingWithGoogle(latitude, longitude);
+                },
+                (error) => {
+                    console.log("Error getting location:", error);
+                }
+            );
+        } else {
+            console.log("Geolocation is not supported by this browser.");
+        }
+    }
+
+    function reverseGeocodingWithGoogle(latitude, longitude) {
+        fetch(
+                `https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=AIzaSyBWzRuWS-rxMCENShE23x4Gh1f7R3vAL1Y`
+            )
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.results && data.results.length > 0) {
+                    console.log("User's Location Info: ", data.results[0]);
+                } else {
+                    console.log("No location information found.");
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching geolocation data:', error);
+            });
+    }
+
+    // Call the getLocation function when the page is loaded
+    getLocation();
 </script>

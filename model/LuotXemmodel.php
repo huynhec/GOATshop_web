@@ -99,6 +99,19 @@ class LuotXemModel extends Database
         // Trả về ID của bản ghi vừa được thêm vào
         return $this->connect->lastInsertId();
     }
+    // public function LuotXem__Add($masp, $makh, $district, $city)
+    // {
+    //     // Lấy ngày hiện tại
+    //     $ngayxem = date("Y-m-d");
+
+    //         // Nếu không có, thêm một bản ghi mới vào bảng luotxem
+    //         $luotxem = 1;
+    //         $obj = $this->connect->prepare("INSERT INTO luotxem(luotxem, ngayxem, masp, makh, quan_huyen, tinh_thanh) VALUES (?,?,?,?,?,?)");
+    //         $obj->execute(array($luotxem, $ngayxem, $masp, $makh, $district, $city));
+    
+    //     // Trả về ID của bản ghi vừa được thêm vào
+    //     return $this->connect->lastInsertId();
+    // }
     
 
 

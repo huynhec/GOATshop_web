@@ -79,6 +79,16 @@ function viewSanpham(masp, makh) {
   });
 }
 
+// function viewSanpham(masp, makh, district, city) {
+//   $.ajax({
+//       type: "POST",
+//       url: "components/action.php",
+//       data: { action: "view", masp: masp, makh: makh, district: district, city: city },
+//       success: function (response) {
+//           $("#view-count").text(response);
+//       },
+//   });
+// }
 
 
 let timer;

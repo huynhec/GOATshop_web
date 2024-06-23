@@ -34,7 +34,7 @@ class ImportModel extends Database
 
     public function import__Get_All()
     {
-        $obj = $this->connect->prepare("SELECT * FROM goiy");
+        $obj = $this->connect->prepare("SELECT * FROM goiy_association_rules");
         $obj->setFetchMode(PDO::FETCH_OBJ);
         $obj->execute();
         return $obj->fetchAll();
@@ -71,12 +71,11 @@ class ImportModel extends Database
 
     public function import__Add_User_Based($user, $rank, $item)
     {
-        
         $obj = $this->connect->prepare("INSERT INTO goiy_user_based(user, rank, item) VALUES (?,?,?)");
         $obj->execute(array($user, $rank, $item));
         return $obj->rowCount();
     }
-    
+
     public function import__Delete_User_Based()
     {
         $obj = $this->connect->prepare("
@@ -84,4 +83,21 @@ class ImportModel extends Database
         $obj->execute();
         return $obj->rowCount();
     }
+    public function import__Add_Association_Rules($masp, $masp_rec, $sup, $conf)
+    {
+        $obj = $this->connect->prepare("INSERT INTO goiy_association_rules(masp, masp_rec, sup, conf) VALUES (?,?,?,?)");
+        $obj->execute(array($masp, $masp_rec, $sup, $conf));
+        return $obj->rowCount();
+    }
+
+    public function import__Delete_Association_Rules()
+    {
+        $obj = $this->connect->prepare("
+        DELETE FROM goiy_association_rules");
+        $obj->execute();
+        return $obj->rowCount();
+    }
+
+
+
 }

@@ -23,9 +23,7 @@ $sanPham__Get_By_Loai = $sp->SanPham__Get_By_IdLoai($maloai);
 <main class="main">
     <div class="main-container">
         <div class="main-title-container">
-            <a href="index.php?pages=sp-moi&page=1">
-                <div class="item-title color-2" style="font-weight: bold; font-size: 24px; margin-top: 60px">Loại sản phẩm: <?=$loaiSp->LoaiSp__Get_By_Id($maloai)->tenloai?></div>
-            </a>
+                <div class="item-title color-2" style="font-weight: bold; font-size: 24px; margin-top: 60px">Loại sản phẩm: <?= $loaiSp->LoaiSp__Get_By_Id($maloai)->tenloai ?></div>
         </div>
         <div class="main-item-container">
             <?php foreach ($sanPham__Get_By_Loai_Paged as $item) : ?>
@@ -39,9 +37,17 @@ $sanPham__Get_By_Loai = $sp->SanPham__Get_By_IdLoai($maloai);
                                         <img src="../assets/<?= $anhSp__Get_By_Id_Sp_First->hinhanh ?>" loading="lazy">
                                     </a>
                                     <!-- khuyến mãi -->
-                                    <!-- <div class="product-tags">
-                                        <div class="tag-saleoff text-center">-23%</div>
-                                    </div> -->
+                                    <?php
+                                        $min = $dg->ShowDonGia__Get_By_Id_Spdg($item->masp);
+                                        $max = $dg->ShowDonGiaMax__Get_By_Id_Spdg($item->masp);
+                                        $res = (($max - $min) / $max) * 100;
+                                        $rounded_res = round($res, 0); // Làm tròn đến 2 chữ số thập phân
+                                        ?>
+                                        <?php if ($rounded_res > 0) : ?>
+                                            <div class="product-tags">
+                                                <div class="tag-saleoff text-center">-<?= $rounded_res ?>%</div>
+                                            </div>
+                                        <?php endif ?>
                                     <div class="product-actions text-center clearfix">
                                         <div>
                                             <button type="button" class="btnQuickView quick-view medium--hide small--hide" data-handle="/products/nike-mercurial-vapor-13-academy-tf-2" onclick="return view('<?= $item->masp ?>','<?= $item->maloai ?>','<?= $_SESSION['user']->makh ?? 0; ?>')">
@@ -64,7 +70,9 @@ $sanPham__Get_By_Loai = $sp->SanPham__Get_By_IdLoai($maloai);
                                 </div>
                                 <div class="product-price clearfix">
                                     <span class="current-price"><?= number_format($dg->ShowDonGia__Get_By_Id_Spdg($item->masp)) ?>₫</span>
-                                    <span class="original-price"><s>1,750,000₫</s></span>
+                                    <?php if (number_format($dg->ShowDonGia__Get_By_Id_Spdg($item->masp)) < number_format($dg->ShowDonGiaMax__Get_By_Id_Spdg($item->masp))) : ?>
+                                        <span class="original-price"><s><?= number_format($dg->ShowDonGiaMax__Get_By_Id_Spdg($item->masp)) ?>₫</s></span>
+                                    <?php endif ?>
                                 </div>
                                 <!-- <div class="fundiin__block-render-ui__loop" data-fundiin-loop-product-price-origin="1350000">
                                     <div class="fundiin__wrapper">
@@ -129,7 +137,7 @@ $sanPham__Get_By_Loai = $sp->SanPham__Get_By_IdLoai($maloai);
 
 </main>
 <script>
-        function addCartSize(masp) {
+    function addCartSize(masp) {
         // Kiểm tra xem đã chọn size chưa
         var selectedSize = document.querySelector('input[name="size"]:checked');
 
@@ -214,6 +222,7 @@ $sanPham__Get_By_Loai = $sp->SanPham__Get_By_IdLoai($maloai);
             }
         });
     }
+
     function viewBuy(masp, maloai, makh) {
         $.ajax({
             url: './pages/trang-chu/viewBuy.php',
@@ -255,5 +264,4 @@ $sanPham__Get_By_Loai = $sp->SanPham__Get_By_IdLoai($maloai);
             }
         });
     }
-
 </script>

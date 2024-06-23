@@ -110,6 +110,14 @@ class DonGiaModel extends Database
         $dongia = $obj->fetch(PDO::FETCH_OBJ); // Lấy dòng đơn giá duy nhất từ kết quả truy vấn
         return $dongia->dongia; // Trả về giá trị đơn giá
     }
+    public function ShowDonGiaMax__Get_By_Id_Spdg($masp)
+    {
+        $obj = $this->connect->prepare("SELECT * FROM dongia WHERE masp= ? ORDER BY dongia DESC LIMIT 1");
+        $obj->setFetchMode(PDO::FETCH_OBJ);
+        $obj->execute(array($masp));
+        $dongia = $obj->fetch(PDO::FETCH_OBJ); // Lấy dòng đơn giá duy nhất từ kết quả truy vấn
+        return $dongia->dongia; // Trả về giá trị đơn giá
+    }
 
     // public function ShowDonGia__Get_By_Id_Not_Spdg($masp)
     // {

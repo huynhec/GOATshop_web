@@ -65,6 +65,20 @@ class SanPhamModel extends Database
         $obj->execute(array($math));
         return $obj->fetchAll();
     }
+    public function SanPham__Get_Khuyenmai()
+    {
+        $obj = $this->connect->prepare("SELECT sp.*
+        FROM sanpham sp
+        WHERE EXISTS (
+        SELECT 1
+        FROM dongia dg
+        WHERE sp.masp = dg.masp
+        AND dg.apdung = 1
+        AND dg.dongia < (SELECT MAX(dongia) FROM dongia WHERE masp = sp.masp)) AND sp.trangthai =1");
+        $obj->setFetchMode(PDO::FETCH_OBJ);
+        $obj->execute();
+        return $obj->fetchAll();
+    }
 
 
     public function SanPham__Get_Top_Updated($limit = 6)
@@ -84,7 +98,7 @@ class SanPhamModel extends Database
     {
         $sql = "SELECT * FROM `sanpham` 
         JOIN `chitietthuoctinh` ON `sanpham`.`masp` = `chitietthuoctinh`.`masp` 
-        WHERE maloai = '1' AND noidung = 'nhan tao' 
+        WHERE maloai = '1' AND noidung = 'nhan tao' AND sanpham.trangthai = 1
         GROUP BY sanpham.masp 
         ORDER BY luotmua 
         DESC LIMIT $limit;";
@@ -98,7 +112,7 @@ class SanPhamModel extends Database
     {
         $sql = "SELECT * FROM `sanpham` 
         JOIN `chitietthuoctinh` ON `sanpham`.`masp` = `chitietthuoctinh`.`masp` 
-        WHERE maloai = '1' AND noidung = 'tu nhien' 
+        WHERE maloai = '1' AND noidung = 'tu nhien' AND sanpham.trangthai = 1
         GROUP BY sanpham.masp 
         ORDER BY luotmua 
         DESC LIMIT $limit;";
@@ -112,7 +126,7 @@ class SanPhamModel extends Database
     {
         $sql = "SELECT * FROM `sanpham` 
         JOIN `chitietthuoctinh` ON `sanpham`.`masp` = `chitietthuoctinh`.`masp` 
-        WHERE maloai = '6'
+        WHERE maloai = '6' AND sanpham.trangthai = 1
         GROUP BY sanpham.masp 
         ORDER BY luotmua 
         DESC LIMIT $limit;";
@@ -126,7 +140,7 @@ class SanPhamModel extends Database
     {
         $sql = "SELECT * FROM `sanpham` 
         JOIN `chitietthuoctinh` ON `sanpham`.`masp` = `chitietthuoctinh`.`masp` 
-        WHERE maloai = '4'
+        WHERE maloai = '4' AND sanpham.trangthai = 1
         GROUP BY sanpham.masp 
         ORDER BY luotmua 
         DESC LIMIT $limit;";
@@ -152,24 +166,24 @@ class SanPhamModel extends Database
         $query->execute([$maloai]);
         $result = $query->fetch(PDO::FETCH_ASSOC);
         $trangThaiLoai = $result['trangthai'];
-    
+
         // Kiểm tra trạng thái của thương hiệu
         $query = $this->connect->prepare("SELECT trangthai FROM thuonghieu WHERE math = ?");
         $query->execute([$math]);
         $result = $query->fetch(PDO::FETCH_ASSOC);
         $trangThaiThuonghieu = $result['trangthai'];
-    
+
         // Nếu trạng thái của loại sản phẩm hoặc thương hiệu không phải là hiển thị, thì không cập nhật sản phẩm
         if ($trangThaiLoai != 1 || $trangThaiThuonghieu != 1) {
             return false;
         }
-    
+
         // Cập nhật sản phẩm nếu cả hai trạng thái đều là hiển thị
         $obj = $this->connect->prepare("UPDATE sanpham SET tensp=?, mota=?, ngaythem=?, trangthai=?, luotmua=?, luotxem=?, math=?, maloai=? WHERE masp=?");
         $obj->execute(array($tensp, $mota, $ngaythem, $trangthai, $luotmua, $luotxem, $math, $maloai, $masp));
         return $obj->rowCount();
     }
-    
+
 
     public function SanPham__Delete($masp)
     {
@@ -280,6 +294,35 @@ class SanPhamModel extends Database
             FROM sanpham
             WHERE trangthai = 1 AND math = $math
             GROUP BY masp
+            LIMIT :page_start, :page_end"
+        );
+
+        $obj->bindParam(':page_start', $page_start, PDO::PARAM_INT);
+        $obj->bindParam(':page_end', $page_end, PDO::PARAM_INT);
+
+        $obj->setFetchMode(PDO::FETCH_OBJ);
+        $obj->execute();
+        return $obj->fetchAll();
+    }
+    public function SanPham__Get_By_Khm_Paged($page_number)
+    {
+        // Số lượng sp trên mỗi trang
+        $items_per_page = 18;
+
+        // Tính toán giá trị bắt đầu và kết thúc cho phân trang
+        $page_start = ($page_number - 1) * $items_per_page;
+        $page_end = $items_per_page;
+
+        // Chuẩn bị và thực hiện truy vấn
+        $obj = $this->connect->prepare(
+            "SELECT sp.*
+        FROM sanpham sp
+        WHERE EXISTS (
+        SELECT 1
+        FROM dongia dg
+        WHERE sp.masp = dg.masp
+        AND dg.apdung = 1
+        AND dg.dongia < (SELECT MAX(dongia) FROM dongia WHERE masp = sp.masp)) AND sp.trangthai =1
             LIMIT :page_start, :page_end"
         );
 

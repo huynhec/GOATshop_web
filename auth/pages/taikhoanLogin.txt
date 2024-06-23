@@ -378,3 +378,13 @@ ducan|1234567
 minhhieu|1234567
 admin|123456
 admin|123456
+admin|123456
+hoaihan|1234567
+tutrinh|1234567
+admin|123456
+anhliem|1234567
+admin|1234565
+admin|123456
+admin|123456
+vanbao|1234567
+admin|123456

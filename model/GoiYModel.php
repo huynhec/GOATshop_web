@@ -51,4 +51,18 @@ class GoiYModel extends Database
         $obj->execute();
         return $obj->fetchAll();
     }
+
+    public function Goi_Y_Association_Rules__Get_By_Id($masp)
+    {
+        $obj = $this->connect->prepare("SELECT sanpham.*,  goiy_association_rules.masp AS item
+FROM goiy_association_rules 
+JOIN sanpham ON goiy_association_rules.masp_rec = sanpham.masp
+WHERE goiy_association_rules.masp = ?
+ORDER BY conf DESC 
+LIMIT 5;");
+        $obj->setFetchMode(PDO::FETCH_OBJ);
+        $obj->execute(array($masp));
+        return $obj->fetchAll();
+    }
+
 }

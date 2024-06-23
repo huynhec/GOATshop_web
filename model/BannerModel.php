@@ -37,8 +37,16 @@ class BannerModel extends Database
         if ($trangthai != -1) {
             $obj = $this->connect->prepare("SELECT * FROM banner");
         } else {
-            $obj = $this->connect->prepare("SELECT * FROM banner WHERE trangthai = 1");
+            $obj = $this->connect->prepare("SELECT * FROM banner");
         }
+        $obj->setFetchMode(PDO::FETCH_OBJ);
+        $obj->execute();
+        return $obj->fetchAll();
+    }
+
+    public function Banner__Show()
+    {
+        $obj = $this->connect->prepare("SELECT * FROM banner WHERE trangthai = 1");
         $obj->setFetchMode(PDO::FETCH_OBJ);
         $obj->execute();
         return $obj->fetchAll();
