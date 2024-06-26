@@ -15,14 +15,14 @@ if (isset($_SERVER["HTTP_REFERER"])) {
 }
 
 // Gán $url bằng $_SESSION['url'], mặc định là '../../user/' nếu $_SESSION['url'] không được set
-$url = $_SESSION['url'] ?? '../../user/';
+$url = $_SESSION['url'] ?? '../../api/';
 
 ?>
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 <div class="auth-container row">
     <div class="form-wrapper col-8">
-        <a href="../user/index.php">
+        <a href="../api/index.php">
             <img src="../assets/images/Black logo - no background.png" alt="logo" class="img-fluid">
         </a>
         <form class="form-control" action="pages/action.php?req=dang-nhap" method="post">

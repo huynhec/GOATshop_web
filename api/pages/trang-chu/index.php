@@ -66,7 +66,7 @@ $top = 0;
             <?php if (isset($_SESSION['user']) && count($goi_Y_User_Based) > 0) : ?>
                 <div class="main-title-container">
                     <a href="index.php?pages=sp-moi&page=1">
-                        <div class="item-title color-2" style="font-weight: bold; font-size: 24px;">Dành riêng cho bạn!
+                        <div class="item-title">Dành riêng cho bạn!
                         </div>
                     </a>
                 </div>
@@ -214,7 +214,7 @@ $top = 0;
 
             <div class="main-container">
                 <div class="main-title-container">
-                    <div class="item-title color-2" style="font-weight: bold; font-size: 24px;">Sản phẩm nổi bật
+                    <div class="item-title">Sản phẩm nổi bật
                     </div>
                     </a>
                 </div>
@@ -280,7 +280,7 @@ $top = 0;
             <div class="main-container">
                 <div class="main-title-container">
                     <a href="index.php?pages=sp-moi&page=1">
-                        <div class="item-title color-2" style="font-weight: bold; font-size: 24px;">Bạn có thể mua !? </div>
+                        <div class="item-title">Bạn có thể mua !? </div>
                     </a>
                 </div>
                 <div class="product-slider">

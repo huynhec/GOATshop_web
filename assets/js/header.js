@@ -265,3 +265,20 @@ $(document).ready(function () {
     lastScrollTop = scrollTop;
   });
 });
+
+
+document.addEventListener('DOMContentLoaded', function() {
+  const navbarItems = document.querySelectorAll('.navbar-item.has-sub');
+  
+  function checkScreenSize() {
+      if (window.innerWidth <= 700) {
+          navbarItems.forEach(item => {
+              item.querySelector('.navbar-item-sub').style.display = 'block';
+          });
+      }
+  }
+
+  checkScreenSize(); // Gọi hàm khi trang được tải
+
+  window.addEventListener('resize', checkScreenSize); // Gọi hàm khi kích thước màn hình thay đổi
+});

@@ -50,37 +50,27 @@ $thuongHieu__Get_All = $th->ThuongHieu__Get_All();
                     </div>
                 </div>
                 <!-- Danh sách -->
-                <div class="navbar-item has-sub">
-                    <a href="index.php?pages=danh-muc">Danh mục<i class="fas fa-chevron-down"></i></a>
-                    <ul class="navbar-item-sub">
-                        <div class="menu-genre">
-                            <?php foreach ($loaiSp__Get_All as $item) : ?>
-                                <li>
-                                    <a href="index.php?pages=loai-sp&maloai=<?= $item->maloai ?>">
-                                        - <?= $item->tenloai ?>
-                                    </a>
-                                </li>
-                            <?php endforeach ?>
-                        </div>
-                    </ul>
+                <div class="navbar-category">
+                    <a href="index.php?pages=danh-muc"><i class="fas fa-chevron-down"></i>Danh mục</a>
+                    <div class="menu-genre">
+                        <?php foreach ($loaiSp__Get_All as $item) : ?>
+                            <li>
+                                <a href="index.php?pages=loai-sp&maloai=<?= $item->maloai ?>">
+                                    <?= $item->tenloai ?>
+                                </a>
+                            </li>
+                        <?php endforeach ?>
+                    </div>
                 </div>
-                <div class="navbar-item has-sub">
-                    <a href="index.php?pages=thuong-hieu">Thương hiệu<i class="fas fa-chevron-down"></i></a>
-                    <ul class="navbar-item-sub" class="nav">
-                        <div class="menu-genre">
-                            <?php foreach ($thuongHieu__Get_All as $item) : ?>
-                                <li><a href="index.php?pages=thuong-hieu&math=<?= $item->math ?>">- <?= $item->tenth ?></a></li>
-                            <?php endforeach ?>
-                        </div>
-                    </ul>
+                <div class="navbar-brands">
+                    <a href="index.php?pages=thuong-hieu"><i class="fas fa-chevron-down"></i>Thương hiệu</a>
+                    <div class="menu-genre">
+                        <?php foreach ($thuongHieu__Get_All as $item) : ?>
+                            <li><a href="index.php?pages=thuong-hieu&math=<?= $item->math ?>"><?= $item->tenth ?></a></li>
+                        <?php endforeach ?>
+                    </div>
                 </div>
 
-                <!--  -->
-                <?php if (isset($_SESSION['user'])) : ?>
-
-                    <div class="navbar-item"><a href="index.php?pages=don-hang"><i class='bx bxs-file bx-burst' style='color:#ff0004'></i>Đơn của bạn</a></div>
-
-                <?php endif ?>
                 <!-- Nút đóng menu -->
                 <div class="navbar-close">
                     <i class="bx bx-x"></i>
@@ -91,6 +81,7 @@ $thuongHieu__Get_All = $th->ThuongHieu__Get_All();
 
         <div class="navbar-display-user-action">
             <?php if (isset($_SESSION['user'])) : ?>
+
                 <div class="navbar-display-cart" onclick="return(location.href='./index.php?pages=gio-hang')">
                     <i class="fas fa-shopping-cart">
                         <!-- <i class='bx bxs-cart'> -->
@@ -104,9 +95,11 @@ $thuongHieu__Get_All = $th->ThuongHieu__Get_All();
                         <span id="cart-item">(<?= ($res) ?>)</span>
                     </i>
                 </div>
-
+                <div class="navbar-display-user">
+                    <a href="index.php?pages=don-hang"><i class='bx bxs-file'></i></a>
+                </div>
             <?php else : ?>
-                <a href="../auth?pages=dang-nhap">
+                <a href="../api_auth?pages=dang-nhap">
                     <div class="navbar-display-cart">
                         <i class="fas fa-shopping-cart">
                             <span id="cart-item">(0)</span>
@@ -122,40 +115,20 @@ $thuongHieu__Get_All = $th->ThuongHieu__Get_All();
 
             <?php if (isset($_SESSION['user'])) : ?>
                 <!-- display-user người dùng đã đăng nhập -->
+
                 <div class="navbar-display-user">
-
-                    <a href="../user/index.php?pages=thong-tin-user"><i class="fas fa-user"></i></a>
+                    <a href="../api/index.php?pages=thong-tin-user"><i class="fas fa-user"></i></a>
                 </div>
+
                 <div class="navbar-display-user">
-
-                    <a href="../auth/pages/action.php?req=dang-xuat"><i class="fa fa-sign-out"></i></a>
+                    <a href="../api_auth/pages/action.php?req=dang-xuat"><i class="fa fa-sign-out"></i></a>
                 </div>
-                <!-- <i class='bx bxs-user-detail'></i> -->
-
-                <!-- Menu hành động của người dùng -->
-                <!-- <div class="navbar-display-action hidden">
-                    <a href="#">
-                        <li><b><i class='bx bx-user-check'></i><?= $_SESSION['user']->tenkh ?></b></li>
-                    </a>
-                    <hr>
-                    <a href="../auth/pages/chinh-sua.php">
-                        <li> <i class='bx bx-cog'></i> Chỉnh sửa</li>
-                    </a>
-                    <hr>
-                    <a href="../auth/pages/action.php?req=dang-xuat">
-                        <li><i class='bx bx-log-out'></i> Đăng xuất</li>
-                    </a>
-                </div> -->
             <?php else : ?>
                 <!-- display-user người dùng chưa đăng nhập -->
                 <div class="navbar-display-user">
                     <!-- <i class="bx bx-user"></i> -->
-                    <a href="../auth?pages=dang-nhap"><i class="fas fa-user"></i></a>
+                    <a href="../api_auth?pages=dang-nhap"><i class="fas fa-user"></i></a>
                 </div>
-                <!-- Menu hành động khi chưa đăng nhập -->
-                <!-- <div class="navbar-display-action hidden">
-                    <li><i class='bx bx-log-in'></i> <a href="../auth?pages=dang-nhap">Đăng nhập</a></li>
-                </div> -->
             <?php endif ?>
         </div>
     </div>
@@ -177,18 +150,16 @@ $thuongHieu__Get_All = $th->ThuongHieu__Get_All();
 </div>
 
 <div id="fixed-social-network">
-    <a href="https://www.facebook.com/profile.php?id=61560199895202" target="_blank" class="fb-icon"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-    <a href="https://www.instagram.com/huynhnguyen3543/" target="_blank" class="ins-icon"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-    <a href="https://www.tiktok.com/@hsifootball" target="_blank" class="tiktok-icon"><img src="https://file.hstatic.net/200000397757/file/tik-tok_b0606ed7c66a49258e7f86647843b718.svg"></a>
-    <a href="https://www.youtube.com/@hsifootball6898/videos" target="_blank" class="yt-icon"><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
+    <a href="https://www.facebook.com/profile.php?id=61560199895202" class="fb-icon"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+    <a href="https://www.instagram.com/huynhnguyen3543/" class="ins-icon"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+    <a href="https://www.tiktok.com/@hsifootball" class="tiktok-icon"><img src="https://file.hstatic.net/200000397757/file/tik-tok_b0606ed7c66a49258e7f86647843b718.svg"></a>
+    <a href="https://www.youtube.com/@hsifootball6898/videos" class="yt-icon"><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
 </div>
 
 
 <div id="fixed-contact">
     <a href="tel:+0985259052" class="call-icon"><i class="fa fa-phone" aria-hidden="true"></i></a>
-    <!-- <a href="https://www.google.com/maps?q=location" target="_blank" class="location-icon"><i class="fa fa-map-marker" aria-hidden="true"></i></a> -->
-    <a href="https://www.facebook.com/messages/t/342366168954879" target="_blank" class="messenger-icon"><i class="fa fa-facebook-messenger" aria-hidden="true"></i></a>
+    <a href="https://www.facebook.com/messages/t/342366168954879" class="messenger-icon"><i class="fa fa-facebook-messenger" aria-hidden="true"></i></a>
     <a href="#" class="back-to-top action-top"><i class="fa fa-angle-up" aria-hidden="true"></i></a>
-    <!-- <div class="action-item action-toggle"><i class="bx bx-target-lock"></i></div> -->
 
 </div>

@@ -87,7 +87,6 @@
 body {
   font-family: "Montserrat", sans-serif !important;
 }
-
 .main {
   position: relative;
   overflow-x: hidden;
@@ -170,16 +169,6 @@ body {
   background-color: #F2F2F2;
   padding: 20px;
   /* padding-left: 60px; */
-
-}
-
-.main-title-container {
-  /* display: flex; */
-  justify-items: center;
-  align-items: center;
-  text-align: center;
-  margin-bottom: 20px;
-
 
 }
 
@@ -1313,7 +1302,7 @@ table {
 }
 
 .swal2-popup.swal2-modal.swal2-show {
-  width: 50%;
+  width: 90%;
 }
 
 .table-custom tbody {
@@ -1481,17 +1470,17 @@ a.slide-btn2 {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin-right: 10px;
+  margin-right: 2px;
 }
 
 .thumbnail-images img {
-  width: 80px;
+  width: 40px;
   /* Adjust this value as needed */
   cursor: pointer;
 }
 
 .main-image img {
-  width: 100%;
+  width: 50%;
   display: block;
 }
 
@@ -2089,6 +2078,7 @@ h1 {
     font-weight: bold;
     text-transform: uppercase;
     text-overflow: ellipsis;
+    text-decoration: none;
     color: #000000;
     margin: 0 0 15px;
     position: relative;
@@ -2274,5 +2264,37 @@ h1 {
     justify-content: center;
     color: white; /* Assuming the text color is white */
     font-size: 14px; /* Adjust font size as necessary */
+  }
+  .main-title-container a{
+    color: #000;
+    text-decoration: none;
+    background-color: transparent;
+    vertical-align: middle;
+  }
+  .main-title-container {
+    /* display: flex; */
+    justify-items: center;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 20px;
+  
+  }
+  .text-card{
+    font-size: smaller;
+    width: 50px; /* Đặt chiều rộng phù hợp cho container */
+    white-space: nowrap; /* Ngăn không cho văn bản xuống dòng */
+    overflow: hidden; /* Ẩn phần văn bản tràn ra ngoài container */
+    text-overflow: ellipsis; /* Thay thế phần bị ẩn bằng dấu chấm lửng (...) */
+
+  }
+  .order-body {
+    flex: 1 1 auto;
+    font-size: x-small;
+    padding: var(--bs-card-spacer-y) var(--bs-card-spacer-x);
+    color: var(--bs-card-color);
+  }
+  .text-center button {
+    font-size: xx-small;
   }
 }

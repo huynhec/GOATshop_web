@@ -397,3 +397,5 @@ admin|123456
 admin|123456
 anhliem|1234567
 hoaibao|1234567
+ducan|1234567
+thuyduy|1234567
