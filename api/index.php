@@ -1,4 +1,4 @@
-<script>
+<!-- <script>
     function redirectIfNotMobile() {
         const userAgent = navigator.userAgent || navigator.vendor || window.opera;
         const isMobile = /android|iphone|ipad|ipod|blackberry|windows phone/i.test(userAgent.toLowerCase());
@@ -7,7 +7,7 @@
         }
     }
     document.addEventListener('DOMContentLoaded', redirectIfNotMobile);
-</script>
+</script> -->
 <?PHP
 session_start();
 ?>

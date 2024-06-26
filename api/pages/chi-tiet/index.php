@@ -61,11 +61,10 @@ $goi_Y_Association_Rules__Get_By_Id = $gy->Goi_Y_Association_Rules__Get_By_Id($m
                 <?php foreach ($anhSp__Get_By_Id_Sp_Not_First as $key => $item) : ?>
                     <img src="../assets/<?= $item->hinhanh ?>" alt="" onclick="changeImage('../assets/<?= $item->hinhanh ?>')">
                 <?php endforeach ?>
-
             </div>
             <div class="main-image">
 
-                <img id="currentImage" src="../assets/<?= $anhSp__Get_By_Id_Sp_Thumbnail->hinhanh ?>" alt="Nike Air Zoom Mercurial" style=" height: 690px; width: 690px;">
+                <img id="currentImage" src="../assets/<?= $anhSp__Get_By_Id_Sp_Thumbnail->hinhanh ?>" alt="Nike Air Zoom Mercurial" style=" height: 320px; width: 320px;">
             </div>
         </div>
         <div class="product-details">
