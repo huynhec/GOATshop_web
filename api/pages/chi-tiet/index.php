@@ -120,7 +120,7 @@ $goi_Y_Association_Rules__Get_By_Id = $gy->Goi_Y_Association_Rules__Get_By_Id($m
                     <button class="add-to-cart" onclick="addCartSize('<?= $masp ?>')">Thêm vào giỏ</button>
                 </div>
             <?php else : ?>
-                <a href="../api_auth?pages=dang-nhap">
+                <a href="../api_auth?pages=dang-nhap" style="text-decoration: none;">
 
                     <div class="actions">
                         <!-- <button class="buy-now" onclick="return checkLogin()">Mua ngay</button>
