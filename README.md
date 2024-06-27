@@ -39,3 +39,5 @@ pip install -r requirements.txt
 
 # 4. Run predict
 python main.py -min_quota=10 -k=2 -file_name="datasets/data.xlsx"
+
+# test

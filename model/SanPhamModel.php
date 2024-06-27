@@ -65,6 +65,17 @@ class SanPhamModel extends Database
         $obj->execute(array($math));
         return $obj->fetchAll();
     }
+    public function SanPham__Get_Goiy($masp)
+    {
+        $obj = $this->connect->prepare("SELECT *
+        FROM goiy_user_based
+        INNER JOIN sanpham ON goiy_user_based.item = sanpham.masp
+        WHERE goiy_user_based.user = $masp AND sanpham.trangthai = 1
+        ORDER BY goiy_user_based.rank ASC");
+        $obj->setFetchMode(PDO::FETCH_OBJ);
+        $obj->execute();
+        return $obj->fetchAll();
+    }
     public function SanPham__Get_Khuyenmai()
     {
         $obj = $this->connect->prepare("SELECT sp.*
@@ -295,6 +306,32 @@ class SanPhamModel extends Database
             WHERE trangthai = 1 AND math = $math
             GROUP BY masp
             LIMIT :page_start, :page_end"
+        );
+
+        $obj->bindParam(':page_start', $page_start, PDO::PARAM_INT);
+        $obj->bindParam(':page_end', $page_end, PDO::PARAM_INT);
+
+        $obj->setFetchMode(PDO::FETCH_OBJ);
+        $obj->execute();
+        return $obj->fetchAll();
+    }
+    public function SanPham__Get_By_Gy_Paged($page_number, $masp)
+    {
+        // Số lượng sp trên mỗi trang
+        $items_per_page = 18;
+
+        // Tính toán giá trị bắt đầu và kết thúc cho phân trang
+        $page_start = ($page_number - 1) * $items_per_page;
+        $page_end = $items_per_page;
+
+        // Chuẩn bị và thực hiện truy vấn
+        $obj = $this->connect->prepare(
+            "SELECT *
+        FROM goiy_user_based
+        INNER JOIN sanpham ON goiy_user_based.item = sanpham.masp
+        WHERE goiy_user_based.user = $masp AND sanpham.trangthai = 1
+        ORDER BY goiy_user_based.rank ASC
+        LIMIT :page_start, :page_end"
         );
 
         $obj->bindParam(':page_start', $page_start, PDO::PARAM_INT);

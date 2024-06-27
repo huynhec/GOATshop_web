@@ -4,29 +4,33 @@ require_once '../model/SanPhamModel.php';
 require_once '../model/ThuongHieuModel.php';
 require_once '../model/AnhSpModel.php';
 require_once '../model/DonGiaModel.php';
+require_once '../model/GoiYModel.php';
 
 $dg = new DonGiaModel();
 $cm = new CommonModel();
 $anhSp = new AnhSpModel();
 $th = new ThuongHieuModel();
 $sp = new SanPhamModel();
+$gy = new GoiYModel();
+
 
 // Lấy số trang từ tham số truyền vào hoặc mặc định là 1
+$math = isset($_GET['masp']) ? intval($_GET['masp']) : 1;
 $page_number = isset($_GET['page']) ? intval($_GET['page']) : 1;
 
 // Lấy danh sách cho trang hiện tại
-$sanPham__Get_By_Khm_Paged = $sp->SanPham__Get_By_Khm_Paged($page_number);
-$sanPham__Get_Khuyenmai = $sp->SanPham__Get_Khuyenmai();
+$sanPham__Get_By_Gy_Paged = $sp->SanPham__Get_By_Gy_Paged($page_number, $masp);
+$sanPham__Get_Goiy = $sp->SanPham__Get_Goiy($masp);
 ?>
 
 <main class="main">
     <div class="main-container">
         <div class="main-title-container">
-                <div class="item-title color-2" style="font-weight: bold; font-size: 24px; margin-top: 60px">Sản phẩm khuyến mãi</div>
+                <div class="item-title color-2" style="font-weight: bold; font-size: 24px; margin-top: 60px">Dành riêng cho bạn</div>
         </div>
         <div class="main-item-container">
-            <?php foreach ($sanPham__Get_By_Khm_Paged as $item) : ?>
-                <?php if (count($sanPham__Get_By_Khm_Paged) > 0) : ?>
+            <?php foreach ($sanPham__Get_By_Gy_Paged as $item) : ?>
+                <?php if (count($sanPham__Get_By_Gy_Paged) > 0) : ?>
                     <?php $anhSp__Get_By_Id_Sp_First = $anhSp->AnhSp__Get_By_Id_Sp_First($item->masp); ?>
                     <?php if (isset($anhSp__Get_By_Id_Sp_First->masp)) : ?>
                         <div class="product-item" data-masp="<?= $anhSp__Get_By_Id_Sp_First->masp ?>" onmouseenter="startTimer(this)" onmouseleave="endTimer()" onclick="endTimer()">
@@ -96,18 +100,18 @@ $sanPham__Get_Khuyenmai = $sp->SanPham__Get_Khuyenmai();
     <div class="pagination-container">
         <div class="pagination">
             <?php
-            $total_pages = ceil(count($sanPham__Get_Khuyenmai) / 18);
+            $total_pages = ceil(count($sanPham__Get_Goiy) / 18);
 
             // Hiển thị nút đầu trang
             if ($page_number > 1) {
-                echo '<a href="index.php?pages=thuong-hieu&page=1" class="pagination-link">
+                echo '<a href="index.php?pages=thuong-hieu&math=' . $math . '&page=1" class="pagination-link">
                            <i class="fa fa-angle-double-left""></i>
                       </a>';
             }
 
             // Hiển thị nút trước
             if ($page_number > 1) {
-                echo '<a href="index.php?pages=thuong-hieu&page=' . ($page_number - 1) . '" class="pagination-link">
+                echo '<a href="index.php?pages=thuong-hieu&math=' . $math . '&page=' . ($page_number - 1) . '" class="pagination-link">
                           <i class="fas fa-angle-left"></i>
                      </a>';
             }
