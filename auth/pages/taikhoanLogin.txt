@@ -408,3 +408,5 @@ tramem|1234567
 tramem|1234567
 anhtuyet|1234567
 hoaihan|1234567
+admin|1234567
+admin|123456

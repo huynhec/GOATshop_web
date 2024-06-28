@@ -1,6 +1,11 @@
 <?php
 require_once '../model/ImportModel.php';
+require_once '../model/SanPhamModel.php';
+require_once '../model/AnhSpModel.php';
 $import = new ImportModel();
+$anhSp = new AnhSpModel();
+$sp = new SanPhamModel();
+
 $import__Get_All = $import->import__Get_All();
 ?>
 
@@ -31,10 +36,10 @@ $import__Get_All = $import->import__Get_All();
                         <thead class="table-dark">
                             <tr>
                                 <th>#</th>
-                                <th>masp</th>
-                                <th>masp_rec</th>
-                                <th>sup</th>
-                                <th>conf</th>
+                                <th>Sản phẩm</th>
+                                <th>Sản phẩm gợi ý</th>
+                                <th>Support</th>
+                                <th>Confidence</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -42,10 +47,10 @@ $import__Get_All = $import->import__Get_All();
                             <?php foreach ($import__Get_All as $item) : ?>
                             <tr>
                                 <td><?= $item->id ?></td>
-                                <td><?= $item->masp ?></td>
-                                <td><?= $item->masp_rec ?></td>
-                                <td><?= $item->sup ?></td>
-                                <td><?= $item->conf ?></td>
+                                <td><img style="cursor:pointer; " src="../assets/<?= $anhSp->AnhSp__Get_By_Id_Sp_First($item->masp)->hinhanh ?>" alt="" srcset="" class="img-fluid" width="50"></td>
+                                <td><img style="cursor:pointer; " src="../assets/<?= $anhSp->AnhSp__Get_By_Id_Sp_First($item->masp_rec)->hinhanh ?>" alt="" srcset="" class="img-fluid" width="50"></td>
+                                <td><?= $item->sup ?>%</td>
+                                <td><?= $item->conf ?>%</td>
                             </tr>
                             <?php endforeach ?>
                         </tbody>
