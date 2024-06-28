@@ -1423,23 +1423,18 @@ a.slide-btn2 {
   margin-right: 15px;
   border: 1px solid #ffffff;
 }
-
-.carousel-item {
-  position: relative;
-  /* Đặt vị trí cho carousel item là relative */
+.carousel-indicators img {
+  width: 70px;
+  display: block;
 }
 
-
-
-.carousel-caption .slide-bold-text {
-  font-weight: bold;
-  margin-bottom: 10px;
-  /* Đặt khoảng cách giữa các đoạn văn bản */
+.carousel-indicators button {
+  width: max-content !important;
 }
 
-.carousel-caption .slide-btn {
-  display: flex;
-  flex-direction: column;
+.carousel-indicators {
+  position: unset;
+  margin-bottom: 2rem;
 }
 
 .slide-btn a {

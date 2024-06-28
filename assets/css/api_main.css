@@ -1371,10 +1371,10 @@ table {
   /* Đặt vị trí từ phía bên phải */
   -webkit-transform: translate(0%, -50%);
   transform: translate(0%, -50%);
-  width: 40%;
+  width: 45%;
   /* Đặt chiều rộng */
   height: 200px;
-  padding: 20px;
+  padding: 10px;
   /* Thêm padding nếu cần thiết */
 }
 
@@ -1388,12 +1388,12 @@ table {
   height: auto;
   color: #ffffff;
   margin-bottom: 55px;
-  font-size: 24px;
+  font-size: 18px;
 
 }
 
 .slide-bold-text {
-  font-size: 28px;
+  font-size: 13px;
   color: #ffffff;
   margin-bottom: 15px;
 }
@@ -1404,7 +1404,7 @@ a.slide-btn2 {
   display: inline-block;
   height: 40px;
   line-height: 40px;
-  padding: 0px 15px;
+  padding: 0px 10px;
   min-width: 150px;
   text-align: center;
   color: #ffffff;
@@ -1413,22 +1413,18 @@ a.slide-btn2 {
   border: 1px solid #ffffff;
 }
 
-.carousel-item {
-  position: relative;
-  /* Đặt vị trí cho carousel item là relative */
+.carousel-indicators img {
+  width: 70px;
+  display: block;
 }
 
-
-
-.carousel-caption .slide-bold-text {
-  font-weight: bold;
-  margin-bottom: 10px;
-  /* Đặt khoảng cách giữa các đoạn văn bản */
+.carousel-indicators button {
+  width: max-content !important;
 }
 
-.carousel-caption .slide-btn {
-  display: flex;
-  flex-direction: column;
+.carousel-indicators {
+  position: unset;
+  margin-bottom: 2rem;
 }
 
 .slide-btn a {
@@ -2072,7 +2068,7 @@ h1 {
 
 @media (max-width: 600px) {
   .carousel {
-    padding-top: 75px;
+    padding-top: 90px;
   }
 
   .main-title-container .item-title {

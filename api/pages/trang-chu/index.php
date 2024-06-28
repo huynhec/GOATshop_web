@@ -28,20 +28,15 @@ $top = 0;
 ?>
 
 <main class="main">
-    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-            <?php $count = 0; ?>
-            <?php foreach ($banner__Show as $item) : ?>
-                <li data-target="#carouselExampleIndicators" data-slide-to="<?= $count++ ?>"></li>
-            <?php endforeach ?>
-
-        </ol>
+    <div class="carousel slide" id="carouselDemo" data-bs-wrap="true" data-bs-ride="carousel">
 
         <div class="carousel-inner">
-            <?php foreach ($banner__Show as $item) : ?>
-                <div class="carousel-item">
-                    <img class="d-block w-100" src="../assets/<?= $item->anhbanner ?>" alt="First slide">
-                    <div class="carousel-caption d-none d-md-block">
+            <?php
+            $firstItem = true; // Khởi tạo biến cờ để kiểm tra phần tử đầu tiên
+            foreach ($banner__Show as $item) : ?>
+                <div class="carousel-item <?= $firstItem ? 'active' : '' ?>">
+                    <img src="../assets/<?= $item->anhbanner ?>" class="w-100">
+                    <div class="carousel-caption">
                         <div class="slide-light-text"> Sắp ra mắt </div>
                         <div class="slide-bold-text">
                             <?= $item->tenbanner ?>
@@ -51,16 +46,33 @@ $top = 0;
                         </div>
                     </div>
                 </div>
-            <?php endforeach ?>
+            <?php
+                $firstItem = false; // Đặt cờ thành false sau lần lặp đầu tiên
+            endforeach ?>
+
         </div>
-        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only"></span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only"></span>
-        </a>
+
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselDemo" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselDemo" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+
+        <div class="carousel-indicators">
+            <?php $count = 0;
+            $firstItem = true; // Khởi tạo biến cờ để kiểm tra phần tử đầu tiên
+            ?>
+            <?php foreach ($banner__Show as $item) : ?>
+                <button type="button" class="<?= $firstItem ? 'active' : '' ?>" data-bs-target="#carouselDemo" data-bs-slide-to="<?= $count++ ?>">
+                    <img src="../assets/<?= $item->anhbanner ?>" />
+                </button>
+
+            <?php
+                $firstItem = false; // Đặt cờ thành false sau lần lặp đầu tiên
+            endforeach ?>
+        </div>
     </div>
     <div class="main-view-item-container">
         <div class="main-container">
@@ -280,7 +292,7 @@ $top = 0;
 
             <div class="main-container">
                 <div class="main-title-container">
-                        <div class="item-title">Bạn có thể mua !? </div>
+                    <div class="item-title">Bạn có thể mua !? </div>
                 </div>
                 <div class="product-slider">
                     <div class="product-container-random">

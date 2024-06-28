@@ -32,6 +32,8 @@ session_start();
     <script src="../assets/vendor/sweetalert2@11.js"></script>
     <script src="../assets/vendor/datatables/js/1_jquery.dataTables.min.js"></script>
     <script src="../assets/vendor/datatables/js/2_dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="../assets/js/header.js"></script>
     <script src="../assets/js/main.js"></script>
     <script src="../assets/js/diachi.js"></script>
