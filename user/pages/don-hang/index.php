@@ -69,9 +69,7 @@ $chiTietTrangThai__Get_By_Id_DH = $cttt->ChiTietTrangThai__Get_By_Id_DH($madon);
                                                                         <td><?= $item->ma_don_hang ?></td>
                                                                         <td><?= $item->ngaythem ?></td>
                                                                         <td><?= number_format($item->tongdh) ?>đ</td>
-                                                                        <td style="color: <?=
-                                                                                            $cttt->ChiTietTrangThai__Get_Last_By_DH($item->madon)->tentt === 'Đã giao thành công' ? 'green' : ($cttt->ChiTietTrangThai__Get_Last_By_DH($item->madon)->tentt === 'Đơn bị từ chối bởi người bán' ? 'red' : ($cttt->ChiTietTrangThai__Get_Last_By_DH($item->madon)->tentt === 'Đơn đã huỷ bởi người mua' ? 'red' : 'orange'))
-                                                                                            ?>">
+                                                                        <td style="color: <?= $cttt->ChiTietTrangThai__Get_Last_By_DH($item->madon)->matt == 6  ? 'green' : ($cttt->ChiTietTrangThai__Get_Last_By_DH($item->madon)->matt == 1 ? 'red' : ($cttt->ChiTietTrangThai__Get_Last_By_DH($item->madon)->matt == 8 ? 'red' : ($cttt->ChiTietTrangThai__Get_Last_By_DH($item->madon)->matt == 7 ? 'red' : 'orange'))) ?>">
                                                                             <?= isset($cttt->ChiTietTrangThai__Get_Last_By_DH($item->madon)->tentt) ?
                                                                                 $cttt->ChiTietTrangThai__Get_Last_By_DH($item->madon)->tentt : 'Chưa xác nhận!' ?>
                                                                         </td>
@@ -81,31 +79,31 @@ $chiTietTrangThai__Get_By_Id_DH = $cttt->ChiTietTrangThai__Get_By_Id_DH($madon);
                                                                                 $cttt->ChiTietTrangThai__Check($item->madon, 1) != false // đơn bị từ chối bởi người bán
                                                                             ) : ?>
                                                                                 <button type="button" class="btn btn-sm btn-danger" onclick="return view('<?= $item->madon ?>')">
-                                                                                    <i class="bx bx-x" aria-hidden="true"></i> Đơn đã hủy
+                                                                                    <i class="bx bxs-show" aria-hidden="true"></i> Xem
                                                                                 </button>
 
                                                                             <?php elseif ($cttt->ChiTietTrangThai__Check($item->madon, 6) != false) :   // đơn được giao thành công
                                                                             ?>
 
                                                                                 <button type="button" class="btn btn-sm btn-success btn-update" onclick="return view('<?= $item->madon ?>')">
-                                                                                    <i class="bx bxs-happy-heart-eyes" aria-hidden="true"></i> Đơn đã giao
+                                                                                    <i class="bx bxs-show" aria-hidden="true"></i> Xem
                                                                                 </button>
                                                                             <?php elseif ($cttt->ChiTietTrangThai__Check($item->madon, 7) != false) :   // giao hàng thất bại 
                                                                             ?>
 
-                                                                                <!-- <button type="button" class="btn btn-sm btn-danger" onclick="return view('<?= $item->madon ?>')">
-                                                                                    <i class="bx bx-x" aria-hidden="true"></i> Đơn đã hủy
-                                                                                </button> -->
+                                                                                <button type="button" class="btn btn-sm btn-danger" onclick="return view('<?= $item->madon ?>')">
+                                                                                    <i class="bx bxs-show" aria-hidden="true"></i> Xem
+                                                                                </button>
                                                                             <?php elseif ($cttt->ChiTietTrangThai__Check($item->madon, 8) != false) :   // đơn đã bị huỷ bởi người mua 
                                                                             ?>
 
                                                                                 <button type="button" class="btn btn-sm btn-danger" onclick="return view('<?= $item->madon ?>')">
-                                                                                    <i class="bx bx-x" aria-hidden="true"></i> Đơn đã hủy
+                                                                                    <i class="bx bxs-show" aria-hidden="true"></i> Xem
                                                                                 </button>
                                                                             <?php else : ?>
                                                                                 <?php if (isset($cttt->ChiTietTrangThai__Get_Last_By_DH($item->madon)->tentt) || $cttt->ChiTietTrangThai__Get_Last_By_DH($item->madon)->matt == 0) : ?>
                                                                                     <button type="button" class="btn btn-sm btn-danger btn-update" onclick="return remove('<?= $item->madon ?>')">
-                                                                                        <i class="bx bxs-edit" aria-hidden="true"></i> Hủy đơn
+                                                                                        <i class="bx bx-x" aria-hidden="true"></i> Hủy đơn
                                                                                     </button>
 
                                                                                     <button type="button" class="btn btn-sm btn-primary btn-update" onclick="return view('<?= $item->madon ?>')">

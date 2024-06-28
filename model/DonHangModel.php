@@ -34,7 +34,7 @@ class DonHangModel extends Database
 
     public function DonHang__Get_All()
     {
-        $obj = $this->connect->prepare("SELECT * FROM donhang");
+        $obj = $this->connect->prepare("SELECT * FROM donhang ORDER BY madon DESC");
         $obj->setFetchMode(PDO::FETCH_OBJ);
         $obj->execute();
         return $obj->fetchAll();

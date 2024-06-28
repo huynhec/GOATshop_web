@@ -32,7 +32,7 @@ $donHang__Get_All = $dh->DonHang__Get_All();
             <div class="main-data">
                 <h3 class="section-title">Danh sách đơn hàng</h3>
                 <div class="table-responsive">
-                    <table id="table_js" class="table table-striped" style="width:100%">
+                    <table id="table_js_d" class="table table-striped" style="width:100%">
                         <thead class="table-dark">
                             <tr>
                                 <th>ID</th>
@@ -65,6 +65,10 @@ $donHang__Get_All = $dh->DonHang__Get_All();
                                             <button type="button" class="btn btn-success btn-update" onclick="return update_obj('<?= $item->madon ?>')">
                                                 <i class="bx bx-edit" aria-hidden="true"></i> Đơn đã giao
                                             </button>
+                                        <?php elseif ($cttt->ChiTietTrangThai__Check($item->madon, 7) != false) :   // đơn bị giao thất bại?>
+                                            <button type="button" class="btn btn-danger btn-update" onclick="return update_obj('<?= $item->madon ?>')">
+                                                <i class="bx bx-edit" aria-hidden="true"></i> Đơn đã huỷ
+                                            </button>
                                         <?php elseif ($cttt->ChiTietTrangThai__Check($item->madon, 8) != false) :   // đơn bị huỷ bởi người mua?>
                                             <button type="button" class="btn btn-danger btn-update" onclick="return update_obj('<?= $item->madon ?>')">
                                                 <i class="bx bx-edit" aria-hidden="true"></i> Đơn đã huỷ
@@ -92,6 +96,12 @@ $donHang__Get_All = $dh->DonHang__Get_All();
 </div>
 
 <script>
+window.addEventListener("load", function () {
+    $("#table_js_d").DataTable({
+    order: [[0, "desc"]], // Sắp xếp theo cột đầu tiên (index 0) giảm dần ("desc")
+  });
+});
+
     function handleUpdate() {
         Swal.fire({
             title: 'Thông báo',

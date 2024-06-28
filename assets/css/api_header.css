@@ -534,6 +534,7 @@
     width: 100%;
     vertical-align: middle;
     padding: 0;
+    padding-top: 30px;
   }
 
   .navbar .navbar-logo {
@@ -560,7 +561,7 @@
     opacity: 1;
     visibility: visible;
     color: #fff;
-    top: 12px;
+    top: 42px;
   }
 
   .navbar.active-user-menu .navbar-display-user {
@@ -583,7 +584,7 @@
     bottom: 0;
     width: 310px;
     height: 100%;
-    padding: 60px 10px 10px;
+    padding: 90px 10px 10px;
     transition: right 0.3s;
   }
 

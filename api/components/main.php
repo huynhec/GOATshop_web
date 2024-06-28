@@ -22,6 +22,9 @@ if (isset($_GET['pages']) && !isset($_GET['req'])) {
         case "thuong-hieu":
             require_once "pages/thuong-hieu/index.php";
             break;
+        case "goi-y-sp":
+            require_once "pages/goi-y-sp/index.php";
+            break;
         case "khuyen-mai":
             require_once "pages/khuyen-mai/index.php";
             break;

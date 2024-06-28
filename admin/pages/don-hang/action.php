@@ -14,9 +14,9 @@ if (isset($_GET['req'])) {
             $manv = isset($_SESSION['admin']->manv) ? $_SESSION['admin']->manv : (isset($_SESSION['nhanvien']->manv) ? $_SESSION['nhanvien']->manv : $_SESSION['manager']->manv);
             $ngaytao = date('Y-m-d H:i:s');
             $res += $cttt->ChiTietTrangThai__Add($madon, $matt, $manv, $ngaytao);
-            if ($matt = 1) {
+            if ($matt == 6) {
                 // cập nhật trạng thái đơn hàng
-                $trangthai = 0;
+                $trangthai = 1;
                 $dh->DonHang__Update_State($madon, $trangthai);
             }
 

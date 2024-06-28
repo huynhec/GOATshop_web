@@ -90,6 +90,21 @@ class SanPhamModel extends Database
         $obj->execute();
         return $obj->fetchAll();
     }
+    public function SanPham__Get_Top_Khuyenmai($limit)
+    {
+        $obj = $this->connect->prepare("SELECT sp.*
+        FROM sanpham sp
+        WHERE EXISTS (
+        SELECT 1
+        FROM dongia dg
+        WHERE sp.masp = dg.masp
+        AND dg.apdung = 1
+        AND dg.dongia < (SELECT MAX(dongia) FROM dongia WHERE masp = sp.masp)) AND sp.trangthai =1
+        LIMIT $limit");
+        $obj->setFetchMode(PDO::FETCH_OBJ);
+        $obj->execute();
+        return $obj->fetchAll();
+    }
 
 
     public function SanPham__Get_Top_Updated($limit = 6)
@@ -315,7 +330,7 @@ class SanPhamModel extends Database
         $obj->execute();
         return $obj->fetchAll();
     }
-    public function SanPham__Get_By_Gy_Paged($page_number, $masp)
+    public function SanPham__Get_By_Gy_Paged($page_number, $makh)
     {
         // Số lượng sp trên mỗi trang
         $items_per_page = 18;
@@ -329,7 +344,7 @@ class SanPhamModel extends Database
             "SELECT *
         FROM goiy_user_based
         INNER JOIN sanpham ON goiy_user_based.item = sanpham.masp
-        WHERE goiy_user_based.user = $masp AND sanpham.trangthai = 1
+        WHERE goiy_user_based.user = $makh AND sanpham.trangthai = 1
         ORDER BY goiy_user_based.rank ASC
         LIMIT :page_start, :page_end"
         );

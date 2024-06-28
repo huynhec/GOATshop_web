@@ -22,6 +22,7 @@ $sp__Get_Top_Random = $sp->SanPham__Get_Top_Random(6);
 $goi_Y_User_Based = $gy->Goi_Y_User_Based($makh);
 $banner__Show = $bn->Banner__Show();
 $sanPham__Get_Khuyenmai = $sp->SanPham__Get_Khuyenmai();
+$sanPham__Get_Top_Khuyenmai = $sp->SanPham__Get_Top_Khuyenmai(6);
 
 $top = 0;
 ?>
@@ -65,7 +66,7 @@ $top = 0;
         <div class="main-container">
             <?php if (isset($_SESSION['user']) && count($goi_Y_User_Based) > 0) : ?>
                 <div class="main-title-container">
-                    <a href="index.php?pages=sp-moi&page=1">
+                    <a href="index.php?pages=goi-y-sp">
                         <div class="item-title">Dành riêng cho bạn!
                         </div>
                     </a>
@@ -144,8 +145,8 @@ $top = 0;
                 </a>
             </div>
             <div class="main-item-container" style="background-color:bisque;">
-                <?php foreach ($sanPham__Get_Khuyenmai as $item) : ?>
-                    <?php if (count($sanPham__Get_Khuyenmai) > 0) : ?>
+                <?php foreach ($sanPham__Get_Top_Khuyenmai as $item) : ?>
+                    <?php if (count($sanPham__Get_Top_Khuyenmai) > 0) : ?>
                         <?php $anhSp__Get_By_Id_Sp_First = $anhSp->AnhSp__Get_By_Id_Sp_First($item->masp); ?>
                         <?php if (isset($anhSp__Get_By_Id_Sp_First->masp)) : ?>
                             <div class="product-item" data-masp="<?= $anhSp__Get_By_Id_Sp_First->masp ?>" onmouseenter="startTimer(this)" onmouseleave="endTimer()" onclick="endTimer()">
@@ -279,9 +280,7 @@ $top = 0;
 
             <div class="main-container">
                 <div class="main-title-container">
-                    <a href="index.php?pages=sp-moi&page=1">
                         <div class="item-title">Bạn có thể mua !? </div>
-                    </a>
                 </div>
                 <div class="product-slider">
                     <div class="product-container-random">

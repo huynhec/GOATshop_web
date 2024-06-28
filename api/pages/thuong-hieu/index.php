@@ -23,7 +23,7 @@ $sanPham__Get_By_Id_Thuonghieu = $sp->SanPham__Get_By_Id_Thuonghieu($math);
 <main class="main">
     <div class="main-container">
         <div class="main-title-container">
-                <div class="item-title color-2" style="font-weight: bold; font-size: 20px; margin-top: 100px">Thương hiệu <?= $th->ThuongHieu__Get_By_Id($math)->tenth ?></div>
+                <div class="item-title color-2" style="font-weight: bold; font-size: 20px; margin-top: 130px">Thương hiệu <?= $th->ThuongHieu__Get_By_Id($math)->tenth ?></div>
         </div>
         <div class="main-item-container">
             <?php foreach ($sanPham__Get_By_Th_Paged as $item) : ?>
@@ -102,7 +102,7 @@ $sanPham__Get_By_Id_Thuonghieu = $sp->SanPham__Get_By_Id_Thuonghieu($math);
             // Hiển thị nút đầu trang
             if ($page_number > 1) {
                 echo '<a href="index.php?pages=thuong-hieu&math=' . $math . '&page=1" class="pagination-link">
-                           <i class="fa fa-angle-double-left""></i>
+                           <i class="fas fa-angle-double-left""></i>
                       </a>';
             }
 
@@ -128,7 +128,7 @@ $sanPham__Get_By_Id_Thuonghieu = $sp->SanPham__Get_By_Id_Thuonghieu($math);
             // Hiển thị nút cuối trang
             if ($page_number < $total_pages) {
                 echo '<a href="index.php?pages=thuong-hieu&math=' . $math . '&page=' . $total_pages . '" class="pagination-link">
-                            <i class="fa fa-angle-double-right""></i>
+                            <i class="fas fa-angle-double-right""></i>
                        </a>';
             }
             ?>

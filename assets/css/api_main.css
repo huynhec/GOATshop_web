@@ -1455,7 +1455,7 @@ a.slide-btn2 {
   display: flex;
   flex-wrap: nowrap;
   flex-direction: column;
-  margin: 0 10px;
+  margin: 30px 10px 0 10px;
   padding: 0;
   overflow-x: auto;
   scroll-behavior: smooth;
@@ -2293,7 +2293,7 @@ h1 {
   }
   .order-body {
     flex: 1 1 auto;
-    font-size: x-small;
+    font-size: xx-small;
     padding: var(--bs-card-spacer-y) var(--bs-card-spacer-x);
     color: var(--bs-card-color);
   }

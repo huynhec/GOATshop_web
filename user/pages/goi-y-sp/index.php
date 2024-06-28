@@ -15,12 +15,12 @@ $gy = new GoiYModel();
 
 
 // Lấy số trang từ tham số truyền vào hoặc mặc định là 1
-$math = isset($_GET['masp']) ? intval($_GET['masp']) : 1;
+$makh = isset($_SESSION['user']->makh) ? $_SESSION['user']->makh : 0;
 $page_number = isset($_GET['page']) ? intval($_GET['page']) : 1;
 
 // Lấy danh sách cho trang hiện tại
-$sanPham__Get_By_Gy_Paged = $sp->SanPham__Get_By_Gy_Paged($page_number, $masp);
-$sanPham__Get_Goiy = $sp->SanPham__Get_Goiy($masp);
+$sanPham__Get_By_Gy_Paged = $sp->SanPham__Get_By_Gy_Paged($page_number, $makh);
+$sanPham__Get_Goiy = $sp->SanPham__Get_Goiy($makh);
 ?>
 
 <main class="main">
@@ -104,34 +104,34 @@ $sanPham__Get_Goiy = $sp->SanPham__Get_Goiy($masp);
 
             // Hiển thị nút đầu trang
             if ($page_number > 1) {
-                echo '<a href="index.php?pages=thuong-hieu&math=' . $math . '&page=1" class="pagination-link">
-                           <i class="fa fa-angle-double-left""></i>
+                echo '<a href="index.php?pages=goi-y-sp&page=1" class="pagination-link">
+                           <i class="fas fa-angle-double-left""></i>
                       </a>';
             }
 
             // Hiển thị nút trước
             if ($page_number > 1) {
-                echo '<a href="index.php?pages=thuong-hieu&math=' . $math . '&page=' . ($page_number - 1) . '" class="pagination-link">
+                echo '<a href="index.php?pages=goi-y-sp&page=' . ($page_number - 1) . '" class="pagination-link">
                           <i class="fas fa-angle-left"></i>
                      </a>';
             }
 
             // Hiển thị các trang gần đó
             for ($i = max(1, $page_number - 2); $i <= min($page_number + 2, $total_pages); $i++) {
-                echo '<a href="index.php?pages=thuong-hieu&math=' . $math . '&page=' . $i . '" class="pagination-link ' . ($page_number == $i ? 'active' : '') . '">' . $i . '</a>';
+                echo '<a href="index.php?pages=goi-y-sp&page=' . $i . '" class="pagination-link ' . ($page_number == $i ? 'active' : '') . '">' . $i . '</a>';
             }
 
             // Hiển thị nút sau
             if ($page_number < $total_pages) {
-                echo '<a href="index.php?pages=thuong-hieu&math=' . $math . '&page=' . ($page_number + 1) . '" class="pagination-link">
+                echo '<a href="index.php?pages=goi-y-sp&page=' . ($page_number + 1) . '" class="pagination-link">
                             <i class="fas fa-angle-right"></i>
                       </a>';
             }
 
             // Hiển thị nút cuối trang
             if ($page_number < $total_pages) {
-                echo '<a href="index.php?pages=thuong-hieu&math=' . $math . '&page=' . $total_pages . '" class="pagination-link">
-                            <i class="fa fa-angle-double-right""></i>
+                echo '<a href="index.php?pages=goi-y-sp&page=' . $total_pages . '" class="pagination-link">
+                            <i class="fas fa-angle-double-right""></i>
                        </a>';
             }
             ?>

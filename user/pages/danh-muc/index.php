@@ -106,7 +106,7 @@ $sanPham__Get_All = $sp->SanPham__Get_All(1);
             // Hiển thị nút đầu trang
             if ($page_number > 1) {
                 echo '<a href="index.php?pages=danh-muc&page=1" class="pagination-link">
-                        <i class="fa fa-angle-double-left""></i>
+                        <i class="fas fa-angle-double-left""></i>
                       </a>';
             }
 

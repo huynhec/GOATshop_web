@@ -20,7 +20,7 @@ if (isset($_GET['req'])) {
     switch ($_GET['req']) {
         case "add":
             $tenbanner = $_POST["tenbanner"];
-            $ngaythem = date("Y-m-d H:i:s");
+            $ngaythem = date("Y-m-d_H-i-s");
             $trangthai = $_POST["trangthai"];
             //tạo tên folder
             $foldername = 'banner_' . $ngaythem;

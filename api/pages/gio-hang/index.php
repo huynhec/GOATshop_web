@@ -89,7 +89,7 @@ $dc__Get_By_Id_makh = $dc->DiaChi__Get_By_Id($makh);
                             <!-- <div class="card-body"> -->
 
                                 <div class="row">
-                                    <div class="cart-col" style="margin-top: 40px">
+                                    <div class="cart-col" style="margin-top: 78px;">
                                         <h5 class="mb-3"><a href="?pages=trang-chu" class="text-body"><i class="bx bx-left-arrow-alt me-2"></i>Tiếp tục mua sắm</a></h5>
                                         <hr>
 
