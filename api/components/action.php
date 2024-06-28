@@ -50,6 +50,8 @@ if (isset($_POST['action'])) {
         case 'checkout':
             $makh = $_POST['makh'];
             $tenkh = $_POST['tenkh'];
+            $payment_method = $_POST['payment_method'];
+            $shipping_method = $_POST['shipping_method'];
             //địa chỉ
             if (isset($_POST['diachi'])) {
                 $diachi_parts = explode(', ', $_POST['diachi']);
@@ -97,10 +99,22 @@ if (isset($_POST['action'])) {
 
             $res = $cttt->ChiTietTrangThai__Add($madh, $matt, $manv, $ngaytao);
             $res1 = $gh->GioHang__Update_Trang_Thai($magh, 0);
-            if ($res !== 0 && $res1 !== 0) {
-                echo true;
+            if ($payment_method == 'cod') {
+                if ($res !== 0 && $res1 !== 0) {
+                    echo true;
+                } else {
+                    echo false;
+                }
             } else {
-                echo false;
+            }
+            $madon = $madh;
+            $total = $dh->DonHang__Get_By_Id($madon)->tongdh + $shipping_method;
+            $total_amount = $total;
+            if ($payment_method == 'bank_transfer') {
+                // echo json_encode(['success' => true, 'payment_method' => 'bank_transfer', 'madon' => $madon]);
+                echo json_encode(['success' => true, 'payment_method' => 'bank_transfer', 'madon' => $madon, 'total_amount' => $total_amount]);
+            } else {
+                echo json_encode(['success' => true, 'payment_method' => 'cod']);
             }
             break;
         case 'add':

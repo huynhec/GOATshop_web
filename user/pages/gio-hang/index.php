@@ -20,6 +20,7 @@ require_once '../model/AnhSpModel.php';
 require_once '../model/CommonModel.php';
 require_once '../model/SizeModel.php';
 require_once '../model/DiaChiModel.php';
+require_once '../model/DonHangModel.php';
 
 $gh = new GioHangModel();
 $ctgh = new ChiTietGioHangModel();
@@ -28,10 +29,12 @@ $anhSp = new AnhSpModel();
 $cm = new CommonModel();
 $sz = new SizeModel();
 $dc = new DiaChiModel();
+$dh = new DonHangModel();
 $makh = isset($_SESSION['user']->makh) ? $_SESSION['user']->makh : 0;
 $gioHang__Get_By_Id_Kh = $gh->GioHang__Get_By_Id_Kh($makh);
 $chiTietGioHang__Get_By_Id_Gh = $ctgh->ChiTietGioHang__Get_By_Id_GH(isset($gioHang__Get_By_Id_Kh->magh) ? $gioHang__Get_By_Id_Kh->magh : 0);
 $dc__Get_By_Id_makh = $dc->DiaChi__Get_By_Id($makh);
+$donHang__Get_By_Id_Kh = $dh->DonHang__Get_By_Id_KH($makh);
 ?>
 <style>
     /* CSS for payment method section */
@@ -43,14 +46,22 @@ $dc__Get_By_Id_makh = $dc->DiaChi__Get_By_Id($makh);
         margin-bottom: 10px;
     }
 
-    .section-title {
-        font-size: 18px;
+    .section-title-method {
+        font-size: 14px;
         font-weight: bold;
+        display: block;
+        background: #000000;
+        color: #fff;
+        text-align: center;
+        outline: none;
+        cursor: pointer;
+        padding: 10px;
+        margin: 0px;
     }
 
     .section-content {
         border: 1px solid #ccc;
-        padding: 10px;
+        padding: 5px;
         border-radius: 5px;
     }
 
@@ -76,6 +87,65 @@ $dc__Get_By_Id_makh = $dc->DiaChi__Get_By_Id($makh);
 
     .radio-label-primary {
         font-weight: bold;
+    }
+
+    .section .section-content .content-box .content-box-row:first-child {
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+        border-top: none;
+    }
+
+    .radio-wrapper .radio-label .radio-label-primary,
+    .checkbox-wrapper .checkbox-label .checkbox-label-primary {
+        display: table-cell;
+        width: 100%;
+    }
+
+    .section .section-content .content-box .content-box-row {
+        display: table;
+        box-sizing: border-box;
+        width: 100%;
+        border-top: 1px solid #d9d9d9;
+        zoom: 1;
+    }
+
+    .radio-wrapper .radio-label,
+    .checkbox-wrapper .checkbox-label {
+        display: flex !important;
+        cursor: pointer !important;
+        align-items: center;
+        padding: 0.8em;
+        width: auto;
+    }
+
+    .radio-wrapper .two-page,
+    .checkbox-wrapper .checkbox-label {
+        display: flex;
+        cursor: pointer;
+        align-items: center;
+        padding: 1.3em;
+        width: auto;
+    }
+
+    .radio-wrapper .payment-method-checkbox {
+        display: flex;
+        align-self: center;
+    }
+
+    .radio-wrapper .radio-input,
+    .checkbox-wrapper .checkbox-input {
+        display: table-cell;
+        padding-right: 0.75em;
+        white-space: nowrap;
+    }
+
+    .radio-wrapper .radio-content-input {
+        display: flex;
+        align-items: center;
+    }
+
+    .section .section-content .content-box .content-box-row.content-box-row-secondary {
+        background-color: #fafafa;
     }
 </style>
 <script src="../assets/js/diachi.js"></script>
@@ -234,76 +304,98 @@ $dc__Get_By_Id_makh = $dc->DiaChi__Get_By_Id($makh);
                                                             </div>
                                                         </div>
                                                         <hr class="my-4">
-
-                                                        <div class="d-flex justify-content-between">
-                                                            <p class="mb-2">Tổng hóa đơn</p>
-                                                            <b class="mb-2 text-danger" id="gh-sum"><?= number_format($ctgh->ChiTietGioHang__Sum_Tien_GH($item->magh)->sum_tien) ?>đ</b>
-                                                        </div>
                                                         <div id="section-payment-method" class="section">
                                                             <div class="order-checkout__loading--box">
                                                                 <div class="order-checkout__loading--circle"></div>
                                                             </div>
-                                                            <div class="section-header">
-                                                                <h2 class="section-title">Phương thức thanh toán</h2>
-                                                            </div>
-                                                            <!-- <div class="section-content">
-                                                                <div class="content-box">
-
-
-                                                                    <div class="radio-wrapper content-box-row">
-                                                                        <label class="two-page" for="payment">
-
-                                                                            <div class="radio-input payment-method-checkbox">
-                                                                                <input class="input-radio" name="payment_method_id" type="radio" value="" checked="">
-                                                                            </div>
-
-                                                                            <div class="radio-content-input">
-                                                                                <img class="main-img" src="https://hstatic.net/0/0/global/design/seller/image/payment/cod.svg?v=6">
-                                                                                <div class="content-wrapper">
-                                                                                    <span class="radio-label-primary">Thanh toán khi giao hàng (COD)</span>
-                                                                                    <span class="quick-tagline hidden"></span>
-
+                                                            <div class="step-sections " step="2">
+                                                                <div id="section-shipping-rate" class="section">
+                                                                    <div class="order-checkout__loading--box">
+                                                                        <div class="order-checkout__loading--circle"></div>
+                                                                    </div>
+                                                                    <div class="section-header">
+                                                                        <h2 class="section-title-method">Phương thức vận chuyển</h2>
+                                                                    </div>
+                                                                    <div class="section-content">
+                                                                        <div class="content-box">
+                                                                            <div class="content-box-row">
+                                                                                <div class="radio-wrapper">
+                                                                                    <label class="radio-label" for="shipping_rate_id_1000166705">
+                                                                                        <div class="radio-input">
+                                                                                            <input id="shipping_rate_id" class="input-radio" type="radio" name="shipping_rate_id" value="30000" checked>
+                                                                                        </div>
+                                                                                        <span class="radio-label-primary">Giao hàng tận nơi</span>
+                                                                                        <span class="radio-accessory content-box-emphasis">
+                                                                                            30,000₫
+                                                                                        </span>
+                                                                                    </label>
                                                                                 </div>
                                                                             </div>
-                                                                        </label>
-                                                                    </div>
-
-                                                                    <div class="radio-wrapper content-box-row">
-                                                                        <label class="two-page" for="payment_method_id_1002112115">
-                                                                            <div class="radio-input payment-method-checkbox">
-                                                                                <input type-id="2" id="payment_method_id_1002112115" class="input-radio" name="payment_method_id" type="radio" value="1002112115">
-                                                                            </div>
-
-                                                                            <div class="radio-content-input">
-                                                                                <img class="main-img" src="https://hstatic.net/0/0/global/design/seller/image/payment/other.svg?v=6">
-                                                                                <div class="content-wrapper">
-                                                                                    <span class="radio-label-primary">Chuyển khoản qua ngân hàng</span>
-                                                                                    <span class="quick-tagline hidden"></span>
-
-
-                                                                                </div>
-                                                                            </div>
-                                                                        </label>
-                                                                    </div>
-
-                                                                    <div class="radio-wrapper content-box-row content-box-row-secondary hidden" for="payment_method_id_1002112115">
-                                                                        <div class="blank-slate">
-                                                                            <img src='https://img.vietqr.io/image/vietinbank-113366668888-compact.jpg' />
                                                                         </div>
                                                                     </div>
-
-
                                                                 </div>
-                                                            </div> -->
+
+                                                                <div id="section-payment-method" class="section">
+                                                                    <div class="order-checkout__loading--box">
+                                                                        <div class="order-checkout__loading--circle"></div>
+                                                                    </div>
+                                                                    <div class="section-header">
+                                                                        <h2 class="section-title-method">Phương thức thanh toán</h2>
+                                                                    </div>
+                                                                    <div class="section-content">
+                                                                        <div class="content-box">
+                                                                            <div class="radio-wrapper content-box-row">
+                                                                                <label class="two-page" for="payment_method_id_1002112112">
+                                                                                    <div class="radio-input payment-method-checkbox">
+                                                                                        <input type-id="1" id="payment_method_id" class="input-radio" name="payment_method_id" type="radio" value="cod" checked>
+                                                                                    </div>
+
+                                                                                    <div class="radio-content-input">
+                                                                                        <img class="main-img" src="https://hstatic.net/0/0/global/design/seller/image/payment/cod.svg?v=6">
+                                                                                        <div class="content-wrapper">
+                                                                                            <span class="radio-label-primary">Thanh toán khi giao hàng (COD)</span>
+                                                                                            <span class="quick-tagline hidden"></span>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </label>
+                                                                            </div>
+
+                                                                            <div class="radio-wrapper content-box-row" id="radio-wrapper">
+                                                                                <label class="two-page" for="payment_method_id_1002112115">
+                                                                                    <div class="radio-input payment-method-checkbox">
+                                                                                        <input type-id="2" id="payment_method_id" class="input-radio" name="payment_method_id" type="radio" value="bank_transfer">
+                                                                                    </div>
+
+                                                                                    <div class="radio-content-input">
+                                                                                        <img class="main-img" src="https://hstatic.net/0/0/global/design/seller/image/payment/other.svg?v=6">
+                                                                                        <div class="content-wrapper">
+                                                                                            <span class="radio-label-primary">Chuyển khoản qua ngân hàng</span>
+                                                                                            <span class="quick-tagline hidden"></span>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </label>
+                                                                            </div>
+                                                                            <hr>
+                                                                            <div class="d-flex justify-content-between">
+                                                                                <p class="mb-2" style="font-weight: bolder;">Tổng hóa đơn: </p>
+                                                                                <?php $total = $ctgh->ChiTietGioHang__Sum_Tien_GH($item->magh)->sum_tien + 30000 ?>
+                                                                                <b class="mb-2 text-danger" id="gh-sum"><?= number_format($total) ?>đ</b>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
                                                         </div>
+
                                                         <hr class="my-2">
-                                                        <button type="button" onclick="return checkout()" class="btn btn-lg btn-danger w-100">
+                                                        <button type="button" onclick="return checkout()" class="btn btn-lg btn-outline-dark w-100 fw-bold" style="border-width: 2px;">
                                                             <input type="hidden" id="magh" name="magh" value="<?= $gioHang__Get_By_Id_Kh->magh ?>" readonly>
                                                             <input type="hidden" id="makh" name="makh" value="<?= $_SESSION['user']->makh ?>" readonly>
                                                             <input type="hidden" id="username" name="username" value="<?= $_SESSION['user']->username ?>" readonly>
                                                             <input type="hidden" id="password" name="password" value="<?= $_SESSION['user']->password ?>" readonly>
                                                             <input type="hidden" id="action" name="action" value="checkout">
-                                                            <span>Đặt hàng <i class="bx bxs-right-arrow-alt"></i></span>
+                                                            <span>Hoàn tất đơn hàng </span>
                                                         </button>
                                                     </form>
                                                 </div>
@@ -324,6 +416,34 @@ $dc__Get_By_Id_makh = $dc->DiaChi__Get_By_Id($makh);
 </main>
 
 <script>
+    // function toggleBankDetails() {
+    //     var bankDetails = document.getElementById("blank-slate");
+    //     var paymentMethods = document.getElementsByName("payment_method_id");
+    //     for (var i = 0; i < paymentMethods.length; i++) {
+    //         if (paymentMethods[i].value === "bank_transfer" && paymentMethods[i].checked) {
+    //             bankDetails.style.display = "block";
+    //         } else if (paymentMethods[i].checked) {
+    //             bankDetails.style.display = "none";
+    //         }
+    //     }
+    // }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        var radioWrappers = document.querySelectorAll('.radio-wrapper');
+
+        radioWrappers.forEach(function(wrapper) {
+            wrapper.addEventListener('click', function() {
+                // Tìm input radio trong wrapper
+                var radioInput = wrapper.querySelector('.input-radio');
+
+                // Nếu input radio được tìm thấy và chưa được chọn, thay đổi trạng thái
+                if (radioInput && !radioInput.checked) {
+                    radioInput.checked = true;
+                }
+            });
+        });
+    });
+
     function clear_road() {
         document.getElementById("road").value = '';
     }
@@ -388,31 +508,61 @@ $dc__Get_By_Id_makh = $dc->DiaChi__Get_By_Id($makh);
                 email: document.getElementById('email').value,
                 magh: document.getElementById('magh').value,
                 username: document.getElementById('username').value,
-                password: document.getElementById('username').value
+                password: document.getElementById('username').value,
+                payment_method: $("input[name='payment_method_id']:checked").val(),
+                shipping_method: $("input[name='shipping_rate_id']:checked").val()
             },
             success: function(response) {
-                console.log(response); // Xác minh phản hồi từ server
-                if (response == true) {
-                    Swal.fire({
-                        icon: "success",
-                        title: "Bạn đã đặt hàng thành công!",
-                        confirmButtonText: "OK",
-                    }).then((result) => {
-                        location.href = '?pages=trang-chu';
-                    });
+                var data = JSON.parse(response);
+                if (data.success) {
+                    if (data.payment_method === 'bank_transfer') {
+                        // window.location.href = './pages/gio-hang/viet_qr.php?madon=' + data.madon;
+                        window.location.href = './pages/gio-hang/viet_qr.php?madon=' + data.madon + '&total_amount=' + data.total_amount;
+                    } else {
+                        Swal.fire({
+                            icon: "success",
+                            title: "Bạn đã đặt hàng thành công!",
+                            confirmButtonText: "OK",
+                        }).then(() => {
+                            location.href = '?pages=trang-chu';
+                        });
+                    }
                 } else {
                     Swal.fire({
                         icon: "error",
                         title: "Đặt hàng thất bại!",
-                        text: response, // Hiển thị lỗi từ server nếu có
+                        text: data.message,
                         confirmButtonText: "OK"
                     });
                 }
             },
             error: function(xhr, status, error) {
-                console.error("Error: " + status + " " + error); // Kiểm tra lỗi từ server
-                console.error(xhr.responseText); // Xem phản hồi lỗi chi tiết từ server
+                console.error("Error: " + status + " " + error);
+                console.error(xhr.responseText);
             }
+            // success: function(response) {
+            //     console.log(response); // Xác minh phản hồi từ server
+            //     if (response == true) {
+            //         Swal.fire({
+            //             icon: "success",
+            //             title: "Bạn đã đặt hàng thành công!",
+            //             confirmButtonText: "OK",
+            //         }).then((result) => {
+            //             location.href = '?pages=trang-chu';
+            //         });
+            //     } else {
+            //         Swal.fire({
+            //             icon: "error",
+            //             title: "Đặt hàng thất bại!",
+            //             text: response, // Hiển thị lỗi từ server nếu có
+            //             confirmButtonText: "OK"
+            //         });
+            //     }
+            // },
+            // error: function(xhr, status, error) {
+            //     console.error("Error: " + status + " " + error); // Kiểm tra lỗi từ server
+            //     console.error(xhr.responseText); // Xem phản hồi lỗi chi tiết từ server
+            // }
         });
 
     }

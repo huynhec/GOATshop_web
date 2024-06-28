@@ -59,8 +59,13 @@ $trangThai__Get_BY_Id_DH = $tt->TrangThai__Get_By_Id_DH($madon);
             </tbody>
             <tfoot>
                 <tr class="text-center">
+                    <th colspan="3">Phí giao hàng:</th>
+                    <th colspan="2">30,000đ</th>
+                </tr>
+                <tr class="text-center">
                     <th colspan="3">Tổng số tiền:</th>
-                    <th colspan="2"><?= number_format($ctdh->ChiTietDonHang__Sum_Tien_DH($madon)->sum_tien) ?></th>
+                    <?php $total = $ctdh->ChiTietDonHang__Sum_Tien_DH($madon)->sum_tien + 30000 ?>
+                    <th colspan="2"><?= number_format($total) ?>đ</th>
                 </tr>
             </tfoot>
         </table>

@@ -62,7 +62,7 @@ html {
 }
 
 .form-wrapper-1 {
-  width: 60%;
+  width: 50%;
   padding: 2rem;
 
   background-color: #f4f4f4;
@@ -87,7 +87,7 @@ html {
   margin: 20px;
   background-color: #ffffff;
   box-shadow: 0 15px 25px rgba(0, 0, 0, 0.321);
-  width: 410px;
+  width: 95%;
   display: flex;
   justify-content: center;
   flex-direction: column;
