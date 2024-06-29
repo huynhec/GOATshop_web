@@ -78,8 +78,10 @@ if (isset($_GET['req'])) {
                 "/opt/anaconda3/bin/python";
 
 
-            $command = "source /opt/anaconda3/bin/activate; /opt/anaconda3/envs/python=3.9/bin/python main.py 2>&1";
-            $output = shell_exec($command);
+            $command1 = "source /opt/anaconda3/bin/activate; /opt/anaconda3/envs/python=3.9/bin/python convert.py 2>&1";
+            $output1 = shell_exec($command1);
+            $command2 = "source /opt/anaconda3/bin/activate; /opt/anaconda3/envs/python=3.9/bin/python main.py 2>&1";
+            $output2 = shell_exec($command2);
 
             // Tiếp tục xử lý với tệp kết quả
             $fileToImport = $fileDir . 'output_rules.xlsx';

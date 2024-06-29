@@ -65,6 +65,25 @@ class BannerModel extends Database
         $obj->execute(array($tenbanner, $trangthai, $id_banner));
         return $obj->rowCount();
     }
+    public function Anh_Banner__Update($id_banner, $anhbanner)
+    {
+        $obj = $this->connect->prepare("UPDATE banner SET anhbanner=? WHERE id_banner=?");
+        $obj->execute(array($anhbanner, $id_banner));
+        return $obj->rowCount();
+    }
+    public function Folder_Banner__Get_by_Id($id_banner)
+    {
+        $obj = $this->connect->prepare("SELECT 
+            id_banner, 
+            tenbanner, 
+            SUBSTRING_INDEX(SUBSTRING_INDEX(anhbanner, '/', 2), '/', -1) AS truncated_anhbanner, 
+            trangthai 
+            FROM banner
+            WHERE id_banner = ?;");
+        $obj->setFetchMode(PDO::FETCH_OBJ);
+        $obj->execute(array( $id_banner));
+        return $obj->fetch();
+    }
 
     public function banner__Delete($masp)
     {

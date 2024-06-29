@@ -199,11 +199,11 @@ if (isset($_GET['req'])) {
             error_reporting(E_ALL);
             ini_set('display_errors', 1);
             
-            // if ($res != 0) {
-            //     header("location: ../../index.php?pages=anh-san-pham&masp=$masp&msg=success");
-            // } else {
-            //     header("location: ../../index.php?pages=anh-san-pham&masp=$masp&msg=error");
-            // }
+            if ($res != 0) {
+                header("location: ../../index.php?pages=anh-san-pham&masp=$masp&msg=success");
+            } else {
+                header("location: ../../index.php?pages=anh-san-pham&masp=$masp&msg=error");
+            }
             break;
 
         case "c_delete":

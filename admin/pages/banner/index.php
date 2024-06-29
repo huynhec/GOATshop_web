@@ -31,7 +31,7 @@ $banner_Get_All = $bn->banner__Get_All(-1);
         </ul>
     </div>
     <div class="row section-container">
-        <div class="col-7">
+        <div class="col-6">
             <div class="main-data">
                 <h3 class="section-title">Danh sách banner</h3>
                 <div class="table-responsive">

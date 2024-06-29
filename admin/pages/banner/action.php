@@ -93,76 +93,37 @@ if (isset($_GET['req'])) {
             }
             break;
 
-        case "c_add":
-            $masp = $_POST["masp"];
-            $totalRes = 0;
-            // Kiểm tra xem có tệp ảnh đã tải lên không
-            if (!empty($_FILES["anhsp"]["name"])) {
-
-                // Tạo một mảng để lưu trữ đường dẫn ảnh cho mỗi sản phẩm
-                $product_images = [];
-
-                foreach ($_FILES["anhsp"]["name"] as $key => $filename) {
-                    // Xử lý và kiểm tra tệp ảnh
-                    $processedImageFilePath = $cm->processAndValidateUploadedFile($_FILES["anhsp"], $masp, $key);
-
-                    // Kiểm tra xem xử lý tệp ảnh thành công hay không
-                    if ($processedImageFilePath) {
-                        // Lưu đường dẫn ảnh vào mảng và thêm vào cơ sở dữ liệu
-                        $product_images[$key] = $processedImageFilePath;
-                        $totalRes += $anhSp->AnhSp__Add($processedImageFilePath, $masp);
-                    } else {
-                        // Sử dụng hình ảnh mặc định nếu xử lý thất bại và thêm vào cơ sở dữ liệu
-                        $product_images[$key] = $defaultImagePath;
-                        $totalRes += $anhSp->AnhSp__Add($defaultImagePath, $masp);
-                    }
-                }
-            } else {
-                // Sử dụng hình ảnh mặc định nếu không có tệp ảnh được tải lên và thêm vào cơ sở dữ liệu
-                $totalRes += $anhSp->AnhSp__Add($defaultImagePath, $masp);
-            }
-
-
-            if ($totalRes > 0) {
-                header("Location: ../../index.php?pages=anh-san-pham&masp=$masp&msg=success");
-                exit();
-            } else {
-                header("Location: ../../index.php?pages=anh-san-pham&masp=$masp&msg=error");
-                exit();
-            }
-
-
         case "c_update":
             $res = 0;
-            $maanh = $_POST["maanh"];
-            $masp = $_POST["masp"];
-            $anhsp_cu = $_POST['anhsp_cu'];
+            $id_banner = $_POST["id_banner"];
+            $anhbanner_cu = $_POST['anhbanner_cu'];
+            $foldername = $bn->Folder_Banner__Get_by_Id($id_banner);
             // Kiểm tra xem có tệp ảnh đã tải lên không
-            if (!empty($_FILES["anhsp"]["name"])) {
+            if (!empty($_FILES["anhbanner"]["name"])) {
                 // Kiểm tra và xử lý tệp
-                $processedImageFilePath = $cm->processAndValidateUploadedFile($_FILES["anhsp"], $masp);
+                $processedImageFilePath = $cm->processAndValidateUploadedFileNotArrays($_FILES["anhbanner"], $foldername->truncated_anhbanner);
 
                 if ($processedImageFilePath) {
                     // Sử dụng đường dẫn tệp để hiển thị hoặc lưu vào cơ sở dữ liệu
-                    $anhsp = $processedImageFilePath;
+                    $anhbanner = $processedImageFilePath;
                 } else {
                     // Sử dụng hình ảnh cũ nếu không có tệp ảnh được tải lên
-                    $anhsp = $_POST['anhsp_cu'];
+                    $anhbanner = $_POST['anhbanner_cu'];
                 }
             } else {
                 // Sử dụng hình ảnh cũ nếu không có tệp ảnh được tải lên
-                $anhsp = $_POST['anhsp_cu'];
+                $anhbanner = $_POST['anhbanner_cu'];
             }
             // Xóa ảnh nếu đường dẫn tồn tại
-            if (file_exists("../../../assets/$anhsp_cu")) {
-                unlink("../../../assets/$anhsp_cu");
+            if (file_exists("../../../assets/$anhbanner_cu")) {
+                unlink("../../../assets/$anhbanner_cu");
             }
-            $res += $anhSp->AnhSp__Update($maanh, $anhsp, $masp);
+            $res += $bn->Anh_Banner__Update($id_banner, $anhbanner);
 
             if ($res != 0) {
-                header("location: ../../index.php?pages=anh-san-pham&masp=$masp&msg=success");
+                header("location: ../../index.php?pages=anh-banner&id_banner=$id_banner&msg=success");
             } else {
-                header("location: ../../index.php?pages=anh-san-pham&masp=$masp&msg=error");
+                header("location: ../../index.php?pages=anh-banner&id_banner=$id_banner&msg=error");
             }
             break;
 

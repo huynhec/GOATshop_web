@@ -6,18 +6,18 @@ $anh_Banner__Get_By_Id_Sp_First = $bn->Anh_Banner__Get_By_Id_Sp_First($id_banner
 ?>
 
 <div class="main-update">
-    <h3 class="section-title">Cập nhật sp nội dung</h3>
+    <h3 class="section-title">Cập nhật nội dung</h3>
     <form class="form-group" action="pages/banner/action.php?req=c_update" method="post" enctype="multipart/form-data">
         <input type="hidden" class="form-control" id="anhbanner_cu" name="anhbanner_cu" required value="<?=$anh_Banner__Get_By_Id_Sp_First->anhbanner?>" readonly>
         <input type="hidden" class="form-control" id="id_banner" name="id_banner" required value="<?=$anh_Banner__Get_By_Id_Sp_First->id_banner?>" readonly>
         <div class="col">
             <label for="c_anh" class="form-label">Hình ảnh</label>
             <input accept="image/*" type='file' class="form-control" id="anhbanner" name="anhbanner">
-            <div id="anhsp_preview"><img src="../assets/<?=$anh_Banner__Get_By_Id_Sp_First->anhbanner ?>" alt="<?= $anhSp__Get_By_Id->maanh ?>" class="img-fluid" width="200"></div>
+            <div id="anhsp_preview"><img src="../assets/<?=$anh_Banner__Get_By_Id_Sp_First->anhbanner ?>" alt="<?= $anh_Banner__Get_By_Id_Sp_First->id_banner ?>" class="img-fluid" width="200px"></div>
         </div>
         <div class="col">
-            <label for="tensp" class="form-label">Tên sản phẩm</label>
-            <input type="text" class="form-control" id="tensp" name="tensp" required value="<?=$sanPham__Get_By_Id->tensp?>" readonly>
+            <label for="tenbanner" class="form-label">Tên sản phẩm</label>
+            <input type="text" class="form-control" id="tenbanner" name="tenbanner" required value="<?=$anh_Banner__Get_By_Id_Sp_First->tenbanner?>" readonly>
         </div>
         <br>
         <div class="col text-center">
@@ -31,7 +31,7 @@ $anh_Banner__Get_By_Id_Sp_First = $bn->Anh_Banner__Get_By_Id_Sp_First($id_banner
 <script>
 
 // Lấy ra đối tượng input có id là 'anhsp'
-    var anhsp = document.getElementById('anhsp');
+    var anhsp = document.getElementById('anhbanner');
     // Lấy ra đối tượng hiển thị ảnh preview có id là 'anhsp_preview'
     var anhsp_preview = document.getElementById('anhsp_preview');
 

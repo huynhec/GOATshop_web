@@ -18,8 +18,8 @@ $loaisp__Get_All_Exist = $loaiSp->LoaiSp__Get_All_Exist();
     <h3 class="section-title">Thêm banner</h3>
     <form class="form-group" action="pages/banner/action.php?req=add" method="post" enctype="multipart/form-data">
         <div class="col">
-            <label for="tensp" class="form-label">Tên banner</label>
-            <input type="text" class="form-control" id="tensp" name="tenbanner" required>
+            <label for="tennbanner" class="form-label">Tên banner</label>
+            <input type="text" class="form-control" id="tenbanner" name="tenbanner" required>
         </div>
 
 
@@ -40,6 +40,7 @@ $loaisp__Get_All_Exist = $loaiSp->LoaiSp__Get_All_Exist();
             </div>
             <div id="anhsp_preview" class="image-preview"></div>
         </div>
+
         <br />
         <div class="col text-center">
             <button type="submit" class="btn btn-primary">Lưu thông tin</button>

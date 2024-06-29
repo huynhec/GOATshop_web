@@ -21,12 +21,12 @@ $anh_Banner__Get_By_Id_Sp_First = $bn->Anh_Banner__Get_By_Id_Sp_First($id_banner
             </li>
             <li><i class='bx bx-chevron-right'></i></li>
             <li>
-                <a class="active" href="index.php?pages=anh-banner&masp=<?= $masp ?>">Hình ảnh</a>
+                <a class="active" href="index.php?pages=anh-banner&masp=<?= $id_banner ?>">Hình ảnh</a>
             </li>
         </ul>
     </div>
     <div class="row section-container">
-        <div class="col-8">
+        <div class="col-7">
             <div class="main-data">
                 <h3 class="section-title">Hình ảnh Banner: <b><?= $banner__Get_By_Id->tenbanner ?></b></h3>
                 <div class="table-responsive">
@@ -60,7 +60,7 @@ $anh_Banner__Get_By_Id_Sp_First = $bn->Anh_Banner__Get_By_Id_Sp_First($id_banner
             </div>
 
         </div>
-        <div class="col-7">
+        <div class="col-5">
             <div class="main-form">
             </div>
         </div>

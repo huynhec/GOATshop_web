@@ -27,4 +27,4 @@ def convert_to_desired_format(input_excel, output_txt):
             output_file.write(f"{order}, {json.dumps(products)}\n")
 
 # Execute the function
-convert_to_desired_format('admin/pages/Association-Rules/dataset/viewlist.xlsx', 'admin/pages/Association-Rules/dataset/formatted_orders.txt')
+convert_to_desired_format('dataset/viewlist.xlsx', 'dataset/formatted_orders.txt')
