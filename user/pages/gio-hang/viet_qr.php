@@ -110,4 +110,10 @@
             flex-wrap: wrap;
             padding: 0 2rem;
         }
+        .text-home {
+            font-size: 36px;
+            /* padding-left: 20rem; */
+            margin: 0;
+            text-align: center;
+        }
     </style>
