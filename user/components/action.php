@@ -99,14 +99,6 @@ if (isset($_POST['action'])) {
 
             $res = $cttt->ChiTietTrangThai__Add($madh, $matt, $manv, $ngaytao);
             $res1 = $gh->GioHang__Update_Trang_Thai($magh, 0);
-            if ($payment_method == 'cod') {
-                if ($res !== 0 && $res1 !== 0) {
-                    echo true;
-                } else {
-                    echo false;
-                }
-            } else {
-            }
             $madon = $madh;
             $total = $dh->DonHang__Get_By_Id($madon)->tongdh + $shipping_method;
             $total_amount = $total;

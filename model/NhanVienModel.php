@@ -44,9 +44,9 @@ class NhanVienModel extends Database
         return $obj->fetchAll();
     }
 
-    public function NhanVien__Add($tenhienthi, $gioitinh, $ngaysinh, $sodienthoai, $diachi, $email, $password, $username, $trangthai, $phanquyen)
+    public function NhanVien__Add($tenhienthi, $gioitinh, $ngaysinh, $sodienthoai, $province, $district, $wards, $road, $email, $password, $username, $trangthai, $phanquyen)
     {
-        // Thêm người dùng vào bảng users
+        // Thêm nhân viên vào bảng users
         $obj = $this->connect->prepare("INSERT INTO users (tenhienthi, username, password, phanquyen, trangthai)
                 VALUES (?, ?, ?, ? , ?)");
         $obj->execute(array($tenhienthi, $username, $password, $phanquyen, $trangthai));
@@ -54,9 +54,22 @@ class NhanVienModel extends Database
         // Lấy mauser vừa được thêm
         $mauser = $this->connect->lastInsertId();
 
-        $obj = $this->connect->prepare("INSERT INTO nhanvien(tennv, gioitinh, ngaysinh, sodienthoai, diachi, email, trangthai, mauser) VALUES (?,?,?,?,?,?,?,?)");
-        $obj->execute(array($tenhienthi, $gioitinh, $ngaysinh, $sodienthoai, $diachi, $email, $trangthai, $mauser));
-        return $obj->rowCount();
+        // Thêm thông tin nhân viên vào bảng nhanvien
+        $obj = $this->connect->prepare("INSERT INTO nhanvien (tennv, gioitinh, ngaysinh, sodienthoai, email, trangthai, mauser)
+                VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $obj->execute(array($tenhienthi, $gioitinh, $ngaysinh, $sodienthoai, $email, $trangthai, $mauser));
+
+        // Lấy manv vừa được thêm
+        $manv = $this->connect->lastInsertId();
+
+
+        // Thêm địa chỉ của nhân viên vào bảng diachi
+        $obj = $this->connect->prepare("INSERT INTO diachi_nv(manv, province, district, wards, road)
+                                    VALUES (?, ?, ?, ?, ?)");
+        $obj->execute(array($manv, $province, $district, $wards, $road));
+
+        // Trả về số hàng đã được thêm vào bảng nhanvien
+        return $obj->rowCount();    
     }
 
     public function NhanVien__Check_Email($email)
@@ -99,11 +112,11 @@ class NhanVienModel extends Database
         }
     }
 
-    public function NhanVien__Update($manv, $tennv, $username, $gioitinh, $ngaysinh, $sodienthoai, $diachi, $email, $password, $trangthai, $phanquyen)
+    public function NhanVien__Update($manv, $tennv, $username, $gioitinh, $ngaysinh, $sodienthoai, $email, $password, $trangthai, $phanquyen)
     {
         $obj = $this->connect->prepare("UPDATE nhanvien nv JOIN users u ON nv.mauser = u.mauser 
-                SET nv.tennv=?, u.username=?, nv.gioitinh=?, nv.ngaysinh=?, nv.sodienthoai=?, nv.diachi=?, nv.email=?, u.password=?, nv.trangthai=?, u.trangthai=?, u.phanquyen=? WHERE nv.manv=?");
-        $obj->execute(array($tennv, $username, $gioitinh, $ngaysinh, $sodienthoai, $diachi, $email, $password, $trangthai, $trangthai, $phanquyen, $manv));
+                SET nv.tennv=?, u.username=?, nv.gioitinh=?, nv.ngaysinh=?, nv.sodienthoai=?, nv.email=?, u.password=?, nv.trangthai=?, u.trangthai=?, u.phanquyen=? WHERE nv.manv=?");
+        $obj->execute(array($tennv, $username, $gioitinh, $ngaysinh, $sodienthoai, $email, $password, $trangthai, $trangthai, $phanquyen, $manv));
         return $obj->rowCount();
     }
 

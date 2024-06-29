@@ -418,3 +418,15 @@ admin|123456
 admin|123456
 admin|123456
 anhliem|1234567
+admin|123456
+admin|123456
+vanbao|1234567
+thanhnhan|1234567
+chilinh|1234567
+thanhnhan|1234567
+thihien|1234567
+thihien|1234567
+tramem|123456
+tramem|1234567
+minhqui|1234567
+admin|123456

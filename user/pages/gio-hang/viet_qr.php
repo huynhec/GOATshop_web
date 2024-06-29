@@ -86,32 +86,32 @@
     $qrUrl = generateQRCode($bankCode, $accountNumber, $qrType, $accountHolderName, $transferAmount, $content);
 
     ?>
+    <a href="../../index.php">
+        <img src="../../../assets/images/Black logo - no background.png" alt="logo" class="img-fluid" width="300px" style="display: block; margin-left: auto;margin-right: auto; width: 6%;">
+    </a>
     <div class="radio-wrapper" for="payment_method_id_1002112115">
         <div class="col" id="blank-slate">
             <?php
             // in hình
             echo '<img src="' . $qrUrl . '" alt="QR Code">';
             ?>
-            <div class="alert alert-success text-center" role="alert">
-                NH Vietcombank Chi nhánh Tân Định
-                TK: Le Thanh Chau
-                STK: 0371000478398
-            </div>
-            <p class="text-center">Trở về <a href="../../index.php">trang chủ</a></p>
+            <p class="text-home">Bạn có thể quét mã trên để thanh toán</p>
+            <p class="text-home">Trở về <a href="../../index.php">trang chủ</a></p>
         </div>
     </div>
 
     <style>
         .radio-wrapper {
-            min-height: 100vh;
+            min-height: 50vh;
             display: flex;
             justify-content: center;
             align-items: center;
             flex-wrap: wrap;
-            padding: 0 2rem;
+            padding: 0;
         }
+
         .text-home {
-            font-size: 36px;
+            font-size: 26px;
             /* padding-left: 20rem; */
             margin: 0;
             text-align: center;

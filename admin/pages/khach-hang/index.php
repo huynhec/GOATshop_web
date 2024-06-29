@@ -45,7 +45,7 @@ $khachHang__Get_All = $kh->KhachHang__Get_All(-1);
                                         $item->trangthai == 1
                                             ? '<span class="text-success">Hoạt động</span>'
                                             : ($item->trangthai == 0
-                                                ? '<span class="text-success">Tạm khóa</span>'
+                                                ? '<span class="text-danger">Tạm khóa</span>'
                                                 : '<span class="text-danger">Đã xóa</span>'
                                             )
                                         ?>

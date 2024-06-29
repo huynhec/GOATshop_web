@@ -1,3 +1,18 @@
+<?php
+$database = new Database();
+$pdo = $database->connect;
+
+// Chuẩn bị và thực thi truy vấn SQL để lấy dữ liệu từ bảng 'province'
+try {
+    $sql = "SELECT * FROM province";
+    $stmt = $pdo->prepare($sql);
+    $stmt->execute();
+    $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) {
+    echo "Lỗi truy vấn: " . $e->getMessage();
+    die();
+}
+?>
 <div class="main-add">
     <h3 class="section-title">Thêm nhân viên</h3>
     <form class="form-group" action="pages/nhan-vien/action.php?req=add" method="post">
@@ -45,16 +60,44 @@
             </div>
         </div>
         <div class="col">
-            <label for="diachi" class="form-label">Địa chỉ</label>
-            <input type="diachi" class="form-control" id="diachi" name="diachi" required>
-        </div>
-        <div class="col">
             <label for="phanquyen" class="form-label">Phân quyền</label>
             <select class="form-select " aria-label=".phanquyen" id="phanquyen" name="phanquyen">
                 <option value="1">Manager</option>
                 <option value="2" selected>Nhân viên</option>
-                <option value="3">Khách hàng</option>
             </select>
+        </div>
+        <!-- Địa chỉ -->
+        <div class="form-group">
+            <label for="tinh1">Tỉnh/Thành phố</label>
+            <select id="tinh1" name="tinh1" class="form-control">
+                <option value="">Chọn một tỉnh</option>
+                <?php foreach ($results as $row) : ?>
+                    <option value="<?php echo $row['province_id'] ?>"><?php echo $row['name'] ?></option>
+                <?php endforeach; ?>
+            </select>
+            <!-- Thêm hidden input để lưu tên tỉnh -->
+            <input type="hidden" id="tinh1_name" name="tinh1_name" value="">
+        </div>
+        <div class="form-group">
+            <label for="huyen1">Quận/Huyện</label>
+            <select id="huyen1" name="huyen1" class="form-control">
+                <option value="">Chọn một quận/huyện</option>
+            </select>
+            <!-- Thêm hidden input để lưu tên huyện -->
+            <input type="hidden" id="huyen1_name" name="huyen1_name" value="">
+        </div>
+        <div class="form-group">
+            <label for="xa1">Phường/Xã</label>
+            <select id="xa1" name="xa1" class="form-control">
+                <option value="">Chọn một xã</option>
+            </select>
+            <!-- Thêm hidden input để lưu tên xã -->
+            <input type="hidden" id="xa1_name" name="xa1_name" value="">
+        </div>
+
+        <div class="form-group">
+            <label for="road">Số nhà</label>
+            <input id="road" name="road" class="form-control">
         </div>
         <br />
         <div class="col text-center">

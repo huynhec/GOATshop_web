@@ -88,7 +88,15 @@ try {
             <label for="diachi" class="form-label">Địa chỉ</label>
             <input type="diachi" class="form-control" id="diachi" name="diachi" required value="<?= $khachHang__Get_By_Id->diachi ?>">
         </div> -->
-        <!-- địa chỉ -->
+        <br />
+        <div class="col text-center">
+            <button type="submit" class="btn btn-primary">Lưu thông tin</button>
+            <button type="button" onclick="return location.reload()" class="btn btn-secondary">Hủy</button>
+        </div>
+    </form>
+
+    <!-- địa chỉ -->
+    <form class="" method="post">
         <div class="form-group">
             <label for="tinh2">Tỉnh/Thành phố</label>
             <select id="tinh2" name="tinh2" class="form-control" onchange="clear_road();">
@@ -126,7 +134,7 @@ try {
             </select>
 
             <!-- Thêm hidden input để lưu tên huyện -->
-            <input type="hidden" id="huyen2_name" name="huyen2_name" value="">
+            <input type="hidden" id="huyen2_name" name="huyen2_name" value="<?php echo $district_cur->name ?>">
         </div>
         <div class="form-group">
             <label for="xa2">Phường/Xã</label>
@@ -142,7 +150,7 @@ try {
                 <?php endif ?>
             </select>
             <!-- Thêm hidden input để lưu tên xã -->
-            <input type="hidden" id="xa2_name" name="xa2_name" value="">
+            <input type="hidden" id="xa2_name" name="xa2_name" value="<?php echo $wards_cur->name ?>">
         </div>
         <div class="form-group">
             <label for="road">Số nhà</label>
@@ -150,13 +158,13 @@ try {
             $road_cur = $dc->Road__Get_By_Id_Kh($makh);
             ?>
 
-
             <input id="road" name="road" class="form-control" value="<?= isset($road_cur->road) ? $road_cur->road : '' ?>">
         </div>
 
         <br />
         <div class="col text-center">
-            <button type="submit" class="btn btn-primary">Lưu thông tin</button>
+            <button type="button" class="btn btn-primary" onclick="return checkout()">Lưu địa chỉ</button>
+            <button type="button" onclick="return location.reload()" class="btn btn-secondary">Hủy</button>
         </div>
     </form>
 </div>
@@ -166,4 +174,52 @@ try {
     function clear_road() {
         document.getElementById("road").value = '';
     }
+
+    function checkout() {
+            var tinh = document.getElementById('tinh2').options[document.getElementById('tinh2').selectedIndex].text;
+            var huyen = document.getElementById('huyen2').options[document.getElementById('huyen2').selectedIndex].text;
+            var xa = document.getElementById('xa2').options[document.getElementById('xa2').selectedIndex].text;
+            var road = document.getElementById('road').value;
+
+            // Kiểm tra xem các trường đã được điền đầy đủ hay không
+            if (tinh.trim() === '' || huyen.trim() === '' || xa.trim() === '' || road.trim() === '') {
+                // Nếu có trường nào chưa được điền đầy đủ, hiển thị thông báo lỗi
+                alert('Vui lòng điền đầy đủ thông tin.');
+                return false;
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "pages/khach-hang/action.php?req=dia-chi", // Thêm '?req=checkout' để gửi action là "checkout"
+                data: {
+                    action: "dia-chi",
+                    makh: document.getElementById('makh').value,
+                    diachi: `${tinh}, ${huyen}, ${xa}, ${road}`, // Sửa thành cú pháp `${}` để nối các biến
+                },
+                success: function(response) {
+                    console.log(response); // Xác minh phản hồi từ server
+                    if (response == true) {
+                        Swal.fire({
+                            icon: "success",
+                            title: "Thay đổi địa chỉ thành công!",
+                            confirmButtonText: "OK",
+                        }).then((result) => {
+                            location.href = '?pages=khach-hang';
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Thay đổi địa chỉ thất bại!",
+                            text: response, // Hiển thị lỗi từ server nếu có
+                            confirmButtonText: "OK"
+                        });
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error("Error: " + status + " " + error); // Kiểm tra lỗi từ server
+                    console.error(xhr.responseText); // Xem phản hồi lỗi chi tiết từ server
+                }
+            });
+
+        }
 </script>

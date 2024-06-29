@@ -78,6 +78,14 @@ class DiaChiModel extends Database
         $obj->execute(array($makh, $province_id, $district_id, $wards_id, $road));
         return $obj->rowCount();
     }
+    public function DiaChi_Nhanvien__Reset($manv, $province_id, $district_id, $wards_id, $road)
+    {
+        $obj = $this->connect->prepare("DELETE FROM `diachi_nv` WHERE manv = ?");
+        $obj->execute(array($manv));
+        $obj = $this->connect->prepare("INSERT INTO `diachi_nv` (manv, province, district, wards, road) VALUES (?, ?, ?, ?, ?)");
+        $obj->execute(array($manv, $province_id, $district_id, $wards_id, $road));
+        return $obj->rowCount();
+    }
     public function DiaChi__Delete($maanh)
     {
         $obj = $this->connect->prepare("DELETE FROM diachi WHERE maanh = ?");
@@ -136,11 +144,29 @@ class DiaChiModel extends Database
         $obj->execute(array($makh));
         return $obj->fetch();
     }
+    public function DiaChi__Get_By_Id_Nv($manv, $des = null)
+    {
+        if ($des != null) {
+            $obj = $this->connect->prepare("SELECT * FROM `$des` WHERE `name` IN (SELECT `$des` FROM `diachi_nv` WHERE `manv` = ?) LIMIT 1 ");
+        } else {
+            $obj = $this->connect->prepare("SELECT * FROM `diachi_nv` WHERE `manv` = ? ORDER BY `diachi_id` DESC LIMIT 1");
+        }
+        $obj->setFetchMode(PDO::FETCH_OBJ);
+        $obj->execute(array($manv));
+        return $obj->fetch();
+    }
     public function Road__Get_By_Id_Kh($makh)
     {
         $obj = $this->connect->prepare("SELECT * FROM `diachi` WHERE `makh` = ? ORDER BY `diachi_id` ASC LIMIT 1");
         $obj->setFetchMode(PDO::FETCH_OBJ);
         $obj->execute(array($makh));
+        return $obj->fetch();
+    }
+    public function Road__Get_By_Id_Nv($manv)
+    {
+        $obj = $this->connect->prepare("SELECT * FROM `diachi_nv` WHERE `manv` = ? ORDER BY `diachi_id` ASC LIMIT 1");
+        $obj->setFetchMode(PDO::FETCH_OBJ);
+        $obj->execute(array($manv));
         return $obj->fetch();
     }
     // nối chuỗi 

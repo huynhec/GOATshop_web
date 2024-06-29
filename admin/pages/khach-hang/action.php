@@ -14,7 +14,6 @@ if (isset($_GET['req'])) {
             $gioitinh = $_POST['gioitinh'];
             $ngaysinh = $_POST['ngaysinh'];
             $sodienthoai = $_POST['sodienthoai'];
-            // $diachi = $_POST['diachi'];
             $email = $_POST['email'];
             $username = $_POST['username'];
             // $password = trim($_POST['password']);
@@ -43,11 +42,11 @@ if (isset($_GET['req'])) {
             $gioitinh = $_POST['gioitinh'];
             $ngaysinh = $_POST['ngaysinh'];
             $sodienthoai = $_POST['sodienthoai'];
-            // Lấy thông tin địa chỉ
-            $province_id = $_POST['tinh2_name'];
-            $district_id = $_POST['huyen2_name'];
-            $wards_id = $_POST['xa2'];
-            $road = $_POST['road'];
+            // // Lấy thông tin địa chỉ
+            // $province_id = $_POST['tinh2_name'];
+            // $district_id = $_POST['huyen2_name'];
+            // $wards_id = $_POST['xa2'];
+            // $road = $_POST['road'];
 
             $trangthai = $_POST['trangthai'];
 
@@ -91,14 +90,33 @@ if (isset($_GET['req'])) {
             }
 
             $res += $kh->KhachHang__Update($makh, $tenkh, $username, $gioitinh, $ngaysinh, $sodienthoai, $email, $password, $trangthai);
-            $res1 += $dc->DiaChi__Reset($makh, $province_id, $district_id, $wards_id, $road);
+            // $res1 += $dc->DiaChi__Reset($makh, $province_id, $district_id, $wards_id, $road);
             if ($res !== false) {
                 header('location: ../../index.php?pages=khach-hang&msg=success');
             } else {
                 header('location: ../../index.php?pages=khach-hang&msg=error');
             }
             break;
-            
+        case "dia-chi":
+            $res = 0;
+            if (isset($_POST['diachi'])) {
+                $diachi_parts = explode(', ', $_POST['diachi']);
+                $tinh = $diachi_parts[0]; // "Hà Nội"
+                $huyen = $diachi_parts[1]; // "Ba Đình"
+                $xa = $diachi_parts[2]; // "Kim Mã"
+                $road = $diachi_parts[3]; // "123 đường ABC"
+                $makh = $_POST['makh'];
+
+                $res += $dc->DiaChi__Reset($makh, $tinh, $huyen, $xa, $road);
+            }
+
+            if ($res !== 0) {
+                echo true;
+            } else {
+                echo false;
+            }
+
+            break;
         case "delete":
             $res = 0;
             $makh = $_GET['makh'];
