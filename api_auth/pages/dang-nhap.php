@@ -7,14 +7,17 @@ if (isset($_SERVER["HTTP_REFERER"])) {
         if (strlen(strstr($_SERVER["HTTP_REFERER"], "chinh-sua")) < 1) {
             // Kiểm tra xem "dang-ky" không xuất hiện trong HTTP referer
             if (strlen(strstr($_SERVER["HTTP_REFERER"], "dang-ky")) < 1) {
-                // Nếu không có điều kiện nào được thỏa mãn, gán $_SESSION['url'] bằng HTTP referer
-                $_SESSION['url'] = $_SERVER["HTTP_REFERER"];
+                // Kiểm tra xem "quen-mat-khau" không xuất hiện trong HTTP referer
+                if (strlen(strstr($_SERVER["HTTP_REFERER"], "quen-mat-khau")) < 1) {
+                    // Nếu không có điều kiện nào được thỏa mãn, gán $_SESSION['url'] bằng HTTP referer
+                    $_SESSION['url'] = $_SERVER["HTTP_REFERER"];
+                }
             }
         }
     }
 }
 
-// Gán $url bằng $_SESSION['url'], mặc định là '../../user/' nếu $_SESSION['url'] không được set
+// Gán $url bằng $_SESSION['url'], mặc định là '../../api/' nếu $_SESSION['url'] không được set
 $url = $_SESSION['url'] ?? '../../api/';
 
 ?>

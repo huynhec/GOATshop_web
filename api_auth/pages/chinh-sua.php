@@ -205,7 +205,7 @@ $khachHang__Get_By_Id = $kh->KhachHang__Get_By_Id($makh);
         </div>
 
         <hr>
-        <p class="footer-text">Mua tiếp nào ! <a href="../index.php?pages=trang-chu" class="text-danger">Về trang chủ</a></p>
+        <p class="footer-text">Mua tiếp nào ! <a href="../api/index.php" class="text-danger">Về trang chủ</a></p>
     </div>
     </div>
     <script>
