@@ -64,7 +64,7 @@ $chiTietTrangThai__Get_By_Id_DH = $cttt->ChiTietTrangThai__Get_By_Id_DH($madon);
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <?php foreach ($donHang__Get_By_Id_Kh as $item) : ?>
+                                                    <?php foreach (array_reverse($donHang__Get_By_Id_Kh) as $item) : ?>
                                                         <tr>
                                                             <td><?= $item->ma_don_hang ?></td>
                                                             <td><?= $item->ngaythem ?></td>

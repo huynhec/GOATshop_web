@@ -297,7 +297,7 @@ $donHang__Get_By_Id_Kh = $dh->DonHang__Get_By_Id_KH($makh);
                                                         <div class="col-md-6">
                                                             <div class="form-outline form-white">
                                                                 <label class="form-label" for="email">Email</label>
-                                                                <input type="email" class="form-control" id="email" name="email" value="<?= $_SESSION['user']->email ?>" required>
+                                                                <input type="email" class="form-control" id="email" name="email" value="<?= $_SESSION['user']->email ?>" readonly required>
                                                             </div>
                                                         </div>
                                                     </div>
