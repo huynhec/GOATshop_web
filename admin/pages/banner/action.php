@@ -78,18 +78,18 @@ if (isset($_GET['req'])) {
 
         case "delete":
             $res = 0;
-            $masp = $_GET['masp'];
-            foreach ($anhSp->AnhSp__Get_By_Id_Sp($masp) as $item) {
-                unlink("../../../assets/" . $item->hinhanh);
-                rmdir("../../../assets/uploads/$masp");
+            $id_banner = $_GET['id_banner'];
+            $foldername = $bn->Folder_Banner__Get_by_Id($id_banner);
+            foreach ($bn->Banner__Get_By_Id($id_banner) as $item) {
+                unlink("../../../assets/" . $item->anhbanner);
+                rmdir("../../../assets/uploads/$foldername->truncated_anhbanner");
             }
-            $res += $anhSp->AnhSp__Delete_By_Id_Sp($masp);
-            $res += $sp->SanPham__Delete($masp);
+            $res += $bn->Banner__Delete($id_banner);
 
             if ($res != 0) {
-                header('location: ../../index.php?pages=san-pham&msg=success');
+                header('location: ../../index.php?pages=banner&msg=success');
             } else {
-                header('location: ../../index.php?pages=san-pham&msg=error');
+                header('location: ../../index.php?pages=banner&msg=error');
             }
             break;
 

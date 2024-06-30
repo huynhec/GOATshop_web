@@ -31,7 +31,7 @@ $banner_Get_All = $bn->banner__Get_All(-1);
         </ul>
     </div>
     <div class="row section-container">
-        <div class="col-6">
+        <div class="col-7">
             <div class="main-data">
                 <h3 class="section-title">Danh sách banner</h3>
                 <div class="table-responsive">
@@ -49,7 +49,7 @@ $banner_Get_All = $bn->banner__Get_All(-1);
                             <?php foreach ($banner_Get_All as $item) : ?>
                                 <tr id="product_<?php echo $item->id_banner; ?>">
                                     <td><?= $item->id_banner ?></td>
-                                    <td><img src="../assets/<?= $bn->Anh_Banner__Get_By_Id_Sp_First($item->id_banner)->anhbanner ?>" alt="" srcset="" class="img-fluid" width="450px"></td>
+                                    <td><img src="../assets/<?= $bn->Anh_Banner__Get_By_Id_Sp_First($item->id_banner)->anhbanner ?>" alt="" srcset="" class="img-fluid" width="350px"></td>
                                     <td><?= $item->tenbanner ?></td>
                                     <td><?= $item->trangthai == 1 ? '<span class="text-success">Hiển thị</span>' : '<span class="text-danger">Tạm ẩn</span>' ?>
                                     </td>
@@ -61,10 +61,10 @@ $banner_Get_All = $bn->banner__Get_All(-1);
                                             <i class="bx bx-edit" aria-hidden="true"></i>
                                         </button>
                                         <?php if (isset($_SESSION['admin'])) : ?>
-                                            <!-- <button type="button" class="btn btn-danger btn-delete"
-                                        onclick="return delete_obj('<?= $item->masp ?>')">
+                                            <button type="button" class="btn btn-danger btn-delete"
+                                        onclick="return delete_obj('<?= $item->id_banner ?>')">
                                         <i class="bx bx-trash" aria-hidden="true"></i> 
-                                    </button> -->
+                                    </button>
                                         <?php endif ?>
                                     </td>
                                 </tr>
@@ -75,7 +75,7 @@ $banner_Get_All = $bn->banner__Get_All(-1);
             </div>
 
         </div>
-        <div class="col-5">
+        <div class="col-4">
             <div class="treo">
                 <div class="main-form">
                     <?php require_once 'add.php' ?>
@@ -100,7 +100,7 @@ $banner_Get_All = $bn->banner__Get_All(-1);
         });
     };
 
-    function delete_obj(masp) {
+    function delete_obj(id_banner) {
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
                 confirmButton: "m-2 btn btn-danger",
@@ -118,13 +118,13 @@ $banner_Get_All = $bn->banner__Get_All(-1);
             reverseButtons: true
         }).then((result) => {
             if (result.isConfirmed) {
-                location.href = "pages/san-pham/action.php?req=delete&masp=" + masp;
+                location.href = "pages/banner/action.php?req=delete&id_banner=" + id_banner;
             } else if (
                 result.dismiss === Swal.DismissReason.cancel
             );
         });
     };
     window.addEventListener('load', function() {
-        document.getElementById('dynamicTitle').innerText = "ADMIN | Quản lý sản phẩm";
+        document.getElementById('dynamicTitle').innerText = "ADMIN | Quản lý banner";
     })
 </script>

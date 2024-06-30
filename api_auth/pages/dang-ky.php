@@ -57,7 +57,6 @@ try {
         transform: translateY(-50%);
         cursor: pointer;
     }
-
 </style>
 <div class="auth-container row">
     <div class=" form-wrapper-1 col-8">
@@ -70,12 +69,12 @@ try {
                     <!-- Left side of the form -->
                     <p class="title">Đăng ký</p>
                     <div class="input-field">
-                        <input required="" class="input" type="text" name="tenkh" />
+                        <input required="" class="input" type="text" name="tenkh"  minlength="8" maxlength="50"/>
                         <label class="label" for="input">Họ tên</label>
                     </div>
 
                     <div class="input-field">
-                        <input required="" class="input" type="text" name="username" />
+                        <input required class="input" type="text" name="username"  pattern="[a-zA-Z0-9]+" title="Username chỉ cho phép nhập kí tự từ a-z, A-Z, 0-9"  minlength="4" maxlength="20" />
                         <label class="label" for="input">Tên đăng nhập</label>
                     </div>
 
@@ -85,14 +84,14 @@ try {
                     </div>
 
                     <div class="input-field">
-                        <input required="" id="password" class="input" type="password" name="password" />
+                        <input required="" id="password" class="input" type="password" name="password"  minlength="6" maxlength="20"/>
                         <label class="label" for="input">Mật khẩu</label>
                         <span class="eye-icon" onclick="togglePasswordVisibility('password', 'eye-icon-password')">
                             <i id="eye-icon-password" class="bx bx-show"></i>
                         </span>
                     </div>
                     <div class="input-field">
-                        <input required="" id="confirm_password" class="input" type="password" name="confirm_password" />
+                        <input required="" id="confirm_password" class="input" type="password" name="confirm_password"  minlength="6" maxlength="20"/>
                         <label class="label" for="confirm_password">Xác nhận mật khẩu</label>
                         <span class="eye-icon" onclick="togglePasswordVisibility('confirm_password', 'eye-icon-confirm')">
                             <i id="eye-icon-confirm" class="bx bx-show"></i>

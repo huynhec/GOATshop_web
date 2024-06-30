@@ -90,12 +90,12 @@ $khachHang__Get_By_Id = $kh->KhachHang__Get_By_Id($makh);
                         <input type="hidden" class="form-control" id="email_old" name="email_old" required value="<?= $khachHang__Get_By_Id->email ?>">
                         <input type="hidden" class="form-control" id="username_old" name="username_old" required value="<?= $khachHang__Get_By_Id->username ?>">
                         <div class="input-field">
-                            <input required="" class="input" type="text" name="tenkh" value="<?= $khachHang__Get_By_Id->tenkh ?>" />
+                            <input required="" class="input" type="text" name="tenkh" value="<?= $khachHang__Get_By_Id->tenkh ?>" minlength="8" maxlength="50"/>
                             <label class="label" for="input">Họ tên</label>
                         </div>
 
                         <div class="input-field">
-                            <input required="" class="input" type="text" name="username_new" value="<?= $khachHang__Get_By_Id->username ?? '' ?>" />
+                            <input required="" class="input" type="text" name="username_new" value="<?= $khachHang__Get_By_Id->username ?? '' ?>" pattern="[a-zA-Z0-9]+" title="Username chỉ cho phép nhập kí tự từ a-z, A-Z, 0-9"  minlength="4" maxlength="20"/>
                             <label class="label" for="input">Tên đăng nhập</label>
                         </div>
 

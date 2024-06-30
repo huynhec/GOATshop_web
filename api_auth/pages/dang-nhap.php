@@ -31,11 +31,11 @@ $url = $_SESSION['url'] ?? '../../api/';
         <form class="form-control" action="pages/action.php?req=dang-nhap" method="post">
             <p class="title">Đăng nhập</p>
             <div class="input-field">
-                <input required="" class="input" type="text" name="email_or_username" />
+                <input required="" class="input" type="text" name="email_or_username" minlength="4" maxlength="254" />
                 <label class="label" for="input">Email hoặc username</label>
             </div>
             <div class="input-field">
-                <input required="" class="input" type="password" name="password" />
+                <input required="" class="input" type="password" name="password"  minlength="6" maxlength="20"/>
                 <label class="label" for="input">Mật khẩu</label>
             </div>
             <div class="g-recaptcha" data-sitekey="6LeCaZkpAAAAADBw3Hip0xBcv6JdGRcEGMQU8HfS"></div>

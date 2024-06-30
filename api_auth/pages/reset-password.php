@@ -24,7 +24,7 @@
             <div class="input-field">
                 <input type="hidden" name="token" value="<?php echo $_GET['token'] ?? ''; ?>" required>
                 <div class="password-wrapper">
-                    <input class="input" type="password" name="password" id="password" required />
+                    <input class="input" type="password" name="password" id="password" required minlength="6" maxlength="20"/>
                     <label class="label" for="password">Nhập mật khẩu mới</label>
                     <span class="eye-icon" onclick="togglePasswordVisibility('password', 'eye-icon-password')">
                         <i id="eye-icon-password" class="bx bx-show"></i>
@@ -33,7 +33,7 @@
             </div>
             <div class="input-field">
                 <div class="password-wrapper">
-                    <input class="input" type="password" name="confirm_password" id="confirm_password" required />
+                    <input class="input" type="password" name="confirm_password" id="confirm_password" required minlength="6" maxlength="20" />
                     <label class="label" for="confirm_password">Xác nhận mật khẩu mới</label>
                     <span class="eye-icon" onclick="togglePasswordVisibility('confirm_password', 'eye-icon-confirm')">
                         <i id="eye-icon-confirm" class="bx bx-show"></i>

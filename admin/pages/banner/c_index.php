@@ -48,9 +48,9 @@ $anh_Banner__Get_By_Id_Sp_First = $bn->Anh_Banner__Get_By_Id_Sp_First($id_banner
                                         <i class="bx bx-edit" aria-hidden="true"></i> Sửa
                                     </button>
                                     <?php if (isset($_SESSION['admin'])) : ?>
-                                        <button type="button" class="btn btn-danger btn-delete" onclick="return delete_obj('<?= $anh_Banner__Get_By_Id_Sp_First->id_banner ?>')">
+                                        <!-- <button type="button" class="btn btn-danger btn-delete" onclick="return delete_obj('<?= $anh_Banner__Get_By_Id_Sp_First->id_banner ?>')">
                                             <i class="bx bx-trash" aria-hidden="true"></i> Xóa
-                                        </button>
+                                        </button> -->
                                     <?php endif ?>
                                 </td>
                             </tr>

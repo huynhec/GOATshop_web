@@ -85,10 +85,10 @@ class BannerModel extends Database
         return $obj->fetch();
     }
 
-    public function banner__Delete($masp)
+    public function Banner__Delete($id_banner)
     {
-        $obj = $this->connect->prepare("DELETE FROM sanpham WHERE masp = ?");
-        $obj->execute(array($masp));
+        $obj = $this->connect->prepare("DELETE FROM banner WHERE id_banner = ?");
+        $obj->execute(array($id_banner));
 
         return $obj->rowCount();
     }
