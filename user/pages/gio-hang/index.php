@@ -219,7 +219,7 @@ $donHang__Get_By_Id_Kh = $dh->DonHang__Get_By_Id_KH($makh);
                                                         <div class="mt-4">
                                                             <div class="form-outline form-white mb-1">
                                                                 <label class="form-label" for="tenkh">Tên người nhận</label>
-                                                                <input type="text" name="tenkh" id="tenkh" class="form-control" siez="17" placeholder="Tên người nhận" value="<?= $_SESSION['user']->tenkh ?>" required />
+                                                                <input type="text" name="tenkh" id="tenkh" class="form-control" siez="17" placeholder="Tên người nhận" value="<?= $_SESSION['user']->tenkh ?>" minlength="8" maxlength="50" required />
 
                                                             </div>
                                                             <!-- địa chỉ -->

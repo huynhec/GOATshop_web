@@ -313,7 +313,7 @@ if (isset($_GET['req'])) {
                 if ($user->User__Check_Username($username_new)) {
                     $username = $username_new;
                 } else {
-                    header('location: ../index.php?pages=chinh-sua&msg=error');
+                    header('location: ../index.php?pages=chinh-sua&msg=update-success');
                 }
             }
 
@@ -326,7 +326,7 @@ if (isset($_GET['req'])) {
                 if ($kh->KhachHang__Check_Email($email_new)) {
                     $email = $email_new;
                 } else {
-                    header('location: ../index.php?pages=chinh-sua&msg=error');
+                    header('location: ../index.php?pages=chinh-sua&msg=update-success');
                 }
             }
             $password_old = $_POST['password_old'];
@@ -339,9 +339,9 @@ if (isset($_GET['req'])) {
             }
             $res += $kh->KhachHang__Update($makh, $tenkh, $username, $gioitinh, $ngaysinh, $sodienthoai, $email, $password, $trangthai);
             if ($res !== 0) {
-                header('location: ../index.php?pages=chinh-sua&msg=success');
+                header('location: ../index.php?pages=chinh-sua&msg=update-success');
             } else {
-                header('location: ../index.php?pages=chinh-sua&msg=error');
+                header('location: ../index.php?pages=chinh-sua&msg=update-error');
             }
             break;
         case "dia-chi":

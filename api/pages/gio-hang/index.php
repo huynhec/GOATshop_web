@@ -181,7 +181,7 @@ $donHang__Get_By_Id_Kh = $dh->DonHang__Get_By_Id_KH($makh);
                                                 <div class="ms-2 me-2">
                                                     <div class="text-card"><?= $sp->SanPham__Get_By_Id($item->masp)->tensp ?></div>
                                                     <div class="text-line">
-                                                        Size : <?= $sz->Size__Get_By_Id($item->idsize)->tensize ?>
+                                                        Size: <?= $sz->Size__Get_By_Id($item->idsize)->tensize ?>
                                                     </div>
                                                     <p class="small mb-0 text-small" id="gh-dg_<?= $item->mactgh ?>"><?= number_format($item->dongia) ?>đ</p>
                                                 </div>
@@ -218,7 +218,7 @@ $donHang__Get_By_Id_Kh = $dh->DonHang__Get_By_Id_KH($makh);
                                                 <div class="mt-4">
                                                     <div class="form-outline form-white mb-1">
                                                         <label class="form-label" for="tenkh">Tên người nhận</label>
-                                                        <input type="text" name="tenkh" id="tenkh" class="form-control" siez="17" placeholder="Tên người nhận" value="<?= $_SESSION['user']->tenkh ?>" required />
+                                                        <input type="text" name="tenkh" id="tenkh" class="form-control" siez="17" placeholder="Tên người nhận" value="<?= $_SESSION['user']->tenkh ?>" minlength="8" maxlength="50" required />
 
                                                     </div>
                                                     <!-- địa chỉ -->
