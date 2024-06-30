@@ -56,12 +56,12 @@ $loaisp__Get_All = $loaisp->LoaiSp__Get_All();
             </div>
 
         </div>
-        <div class="row">
+        <!-- <div class="row">
             <div class="col text-center">
                 <button type="button" class="btn btn-primary mt-2" onclick="addInput()">Thêm thuộc
                     tính</button>
             </div>
-        </div>
+        </div> -->
         <br />
         <br />
         <div class="col text-center">

@@ -96,9 +96,9 @@ function addInput() {
   var radioInput1 = document.createElement('input');
   radioInput1.type = 'radio';
   radioInput1.className = 'form-check-input checkbox';
-  radioInput1.id = 'is_num_0_' + (row.querySelectorAll('.col-4').length + 1);
+  radioInput1.id = 'is_num_0_'+ (row.querySelectorAll('.col-4').length + 1);
   radioInput1.value = '0';
-  radioInput1.name = 'is_num[' + (row.querySelectorAll('.col-4').length + 1) + ']';
+  radioInput1.name = 'is_num[' + (row.querySelectorAll('.col-3').length + 1) + ']';
   radioInput1.required = true;
   var radioLabel1 = document.createElement('label');
   radioLabel1.className = 'form-check-label';
@@ -108,12 +108,12 @@ function addInput() {
   radioGroup.appendChild(radioLabel1);
   var radioGroup2 = document.createElement('div');
   radioGroup2.className = 'form-check form-check-inline';
-  var radioInput2 = document.createElement('input');
+var radioInput2 = document.createElement('input');
   radioInput2.type = 'radio';
   radioInput2.className = 'form-check-input checkbox';
   radioInput2.id = 'is_num_1_' + (row.querySelectorAll('.col-4').length + 1);
   radioInput2.value = '1';
-  radioInput2.name = 'is_num[' + (row.querySelectorAll('.col-4').length + 1) + ']';
+  radioInput2.name = 'is_num[' + (row.querySelectorAll('.col-3').length + 1) + ']';
   radioInput2.required = true;
   var radioLabel2 = document.createElement('label');
   radioLabel2.className = 'form-check-label';
@@ -123,6 +123,9 @@ function addInput() {
   radioGroup2.appendChild(radioLabel2);
   colDataType.appendChild(radioGroup);
   colDataType.appendChild(radioGroup2);
+
+  console.log(num);
+  console.log(radioInput1)
   // nut xoa
   var colDeleteButton = document.createElement('div');
     colDeleteButton.className = 'col-1';
@@ -145,6 +148,7 @@ function addInput() {
   row.appendChild(colDataType);
   row.appendChild(colDeleteButton);
 }
+
 
 function addInput2() {
   var row = document.querySelector('.main-add .row');
