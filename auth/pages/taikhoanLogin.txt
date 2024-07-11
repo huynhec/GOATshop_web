@@ -459,3 +459,12 @@ anhngoc|1234567
 anhngoc|123456
 admin|123456
 admin|123456
+admin|123456
+admin|123456
+staf01|123456
+staf02|123456
+staff01|123456
+manager|123456
+minhhau|1234567
+hoaibao|1234567
+minhhau|1234567

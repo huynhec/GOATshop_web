@@ -1,0 +1,4 @@
+Đảm bảo phải có env code và cài đặt packages
+
+conda create -n code python=3.9
+pip install -r requirements.txt

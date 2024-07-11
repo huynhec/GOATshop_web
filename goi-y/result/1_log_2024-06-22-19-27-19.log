@@ -1,0 +1,41 @@
+2024-06-22 19:27:19,322 - INFO - Thông tin đầu vào:
+2024-06-22 19:27:19,322 - INFO - file_name: datasets/training_user_based.xlsx
+2024-06-22 19:27:19,322 - INFO - min_quota: 0
+2024-06-22 19:27:19,322 - INFO - k: 2
+2024-06-22 19:27:19,322 - INFO - ----------------------------------------------
+2024-06-22 19:27:19,322 - INFO - Kết quả thực thi:
+2024-06-22 19:27:19,333 - INFO - Các cặp (user, item) bị trùng lặp:
+2024-06-22 19:27:19,333 - INFO -    user  item  rating
+1    27    85       4
+2    27    85       5
+3    27    87       5
+4    27    87       5
+2024-06-22 19:27:19,355 - INFO - Dữ liệu đã được tải từ file: result/1_original_matrix.xlsx
+2024-06-22 19:27:19,380 - INFO - Ma trận độ tương tự giữa các user đã được tính toán
+2024-06-22 19:27:19,381 - INFO - Ma trận gốc:
+2024-06-22 19:27:19,383 - INFO -    User   74   85   87   90
+0    26  NaN  2.0  NaN  NaN
+1    27  5.0  4.5  5.0  NaN
+2    32  NaN  NaN  NaN  5.0
+2024-06-22 19:27:19,383 - INFO - Ma trận độ tương tự cosine:
+2024-06-22 19:27:19,384 - INFO - User    26    27   32
+User                 
+26    1.00  0.54  0.0
+27    0.54  1.00  0.0
+32    0.00  0.00  1.0
+2024-06-22 19:27:19,384 - INFO - Ma trận dự đoán:
+2024-06-22 19:27:19,385 - INFO -        74   85   87   90
+User                    
+26    5.0  2.0  5.0  NaN
+27    5.0  4.5  5.0  NaN
+32    NaN  NaN  NaN  5.0
+2024-06-22 19:27:19,409 - INFO - Các cặp (user, item) bị trùng lặp:
+2024-06-22 19:27:19,409 - INFO -    user  item  rating
+1    27    85       4
+2    27    85       5
+3    27    87       5
+4    27    87       5
+2024-06-22 19:27:19,415 - INFO - Mean RMSE: 1.15
+2024-06-22 19:27:19,416 - INFO - Mean MAE: 1.15
+2024-06-22 19:27:19,416 - INFO - Thời gian thực thi: 0:00:00.094798
+2024-06-22 19:27:19,423 - INFO - Đã lưu file gợi ý: result/4_prediction_export.xlsx

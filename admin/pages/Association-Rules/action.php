@@ -73,15 +73,30 @@ if (isset($_GET['req'])) {
             }
 
             // Thiết lập đường dẫn đến Python
-            $pythonPath = (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') ?
-                "%USERPROFILE%\\Anaconda3\\python.exe" :
-                "/opt/anaconda3/bin/python";
+            // $pythonPath = (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') ?
+            // "%USERPROFILE%\\Anaconda3\\python.exe" :
+            // "/opt/anaconda3/bin/python";
+            $condaPath = "\"C:\\Users\\Huynh\\anaconda3\\Scripts\\activate.bat\""; // Thay đổi đường dẫn tới activate.bat tương ứng trên máy của bạn
+            $envPath = "\"C:\\Users\\Huynh\\anaconda3\\python.exe\""; // Thay đổi đường dẫn tới python.exe trong môi trường conda của bạn
+            $scriptPath1 = "convert.py";
+            $scriptPath2 = "main.py";
+            // $command = "$condaPath && $envPath $scriptPath 2>&1";
 
 
-            $command1 = "source /opt/anaconda3/bin/activate; /opt/anaconda3/envs/python=3.9/bin/python convert.py 2>&1";
-            $output1 = shell_exec($command1);
-            $command2 = "source /opt/anaconda3/bin/activate; /opt/anaconda3/envs/python=3.9/bin/python main.py 2>&1";
-            $output2 = shell_exec($command2);
+            $pythonPath1 = (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') ?
+                "$condaPath && $envPath $scriptPath1 2>&1" :
+                "source /opt/anaconda3/bin/activate; /opt/anaconda3/envs/python=3.9/bin/python convert.py 2>&1";
+
+            $pythonPath2 = (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') ?
+                "$condaPath && $envPath $scriptPath2 2>&1" :
+                "source /opt/anaconda3/bin/activate; /opt/anaconda3/envs/python=3.9/bin/python main.py 2>&1";
+
+
+
+            // $command1 = "source /opt/anaconda3/bin/activate; /opt/anaconda3/envs/python=3.9/bin/python convert.py 2>&1";
+            $output1 = shell_exec($pythonPath1);
+            // $command2 = "source /opt/anaconda3/bin/activate; /opt/anaconda3/envs/python=3.9/bin/python main.py 2>&1";
+            $output2 = shell_exec($pythonPath2);
 
             // Tiếp tục xử lý với tệp kết quả
             $fileToImport = $fileDir . 'output_rules.xlsx';

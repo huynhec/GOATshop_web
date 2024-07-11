@@ -72,9 +72,14 @@ if (isset($_GET['req'])) {
             }
 
             // Thiết lập đường dẫn đến Python
+            $condaPath = "\"C:\\Users\\Huynh\\anaconda3\\Scripts\\activate.bat\""; // Thay đổi đường dẫn tới activate.bat tương ứng trên máy của bạn
+            $envPath = "\"C:\\Users\\Huynh\\anaconda3\\python.exe\""; // Thay đổi đường dẫn tới python.exe trong môi trường conda của bạn
+            $scriptPath = "main.py";
+
+
             $pythonPath = (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') ?
-                "%USERPROFILE%\\Anaconda3\\python.exe" :
-                "/opt/anaconda3/bin/python";
+                "$condaPath && $envPath $scriptPath 2>&1" :
+                "source /opt/anaconda3/bin/activate; /opt/anaconda3/envs/python=3.9/bin/python main.py 2>&1";
 
             // // Thiết lập lệnh Python với đường dẫn và tên file
             // $pythonCommand = 'conda run --name code ' . $pythonPath . " main.py 2>&1";
@@ -82,15 +87,13 @@ if (isset($_GET['req'])) {
             // $pythonPath = "/opt/anaconda3/envs/python=3.9/bin/python";
             // $pythonCommand = 'source activate python=3.9 ' . $pythonPath . " main.py 2>&1";
 
-            $command = "source /opt/anaconda3/bin/activate; /opt/anaconda3/envs/python=3.9/bin/python main.py 2>&1";
-            $output = shell_exec($command);
-
 
             // encoding  UTF-8
             // putenv("PYTHONIOENCODING=utf-8");
 
             // Thực thi lệnh Python
             // $output = shell_exec($pythonCommand);
+            $output = shell_exec($pythonPath);
 
             // Tiếp tục xử lý với tệp kết quả
             $fileToImport = $fileDir . '4_prediction_export.xlsx';
